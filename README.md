@@ -23,3 +23,5 @@ Rebeca Anahi Luna Colque: Tengo 22 años, vivo en Ingeniero Budge( Partido de Lo
 Maximiliano Martinez: Hola soy Maximiliano Martinez, tengo 26 años,soy estudiante de biología, vivo en la ciudad de córdoba y estoy aprendiendo a programar para poder trabajar algún día ya que me está interesando mucho
 
 Agustina Rodriguez: Tengo 34 años, vivo en Roque Pérez (Pcia. de Buenos Aires). Soy arquitecta y docente en nivel medio. Este año decidí comenzar a estudiar Programación, porque quiero producir cambios en mi área laboral y quiero permitirme conocer otras opciones de trabajo, otras realidades y aspiraciones. 
+
+Link al board de Trello: [https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic](https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic)
