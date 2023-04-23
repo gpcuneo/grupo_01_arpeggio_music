@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+body{
+    margin: 0;
+}
+header{
+    background-color:green;
+}
+.container-general{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 100%;
+
+}
+.fa-bars{
+    display: none;
+}
+.img-logo{
+    width: 20vw;
+}
+.caja-padre-logo{
+    display: flex;
+}
+.box{
+    position: relative;
+    display:block;
+    box-sizing: border-box;
+}
+input.src{
+    padding-left: 20px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    
+
+}
+.fa-magnifying-glass{
+    font-size: 10px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
+
+.lista-menu{
+    list-style: none;
+    padding: 0;
+    background-color: black;
+    width: 90%;
+    box-sizing: border-box;
+}
+.lista-menu li a{
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+.lista-menu li{
+    display: inline-block;
+    text-align: center;
+}
+.lista-menu li a:hover{
+    background: white;
+    color: black;
+}
+.lista-login{
+    list-style: none;
+    padding: 0;
+    background-color: black;
+}
+.lista-login li a{
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+.lista-login li{
+    display: inline-block;
+    text-align: center;
+}
+.lista-login li a:hover{
+    background: white;
+    color: black;
+}
+    
+
+
