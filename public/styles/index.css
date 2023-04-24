@@ -2,7 +2,7 @@
 body{
     margin: 0;
 }
-header{
+/* header{
     background-color:green;
 }
 .container-general{
@@ -83,7 +83,80 @@ input.src{
 .lista-login li a:hover{
     background: white;
     color: black;
+} */
+    
+.container-general{
+    width: 100vw;
 }
     
+    
+
+.img-logo{
+    width: 20vw;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+.fa-bars{
+    color: white;
+    margin: 15px;
+    font-size: 25px;
+}
+.fa-cart-plus{
+    color: white;
+    margin: 15px;
+    font-size: 25px;
+}
+.caja-one{
+    background-color: black;
+    width: 100%;
+    display: inline-flex; 
+    flex-direction: row;
+    border: 1px red solid;
+    align-self:flex-start;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    border: red solid 1px;
+}
+input.src{
+    padding-left: 20px;
+    border-radius: 15px;
+    align-self: flex-end;
+    box-sizing: border-box;
+    width: 85%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.fa-magnifying-glass{
+    font-size: 10px;
+    order: -1;
+    align-self: center;
+    justify-content: flex-start;
+}
+.lista-menu{
+    display: none;
+}
+.lista-login{
+    display: none;
+}
+.fa-circle-user{
+    display: none;
+}
+
+    
+    
+    
+    
+
+
 
 
