@@ -1,67 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
-body{
+
+body {
 
     margin: 0;
 }
-header{
+
+header {
     width: 100%;
     box-sizing: border-box;
 }
 
-.container-general{
+.container-general {
     width: 100vw;
     font-family: 'Roboto', sans-serif;
 }
-.img-logo{
+
+.img-logo {
     width: 20vw;
     margin: 10px;
     display: flex;
     justify-content: center;
 }
-.fa-bars{
+
+.fa-bars {
     color: white;
     margin: 15px;
     font-size: 25px;
 }
-.fa-cart-plus{
+
+.fa-cart-plus {
     color: white;
     margin: 15px;
     font-size: 25px;
 }
-.caja-one{
+
+.caja-one {
     background-color: black;
     width: 100%;
-    display: inline-flex; 
+    display: inline-flex;
     flex-direction: row;
-    align-self:flex-start;
+    align-self: flex-start;
     justify-content: space-between;
     align-items: center;
 }
-.container-general{
+
+.container-general {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.caja-searchbar{
+
+.caja-searchbar {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.box{
-    
+
+.box {
+
     width: 90%;
     height: 25px;
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    border:black solid 1px;
+    border: black solid 1px;
     border-radius: 15px;
-    background-color:whitesmoke;
+    background-color: whitesmoke;
     margin-top: 10px;
     margin-bottom: 10px;
 }
-input.src{
+
+input.src {
     padding-left: 20px;
     align-self: center;
     box-sizing: border-box;
@@ -70,41 +80,51 @@ input.src{
     border: whitesmoke;
     background-color: whitesmoke;
 }
-.fa-magnifying-glass{
+
+.fa-magnifying-glass {
     font-size: 15px;
     order: -1;
     align-self: center;
     padding-left: 10px;
 }
-.lista-menu{
+
+.lista-menu {
     display: none;
 }
-.lista-login{
+
+.lista-login {
     display: none;
 }
-.fa-circle-user{
+
+.fa-circle-user {
     display: none;
 }
-.second-img-logo{
+
+.second-img-logo {
     display: none;
 }
-.cart{
+
+.cart {
     display: none;
 }
-@media (min-width: 481px){
-    header{
-        background-color:black;
+
+@media (min-width: 481px) {
+    header {
+        background-color: black;
         width: 100%;
     }
-    .fa-bars{
+
+    .fa-bars {
         display: none;
     }
-    .container-general{
-        display:flex;
+
+    .container-general {
+        display: flex;
         width: 100%;
         box-sizing: border-box;
     }
-    .nav-bar{
+
+    .nav-bar {
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -113,7 +133,8 @@ input.src{
         padding: 5px;
         box-sizing: border-box;
     }
-    .register-bar{
+
+    .register-bar {
         width: 35%;
         display: flex;
         flex-direction: row;
@@ -122,14 +143,17 @@ input.src{
         padding-right: 10px;
         box-sizing: border-box;
     }
-    .fa-magnifying-glass{
+
+    .fa-magnifying-glass {
         padding-left: 5px;
         font-size: 10px;
     }
-    .caja-one{
+
+    .caja-one {
         display: none;
     }
-    .second-img-logo{
+
+    .second-img-logo {
         width: 25%;
         display: flex;
         justify-content: flex-start;
@@ -137,85 +161,98 @@ input.src{
         padding-left: 10px;
         box-sizing: border-box;
     }
-    .second-img-logo .img-logo-ar{
+
+    .second-img-logo .img-logo-ar {
         width: 13vw;
     }
-    .cart{
+
+    .cart {
         display: flex;
         border: dashed 1px black;
         align-self: center;
         justify-content: center;
     }
-    .cart i{
+
+    .cart i {
         font-size: 15px;
         color: white;
         margin: 0;
         padding-left: 5px;
     }
 
-    .caja-login{
+    .caja-login {
         display: flex;
         flex-direction: row;
         align-items: center;
     }
-    .caja-searchbar{
-        width:40%;
+
+    .caja-searchbar {
+        width: 40%;
         display: flex;
         align-self: flex-start;
         box-sizing: border-box;
     }
-    .box{
+
+    .box {
         width: 100%;
         height: 18px;
         box-sizing: border-box;
     }
-    input.src{
+
+    input.src {
         height: 16.4px;
         box-sizing: border-box;
         padding-left: 15px;
     }
-    .barra-menu{
+
+    .barra-menu {
         width: 100%;
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
     }
-    .lista-menu{
+
+    .lista-menu {
         width: 100%;
         display: flex;
         list-style: none;
         flex-direction: row;
         justify-content: center;
         background-color: black;
-        margin:0px;
+        margin: 0px;
         padding: 0;
         box-sizing: border-box;
     }
-    .lista-menu li a{
+
+    .lista-menu li a {
         text-decoration: none;
         color: white;
         display: block;
         font-size: 10px;
-        padding-right: 15px; 
+        padding-right: 15px;
         padding-left: 15px;
         border-right: 1px white solid;
-        margin-top:  5px;
+        margin-top: 5px;
         margin-bottom: 5px;
     }
-    .lista-menu li:hover{
+
+    .lista-menu li:hover {
         background: white;
     }
-    .lista-menu li a:hover{
-        color:black;
+
+    .lista-menu li a:hover {
+        color: black;
     }
-    .lista-login{
+
+    .lista-login {
         display: flex;
         list-style: none;
         background-color: black;
         padding-left: 0px;
         margin: 0;
     }
-    .lista-login li a{
+
+    .lista-login li a {
         text-decoration: none;
         color: white;
         display: block;
@@ -226,83 +263,135 @@ input.src{
         margin-bottom: 5px;
         border-right: white solid 1px;
     }
-    .lista-login li:hover{
+
+    .lista-login li:hover {
         background: white;
     }
-    .lista-login li a:hover{
-        color:black;
+
+    .lista-login li a:hover {
+        color: black;
     }
 
-    .fa-circle-user{
+    .fa-circle-user {
         display: flex;
-        color:white;
+        color: white;
         font-size: 15px;
     }
-
 }
-@media (min-width: 600px){
-    .register-bar{
+
+@media (min-width: 600px) {
+    .register-bar {
         width: 28%;
     }
 }
-@media (min-width: 769px){
-    .nav-bar{
+
+@media (min-width: 769px) {
+    .nav-bar {
         height: 55px;
         box-sizing: border-box;
     }
-    .second-img-logo{
+
+    .second-img-logo {
         width: 25%;
         height: 100%;
         padding-left: 15px;
         box-sizing: border-box;
     }
-    .img-logo-ar{
+
+    .img-logo-ar {
         height: 100%;
         box-sizing: border-box;
     }
-    .caja-searchbar{
+
+    .caja-searchbar {
         width: 40%;
         height: 100%;
         display: flex;
         align-self: center;
         box-sizing: border-box;
     }
-    .box{
+
+    .box {
         height: 25px;
     }
-    .register-bar{
+
+    .register-bar {
         width: 25%;
         padding-right: 15px;
     }
-    .lista-login li a{
+
+    .lista-login li a {
         font-size: 12px;
     }
-    .lista-menu li a{
+
+    .lista-menu li a {
         font-size: 12px;
         box-sizing: border-box;
     }
 }
-@media (min-width: 1200px){
-    .nav-bar, .barra-menu{
+
+@media (min-width: 1200px) {
+
+    .nav-bar,
+    .barra-menu {
         max-width: 1200px;
         margin: auto;
         padding-left: 0;
         padding-right: 0;
         box-sizing: border-box;
     }
-    .second-img-logo{
+
+    .second-img-logo {
         width: 25%;
         display: flex;
         padding-left: 0;
         box-sizing: border-box;
     }
-    .second-img-logo .img-logo-ar{
+
+    .second-img-logo .img-logo-ar {
         width: 50%;
     }
-    .register-bar{
+
+    .register-bar {
         width: 25%;
         padding-right: 0;
     }
 }
 
 
+/* -- START FOOTER -- */
+#footer-sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#footer-sections i {
+    padding: 5px;
+}
+.footer-section {
+    width: 33%;
+}
+#footer-fiscal-data, #footer-copyright {
+    display: flex;
+    justify-content: center;
+}
+/* -- END FOOTER -- */
+
+
+/* XS */
+@media (max-width: 480px) {
+    /* -- START FOOTER -- */
+
+
+
+    /* -- END FOOTER -- */
+}
+
+/* SM */
+@media screen and (min-width: 481px) and (max-width: 768px) {}
+
+/* LG */
+@media screen and (min-width: 769px) and (max-width: 1279px) {}
+
+/* XL */
+@media (min-width: 1280px) {}
