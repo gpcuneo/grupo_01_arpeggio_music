@@ -381,9 +381,18 @@ input.src {
 /* XS */
 @media (max-width: 480px) {
     /* -- START FOOTER -- */
-
-
-
+    #footer-sections { 
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-section {
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+    }
+    #footer-copyright {
+        font-size: 12px;
+        text-align: center;
+    }
     /* -- END FOOTER -- */
 }
 
@@ -391,7 +400,7 @@ input.src {
 @media screen and (min-width: 481px) and (max-width: 768px) {}
 
 /* LG */
-@media screen and (min-width: 769px) and (max-width: 1279px) {}
+@media screen and (min-width: 769px) and (max-width: 1200px) {}
 
 /* XL */
-@media (min-width: 1280px) {}
+@media (min-width: 1201px) {}
