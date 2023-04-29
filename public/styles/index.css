@@ -58,7 +58,6 @@ header {
 }
 
 .box {
-
     width: 90%;
     height: 25px;
     display: flex;
@@ -189,6 +188,7 @@ input.src {
 
     .caja-searchbar {
         width: 40%;
+        flex-wrap: wrap;
         display: flex;
         align-self: flex-start;
         box-sizing: border-box;
@@ -211,6 +211,7 @@ input.src {
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
+        align-items: space-around;
     }
 
     .lista-menu {
@@ -288,7 +289,6 @@ input.src {
 
 @media (min-width: 769px) {
     .nav-bar {
-        height: 55px;
         box-sizing: border-box;
     }
 

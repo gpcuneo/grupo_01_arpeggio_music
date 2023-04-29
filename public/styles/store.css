@@ -130,7 +130,18 @@ main {
     }
 
     .container-items {
-        width: 50vw;
+        width: 75vw;
+        display: inline-block;
+    }
+}
+
+@media (min-width: 1200px) {
+    .filter-products{
+        max-width: 15vw;
+    }
+
+    .container-items {
+        width: 85vw;
         display: inline-block;
     }
 }
