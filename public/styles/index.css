@@ -3,6 +3,7 @@
 body {
 
     margin: 0;
+    background-color: black;
 }
 
 header {
@@ -403,4 +404,4 @@ input.src {
 @media screen and (min-width: 769px) and (max-width: 1200px) {}
 
 /* XL */
-@media (min-width: 1201px) {}
+@media (min-width: 1280px) {}
