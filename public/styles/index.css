@@ -3,6 +3,7 @@
 body {
 
     margin: 0;
+    background-color: black;
 }
 
 header {
@@ -358,6 +359,7 @@ input.src {
     }
 }
 
+<<<<<<< HEAD
 
 /* -- START FOOTER -- */
 #footer-sections {
@@ -395,3 +397,5 @@ input.src {
 
 /* XL */
 @media (min-width: 1280px) {}
+=======
+>>>>>>> d66dfaa (Se suben cambios parciales sobre el main de la home, aun en desarrollo)
