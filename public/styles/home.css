@@ -1,5 +1,6 @@
 main { 
     text-align: center;
+    background-color: white;
 }
 
 .slider {
@@ -8,6 +9,7 @@ main {
     justify-content: center;
     text-align: center;
     background-color: black;
+    margin-bottom: 25px;
 }
 
 .slider img {
@@ -27,10 +29,6 @@ main {
     background-color: rgba(120, 120, 120, 50%);
 }
 
-/* .float-text .row-direction {
-    margin: 10px;
-} */
-
 .brands-container {
     display: flex;
     flex-wrap: wrap;
@@ -38,8 +36,10 @@ main {
     background-color: black;
     color: white;
     text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    /* margin-top: 25px;
+    margin-bottom: 25px; */
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .brands {
@@ -51,13 +51,12 @@ main {
 .container-items {
     border-color: white;
     border: 2px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     text-align: center;
 }
 
@@ -136,13 +135,13 @@ main {
 
 .sub-title {
     display: inline-block;
-    min-width: 75vw;
-    color: black;
+    width: 100%;
+    color: white;
     font-size: 25px;
     text-align: center;
-    background-color: white;
-    border-radius: 5px;
-    margin: 25px;
+    background-color: black;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 
@@ -152,6 +151,17 @@ main {
 @media (min-width: 768px) {
     .item-box {
         width: 22vw;
+    }
+
+    .brands-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        background-color: black;
+        color: white;
+        text-align: center;
+        margin: 0px 25px 25px 25px;
+        border-radius: 5px;
     }
 }
 /* 
