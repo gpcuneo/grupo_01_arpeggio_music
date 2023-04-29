@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
 
 body {
-
+    width: 100vw;
     margin: 0;
+    box-sizing: border-box;
 }
 
 header {
@@ -13,6 +14,7 @@ header {
 .container-general {
     width: 100vw;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 .img-logo {
@@ -111,7 +113,8 @@ input.src {
 @media (min-width: 481px) {
     header {
         background-color: black;
-        width: 100%;
+        width: 100vw;
+        box-sizing: border-box;
     }
 
     .fa-bars {
@@ -123,7 +126,6 @@ input.src {
         width: 100%;
         box-sizing: border-box;
     }
-
     .nav-bar {
         width: 100%;
         display: flex;
@@ -286,12 +288,20 @@ input.src {
 }
 
 @media (min-width: 769px) {
+    .container-general{
+        display: flex;
+        box-sizing: border-box;
+    }
     .nav-bar {
+        display:flex;
+        justify-content: space-between;
+        width: 100%;
         height: 55px;
         box-sizing: border-box;
     }
 
     .second-img-logo {
+        display: flex;
         width: 25%;
         height: 100%;
         padding-left: 15px;
@@ -302,7 +312,11 @@ input.src {
         height: 100%;
         box-sizing: border-box;
     }
-
+    .img-logo-second {
+        display: none;
+        width: 15%;
+        box-sizing: border-box;
+    }
     .caja-searchbar {
         width: 40%;
         height: 100%;
@@ -332,8 +346,7 @@ input.src {
 
 @media (min-width: 1200px) {
 
-    .nav-bar,
-    .barra-menu {
+    .nav-bar,.barra-menu {
         max-width: 1200px;
         margin: auto;
         padding-left: 0;
@@ -365,16 +378,21 @@ input.src {
     flex-direction: row;
     justify-content: center;
 }
+
 #footer-sections i {
     padding: 5px;
 }
+
 .footer-section {
     width: 33%;
 }
-#footer-fiscal-data, #footer-copyright {
+
+#footer-fiscal-data,
+#footer-copyright {
     display: flex;
     justify-content: center;
 }
+
 /* -- END FOOTER -- */
 
 
