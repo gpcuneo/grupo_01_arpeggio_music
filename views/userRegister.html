@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/userRegister.css">
 </head>
+
 <body>
     <header>
         <div>
@@ -32,14 +34,74 @@
         <div><img src="" alt="Carrito de compras"></div>
     </header>
     <main>
-        
+        <div class="main-container">
+            <div class="left-column">
+                <form action="./userRegister" method="POST">
+                    <div class="form-input">
+                        <label for="usuario">Usuario</label>
+                        <input type="usuario" name="usuario" id="usuario">
+                    </div>
+                    <div class="form-input">
+                        <label for="nombre">Nombre</label>
+                        <input type="nombre" name="nombre" id="nombre">
+                    </div>
+                    <div class="form-input">
+                        <label for="apellido">Apellido</label>
+                        <input type="apellido" name="apellido" id="apellido">
+                    </div>
+                    <div class="form-input">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="form-input">
+                        <label for="telefono">Teléfono</label>
+                        <input type="number" name="telefono" id="telefono">
+                    </div>
+                    <div class="form-input">
+                        <label for="pwd">Contraseña</label>
+                        <input type="password" name="pwd" id="pwd">
+                    </div>
+                    <div class="form-input">
+                        <label for="confirmpwd">Confirmar contraseña</label>
+                        <input type="password" name="confirmpwd" id="confirmpwd">
+                    </div>
+                </form>
+            </div>
+            <div class="right-column">
+                <img src="" alt="">
+            </div>
+        </div>
     </main>
     <footer>
-        <section>Contacto</section>
-        <section>Redes sociales</section>
-        <section>Newsletter</section>
-        <section>About / sobre mi... </section>
-        <section>Politicas de privacidad COCKIES!!!</section>
+        <div id="footer-sections">
+            <div class="footer-section">
+                <h4>Términos y condiciones</h4>
+                <p>Condiciones de pagos</p>
+                <p>Problemas de envios, compras</p>
+                <p>Preguntas Frecuentes</p>
+                <p>Botón de arrepentimiento</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes sociales</h4>
+                <p><i class="fa-brands fa-instagram"></i>Instagram</p>
+                <p><i class="fa-brands fa-facebook"></i>Facebook</p>
+                <p><i class="fa-brands fa-twitter"></i>Twitter</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fa-brands fa-whatsapp"></i>00-0000-0000</p>
+                <p><i class="fa-solid fa-envelope"></i>arpeggiomusic@gmail.com</p>
+                <p>Sucursales</p>
+            </div>
+        </div>
+        <div id="footer-fiscal-data">
+            <img src="" alt="">
+            <h4>Data fiscal</h4>
+        </div>
+        <div id="footer-copyright">
+            <p>Copyright 1000-0000 ArpeggioMusic <a href="">Políticas de privacidad</a></p>
+        </div>
     </footer>
 </body>
+
 </html>

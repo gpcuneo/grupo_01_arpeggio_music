@@ -3,50 +3,37 @@ main {
     background-color: white;
 }
 
-.slider {
-    position: relative;
-    display: inline-block;
-    justify-content: center;
-    text-align: center;
-    background-color: black;
-    margin-bottom: 25px;
-}
-
-.slider img {
-    width: 100%;
-    height: auto;
-}
-
-.float-text {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    color: rgb(30, 30, 30);
-    background-color: rgba(120, 120, 120, 50%);
-}
-
-.brands-container {
+.container-flex {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    background-color: black;
-    color: white;
-    text-align: center;
-    /* margin-top: 25px;
-    margin-bottom: 25px; */
-    padding-top: 25px;
-    padding-bottom: 25px;
+    text-align: start;
 }
 
-.brands {
-    width: 22vw;
-    height: auto;
-    margin: 5px;
+.filter-products {
+    background-color: black;
+    color: white;
+    font-family: 'Roboto', 'Open Sans', 'Helvetica Neue', 'sans-serif';
+    width: 100vw;
 }
+
+.filter-container-items{
+    display: block;
+    flex-wrap: wrap;
+    text-align: start;
+}
+
+.input-filters {
+    margin-left: 5%;
+}
+
+/* .price-rangue{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: space-evenly;
+}
+.input-price {
+    max-width: 25px;
+} */
 
 .container-items {
     border-color: white;
@@ -66,13 +53,9 @@ main {
     height: 250px;
     background-color: white;
     border-radius: 5px;
-    margin-bottom: 15px;
-}
+    /* margin-bottom: 15px; */
+    margin: 15px;
 
-.logos {
-    width: 20vw;
-    height: auto;
-    margin: 5px;
 }
 
 .img-responsive {
@@ -81,16 +64,6 @@ main {
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
-}
-
-.text-in-categories {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, -50%);
-    color: rgb(30, 30, 30);
-    background-color: rgba(120, 120, 120, 50%);
 }
 
 .text-in-product-box {
@@ -129,20 +102,17 @@ main {
     background-color: rgb(141, 134, 134);
 }
 
-.text-hiden{
-    display: none;
-}
 
-.sub-title {
-    display: inline-block;
-    width: 100%;
-    color: white;
-    font-size: 25px;
-    text-align: center;
-    background-color: black;
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -150,18 +120,29 @@ main {
 
 @media (min-width: 768px) {
     .item-box {
-        width: 22vw;
+        width: 15vw;
     }
 
-    .brands-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        background-color: black;
-        color: white;
-        text-align: center;
-        margin: 0px 25px 25px 25px;
-        border-radius: 5px;
+    .filter-products{
+        max-width: 25vw;
+        margin: 0px;
+        display: inline-block;
+    }
+
+    .container-items {
+        width: 75vw;
+        display: inline-block;
+    }
+}
+
+@media (min-width: 1200px) {
+    .filter-products{
+        max-width: 15vw;
+    }
+
+    .container-items {
+        width: 85vw;
+        display: inline-block;
     }
 }
 /* 
@@ -170,3 +151,14 @@ main {
         width: 10vw;
     }
 } */
+
+
+
+
+
+
+
+
+
+
+
