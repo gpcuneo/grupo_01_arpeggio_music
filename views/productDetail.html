@@ -1,38 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Arpeggio Music</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/productDetail.css">
 </head>
+
 <body>
     <header>
-        <div>
-            <img src="" alt="Logo de Arpeggio Music">
-        </div>
-        <div>
-            <input type="search" placeholder="Burcar productos, marcas">
-            <nav>
-                <ul>
-                    <li>categorias</li>
-                    <li>Ofertas</li>
-                    <li>Marcas</li>
-                    <li>Envios</li>
-                    <li>Cursos</li>
-                </ul>
+        <section class="container-general">
+            <div class="caja-one">
+                <div>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="caja-padre-logo">
+                    <img src="/img/logo-arpeggio.JPG" class="img-logo" alt="Logo de Arpeggio Music">
+                </div>
+                <div>
+                    <i class="fa-solid fa-cart-plus"></i>
+                </div>
+            </div>
+            <nav class="nav-bar">
+                <div class="second-img-logo">
+                    <img src="/img/logo-arpeggio.JPG" class="img-logo-ar" alt="">
+                </div>
+                <div class="caja-searchbar">
+                    <div class="box">
+                        <input type="search" placeholder="Burcar" class="src">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="register-bar">
+                    <div class="caja-login">
+                        <i class="fa-regular fa-circle-user"></i>
+                        <ul class="lista-login">
+                            <li id="text-log-in"><a href="#">Log in</a></li>
+                            <li><a href="#">Sign up</a></li>
+                        </ul>
+                    </div>
+                    <div class="cart">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </div>
+                </div>
             </nav>
-        </div>
-        <div>
-            <img src="" alt="login"> Login
-        </div>
-        <div>Sign Up</div>
-        <div><img src="" alt="Carrito de compras"></div>
+            <div class="barra-menu">
+                <ul class="lista-menu">
+                    <li><a href="#">Categorías</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Marcas</a></li>
+                    <li><a href="#">Envios</a></li>
+                    <li><a href="#">Cursos</a></li>
+                </ul>
+            </div>
+        </section>
     </header>
     <main>
-        
+        <article class="container">
+            <nav class="container-article">
+                <div class="name-product">
+                    <h4>Batería Acústica</h4>
+                </div>
+                <div class="container-img">
+                    <img src="/img/image 32.jpg" alt="">
+                </div>
+                <section class="box-text-product">
+                    <p class="price">$150.000</p>
+                    <p class="discount">20% de descuento</p>
+                    <div class="box-characteristics">
+                        <h5>Características</h5>
+                        <p>Batería Acústica 5 cuerpos 20 14 12 10 Yamaha Rydeen Rdp0f5</p>
+                    </div>
+                    <div class="box-send">
+                        <h5>Envíos</h5>
+                        <P>Envios a todo el País<i class="fa-solid fa-truck"></i></P>
+                    </div>
+                    <div class="box-stock">
+                        <h5>Stock disponible</h5>
+                        <div class="container-inc-dec">
+                            <label for="cantidad">Cantidad:</label>
+                            <button id="decrement"> - </button>
+                            <input type="number" min="1" max="50" value="1" id="my-input" readonly>
+                            <button id="increment"> + </button>
+                        </div>
+                    </div>
+                    <div class="container-button">
+                        <button id="input-shop">Comprar</button>
+                        <button id="input-cart-shop">Agregar al carrito</button>
+                    </div>
+            </nav>
+            <div class="caja-descripcion">
+                <h5>Descripción del Producto</h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia
+                recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporis minus
+                quia.
+            </div>
+            <div class="container-store">
+                <h5>Información de Tienda</h5>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis repellat molestiae rem quisquam, aperiam laboriosam voluptatum eligendi id, reprehenderit nesciunt, quasi optio commodi cum quibusdam fuga? Eveniet quos voluptas maxime?
+            </div>
+            </section>
+        </article>
+        <nav class="container-other-product">
+            <h5>Productos Similares</h5>
+            <div>
+                <article>producto 1</article>
+                <article>producto 2</article>
+            </div>
+        </nav>
+
     </main>
     <footer>
         <section>Contacto</section>
@@ -42,4 +124,5 @@
         <section>Politicas de privacidad COCKIES!!!</section>
     </footer>
 </body>
+
 </html>
