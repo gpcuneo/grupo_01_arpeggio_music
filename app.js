@@ -23,4 +23,6 @@ app.get('/userProfile', (req, res) => returnView(req, res, req.path));
 
 app.get('/userRegister', (req, res) => returnView(req, res, req.path));
 
+app.get('/store', (req, res) => returnView(req, res, req.path));
+
 app.get('*', (req, res) => returnView(req, res, '404'));

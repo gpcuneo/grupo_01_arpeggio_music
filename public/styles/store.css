@@ -1,0 +1,153 @@
+main { 
+    text-align: center;
+    background-color: white;
+}
+
+.container-flex {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: start;
+}
+
+.filter-products {
+    background-color: black;
+    color: white;
+    font-family: 'Roboto', 'Open Sans', 'Helvetica Neue', 'sans-serif';
+    width: 100vw;
+}
+
+.filter-container-items{
+    display: block;
+    flex-wrap: wrap;
+    text-align: start;
+}
+
+.input-filters {
+    margin-left: 5%;
+}
+
+/* .price-rangue{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: space-evenly;
+}
+.input-price {
+    max-width: 25px;
+} */
+
+.container-items {
+    border-color: white;
+    border: 2px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+.item-box {
+    position: relative;
+    width: 40vw;
+    height: 250px;
+    background-color: white;
+    border-radius: 5px;
+    /* margin-bottom: 15px; */
+    margin: 15px;
+
+}
+
+.img-responsive {
+    aspect-ratio: 9/16;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.text-in-product-box {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    color: rgb(30, 30, 30);
+    background-color: rgba(120, 120, 120, 50%);
+}
+
+.text-in-product-box-hover{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    width: 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    color: rgb(30, 30, 30);
+    background-color: rgb(141, 134, 134);
+}
+
+.text-in-product-box-hover_v2{
+    position: absolute;
+    top: 82%;
+    left: 50%;
+    width: 100%;
+    min-height: 90px;
+    max-height: 90px;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    color: rgb(30, 30, 30);
+    background-color: rgb(141, 134, 134);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 768px) {
+    .item-box {
+        width: 15vw;
+    }
+
+    .filter-products{
+        max-width: 25vw;
+        margin: 0px;
+        display: inline-block;
+    }
+
+    .container-items {
+        width: 50vw;
+        display: inline-block;
+    }
+}
+/* 
+@media (min-width: 1200px) {
+    .item-box {
+        width: 10vw;
+    }
+} */
+
+
+
+
+
+
+
+
+
+
+
