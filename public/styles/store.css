@@ -1,4 +1,4 @@
-main { 
+main {
     text-align: center;
     background-color: white;
 }
@@ -6,7 +6,8 @@ main {
 .container-flex {
     display: flex;
     flex-wrap: wrap;
-    text-align: start;
+    /* text-align: start; */
+    justify-content: space-evenly;
 }
 
 .filter-products {
@@ -20,6 +21,8 @@ main {
     display: block;
     flex-wrap: wrap;
     text-align: start;
+    margin-top: 15px;
+    margin: 15px;
 }
 
 .input-filters {
@@ -41,10 +44,11 @@ main {
     margin-bottom: 50px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: white;
     color: black;
     text-align: center;
+    margin-top: 25px;
 }
 
 .item-box {
@@ -53,9 +57,9 @@ main {
     height: 250px;
     background-color: white;
     border-radius: 5px;
+    margin-bottom: 15px;
     /* margin-bottom: 15px; */
-    margin: 15px;
-
+    /* margin: 15px; */
 }
 
 .img-responsive {
@@ -120,32 +124,38 @@ main {
 
 @media (min-width: 768px) {
     .item-box {
-        width: 15vw;
+        width: 14vw;
+    }
+
+    .filter-container-items {
+        border-radius: 5px;
+        /* margin: 15px; */
     }
 
     .filter-products{
         max-width: 25vw;
-        margin: 0px;
+        margin: 25px;
         display: inline-block;
+        border-radius: 5px;
     }
 
     .container-items {
-        width: 75vw;
+        width: 68vw;
         display: inline-block;
+        /* margin-top: 25px; */
     }
 }
 
 @media (min-width: 1200px) {
     .filter-products{
-        max-width: 15vw;
+        max-width: 14vw;
     }
 
     .container-items {
-        width: 85vw;
-        display: inline-block;
+        width: 75vw;
     }
 }
-/* 
+/*
 @media (min-width: 1200px) {
     .item-box {
         width: 10vw;
