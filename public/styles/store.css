@@ -29,6 +29,18 @@ main {
     margin-left: 5%;
 }
 
+.input-price{
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.center-elements{
+    text-align: center;
+}
+
+.input-price-container {
+    max-width: 90%;
+}
 /* .price-rangue{
     display: flex;
     flex-wrap: wrap;
