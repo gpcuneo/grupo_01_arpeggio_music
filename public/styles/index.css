@@ -140,8 +140,9 @@ input.src {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        align-self: center;
+        align-self: flex-start;
         padding-right: 10px;
+        margin-top: 8px;
         box-sizing: border-box;
     }
 
@@ -226,7 +227,10 @@ input.src {
         padding: 0;
         box-sizing: border-box;
     }
-
+    .lista-menu li{
+        background: black;
+        transition: all 0.5s;
+    }
     .lista-menu li a {
         text-decoration: none;
         color: white;
@@ -237,6 +241,7 @@ input.src {
         border-right: 1px white solid;
         margin-top: 5px;
         margin-bottom: 5px;
+        transition: all 0.5s;
     }
 
     .lista-menu li:hover {
@@ -264,7 +269,12 @@ input.src {
         padding-right: 10px;
         margin-top: 5px;
         margin-bottom: 5px;
+        transition: all 0.5s;
         border-right: white solid 1px;
+    }
+    .lista-login li{
+        background: black;
+        transition: all 0.5s;
     }
 
     .lista-login li:hover {
@@ -328,6 +338,8 @@ input.src {
 
     .register-bar {
         width: 25%;
+        align-self:center;
+        margin-top: 0;
         padding-right: 15px;
     }
 

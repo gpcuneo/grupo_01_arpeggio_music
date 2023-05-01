@@ -27,7 +27,7 @@
                     <i class="fa-solid fa-cart-plus"></i>
                 </div>
             </div>
-            <nav class="nav-bar">
+            <div class="nav-bar">
                 <div class="second-img-logo">
                     <img src="/img/logo-arpeggio.JPG" class="img-logo-ar" alt="">
                 </div>
@@ -35,6 +35,15 @@
                     <div class="box">
                         <input type="search" placeholder="Burcar" class="src">
                         <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="barra-menu">
+                        <ul class="lista-menu">
+                            <li><a href="#">Categorías</a></li>
+                            <li><a href="#">Ofertas</a></li>
+                            <li><a href="#">Marcas</a></li>
+                            <li><a href="#">Envios</a></li>
+                            <li><a class="remove-border" href="#">Cursos</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="register-bar">
@@ -49,15 +58,6 @@
                         <i class="fa-solid fa-cart-plus"></i>
                     </div>
                 </div>
-            </nav>
-            <div class="barra-menu">
-                <ul class="lista-menu">
-                    <li><a href="#">Categorías</a></li>
-                    <li><a href="#">Ofertas</a></li>
-                    <li><a href="#">Marcas</a></li>
-                    <li><a href="#">Envios</a></li>
-                    <li><a href="#">Cursos</a></li>
-                </ul>
             </div>
         </section>
     </header>
@@ -89,6 +89,16 @@
                         <h5>Envíos</h5>
                         <P>Envios a todo el País<i class="fa-solid fa-truck"></i></P>
                     </div>
+                    <div class="container-color">
+                        <h5>Seleccione un color</h5>
+                        <label for="">Color:</label>
+                        <select name="color" id="">
+                            <option value="#ff0000">Rojo</option>
+                            <option value="#00ff00">Verde</option>
+                            <option value="#0000ff">Azul</option>
+                            <option value="#000000">Negro</option>
+                        </select>
+                    </div>
                     <div class="box-stock">
                         <h5>Stock disponible</h5>
                         <div class="container-inc-dec">
@@ -107,38 +117,76 @@
             <div class="container-descripcion">
                 <div class="caja-descripcion">
                     <h5>Descripción del Producto</h5>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit
-                    mollitia
-                    recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporis
-                    minus
-                    quia.
+                    <p class="texto">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit
+                        mollitia
+                        recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam
+                        corporis
+                        minus
+                        quia.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse
+                        deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius
+                        maxime ad assumenda provident?
+                    </p>
                 </div>
                 <div class="container-store">
                     <h5>Información de Tienda</h5>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis repellat molestiae rem quisquam,
-                    aperiam laboriosam voluptatum eligendi id, reprehenderit nesciunt, quasi optio commodi cum quibusdam
-                    fuga? Eveniet quos voluptas maxime?
+                    <p class="texto">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis repellat molestiae rem
+                        quisquam,
+                        aperiam laboriosam voluptatum eligendi id, reprehenderit nesciunt, quasi optio commodi cum
+                        quibusdam
+                        fuga? Eveniet quos voluptas maxime?
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum ipsum ad quam esse illum? Velit
+                        tenetur assumenda accusantium temporibus tempora laborum veritatis fugit, suscipit ut incidunt
+                        minus, voluptatem, nihil totam!
+                    </p>
                 </div>
             </div>
             <nav class="container-other-product">
                 <h5>Productos Similares</h5>
-                <article class="article-other">
-                    <img src="/img/image 46.jpg" alt="">
-                    <div>name</div>
-                </article>
-                <article class="article-other">
-                    <img src="/img/image 47.jpg" alt="">
-                    <div>name</div>
-                </article>
+                <div class="box-article">
+                    <article class="article-other">
+                        <img src="/img/image 46.jpg" alt="">
+                        <h5>Redoblante</h5>
+                    </article>
+                    <article class="article-other">
+                        <img src="/img/image 47.jpg" alt="">
+                        <h5>Pedal</h5>
+                    </article>
+                </div>
             </nav>
         </article>
     </main>
     <footer>
-        <section>Contacto</section>
-        <section>Redes sociales</section>
-        <section>Newsletter</section>
-        <section>About / sobre mi... </section>
-        <section>Politicas de privacidad COCKIES!!!</section>
+        <div id="footer-sections">
+            <div class="footer-section">
+                <h4>Términos y condiciones</h4>
+                <p>Condiciones de pagos</p>
+                <p>Problemas de envios, compras</p>
+                <p>Preguntas Frecuentes</p>
+                <p>Botón de arrepentimiento</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes sociales</h4>
+                <p><i class="fa-brands fa-instagram"></i>Instagram</p>
+                <p><i class="fa-brands fa-facebook"></i>Facebook</p>
+                <p><i class="fa-brands fa-twitter"></i>Twitter</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fa-brands fa-whatsapp"></i>00-0000-0000</p>
+                <p><i class="fa-solid fa-envelope"></i>arpeggiomusic@gmail.com</p>
+                <p>Sucursales</p>
+            </div>
+        </div>
+        <div id="footer-fiscal-data">
+            <img src="" alt="">
+            <h4>Data fiscal</h4>
+        </div>
+        <div id="footer-copyright">
+            <p>Copyright 1000-0000 ArpeggioMusic <a href="">Políticas de privacidad</a></p>
+        </div>
     </footer>
 </body>
 
