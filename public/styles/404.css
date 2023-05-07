@@ -1,0 +1,22 @@
+main {
+    color: white;
+}
+
+.container-error { 
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+img {
+    width: 100%;
+    max-width: 650px;
+}
+
+.width-full{
+    width: 100%;
+}

@@ -4,42 +4,190 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Arpeggio Music</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/userProfile.css">
 </head>
 <body>
     <header>
-        <div>
-            <img src="" alt="Logo de Arpeggio Music">
-        </div>
-        <div>
-            <input type="search" placeholder="Burcar productos, marcas">
-            <nav>
-                <ul>
-                    <li>categorias</li>
-                    <li>Ofertas</li>
-                    <li>Marcas</li>
-                    <li>Envios</li>
-                    <li>Cursos</li>
-                </ul>
-            </nav>
-        </div>
-        <div>
-            <img src="" alt="login"> Login
-        </div>
-        <div>Sign Up</div>
-        <div><img src="" alt="Carrito de compras"></div>
+        <section class="container-general">
+            <div class="caja-one">
+                <div>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="caja-padre-logo">
+                    <a href="/">
+                        <img src="/img/logo-arpeggio.JPG" class="img-logo" alt="Logo de Arpeggio Music">
+                    </a>                    
+                </div>
+                <div>
+                    <i class="fa-solid fa-cart-plus"></i>
+                </div>
+            </div>
+            <div class="nav-bar">
+                <div class="second-img-logo">
+                    <a href="/"><img src="/img/logo-arpeggio.JPG" class="img-logo-ar" alt=""></a>
+                </div>
+                <div class="caja-searchbar">
+                    <div class="box">
+                        <input type="search" placeholder="Burcar" class="src">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="barra-menu">
+                        <ul class="lista-menu">
+                            <li><a href="/store">Tienda</a></li>
+                            <li><a href="/store">Ofertas</a></li>
+                            <li><a href="/about">Sobre nosotros</a></li>
+                            <li><a href="/shipping">Envios</a></li>
+                            <!-- <li><a class="remove-border" href="#">Cursos</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="register-bar">
+                    <div class="caja-login">
+                        <i class="fa-regular fa-circle-user"></i>
+                        <ul class="lista-login">
+                            <li id="text-log-in"><a href="#">Log in</a></li>
+                            <li><a href="#">Sign up</a></li>
+                        </ul>
+                    </div>
+                    <div class="cart">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
     </header>
     <main>
-        
+        <section class="user-info">
+            <div class="container-image">
+                <img class="user-image" src="/images/userProfile/profile_2.jpg" alt="Imagen de perfil del usuario">
+            </div>
+            <div class="user-detail">
+                <p>Amelie Lens</p>
+                <p>alend@gmail.com</p>
+                <p>Calle Falsa 123</p>
+                <p>Almagro</p>
+            </div>
+            <div class="edit-profile">
+                <button type="button">Editar informacion</button>
+            </div>
+        </section>
+        <hr>
+        <section class="order-history">
+            <div class="tittle">
+                <p>Historial de pedidos</p>
+            </div>
+            <article class="container-info">
+                <div class="order-item">
+                    <p><b>Numero de pedido: </b>#34628</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Fecha: </b>24/11/2022</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Monto: </b>$ 35423</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Estado: </b><span class="status-loaded">Cargado</span></p>
+                </div>
+                <div class="order-item center-items">
+                    <button class="btn-order-details" type="button">
+                        Ver detalles
+                    </button>
+                </div>
+            </article>
+            <article class="container-info">
+                <div class="order-item">
+                    <p><b>Numero de pedido: </b>#34628</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Fecha: </b>24/11/2022</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Monto: </b>$ 35423</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Estado: </b><span class="status-invoiced">Facturado</span></p>
+                </div>
+                <div class="order-item center-items">
+                    <button class="btn-order-details" type="button">
+                        Ver detalles
+                    </button>
+                </div>
+            </article>
+            <article class="container-info">
+                <div class="order-item">
+                    <p><b>Numero de pedido: </b>#34628</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Fecha: </b>24/11/2022</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Monto: </b>$ 35423</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Estado: </b><span class="status-delivered">Entregado</span></p>
+                </div>
+                <div class="order-item center-items">
+                    <button class="btn-order-details" type="button">
+                        Ver detalles
+                    </button>
+                </div>
+            </article>
+            <article class="container-info">
+                <div class="order-item">
+                    <p><b>Numero de pedido: </b>#34628</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Fecha: </b>24/11/2022</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Monto: </b>$ 35423</p>
+                </div>
+                <div class="order-item">
+                    <p><b>Estado: </b><span class="status-cancelled">Cancelado</span></p>
+                </div>
+                <div class="order-item center-items">
+                    <button class="btn-order-details" type="button">
+                        Ver detalles
+                    </button>
+                </div>
+            </article>
+        </section>
     </main>
     <footer>
-        <section>Contacto</section>
-        <section>Redes sociales</section>
-        <section>Newsletter</section>
-        <section>About / sobre mi... </section>
-        <section>Politicas de privacidad COCKIES!!!</section>
+        <div id="footer-sections">
+            <div class="footer-section">
+                <h4>Términos y condiciones</h4>
+                <p>Condiciones de pagos</p>
+                <p>Problemas de envios, compras</p>
+                <p>Preguntas Frecuentes</p>
+                <p>Botón de arrepentimiento</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes sociales</h4>
+                <p><i class="fa-brands fa-instagram"></i>Instagram</p>
+                <p><i class="fa-brands fa-facebook"></i>Facebook</p>
+                <p><i class="fa-brands fa-twitter"></i>Twitter</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fa-brands fa-whatsapp"></i>00-0000-0000</p>
+                <p><i class="fa-solid fa-envelope"></i>arpeggiomusic@gmail.com</p>
+                <p>Sucursales</p>
+            </div>
+        </div>
+        <div id="footer-fiscal-data">
+            <img src="" alt="">
+            <h4>Data fiscal</h4>
+        </div>
+        <div id="footer-copyright">
+            <p>Copyright 1000-0000 ArpeggioMusic <a href="">Políticas de privacidad</a></p>
+        </div>
     </footer>
 </body>
 </html>

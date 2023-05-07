@@ -1,0 +1,119 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    color: white;
+    margin-bottom: 25px;
+}
+
+hr {
+    width: 90%;
+}
+
+.container-image {
+    width: 100%;
+    text-align: center;
+}
+
+.user-image {
+    width: 90%;
+    height: auto;
+    border-radius: 50px;
+}
+
+.user-info {
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.user-detail {
+    margin-left: 5%;
+}
+
+.edit-profile {
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.tittle {
+    background-color: gray;
+    border: solid white 1px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.order-history {
+    width: 90vw;
+    margin-left: 5%;
+    text-align: center;
+}
+
+.container-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    border: solid white 1px;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: start;
+}
+
+.order-item {
+    width: 100%;
+}
+
+.center-items {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.status-delivered {
+    color: green;
+}
+
+.status-invoiced {
+    color: blue;
+}
+
+.status-loaded {
+    color: yellow;
+}
+
+.status-cancelled {
+    color: red;
+}
+
+@media (min-width: 768px) {
+    .container-image {
+        margin-left: 5%;
+        width: 35%;
+    }
+
+    .user-info {
+        margin-top: 40px;
+    }
+
+    .user-detail {
+        width: 45%;
+        margin-top: 25px;
+    }
+
+    .edit-profile {
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .order-item {
+        width: 20%;
+    }
+}
