@@ -11,7 +11,6 @@ hr {
 }
 
 .container-image {
-    margin-top: 25px;
     width: 100%;
     text-align: center;
 }
@@ -20,11 +19,17 @@ hr {
     width: 90%;
     height: auto;
     border-radius: 50px;
-
 }
 
 .user-info {
+    margin-top: 25px;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.user-detail {
     margin-left: 5%;
 }
 
@@ -33,6 +38,15 @@ hr {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+.tittle {
+    background-color: gray;
+    border: solid white 1px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .order-history {
@@ -62,12 +76,33 @@ hr {
     justify-content: center;
 }
 
+.status-delivered {
+    color: green;
+}
+
+.status-invoiced {
+    color: blue;
+}
+
+.status-loaded {
+    color: yellow;
+}
+
+.status-cancelled {
+    color: red;
+}
+
 @media (min-width: 768px) {
     .container-image {
+        margin-left: 5%;
         width: 35%;
     }
 
     .user-info {
+        margin-top: 40px;
+    }
+
+    .user-detail {
         width: 45%;
         margin-top: 25px;
     }
