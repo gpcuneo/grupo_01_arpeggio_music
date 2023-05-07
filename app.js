@@ -28,3 +28,4 @@ app.get('/store', (req, res) => returnView(req, res, req.path));
 app.get('/shoppingHistory', (req, res) => returnView(req, res, req.path));
 
 app.get('*', (req, res) => returnView(req, res, '404'));
+
