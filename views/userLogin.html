@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/userLogin.css">
 </head>
+
 <body>
     <header>
         <section class="container-general">
@@ -21,7 +23,7 @@
                 <div class="caja-padre-logo">
                     <a href="/">
                         <img src="/images/logos/logo-arpeggio.JPG" class="img-logo" alt="Logo de Arpeggio Music">
-                    </a>                    
+                    </a>
                 </div>
                 <div>
                     <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a>
@@ -55,42 +57,54 @@
                         </ul>
                     </div>
                     <div class="cart">
-                        <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a> 
+                        <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a>
                     </div>
                 </div>
             </div>
         </section>
     </header>
     <main>
-        <section class="login">
-            <form action="/login" method="POST">
-                <div class="input">
-                    <label>Usuario</label>
-                    <input type="text" name="User">
+        <div class="general">
+            <section class="login">
+                <form action="/login" method="POST">
+                    <div class="input">
+                        <label>Usuario</label>
+                        <input type="text" name="User">
+                    </div>
+                    <div class="input">
+                        <label>Contraseña</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="text">
+                        <p>Al continuar, aceptas las Condiciones de uso y el aviso de privacidad de Arpeggio</p>
+                        <button>Continuar</button>
+                    </div>
+                </form>
+                <div class="img-button">
+                    <div>
+                        <img class="redes" src="/images/logos/gmail.png" alt="redes">
+                    </div>
+                    <div>
+                        <img class="redes" src="/images/logos/facebook.png" alt="redes">
+                    </div>
+
+                    <div>
+                        <button class="redes" class="new-account">Crear Cuenta</button>
+                    </div>
                 </div>
-                <div class="input">
-                    <label>Contraseña</label>
-                    <input type="password" name="password">
-                </div>
-                <div class="text">
-                    <p>Al continuar, aceptas las Condiciones de uso y el aviso de privacidad de Arpeggio</p>
-                    <button>Continuar</button>
-                </div>
-                <div class="redes">
-                    <img src="/images/logos/gmail.png" alt="redes" width=90px>
-                </div>
-                <div class="redes">
-                    <img src="/images/logos/facebook.png" alt="redes"width=90px>
-                </div>
-    
+            </section>
+            <section class="logo">
                 <div>
-                    <button class="new-account">Crear Cuenta</button>
+                    <img src="/images/productos/studio.JPG" alt="logo">
+
                 </div>
-    
-            </form>
-        </section>
-    
-        
+
+
+            </section>
+        </div>
+
+
+
     </main>
     <footer>
         <div class="footer-container">
@@ -117,10 +131,11 @@
                 <img src="" alt="Datos fiscales">
                 <p>Data fiscal</p> <br>
                 <p>Copyright 1000-0000 ArpeggioMusic <br><br>
-                <a href="">Políticas de privacidad</a>
+                    <a href="">Políticas de privacidad</a>
                 </p>
             </div>
         </div>
     </footer>
 </body>
+
 </html>

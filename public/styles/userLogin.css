@@ -1,22 +1,36 @@
-.redes {margin-bottom: 30px;
-;}
 
-.login{background-color: black;
-width: 100%;
-margin: auto;
-padding: 30px;
-display: flex;
-justify-content: center; /*como le pongo un fondo negro, sera con box-shadow: 5px 5px 20px black;?*/
+.redes {
+    margin-bottom: 30px;
+    width: 90px;
 }
+
+.login {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    margin: auto;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    /*como le pongo un fondo negro, sera con box-shadow: 5px 5px 20px black;?*/
+}
+
+.logo {
+    display: none;
+}
+
 label {
     color: white;
     margin-bottom: 10px;
 }
-p{color: white;
-    display: none;}
 
-button{
-    background-color: white; 
+p {
+    color: white;
+    display: none;
+}
+
+button {
+    background-color: white;
     color: black;
     border-radius: 1em;
     margin: 20px;
@@ -24,20 +38,40 @@ button{
     justify-content: center;
     width: 60%;
 }
-.input {display: flex;
-flex-direction: column;
-margin-bottom: 30px;
-width: 100%;}
 
-.new-account{display: none;}
-footer{display: none;}
-.box {display: none;}
+.input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.img-button{
+    display: flex;
+    flex-direction: column;
+}
 
-@media (min-width:1200px){
-    .login{justify-content: left;}
-    p{width: 100%;
-    } /*no puedo hacer que el texto aparezca en esta vista*/
-} /*tampoco pude hacer que se vea solo el logo del navbar*/
+.new-account {
+    display: none;
+}
+
+footer {
+    display: none;
+}
+
+.box {
+    display: none;
+}
+
+@media (min-width:1200px) {
+    .general{display: contents;}
+    .login{max-width: 30%;}
+    .logo{max-width: 70%;}
+
+
+  
+    /*no puedo hacer que el texto aparezca en esta vista*/
+}
+
+/*tampoco pude hacer que se vea solo el logo del navbar*/
 
 /*
-
