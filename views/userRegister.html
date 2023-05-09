@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/userRegister.css">
 </head>
+
 <body>
     <header>
         <section class="container-general">
@@ -21,7 +23,7 @@
                 <div class="caja-padre-logo">
                     <a href="/">
                         <img src="/images/logos/logo-arpeggio.JPG" class="img-logo" alt="Logo de Arpeggio Music">
-                    </a>                    
+                    </a>
                 </div>
                 <div>
                     <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a>
@@ -55,7 +57,7 @@
                         </ul>
                     </div>
                     <div class="cart">
-                        <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a> 
+                        <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -64,39 +66,39 @@
     <main>
         <div class="main-container">
             <div class="left-column">
-                <form action="./userRegister" method="POST">
-                    <div class="form-input">
+                <form class="formulario-centrado" action="./userRegister" method="POST">
+                    <div class="separacion">
                         <label for="usuario">Usuario</label>
-                        <input type="usuario" name="usuario" id="usuario">
+                        <input class="form-input" type="usuario" name="usuario" id="usuario">
                     </div>
-                    <div class="form-input">
+                    <div class="separacion">
                         <label for="nombre">Nombre</label>
-                        <input type="nombre" name="nombre" id="nombre">
+                        <input class="form-input" type="nombre" name="nombre" id="nombre">
                     </div>
-                    <div class="form-input">
+                    <div class="separacion">
                         <label for="apellido">Apellido</label>
-                        <input type="apellido" name="apellido" id="apellido">
+                        <input class="form-input" type="apellido" name="apellido" id="apellido">
                     </div>
-                    <div class="form-input">
+                    <div class="separacion">
                         <label for="email">E-mail</label>
-                        <input type="email" name="email" id="email">
+                        <input class="form-input" type="email" name="email" id="email">
                     </div>
-                    <div class="form-input">
+                    <div class="separacion">
                         <label for="telefono">Teléfono</label>
-                        <input type="number" name="telefono" id="telefono">
+                        <input class="form-input" type="number" name="telefono" id="telefono">
                     </div>
-                    <div class="form-input">
+                    <div class="separacion">
                         <label for="pwd">Contraseña</label>
-                        <input type="password" name="pwd" id="pwd">
+                        <input class="form-input" type="password" name="pwd" id="pwd">
                     </div>
-                    <div class="form-input">
+                    <div class="separacion">
                         <label for="confirmpwd">Confirmar contraseña</label>
-                        <input type="password" name="confirmpwd" id="confirmpwd">
+                        <input class="form-input" type="password" name="confirmpwd" id="confirmpwd">
                     </div>
                 </form>
             </div>
             <div class="right-column">
-                <img src="" alt="">
+                <img src="/images/userProfile/registro.jpg" alt="imagen de fondo">
             </div>
         </div>
     </main>
@@ -121,14 +123,17 @@
                 <p><i class="fa-solid fa-envelope"></i>arpeggiomusic@gmail.com</p>
                 <p>Sucursales</p>
             </div>
-            <div class="footer-section">
-                <img src="" alt="Datos fiscales">
-                <p>Data fiscal</p> <br>
-                <p>Copyright 1000-0000 ArpeggioMusic <br><br>
-                <a href="">Políticas de privacidad</a>
-                </p>
+        </div>
+        <div id="footer-fiscal-data">
+            <img src="" alt="">
+            <h4>Data fiscal</h4>
+        </div>
+        <div id="footer-copyright">
+            <div class="copyright-center">
+                <p>Copyright 1000-0000 ArpeggioMusic <a href="">Políticas de privacidad</a></p>
             </div>
         </div>
     </footer>
 </body>
+
 </html>
