@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
 
+* {
+    font-family: roboto;
+}
+
 body {
     width: 100vw;
     margin: 0;
@@ -109,7 +113,22 @@ input.src {
     display: none;
 }
 
-@media (min-width: 769px) {
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    padding: 5px;
+    color: white;
+}
+
+.footer-section {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+
+@media (min-width: 481px) {
     header {
         background-color: black;
         width: 100vw;
@@ -321,58 +340,8 @@ input.src {
         width: 25%;
         padding-right: 0;
     }
-}
-
-
-/* -- START FOOTER -- */
-#footer-sections {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: white;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-#footer-sections i {
-    padding: 5px;
-}
-
-.footer-section {
-    width: 33%;
-}
-
-#footer-fiscal-data,
-#footer-copyright {
-    display: flex;
-    justify-content: center;
-}
-
-/* -- END FOOTER -- */
-
-
-/* XS */
-@media (max-width: 480px) {
-    /* -- START FOOTER -- */
-    #footer-sections { 
-        flex-direction: column;
-        text-align: center;
-    }
     .footer-section {
-        width: 100%;
-        border-bottom: 1px solid #ccc;
+        width: 30%;
+        border-bottom: none;
     }
-    #footer-copyright {
-        font-size: 12px;
-        text-align: center;
-    }
-    /* -- END FOOTER -- */
 }
-
-/* SM */
-@media screen and (min-width: 481px) and (max-width: 768px) {}
-
-/* LG */
-@media screen and (min-width: 769px) and (max-width: 1200px) {}
-
-/* XL */
-@media (min-width: 1280px) {}
