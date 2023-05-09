@@ -17,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 /* XS */
 @media (max-width: 480px) {
 }

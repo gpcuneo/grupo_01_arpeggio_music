@@ -396,12 +396,20 @@ input.src {
 
 .footer-section {
     width: 33%;
+    padding: 0 90px;
+    text-align: center;
+}
+
+.footer-section p {
+    font-size: 13px;
 }
 
 #footer-fiscal-data,
 #footer-copyright {
     display: flex;
     justify-content: center;
+    text-align: center;
+    font-size:small;
 }
 
 /* -- END FOOTER -- */
