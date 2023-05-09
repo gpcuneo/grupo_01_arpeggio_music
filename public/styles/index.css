@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
 
+* {
+    font-family: roboto;
+}
+
 body {
     width: 100vw;
     margin: 0;
@@ -109,6 +113,21 @@ input.src {
     display: none;
 }
 
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    padding: 5px;
+    color: white;
+}
+
+.footer-section {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+
 @media (min-width: 481px) {
     header {
         background-color: black;
@@ -136,13 +155,13 @@ input.src {
     }
 
     .register-bar {
-        width: 35%;
+        width: 25%;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        align-self: flex-start;
-        padding-right: 10px;
-        margin-top: 8px;
+        align-self: center;
+        padding-right: 15px;
+        margin-top: 0px;
         box-sizing: border-box;
     }
 
@@ -160,7 +179,7 @@ input.src {
         display: flex;
         justify-content: flex-start;
         align-self: center;
-        padding-left: 10px;
+        padding-left: 15px;
         box-sizing: border-box;
     }
 
@@ -189,7 +208,7 @@ input.src {
     }
 
     .caja-searchbar {
-        width: 40%;
+        width: 45%;
         flex-wrap: wrap;
         display: flex;
         align-self: flex-start;
@@ -198,7 +217,7 @@ input.src {
 
     .box {
         width: 100%;
-        height: 18px;
+        height: 25px;
         box-sizing: border-box;
     }
 
@@ -235,7 +254,7 @@ input.src {
         text-decoration: none;
         color: white;
         display: block;
-        font-size: 10px;
+        font-size: 12px;
         padding-right: 15px;
         padding-left: 15px;
         border-right: 1px white solid;
@@ -264,7 +283,7 @@ input.src {
         text-decoration: none;
         color: white;
         display: block;
-        font-size: 10px;
+        font-size: 12px;
         padding-left: 10px;
         padding-right: 10px;
         margin-top: 5px;
@@ -284,72 +303,15 @@ input.src {
     .lista-login li a:hover {
         color: black;
     }
+    .caja-login a{
+        text-decoration: none;
+    }
 
     .fa-circle-user {
         display: flex;
         color: white;
         font-size: 15px;
-    }
-}
-
-@media (min-width: 600px) {
-    .register-bar {
-        width: 28%;
-    }
-}
-
-@media (min-width: 769px) {
-    .container-general{
-        display: flex;
-        box-sizing: border-box;
-    }
-    .nav-bar {
-        box-sizing: border-box;
-    }
-
-    .second-img-logo {
-        display: flex;
-        width: 25%;
-        height: 100%;
-        padding-left: 15px;
-        box-sizing: border-box;
-    }
-
-    .img-logo-ar {
-        height: 100%;
-        box-sizing: border-box;
-    }
-    .img-logo-second {
-        display: none;
-        width: 15%;
-        box-sizing: border-box;
-    }
-    .caja-searchbar {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        align-self: center;
-        box-sizing: border-box;
-    }
-
-    .box {
-        height: 25px;
-    }
-
-    .register-bar {
-        width: 25%;
-        align-self:center;
-        margin-top: 0;
-        padding-right: 15px;
-    }
-
-    .lista-login li a {
-        font-size: 12px;
-    }
-
-    .lista-menu li a {
-        font-size: 12px;
-        box-sizing: border-box;
+        margin-right: 5px;
     }
 }
 
@@ -378,6 +340,7 @@ input.src {
         width: 25%;
         padding-right: 0;
     }
+<<<<<<< HEAD
 }
 
 
@@ -396,12 +359,20 @@ input.src {
 
 .footer-section {
     width: 33%;
+    padding: 0 90px;
+    text-align: center;
+}
+
+.footer-section p {
+    font-size: 13px;
 }
 
 #footer-fiscal-data,
 #footer-copyright {
     display: flex;
     justify-content: center;
+    text-align: center;
+    font-size:small;
 }
 
 /* -- END FOOTER -- */
@@ -414,22 +385,10 @@ input.src {
         flex-direction: column;
         text-align: center;
     }
+=======
+>>>>>>> 4857eb980b5413094136e702f122da6f8d7512f6
     .footer-section {
-        width: 100%;
-        border-bottom: 1px solid #ccc;
+        width: 30%;
+        border-bottom: none;
     }
-    #footer-copyright {
-        font-size: 12px;
-        text-align: center;
-    }
-    /* -- END FOOTER -- */
 }
-
-/* SM */
-@media screen and (min-width: 481px) and (max-width: 768px) {}
-
-/* LG */
-@media screen and (min-width: 769px) and (max-width: 1200px) {}
-
-/* XL */
-@media (min-width: 1280px) {}
