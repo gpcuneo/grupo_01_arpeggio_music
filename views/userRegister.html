@@ -66,7 +66,7 @@
     <main>
         <div class="main-container">
             <div class="left-column">
-                <form class="formulario-centrado" action="./userRegister" method="POST">
+                <form class="form-center" action="./userRegister" method="POST">
                     <div class="separacion">
                         <label for="usuario">Usuario</label>
                         <input class="form-input" type="usuario" name="usuario" id="usuario">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="separacion">
                         <label for="telefono">Teléfono</label>
-                        <input class="form-input" type="number" name="telefono" id="telefono">
+                        <input class="form-input" required type="tel" name="telefono" id="telefono">
                     </div>
                     <div class="separacion">
                         <label for="pwd">Contraseña</label>
@@ -95,10 +95,10 @@
                         <label for="confirmpwd">Confirmar contraseña</label>
                         <input class="form-input" type="password" name="confirmpwd" id="confirmpwd">
                     </div>
+                    <div>
+                        <button class="btn-format" type="button">Enviar</button>
+                    </div>
                 </form>
-            </div>
-            <div class="right-column">
-                <img src="/images/userProfile/registro.jpg" alt="imagen de fondo">
             </div>
         </div>
     </main>
