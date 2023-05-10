@@ -128,7 +128,7 @@ input.src {
 }
 
 
-@media (min-width: 481px) {
+@media (min-width: 769px) {
     header {
         background-color: black;
         width: 100vw;
