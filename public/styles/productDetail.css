@@ -447,6 +447,7 @@ h4{
     .container{
         max-width: 1200px;
         padding: 0;
+        padding-top: 20px;
         padding-bottom: 20px;
         margin: auto;
         box-sizing: border-box;
