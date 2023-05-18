@@ -12,7 +12,8 @@ app.use( express.static(publicPath) );
 const userRoutes = require('./routes/user');
 const productRoutes=require('./routes/products')
 const indexRoutes=require('./routes/index');
-const compraRoutes=require ('./routes/compra')
+const compraRoutes=require ('./routes/compra');
+const aboutRoutes=require('./routes/about');
 
 
 const returnView = (req, res, viewName) => res.sendFile(path.resolve(__dirname, `./views/${viewName}.html`) );

@@ -2,8 +2,8 @@ let getAbout = (req, res) => {
     res.render('about')
 }
 
-const aboutControllers = {
+const aboutController = {
     index: getAbout
 }
 
-module.exports = aboutControllers;
+module.exports = aboutController;
