@@ -23,7 +23,7 @@ app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
 app.get('/productCart', (req, res) => returnView(req, res, req.path));
 app.use('/products', productRoutes);
-app.use('/',compraRoutes);
+app.use('/compra',compraRoutes);
 
 /* app.get('/productDetail', (req, res) => returnView(req, res, req.path)); */
 
