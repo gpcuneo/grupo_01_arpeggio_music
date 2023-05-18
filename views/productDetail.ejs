@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Arpeggio Music</title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/productDetail.css">
 </head>
@@ -65,28 +65,24 @@
         <article class="container">
             <nav class="container-article">
                 <div class="name-product">
-                    <h4>Batería Acústica</h4>
+                    <!-- <h4>Batería Acústica</h4> -->
+                    <h4><%= product.name %></h4>
                 </div>
                 <div class="container-img-product-colum">
-                    <!-- <% for (let i=0; i < 4 ; i++){ %>
-                        <img src="/images/productos/image-33.jpg" alt="">
-                    <% } %> -->
-                    <img src="/images/productos/image-32.jpg" alt="">
-                    <img src="/images/productos/image-33.jpg" alt="">
-                    <img src="/images/productos/image-34.jpg" alt="">
-                    <img src="/images/productos/image-35.jpg" alt="">
+                    <% images. forEach (images =>{ %>
+                        <img src="<%= images.img %>" alt="">
+                    <% }) %>
                 </div>
                 <div class="container-img">
-                    <img src="/images/productos/image-32.jpg" alt="">
-                    <!-- <img src="/img/image 45.jpg" alt=""> -->
+                    <img src="<%= product.img %>" alt="">
                 </div>
                 <section class="box-text-product">
-                    <h4>Batería Acústica</h4>
-                    <p class="price">$150.000</p>
-                    <p class="discount">20% de descuento</p>
+                    <h4><%= product.name %></h4>
+                    <p class="price">$<%= product.price %></p>
+                    <p class="discount"><%= product.discount %> % de descuento</p>
                     <div class="box-characteristics">
                         <h5>Características</h5>
-                        <p>Batería Acústica 5 cuerpos 20 14 12 10 Yamaha Rydeen Rdp0f5</p>
+                        <p><%= product.characteristics %></p>
                     </div>
                     <div class="box-send">
                         <h5>Envíos</h5>
@@ -107,7 +103,7 @@
                         <div class="container-inc-dec">
                             <label for="cantidad">Cantidad:</label>
                             <button id="decrement"> - </button>
-                            <input type="number" min="1" max="50" value="1" id="my-input" readonly>
+                            <p><%= product.stock %></p>
                             <button id="increment"> + </button>
                         </div>
                     </div>
@@ -120,77 +116,26 @@
             <div class="container-descripcion">
                 <div class="caja-descripcion">
                     <h5>Descripción del Producto</h5>
-                    <p class="texto">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit
-                        mollitia
-                        recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam
-                        corporis
-                        minus
-                        quia.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse
-                        deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius
-                        maxime ad assumenda provident?
-                    </p>
+                    <p class="texto"><%= product.descripcion %></p>
                 </div>
                 <div class="container-store">
                     <h5>Información de Tienda</h5>
-                    <p class="texto">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis repellat molestiae rem
-                        quisquam,
-                        aperiam laboriosam voluptatum eligendi id, reprehenderit nesciunt, quasi optio commodi cum
-                        quibusdam
-                        fuga? Eveniet quos voluptas maxime?
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum ipsum ad quam esse illum? Velit
-                        tenetur assumenda accusantium temporibus tempora laborum veritatis fugit, suscipit ut incidunt
-                        minus, voluptatem, nihil totam!
-                    </p>
+                    <p class="texto"><%= product.store %></p>
                 </div>
             </div>
             <nav class="container-other-product">
                 <h5 class="name-other">Productos Similares</h5>
                 <div class="box-article">
-                    <!-- <% for(let i =0; i < 4; i++) { %>
+                    <% articles.forEach(articles=>{ %>
                         <article class="article-other">
-                            <img src="/images/productos/image-46.jpg" alt="">
+                            <img src="<%= articles.img %>" alt="">
                             <div class="box-article-charact">
-                                <h5>Redoblante</h5>
-                                <p>Redoblante Roadshow 14x6,5 8 Torres Rsn1465s</p>
-                                <p class="price-art">$68.800</p>
+                                <h5><%= articles.name %></h5>
+                                <p><%= articles.characteristics %></p>
+                                <p class="price-art">$<%= articles.price %></p>
                             </div>
                         </article>
-                    <% } %> -->
-                    <article class="article-other">
-                        <img src="/images/productos/image-46.jpg" alt="">
-                        <div class="box-article-charact">
-                            <h5>Redoblante</h5>
-                            <p>Redoblante Roadshow 14x6,5 8 Torres Rsn1465s</p>
-                            <p class="price-art">$68.800</p>
-                        </div>
-                    </article>
-                    <article class="article-other">
-                        <img src="/images/productos/image-47.jpg" alt="">
-                        <div class="box-article-charact">
-                            <h5>Pedal de bombo</h5>
-                            <p>Pedal de Bombo Hebikuo G610 Cadena Doble base metalica</p>
-                            <p class="price-art">$20.000</p>
-                        </div>
-                    </article>
-                    <article class="article-other">
-                        <img src="/images/productos/image-48.jpg" alt="">
-                        <div class="box-article-charact">
-                            <h5>Bombo de Bateria</h5>
-                            <p>Bombo de Bateria Pearl Forum Fzh2218b/c 22x18</p>
-                            <p class="price-art">$100.000</p>
-                        </div>
-                    </article>
-                    <article class="article-other">
-                        <img src="/images/productos/image-49.jpg" alt="">
-                        <div class="box-article-charact">
-                            <h5>Set de Platillos</h5>
-                            <p>Set de platillos Zildjian Zp1418 Hi Hat 14 Cash 18 Palillos</p>
-                            <p class="price-art">$20.000</p>
-                        </div>
-                    </article>
+                    <% }) %>
                 </div>
             </nav>
         </article>
