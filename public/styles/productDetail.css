@@ -130,12 +130,13 @@ h4{
     align-items: center;
     box-sizing: border-box;
 }
-.container-inc-dec input{
+
+.container-inc-dec p{
     display: flex;
     text-align: center;
     font-size: 15px;
-    border: none;
     box-sizing: border-box;
+    padding: 0px 25px;
     background-color:whitesmoke;
 }
 
@@ -386,7 +387,7 @@ h4{
     .container-inc-dec label{
         font-size: 14px;
     }
-    .container-inc-dec input{
+    .container-inc-dec p{
         background-color: white;
     }
     .container-button{
