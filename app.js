@@ -14,6 +14,7 @@ const productRoutes=require('./routes/products');
 const indexRoutes=require('./routes/index');
 const compraRoutes=require ('./routes/compra');
 const cartRoutes = require('./routes/cart');
+const productCatRoutes=require ('./routes/productCat')
 
 
 const returnView = (req, res, viewName) => res.sendFile(path.resolve(__dirname, `./views/${viewName}.html`) );
@@ -23,7 +24,7 @@ app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
 app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
-app.use('/compra',compraRoutes);
+app.use('/productCat',productCatRoutes);
 
 app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 
