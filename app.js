@@ -10,9 +10,10 @@ app.use( express.static(publicPath) );
 
 // Importamos o requirimos el modulo de rutas de usuario (Creado por nosotros).
 const userRoutes = require('./routes/user');
-const productRoutes=require('./routes/products')
+const productRoutes=require('./routes/products');
 const indexRoutes=require('./routes/index');
-const compraRoutes=require ('./routes/compra')
+const compraRoutes=require ('./routes/compra');
+const cartRoutes = require('./routes/cart');
 
 
 const returnView = (req, res, viewName) => res.sendFile(path.resolve(__dirname, `./views/${viewName}.html`) );
@@ -20,12 +21,9 @@ const returnView = (req, res, viewName) => res.sendFile(path.resolve(__dirname, 
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
 
-
-app.get('/productCart', (req, res) => returnView(req, res, req.path));
+app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
 app.use('/compra',compraRoutes);
-
-/* app.get('/productDetail', (req, res) => returnView(req, res, req.path)); */
 
 app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 
