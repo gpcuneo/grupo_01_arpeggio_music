@@ -12,16 +12,16 @@ app.use( express.static(publicPath) );
 const userRoutes = require('./routes/user');
 const productRoutes=require('./routes/products');
 const indexRoutes=require('./routes/index');
-const compraRoutes=require ('./routes/compra');
-<<<<<<< HEAD
 const aboutRoutes=require('./routes/about');
-=======
 const cartRoutes = require('./routes/cart');
 const productCatRoutes=require ('./routes/productCat')
->>>>>>> 8c6a67bfcf2c6a5d107c370a397f7c1117e29898
 
-
-const returnView = (req, res, viewName) => res.sendFile(path.resolve(__dirname, `./views/${viewName}.html`) );
+const returnView = (req, res, viewName) => {
+    console.log(viewName);
+    let vista = path.resolve(__dirname, `./views/${viewName}.html`);
+    console.log(vista)
+    res.sendFile(vista)
+};
 
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
@@ -39,7 +39,7 @@ app.use ('/',indexRoutes)
 
 app.get('/userRegister', (req, res) => returnView(req, res, req.path));
 
-app.get('/store', (req, res) => returnView(req, res, req.path));
+app.use('/store', (req, res) => returnView(req, res, 'store'));
 
 app.get('/shoppingHistory', (req, res) => returnView(req, res, req.path));
 
