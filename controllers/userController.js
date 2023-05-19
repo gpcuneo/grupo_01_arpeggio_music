@@ -10,7 +10,7 @@ const showUser = (req, res) => {
 // Declaramos el objeto userController el cual tendra metodos que invocaran a funciones
 const userController = {
     show: showUser,
-    // show: '',
+    // showbyid: '',
     // create: '',
     // update: '',
     // delete: '',

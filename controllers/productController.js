@@ -60,6 +60,10 @@ let getDetail=(req, res)=>{
 const productController={
     /* Index:getProduct, */
     product:getDetail,
+    // showbyid: '',
+    // create: '',
+    // update: '',
+    // delete: '',
 }
 
 

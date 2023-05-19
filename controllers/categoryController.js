@@ -4,6 +4,10 @@ let showCategory = (req, res) => {
 
 const productcatController = {
     show: showCategory,
+    // showbyid: '',
+    // create: '',
+    // update: '',
+    // delete: '',
 }
 
 module.exports = productcatController
