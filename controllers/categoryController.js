@@ -2,7 +2,7 @@ let showCategory = (req, res) => {
     res.render('category')
 }
 
-const productcatController = {
+const categoryController = {
     show: showCategory,
     // showbyid: '',
     // create: '',
@@ -10,4 +10,4 @@ const productcatController = {
     // delete: '',
 }
 
-module.exports = productcatController
+module.exports = categoryController
