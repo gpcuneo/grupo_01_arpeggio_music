@@ -16,7 +16,6 @@ const productCatRoutes=require ('./routes/productCat')
 const newProductRoutes=require ('./routes/newProduct')
 const aboutRoutes=require('./routes/about');
 const cartRoutes = require('./routes/cart');
-const productCatRoutes=require ('./routes/productCat');
 const historyRoutes = require('./routes/history');
 const editproductRoutes=require('./routes/editProduct')
 
@@ -35,6 +34,7 @@ app.use ('/newProduct', newProductRoutes)
 app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
 app.use('/productCat',productCatRoutes);
+app.use('/editProduct',editproductRoutes)
 
 
 app.get('/userLogin', (req, res) => returnView(req, res, req.path));

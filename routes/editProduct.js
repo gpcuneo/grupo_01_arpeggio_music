@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const editproductController = require('../controllers/editproductController');
+const editproductController = require('../controllers/editProduct');
 
 router.use('/', editproductController.index)
 

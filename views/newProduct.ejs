@@ -57,17 +57,43 @@
             </div>
         </section>
     </header>
-    <div class="general">
-        <form action="/newProduct" method="POST">  
-            
-            
-
-            
+    <main>
+    <div class="container-form-edit-product">
+        <form action="/editProduct" method="POST">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="nombre" name="nombre" id="nombre">
+            </div>
+            <div>
+                <label for="categoria">Categoría</label>
+                <input type="categoria" name="categoria" id="categoria">
+            </div>
+            <div>
+                <label for="precio">Precio</label>
+                <input type="precio" name="precio" id="precio">
+            </div>
+            <div>
+                <label for="stock">Stock</label>
+                <input type="stock" name="stock" id="stock">
+            </div>
+            <div>
+                <label for="color">Color</label>
+                <input type="color" name="color" id="color">
+            </div>
+            <div>
+                <label for="imagen">Imagen</label>
+                <input type="file" name="imagen" id="imagen">
+            </div>
+            <div>
+                <label for="descripcion">Descripción del producto</label>
+                <input type="" name="descripción" id="descripción">
+            </div>
         </form>
-
-
-
+        <div>
+            <button>Cargar</button>
+        </div>
     </div>
+</main>
     
 </body>
 </html>
