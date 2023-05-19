@@ -48,6 +48,6 @@ app.get('/about', (req, res) => returnView(req, res, req.path));
 
 app.get('/shipping', (req, res) => returnView(req, res, req.path));
 
-app.get('/editproduct', (req, res) => returnView(req, res, req.path));
-
 app.get('*', (req, res) => returnView(req, res, '404'));
+
+app.get('/editproduct', (req, res) => returnView(req, res, req.path));
