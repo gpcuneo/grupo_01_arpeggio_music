@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Arpeggio Music</title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/productCart.css">
 </head>
@@ -74,78 +74,32 @@
                         <p class="title-many">Cantidad</p>
                         <p class="title-total">Total</p>
                     </div>
-                    <article>
-                        <div class="box-img-text">
-                            <img src="/images/productos/image-37.jpg" alt="">
-                            <div class="box-text-descrip">
-                                <h5 class="title-product">Bajo Eléctrico</h5>
-                                <p>Bajo Eléctrico Aston Reed Ebs150-20 con funda y cable</p>
-                                <p class="price-first">$23.000</p>
+                    <% cart.forEach( cart => { %>
+                        <article>
+                            <div class="box-img-text">
+                                <img src="<%= cart.img %>" alt="">
+                                <div class="box-text-descrip">
+                                    <h5 class="title-product"><%= cart.name %></h5>
+                                    <p><%= cart.characteristics %></p>
+                                    <p class="price-first">$<%= cart.price %></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="price-second">
-                            <p>$23.000</p>
-                        </div>
-                        <div class="container-input-price">
-                            <div class="box-input-inc-dec">
-                                <button class="decrement"> - </button>
-                                <p class="number">1</p>
-                                <button class="increment"> + </button>
+                            <div class="price-second">
+                                <p>$<%= cart.price %></p>
                             </div>
-                            <div class="box-price-delete">
-                                <p>$23.000</p>
-                                <button class="delete"> x </button>
+                            <div class="container-input-price">
+                                <div class="box-input-inc-dec">
+                                    <button class="decrement"> - </button>
+                                    <p class="number"><%= cart.stock %></p>
+                                    <button class="increment"> + </button>
+                                </div>
+                                <div class="box-price-delete">
+                                    <p>$<%= cart.total %></p>
+                                    <button class="delete"> x </button>
+                                </div>
                             </div>
-                        </div>
-                    </article>
-                    <article>
-                        <div class="box-img-text">
-                            <img src="/images/productos/image-38.jpg" alt="">
-                            <div class="box-text-descrip">
-                                <h5 class="title-product">Microfóno Inalámbrico</h5>
-                                <p>Microfóno Inalámbrico AKG P3 S dinámico cardioide negro</p>
-                                <p class="price-first">$10.000</p>
-                            </div>
-                        </div>
-                        <div class="price-second">
-                            <p>$10.000</p>
-                        </div>
-                        <div class="container-input-price">
-                            <div class="box-input-inc-dec">
-                                <button class="decrement"> - </button>
-                                <p class="number">1</p>
-                                <button class="increment"> + </button>
-                            </div>
-                            <div class="box-price-delete">
-                                <p>$10.000</p>
-                                <button class="delete"> x </button>
-                            </div>
-                        </div>
-                    </article>
-                    <article>
-                        <div class="box-img-text">
-                            <img src="/images/productos/image-39.jpg" alt="">
-                            <div class="box-text-descrip">
-                                <h5 class="title-product">Teclado Portátil</h5>
-                                <p>Teclado Portátil Yamaha Psr-f52 Psr-f52 Psr-f52</p>
-                                <p class="price-first">$45.000</p>
-                            </div>
-                        </div>
-                        <div class="price-second">
-                            <p>$45.000</p>
-                        </div>
-                        <div class="container-input-price">
-                            <div class="box-input-inc-dec">
-                                <button class="decrement"> - </button>
-                                <p class="number">1</p>
-                                <button class="increment"> + </button>
-                            </div>
-                            <div class="box-price-delete">
-                                <p>$45.000</p>
-                                <button class="delete"> x </button>
-                            </div>
-                        </div>
-                    </article>
+                        </article>
+                    <% }) %>
                 </div>
             </section>
             <section class="section-shop-total">
@@ -156,11 +110,11 @@
                     </div>
                     <div class="box-shop-price">
                         <p class="text-shop"><i class="fa-solid fa-tags"></i>Ingresar Código de Cupón</p>
-                        <p class="price-shop">% 25 Descuento</p>
+                        <p class="price-shop">%<%= costShop.discount %> Descuento</p>
                     </div>
                     <div class="box-shop-price">
                         <p class="text-shop">Envío</p>
-                        <p class="price-shop">$0.00</p>
+                        <p class="price-shop">$<%= costShop.costSend %></p>
                     </div>
                     <div class="box-shop-price">
                         <p class="text-shop">Total</p>
