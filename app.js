@@ -15,6 +15,7 @@ const indexRoutes=require('./routes/index');
 const aboutRoutes=require('./routes/about');
 const cartRoutes = require('./routes/cart');
 const productCatRoutes=require ('./routes/productCat');
+const historyRoutes = require('./routes/history');
 const editproductRoutes=require('./routes/editProduct')
 
 const returnView = (req, res, viewName) => {
@@ -37,12 +38,11 @@ app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 // indicamos que las peticiones que lleguen con solicitud de /user se envien a ese modulo.
 app.use('/user', userRoutes);
 app.use ('/',indexRoutes)
+app.use('/History',historyRoutes);
 
 app.get('/userRegister', (req, res) => returnView(req, res, req.path));
 
 app.use('/store', (req, res) => returnView(req, res, 'store'));
-
-app.get('/shoppingHistory', (req, res) => returnView(req, res, req.path));
 
 app.get('/about', (req, res) => returnView(req, res, req.path));
 
