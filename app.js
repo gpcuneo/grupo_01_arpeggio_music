@@ -13,6 +13,7 @@ const userRoutes = require('./routes/user');
 const productRoutes=require('./routes/products')
 const indexRoutes=require('./routes/index');
 const productCatRoutes=require ('./routes/productCat')
+const newProductRoutes=require ('./routes/newProduct')
 
 
 const returnView = (req, res, viewName) => res.sendFile(path.resolve(__dirname, `./views/${viewName}.html`) );
@@ -21,7 +22,7 @@ app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
 
 
-app.get('/productCart', (req, res) => returnView(req, res, req.path));
+app.use ('/newProduct', newProductRoutes)
 app.use('/products', productRoutes);
 app.use('/productCat',productCatRoutes);
 
@@ -34,6 +35,8 @@ app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 app.use('/user', userRoutes);
 app.use ('/',indexRoutes)
 
+app.get('/productCart', (req, res) => returnView(req, res, req.path));
+
 app.get('/userRegister', (req, res) => returnView(req, res, req.path));
 
 app.get('/store', (req, res) => returnView(req, res, req.path));
@@ -45,4 +48,5 @@ app.get('/about', (req, res) => returnView(req, res, req.path));
 app.get('/shipping', (req, res) => returnView(req, res, req.path));
 
 app.get('*', (req, res) => returnView(req, res, '404'));
+
 
