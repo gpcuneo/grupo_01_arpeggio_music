@@ -13,11 +13,10 @@ const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/products');
 const indexRoutes = require('./routes/index');
 const categoryRoutes = require('./routes/category')
-const newProductRoutes = require('./routes/newProduct')
 const aboutRoutes = require('./routes/about');
 const cartRoutes = require('./routes/cart');
 const historyRoutes = require('./routes/history');
-const editproductRoutes = require('./routes/editProduct')
+
 
 const returnView = (req, res, viewName) => {
     console.log(viewName);
@@ -30,18 +29,15 @@ app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
 
 app.use('/user', userRoutes);
-app.use('/newProduct', newProductRoutes)
 app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
 app.use('/category',categoryRoutes);
-app.use('/editproduct', editproductRoutes);
+app.use('/history',historyRoutes);
 app.use('/about', aboutRoutes);
 app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 
-app.use('/History',historyRoutes);
 
 
-app.get('/productCart', (req, res) => returnView(req, res, req.path));
 
 app.get('/userRegister', (req, res) => returnView(req, res, req.path));
 
@@ -50,8 +46,6 @@ app.use('/store', (req, res) => returnView(req, res, 'store'));
 app.get('/about', (req, res) => returnView(req, res, req.path));
 
 app.get('/shipping', (req, res) => returnView(req, res, req.path));
-
-app.get('/editproduct', (req, res) => returnView(req, res, req.path));
 
 app.use('/', indexRoutes)
 

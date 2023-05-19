@@ -1,9 +1,4 @@
-/* let getProduct = (req, res)=>{
-    if(req.params.id){
-        console.log(req.params.id)
-    }
-    res.render('productDetail')
-} */
+
 let getDetail=(req, res)=>{
     const product={
         name:'Batería Acústica',
@@ -57,13 +52,28 @@ let getDetail=(req, res)=>{
     ]
     res.render('productDetail', {title:'Detalle del Producto',product, articles, images});
 }
+let getDelete = (req, res)=>{
+    res.render('productDelete')
+}
+let getCreate = (req, res)=>{
+    res.render('newProduct')
+}
+
+let getUpDate = (req, res)=>{
+    res.render('editProduct')
+}
+let getId = (req, res)=>{
+    if(req.params.id){
+        console.log(req.params.id)
+    }
+    res.render('productDetail')
+}
 const productController={
-    /* Index:getProduct, */
     product:getDetail,
-    // showbyid: '',
-    // create: '',
-    // update: '',
-    // delete: '',
+    showbyid:getId,
+    create:getCreate,
+    update:getUpDate,
+    delete:getDelete,
 }
 
 
