@@ -35,6 +35,8 @@ app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
 app.use('/productCat',productCatRoutes);
 app.use('/editProduct',editproductRoutes)
+app.use('/editproduct', editproductRoutes);
+app.use('/about', aboutRoutes);
 
 
 app.get('/userLogin', (req, res) => returnView(req, res, req.path));
