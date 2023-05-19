@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title><%= title %></title>
+    <title>Compra
+    </title>
     <link rel="stylesheet" href="/styles/index.css">
-    <link rel="stylesheet" href="/styles/productCart.css">
+    <link rel="stylesheet" href="/styles/productCat.css">
 </head>
 
 <body>
@@ -23,7 +21,7 @@
                 <div class="caja-padre-logo">
                     <a href="/">
                         <img src="/images/logos/logo-arpeggio.JPG" class="img-logo" alt="Logo de Arpeggio Music">
-                    </a>                    
+                    </a>
                 </div>
                 <div>
                     <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a>
@@ -57,105 +55,208 @@
                         </ul>
                     </div>
                     <div class="cart">
-                        <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a> 
+                        <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a>
                     </div>
                 </div>
             </div>
         </section>
     </header>
     <main>
-        <div class="container">
-            <section class="section-article">
-                <h5 class="title-cart">Mi Carrito</h5>
-                <div class="container-article">
-                    <div class="title-first">
-                        <p class="product">Producto</p>
-                        <p class="price-title">Precio</p>
-                        <p class="title-many">Cantidad</p>
-                        <p class="title-total">Total</p>
-                    </div>
-                    <% cart.forEach( cart => { %>
-                        <article>
-                            <div class="box-img-text">
-                                <img src="<%= cart.img %>" alt="">
-                                <div class="box-text-descrip">
-                                    <h5 class="title-product"><%= cart.name %></h5>
-                                    <p><%= cart.characteristics %></p>
-                                    <p class="price-first">$<%= cart.price %></p>
-                                </div>
-                            </div>
-                            <div class="price-second">
-                                <p>$<%= cart.price %></p>
-                            </div>
-                            <div class="container-input-price">
-                                <div class="box-input-inc-dec">
-                                    <button class="decrement"> - </button>
-                                    <p class="number"><%= cart.stock %></p>
-                                    <button class="increment"> + </button>
-                                </div>
-                                <div class="box-price-delete">
-                                    <p>$<%= cart.total %></p>
-                                    <button class="delete"> x </button>
-                                </div>
-                            </div>
-                        </article>
-                    <% }) %>
+        <div class="contenedor-general">
+    
+            <section class="bar">
+                <div>
+                    <h3 class="title">Instrumentos de Cuerda</h3>
+              
+                <div>
+                    <h4>Marcas</h4>
+                    <p>Yamaha</p>
+                    <p>Pearls</p>
+                    <p>Marshall</p>
+                    <p>Samson</p>
+                    <p>Casio</p>
+                    <p>Jackson</p>
                 </div>
+<<<<<<< HEAD:views/compra.ejs
+                <section class="categorias-productos">
+                    <div>
+                        <p>Categorías</p>
+                    </div>
+                    <div>
+                        <h3>Percusión</h3>
+                        <ul>
+                            <li>Batería</li>
+                            <li>Bombo</li>
+                            <p>Mostrar más<a href="Mostrar más"></a></p>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Cuerda</h3>
+                        <ul>
+                            <li>Guitarras</li>
+                            <li>Bajo</li>
+                            <p>Mostrar más<a href="Mostrar más"></a></p>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Viento</h3>
+                        <ul>
+                            <li>Piano</li>
+                            <li>Saxofón</li>
+                            <p>Mostrar más<a href="Mostrar más"></a></p>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Equipos de sonido</h3>
+                        <ul>
+                            <li>Micrófonos</li>
+                            <li>Cables</li>
+                            <p>Mostrar más<a href="Mostrar más"></a></p>
+                        </ul>
+                    </div>
+                    <div>
+                        <p>Tiempo de entrega</p>
+                        <h3>Llega en menos de 24 hs</h3>
+                    </div>
+                </section>
+=======
+                <div>
+                    <h4>Precios</h4>
+                </div>
+                <div class="categorias">
+                    <h3>Categorias</h3>
+                    <div>
+                        <h5>Percusion</h5>
+                        <p>Bateria</p>
+                        <p>Bombo</p>
+                        <p>Mostrar Mas </p>
+                    </div>
+                    <div>
+                        <h5>Cuerda</h5>
+                        <p>Guitarra</p>
+                        <p>Bajo</p>
+                        <p>Mostrar Mas</p>
+                    </div>
+                    <div>
+                        <h5>Viento</h5>
+                        <p>Piano</p>
+                        <p>Saxofon</p>
+                        <p>Mostrar Mas</p>
+                    </div>
+                    <div>
+                        <h5>Equipo de Sonido</h5>
+                        <p>Microfono</p>
+                        <p>Cables</p>
+                        <p>Mostrar Mas</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Tiempo de Entrega</h3>
+                    <p>Llega en menos de 24 hs.</p>
+
+                </div>
+
+
+>>>>>>> 8c6a67bfcf2c6a5d107c370a397f7c1117e29898:views/productCat.ejs
             </section>
-            <section class="section-shop-total">
-                <div class="container-price">
-                    <div class="box-shop-price">
-                        <p class="text-shop">Sub. Total</p>
-                        <p class="price-shop">$0.00</p>
+            <section class="products">
+                <article class="product">
+                    <img src="/images/productos/bajo.png" alt="">
+                    <div class="text">
+                        <p class="detail">Bajo Yamaha Trbx174 - 4 Cuerdas</p>
+                        <p class="price">$100.000</p>
                     </div>
-                    <div class="box-shop-price">
-                        <p class="text-shop"><i class="fa-solid fa-tags"></i>Ingresar Código de Cupón</p>
-                        <p class="price-shop">%<%= costShop.discount %> Descuento</p>
+                </article>
+                <article class="product">
+                    <img src="/images/productos/bajo.png" alt="">
+                    <div class="text">
+                        <p class="detail">Bajo Yamaha Trbx174 - 4 Cuerdas</p>
+                        <p class="price">$100.000</p>
                     </div>
-                    <div class="box-shop-price">
-                        <p class="text-shop">Envío</p>
-                        <p class="price-shop">$<%= costShop.costSend %></p>
+                </article>
+                <article class="product">
+                    <img src="/images/productos/bajo.png" alt="">
+                    <div class="text">
+                        <p class="detail">Bajo Yamaha Trbx174 - 4 Cuerdas</p>
+                        <p class="price">$100.000</p>
                     </div>
-                    <div class="box-shop-price">
-                        <p class="text-shop">Total</p>
-                        <p class="price-shop">$0.00</p>
+                </article>
+                <article class="product">
+                    <img src="/images/productos/piano.png" alt="">
+                    <div class="text">
+                        <p class="detail">Bajo Yamaha Trbx174 - 4 Cuerdas</p>
+                        <p class="price">$100.000</p>
                     </div>
-                </div>
-                <div class="box-input">
-                    <button class="finaly-button">Finalizar Comprar</button>
-                    <button class="more-shop-button">Buscar más</button>
-                </div>
+                </article>
+                <article class="product">
+                    <img src="/images/productos/piano.png" alt="">
+                    <div class="text">
+                        <p class="detail">Bajo Yamaha Trbx174 - 4 Cuerdas</p>
+                        <p class="price">$100.000</p>
+                    </div>
+                </article>
+                <article class="product">
+                    <img src="/images/productos/piano.png" alt="">
+                    <div class="text">
+                        <p class="detail">Bajo Yamaha Trbx174 - 4 Cuerdas</p>
+                        <p class="price">$100.000</p>
+                    </div>
+                </article>
             </section>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </main>
     <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4>Términos y condiciones</h4>
-                <p>Condiciones de pagos</p>
-                <p>Problemas de envios, compras</p>
-                <p>Preguntas Frecuentes</p>
-                <p>Botón de arrepentimiento</p>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Términos y condiciones</h4>
+                    <p>Condiciones de pagos</p>
+                    <p>Problemas de envios, compras</p>
+                    <p>Preguntas Frecuentes</p>
+                    <p>Botón de arrepentimiento</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes sociales</h4>
+                    <p><i class="fa-brands fa-instagram"></i>Instagram</p>
+                    <p><i class="fa-brands fa-facebook"></i>Facebook</p>
+                    <p><i class="fa-brands fa-twitter"></i>Twitter</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fa-brands fa-whatsapp"></i>00-0000-0000</p>
+                    <p><i class="fa-solid fa-envelope"></i>arpeggiomusic@gmail.com</p>
+                    <p>Sucursales</p>
+                </div>
             </div>
-            <div class="footer-section">
-                <h4>Redes sociales</h4>
-                <p><i class="fa-brands fa-instagram"></i>Instagram</p>
-                <p><i class="fa-brands fa-facebook"></i>Facebook</p>
-                <p><i class="fa-brands fa-twitter"></i>Twitter</p>
+            <div id="footer-fiscal-data">
+                <img src="" alt="">
+                <h4>Data fiscal</h4>
             </div>
-            <div class="footer-section">
-                <h4>Contacto</h4>
-                <p><i class="fa-brands fa-whatsapp"></i>00-0000-0000</p>
-                <p><i class="fa-solid fa-envelope"></i>arpeggiomusic@gmail.com</p>
-                <p>Sucursales</p>
+            <div id="footer-copyright">
+                <div class="copyright-center">
+                    <p>Copyright 1000-0000 ArpeggioMusic <a href="">Políticas de privacidad</a></p>
+                </div>
             </div>
-            <div class="footer-section">
-                <img src="" alt="Datos fiscales">
-                <p>Data fiscal</p> <br>
-                <p>Copyright 1000-0000 ArpeggioMusic <br><br>
-                <a href="">Políticas de privacidad</a>
-                </p>
-            </div>
-        </div>
+        </footer>
     </footer>
+
+
 </body>
+
+</html>
