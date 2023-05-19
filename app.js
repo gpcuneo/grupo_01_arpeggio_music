@@ -29,17 +29,16 @@ const returnView = (req, res, viewName) => {
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
 
-app.use('/', indexRoutes)
+app.use('/user', userRoutes);
 app.use('/newProduct', newProductRoutes)
 app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
 app.use('/category',categoryRoutes);
 app.use('/editproduct', editproductRoutes);
 app.use('/about', aboutRoutes);
-app.use('/user', userRoutes);
+app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 
 app.use('/History',historyRoutes);
-app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 
 
 app.get('/productCart', (req, res) => returnView(req, res, req.path));
@@ -54,6 +53,6 @@ app.get('/shipping', (req, res) => returnView(req, res, req.path));
 
 app.get('/editproduct', (req, res) => returnView(req, res, req.path));
 
+app.use('/', indexRoutes)
+
 app.get('*', (req, res) => returnView(req, res, '404'));
-
-
