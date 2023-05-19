@@ -10,14 +10,14 @@ app.use( express.static(publicPath) );
 
 // Importamos o requirimos el modulo de rutas de usuario (Creado por nosotros).
 const userRoutes = require('./routes/user');
-const productRoutes=require('./routes/products');
-const indexRoutes=require('./routes/index');
-const productCatRoutes=require ('./routes/productCat')
-const newProductRoutes=require ('./routes/newProduct')
-const aboutRoutes=require('./routes/about');
+const productRoutes = require('./routes/products');
+const indexRoutes = require('./routes/index');
+const categoryRoutes = require('./routes/category')
+const newProductRoutes = require('./routes/newProduct')
+const aboutRoutes = require('./routes/about');
 const cartRoutes = require('./routes/cart');
 const historyRoutes = require('./routes/history');
-const editproductRoutes=require('./routes/editProduct')
+const editproductRoutes = require('./routes/editProduct')
 
 const returnView = (req, res, viewName) => {
     console.log(viewName);
@@ -29,23 +29,18 @@ const returnView = (req, res, viewName) => {
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
 
-
-app.use ('/newProduct', newProductRoutes)
+app.use('/', indexRoutes)
+app.use('/newProduct', newProductRoutes)
 app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
-app.use('/productCat',productCatRoutes);
-app.use('/editProduct',editproductRoutes)
+app.use('/category',categoryRoutes);
 app.use('/editproduct', editproductRoutes);
 app.use('/about', aboutRoutes);
+app.use('/user', userRoutes);
 
-
+app.use('/History',historyRoutes);
 app.get('/userLogin', (req, res) => returnView(req, res, req.path));
 
-
-// indicamos que las peticiones que lleguen con solicitud de /user se envien a ese modulo.
-app.use('/user', userRoutes);
-app.use ('/',indexRoutes)
-app.use('/History',historyRoutes);
 
 app.get('/productCart', (req, res) => returnView(req, res, req.path));
 
@@ -57,7 +52,8 @@ app.get('/about', (req, res) => returnView(req, res, req.path));
 
 app.get('/shipping', (req, res) => returnView(req, res, req.path));
 
+app.get('/editproduct', (req, res) => returnView(req, res, req.path));
+
 app.get('*', (req, res) => returnView(req, res, '404'));
 
 
-app.get('/editproduct', (req, res) => returnView(req, res, req.path));
