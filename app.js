@@ -14,7 +14,8 @@ const productRoutes=require('./routes/products');
 const indexRoutes=require('./routes/index');
 const aboutRoutes=require('./routes/about');
 const cartRoutes = require('./routes/cart');
-const productCatRoutes=require ('./routes/productCat')
+const productCatRoutes=require ('./routes/productCat');
+const editproductRoutes=require('./routes/editProduct')
 
 const returnView = (req, res, viewName) => {
     console.log(viewName);
@@ -47,5 +48,6 @@ app.get('/about', (req, res) => returnView(req, res, req.path));
 
 app.get('/shipping', (req, res) => returnView(req, res, req.path));
 
-app.get('*', (req, res) => returnView(req, res, '404'));
+app.get('/editproduct', (req, res) => returnView(req, res, req.path));
 
+app.get('*', (req, res) => returnView(req, res, '404'));
