@@ -76,19 +76,23 @@ hr {
     justify-content: center;
 }
 
-.status-delivered {
+.status-Entregado {
     color: green;
 }
 
-.status-invoiced {
+.status-Facturado {
     color: blue;
 }
 
-.status-loaded {
+.status-Enviado {
+    color: blue;
+}
+
+.status-Cargado {
     color: yellow;
 }
 
-.status-cancelled {
+.status-Cancelado {
     color: red;
 }
 

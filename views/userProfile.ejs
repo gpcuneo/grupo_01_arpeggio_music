@@ -19,10 +19,13 @@
                 <img class="user-image" src="/images/userProfile/profile_2.jpg" alt="Imagen de perfil del usuario">
             </div>
             <div class="user-detail">
-                <p>Amelie Lens</p>
-                <p>alend@gmail.com</p>
-                <p>Calle Falsa 123</p>
-                <p>Almagro</p>
+                <p> <b>Nombres: </b> <%=userInfo.name%></p>
+                <p> <b>Apellidos: </b> <%=userInfo.lastName%></p>
+                <p> <b>Email: </b> <%=userInfo.email%></p>
+                <p> <b>Direccion: </b> <%=userInfo.address%></p>
+                <p> <b>Ciudad: </b> <%=userInfo.city%></p>
+                <p> <b>DNI: </b> <%=userInfo.dni%></p>
+                <p> <b>Telefono: </b> <%=userInfo.phone%></p>
             </div>
             <div class="edit-profile">
                 <button type="button">Editar informacion</button>
@@ -33,82 +36,27 @@
             <div class="tittle">
                 <p>Historial de pedidos</p>
             </div>
-            <article class="container-info">
-                <div class="order-item">
-                    <p><b>Numero de pedido: </b>#34628</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Fecha: </b>24/11/2022</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Monto: </b>$ 35423</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Estado: </b><span class="status-loaded">Cargado</span></p>
-                </div>
-                <div class="order-item center-items">
-                    <button class="btn-order-details" type="button">
-                        Ver detalles
-                    </button>
-                </div>
-            </article>
-            <article class="container-info">
-                <div class="order-item">
-                    <p><b>Numero de pedido: </b>#34628</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Fecha: </b>24/11/2022</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Monto: </b>$ 35423</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Estado: </b><span class="status-invoiced">Facturado</span></p>
-                </div>
-                <div class="order-item center-items">
-                    <button class="btn-order-details" type="button">
-                        Ver detalles
-                    </button>
-                </div>
-            </article>
-            <article class="container-info">
-                <div class="order-item">
-                    <p><b>Numero de pedido: </b>#34628</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Fecha: </b>24/11/2022</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Monto: </b>$ 35423</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Estado: </b><span class="status-delivered">Entregado</span></p>
-                </div>
-                <div class="order-item center-items">
-                    <button class="btn-order-details" type="button">
-                        Ver detalles
-                    </button>
-                </div>
-            </article>
-            <article class="container-info">
-                <div class="order-item">
-                    <p><b>Numero de pedido: </b>#34628</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Fecha: </b>24/11/2022</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Monto: </b>$ 35423</p>
-                </div>
-                <div class="order-item">
-                    <p><b>Estado: </b><span class="status-cancelled">Cancelado</span></p>
-                </div>
-                <div class="order-item center-items">
-                    <button class="btn-order-details" type="button">
-                        Ver detalles
-                    </button>
-                </div>
-            </article>
+            <% orderHistory.forEach( order => { %>
+                <article class="container-info">
+                    <div class="order-item">
+                        <p><b>Numero de pedido: </b># <%= order.id  %></p>
+                    </div>
+                    <div class="order-item">
+                        <p><b>Fecha: </b><%= order.date  %></p>
+                    </div>
+                    <div class="order-item">
+                        <p><b>Monto: </b>$ <%= order.mount %></p>
+                    </div>
+                    <div class="order-item">
+                        <p><b>Estado: </b><span class="status-<%= order.status %>"><%= order.status %></span></p>
+                    </div>
+                    <div class="order-item center-items">
+                        <button class="btn-order-details" type="button">
+                            Ver detalles
+                        </button>
+                    </div>
+                </article>
+            <% }); %>
         </section>
     </main>
     <footer>
