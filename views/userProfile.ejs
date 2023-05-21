@@ -51,9 +51,11 @@
                         <p><b>Estado: </b><span class="status-<%= order.status %>"><%= order.status %></span></p>
                     </div>
                     <div class="order-item center-items">
-                        <button class="btn-order-details" type="button">
+                    <form action="/history">
+                        <button class="btn-order-details" type="submmit">
                             Ver detalles
                         </button>
+                    </form>
                     </div>
                 </article>
             <% }); %>
