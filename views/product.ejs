@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar producto</title>
+    <% if (action == 'create') { %>
+        <title>Nuevo producto</title>
+    <%} else { %>
+        <title>Editar producto</title>
+    <% } %>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/editProduct.css">
 </head>
@@ -93,7 +97,11 @@
                 </div>
             </form>
             <div>
-                <input type="submit" value="Editar">
+                <% if (action == 'create') { %>
+                    <input type="submit" value="Guardar">
+                <%} else { %>
+                    <input type="submit" value="Editar">
+                <% } %>
             </div>
         </div>
     </main>

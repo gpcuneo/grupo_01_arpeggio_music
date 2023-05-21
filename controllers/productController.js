@@ -56,11 +56,11 @@ let getDelete = (req, res)=>{
     res.render('productDelete')
 }
 let getCreate = (req, res)=>{
-    res.render('newProduct')
+    res.render('product', {action:'create'})
 }
 
 let getUpDate = (req, res)=>{
-    res.render('editProduct')
+    res.render('product', {action:'update'})
 }
 let getId = (req, res)=>{
     if(req.params.id){
