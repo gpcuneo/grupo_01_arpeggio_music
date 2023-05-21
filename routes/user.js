@@ -8,6 +8,8 @@ const userController = require('../controllers/userController')
 // Definimos que todo lo que llegue a la raiz de usuario o sea http://arpegio.com.ar/user se envie
 // al metodo index del controlador de usuario y declaramos un parametro dinamico de nombre id
 // mediant el uso de ? indicamos que este parametro es dinamico, puede o no venis en la peticion
+router.use('/login', userController.login);
+router.use('/register', userController.register);
 router.use('/:id', userController.showByID);
 router.use('/', userController.show);
 

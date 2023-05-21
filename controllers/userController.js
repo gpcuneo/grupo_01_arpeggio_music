@@ -32,10 +32,20 @@ const listUsers = (req, res) => {
     res.render('userList', {'users': userList} );
 }
 
+const register = (req, res) => {
+    res.render('userRegister');
+}
+
+const login = (req, res) => {
+    res.render('userLogin');
+}
+
 // Declaramos el objeto userController el cual tendra metodos que invocaran a funciones
 const userController = {
     show: listUsers,
     showByID: showUser,
+    login: login,
+    register: register,
     // create: '',
     // update: '',
     // delete: '',

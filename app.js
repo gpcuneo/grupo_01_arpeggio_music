@@ -34,12 +34,6 @@ app.use('/products', productRoutes);
 app.use('/category',categoryRoutes);
 app.use('/history',historyRoutes);
 app.use('/about', aboutRoutes);
-app.get('/userLogin', (req, res) => returnView(req, res, req.path));
-
-
-
-
-app.get('/userRegister', (req, res) => returnView(req, res, req.path));
 
 app.use('/store', (req, res) => returnView(req, res, 'store'));
 
