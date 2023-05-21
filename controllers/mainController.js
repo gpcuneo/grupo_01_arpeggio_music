@@ -14,7 +14,7 @@ const shipping = (req, res) => res.render('shipping')
 
 const error = (req, res) => res.render('error')
 
-const store = (req, res) => res.render('store');
+const store = (req, res) => res.render('store', {products: products});
 
 const mainController = {
     home: home,
