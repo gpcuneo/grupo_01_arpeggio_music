@@ -29,10 +29,7 @@ const showUser = (req, res) => {
 }
 
 const listUsers = (req, res) => {
-    res.send('ok')
-
-    // Renderizamos la vista
-    //res.render('userProfile', {'userList': userList} );
+    res.render('userList', {'users': userList} );
 }
 
 // Declaramos el objeto userController el cual tendra metodos que invocaran a funciones

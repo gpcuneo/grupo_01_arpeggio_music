@@ -9,51 +9,29 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Arpeggio Music</title>
     <link rel="stylesheet" href="/styles/index.css">
-    <link rel="stylesheet" href="/styles/userProfile.css">
+    <link rel="stylesheet" href="/styles/userList.css">
 </head>
 <body>
     <%- include('./partials/header') %>
     <main>
         <section class="user-info">
-            <div class="container-image">
-                <img class="user-image" src="/images/userProfile/profile3.avif" alt="Imagen de perfil del usuario">
-            </div>
-            <div class="user-detail">
-                <p> <b>Nombres: </b> <%=userInfo.name%></p>
-                <p> <b>Apellidos: </b> <%=userInfo.lastName%></p>
-                <p> <b>Email: </b> <%=userInfo.email%></p>
-                <p> <b>Direccion: </b> <%=userInfo.address%></p>
-                <p> <b>Ciudad: </b> <%=userInfo.city%></p>
-                <p> <b>DNI: </b> <%=userInfo.dni%></p>
-                <p> <b>Telefono: </b> <%=userInfo.phone%></p>
-            </div>
-            <div class="edit-profile">
-                <button type="button">Editar informacion</button>
-            </div>
-        </section>
-        <hr>
-        <section class="order-history">
-            <div class="tittle">
-                <p>Historial de pedidos</p>
-            </div>
-            <% orderHistory.forEach( order => { %>
+            <% users.forEach( userInfo => { %>
                 <article class="container-info">
-                    <div class="order-item">
-                        <p><b>Numero de pedido: </b># <%= order.id  %></p>
+                    <div class="container-image">
+                        <img class="user-image" src="/images/userProfile/profile3.avif" alt="Imagen de perfil del usuario">
                     </div>
-                    <div class="order-item">
-                        <p><b>Fecha: </b><%= order.date  %></p>
+                    <div class="user-detail">
+                        <p><b>Nombres: </b> <%=userInfo.name%></p>
+                        <p><b>Apellidos: </b> <%=userInfo.lastName%></p>
+                        <p><b>Email: </b> <%=userInfo.email%></p>
+                        <p><b>Direccion: </b> <%=userInfo.address%></p>
+                        <p><b>Ciudad: </b> <%=userInfo.city%></p>
+                        <p><b>DNI: </b> <%=userInfo.dni%></p>
+                        <p><b>Telefono: </b> <%=userInfo.phone%></p>
                     </div>
-                    <div class="order-item">
-                        <p><b>Monto: </b>$ <%= order.mount %></p>
-                    </div>
-                    <div class="order-item">
-                        <p><b>Estado: </b><span class="status-<%= order.status %>"><%= order.status %></span></p>
-                    </div>
-                    <div class="order-item center-items">
-                    <form action="/history">
+                    <form action="/user/<%= userInfo.id %>" class="form-btn">
                         <button class="btn-order-details" type="submmit">
-                            Ver detalles
+                            Ver perfil
                         </button>
                     </form>
                     </div>
