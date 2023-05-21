@@ -4,6 +4,10 @@
     font-family: roboto;
 }
 
+a {
+    color: white;
+}
+
 body {
     width: 100vw;
     margin: 0;
