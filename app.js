@@ -16,31 +16,13 @@ const categoryRoutes = require('./routes/category')
 const aboutRoutes = require('./routes/about');
 const cartRoutes = require('./routes/cart');
 const historyRoutes = require('./routes/history');
-
-
-const returnView = (req, res, viewName) => {
-    console.log(viewName);
-    let vista = path.resolve(__dirname, `./views/${viewName}.html`);
-    console.log(vista)
-    res.sendFile(vista)
-};
+const mainRoutes = require('./routes/main');
 
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
-
 
 app.use('/user', userRoutes);
 app.use('/productCart',cartRoutes);
 app.use('/products', productRoutes);
 app.use('/category',categoryRoutes);
 app.use('/history',historyRoutes);
-app.use('/about', aboutRoutes);
-
-app.use('/store', (req, res) => returnView(req, res, 'store'));
-
-app.get('/about', (req, res) => returnView(req, res, req.path));
-
-app.get('/shipping', (req, res) => returnView(req, res, req.path));
-
-app.use('/', indexRoutes)
-
-app.get('*', (req, res) => returnView(req, res, '404'));
+app.use('/', mainRoutes);
