@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <% if (action == 'create') { %>
-        <title>Nuevo producto</title>
+        <title>Crear nuevo producto</title>
     <%} else { %>
         <title>Editar producto</title>
     <% } %>
     <link rel="stylesheet" href="/styles/index.css">
-    <link rel="stylesheet" href="/styles/editProduct.css">
+    <link rel="stylesheet" href="/styles/product.css">
 </head>
 
 <body>
@@ -65,44 +65,49 @@
         </section>
     </header>
     <main>
-        <div class="container-form-edit-product">
-            <form action="/editProduct" method="POST">
-                <div>
+        <div class="container">
+            <% if (action == 'create') { %>
+                <h4 class="form-title">Crear nuevo producto</h4>
+                <form action="/createProduct" method="POST" class="form-container">
+            <%} else { %>
+                <h4 class="form-title">Editar producto</h4>
+                <form action="/editProduct" method="POST" class="form-container">
+            <% } %>
+            
+                <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="nombre" name="nombre" id="nombre">
+                    <input type="text" name="nombre" id="nombre">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="categoria">Categoría</label>
-                    <input type="categoria" name="categoria" id="categoria">
+                    <input type="text" name="categoria" id="categoria">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="precio">Precio</label>
-                    <input type="precio" name="precio" id="precio">
+                    <input type="text" name="precio" id="precio">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="stock">Stock</label>
-                    <input type="stock" name="stock" id="stock">
+                    <input type="text" name="stock" id="stock">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="color">Color</label>
                     <input type="color" name="color" id="color">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="imagen">Cargar imagen</label>
-                    <input type="file" name="imagen" id="imagen">
+                    <input type="file" name="imagen" id="imagen" >
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="descripcion">Descripción del producto</label>
-                    <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+                    <textarea name="descripcion" cols="30" rows="10"  maxlength="500"></textarea>
                 </div>
-            </form>
-            <div>
                 <% if (action == 'create') { %>
-                    <input type="submit" value="Guardar">
+                    <button class="btn-black" type="submit">Guardar</button>
                 <%} else { %>
-                    <input type="submit" value="Editar">
+                    <button class="btn-black" type="submit">Editar</button>
                 <% } %>
-            </div>
+            </form>
         </div>
     </main>
     <footer>
