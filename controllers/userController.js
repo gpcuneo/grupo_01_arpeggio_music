@@ -36,6 +36,10 @@ const register = (req, res) => {
     res.render('userRegister');
 }
 
+const update = (req, res) => {
+    res.render('userRegister');
+}
+
 const login = (req, res) => {
     res.render('userLogin');
 }
@@ -47,7 +51,7 @@ const userController = {
     login: login,
     register: register,
     // create: '',
-    // update: '',
+    update: update,
     // delete: '',
 }
 

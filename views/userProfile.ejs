@@ -28,7 +28,9 @@
                 <p> <b>Telefono: </b> <%=userInfo.phone%></p>
             </div>
             <div class="edit-profile">
-                <button type="button">Editar informacion</button>
+                <form action="/user/update/<%= userInfo.id %>">
+                    <button type="submmit">Editar informacion</button>
+                </form>
             </div>
         </section>
         <hr>

@@ -10,6 +10,7 @@ const userController = require('../controllers/userController')
 // mediant el uso de ? indicamos que este parametro es dinamico, puede o no venis en la peticion
 router.use('/login', userController.login);
 router.use('/register', userController.register);
+router.use('/update/:id', userController.update);
 router.use('/:id', userController.showByID);
 router.use('/', userController.show);
 
