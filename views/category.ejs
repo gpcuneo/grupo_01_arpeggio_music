@@ -21,16 +21,15 @@
                     <h4 class="category-title">Editar categoría</h4>
                     <form action="/editProduct" method="POST" class="category-container">
                 <% } %>
-            <div class="form-category">
-                <label for="categorias">Categorías de productos</label>
-                <input type="text" name="categorias" id="categorias">
-                <ul>
-                    <li>Teclados</li>
-                    <li>Guitarras</li>
-                    <li>Baterías</li>
-                </ul>
-            </div>
-            <div>
+                <form action="/category" method="post" class="bar-select">
+                    <label>Categorías de productos:</label>
+                    <select type="date" name="instruments" class="select-instrument">
+                        <option>Seleccioná tu categoría</option>
+                        <option>Teclados</option>
+                        <option>Guitarras</option>
+                        <option>Baterías</option>
+                    </select>
+                </form>
                 <button class="btn-category" type="submit">Cargar</button>
             </div>
             </div>
