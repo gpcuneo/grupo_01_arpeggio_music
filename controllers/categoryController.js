@@ -1,27 +1,18 @@
 // category data
 const categoryList = [
-    {id: '1', instrument: 'Guitarra criolla'},
-    {id: '2', instrument: 'Guitarra eléctrica'},
-    {id: '3', instrument: 'Piano'},
-    {id: '4', instrument: 'Batería'},
-    {id: '5', instrument: 'Teclado'},
-    {id: '6', instrument: 'Violín'},
-    {id: '7', instrument: 'Saxofón'},
-    {id: '8', instrument: 'Clarinete'},
+    {id: '1', name: 'Guitarra criolla'},
+    {id: '3', name: 'Piano'},
+    {id: '4', name: 'Batería'},
+    {id: '5', name: 'Teclado'},
+    {id: '2', name: 'Guitarra eléctrica'},
+    {id: '6', name: 'Violín'},
+    {id: '7', name: 'Saxofón'},
+    {id: '8', name: 'Clarinete'},
 ]
 
 
-let showCategory = (req, res) => {
-    if(req.params.id){
-        console.log(req.params.id);
-    }
-    let categoryList = {}
-    categoryList.forEach( category['id'] === id ? categoryInfo = category : '');
-    console.log(categoryInfo);
-    res.render('category', {categoryInfo: categoryInfo})
-}
-const categoryUsers = (req, res) => {
-    res.render('categoryList', {'category': categoryList} );
+let showCategories = (req, res) => {
+    res.render('category', {'cate': categoryList})
 }
 let getCategoryId = (req, res) => {
     res.render('category')
@@ -37,7 +28,7 @@ let getCategoryDelete = (req, res) => {
 }
 
 const categoryController = {
-    show:showCategory,
+    show:showCategories,
     showbyid:getCategoryId,
     create:getCategoryCreate,
     update:getCategoryUpDate,

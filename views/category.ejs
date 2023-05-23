@@ -11,36 +11,21 @@
 </head>
 
 <body>
-    <%- include('./partials/header') %>
         <main>
             <div class="container">
-                <!-- <% if (action=='create' ) { %>
-                    <h4 class="category-title">Nueva categoría</h4>
-                    <form action="/createProduct" method="POST" class="category-container">
-                <%} else { %>
-                    <h4 class="category-title">Editar categoría</h4>
-                    <form action="/editProduct" method="POST" class="category-container">
-                <% } %> -->
                 <form action="/category" method="post" class="bar-select">
                     <label>Categorías de productos:</label>
-                    <% categoryList.forEach( category=> { %>
+                    <% cate.forEach( category => { %>
                         <div class="category-form">
                             <div>
-                                <p><b>Instrumento: </b>
-                                    <%=categoryList.instrument%>
-                                </p>
+                                <p><b>Instrumento: </b><%=category.name%></p>
                             </div>
                             <div>
                                 <button class="btn-category" type="submit">Editar</button>
                                 <button class="btn-category" type="submit">Eliminar</button>
                             </div>
-
-                            <!-- <select type="date" name="instruments" class="select-instrument">
-                        <option>Seleccioná tu categoría</option>
-                        <option>Teclados</option>
-                        <option>Guitarras</option>
-                        <option>Baterías</option>
-                    </select> -->
+                    </div>
+                    <% }) %>
                 </form>
             </div>
             <button class="btn-category" type="submit">Crear</button>
