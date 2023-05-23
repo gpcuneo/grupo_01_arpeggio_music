@@ -11,11 +11,12 @@
 </head>
 
 <body>
+    <%- include('./partials/header') %>
         <main>
             <div class="container">
                 <form action="/category" method="post" class="bar-select">
                     <label>Categorías de productos:</label>
-                    <% cate.forEach( category => { %>
+                    <% categoryList.forEach( category => { %>
                         <div class="category-form">
                             <div>
                                 <p><b>Instrumento: </b><%=category.name%></p>

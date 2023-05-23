@@ -12,7 +12,7 @@ const categoryList = [
 
 
 let showCategories = (req, res) => {
-    res.render('category', {'cate': categoryList})
+    res.render('category', {'categoryList': categoryList})
 }
 let getCategoryId = (req, res) => {
     res.render('category')
