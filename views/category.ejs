@@ -13,10 +13,12 @@
 <body>
     <%- include('./partials/header') %>
         <main>
-           
+
             <div class="container">
                 <form action="/category" method="post" class="bar-select">
-                    <label>Categorías de productos:</label>
+                    <label class="label">
+                        Categorías de productos:
+                    </label>
                     <% categoryList.forEach( category=> { %>
                         <div class="category-form">
                             <div class="text">
@@ -25,17 +27,17 @@
                                 </p>
                             </div>
                             <div class="buttons">
-                                <button class="btn-category-edit" type="submit" href=""><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn-category-edit" type="submit" href="">Editar</button>
                                 <button class="btn-category-delete" type="submit" href="">Eliminar</button>
                             </div>
                         </div>
                         <% }) %>
-                        <div class="button-create">
-                            <button class="btn-create" type="submit" href="">Crear</button>
-                        </div>
+                            <div class="button-create">
+                                <button class="btn-create" type="submit" href="">Crear</button>
+                            </div>
                 </form>
             </div>
-          
+
 
 
         </main>
