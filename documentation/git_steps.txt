@@ -7,7 +7,7 @@ git add / git commits a esta rama local # Ejecuto los git adds y commits a la ra
 
 ## una vez que terminamos la funcionalidad en desarrollo
 git checkout sprint4 # Nos movemos a la rama sprint4
-git pull # Descargamos los nuevos cambios de la rama sprint4
+git pull origin sprint4 # Descargamos los nuevos cambios de la rama sprint4
 git merge 'nombreDeLaFuncionalidad' # hacemos un merge en sprint4 trayendo las modificaciones que contiene la nueva funcionalidad
 git push origin sprint4 # Actualizamos la rama sprint4 en GitHub.
 
@@ -19,6 +19,6 @@ git add / git commits a esta rama local # Ejecuto los git adds y commits a la ra
 
 ## una vez que terminamos la funcionalidad en desarrollo
 git checkout sprint4 # Nos movemos a la rama sprint4
-git pull # Descargamos los nuevos cambios de la rama sprint4
+git pull origin sprint4 # Descargamos los nuevos cambios de la rama sprint4
 git merge 'nombreDeLaFuncionalidad' # hacemos un merge en sprint4 trayendo las modificaciones que contiene la nueva funcionalidad
 git push origin sprint4 # Actualizamos la rama sprint4 en GitHub.
