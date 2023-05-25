@@ -1,0 +1,7 @@
+[
+    {"id": 1, "userName": "alauti", "firstName": "Andres Lautaro", "lastName": "Gonzalez", "email": "andreslautarogonzalez@gmail.com", "emailValidated": true, "address": "Pastor Luna 6919", "city": "Martin Coronado", "dni": 3344445555, "phone": 1550504040},
+    {"id": 2, "userName": "normap", "firstName": "Norma Lorena", "lastName": "Perez", "email": "norma.perez@hotmail.com", "emailValidated": true, "address": "Av. Corrientes 2355", "city": "Almagro", "dni": 3344445555, "phone": 1550504040},
+    {"id": 3, "userName": "julio.martins", "firstName": "Julio Estaban", "lastName": "Martins", "email": "jemartins@outlook.com.ar", "emailValidated": true, "address": "Aviador Rohland 2323", "city": "El Palomar", "dni": 3344445555, "phone": 1550504040},
+    {"id": 4, "userName": "macevedo", "firstName": "Maria Laura ", "lastName": "Acevedo", "email": "marialacevedo@gmail.com", "emailValidated": true, "address": "Campo de Mayo 8215", "city": "Loma Hermosa", "dni": 3344445555, "phone": 1550504040},
+    {"id": 5, "userName": "jplopez", "firstName": "Jose Pedro", "lastName": "Lopez", "email": "jplopez90@hotmail.com", "emailValidated": true, "address": "Sandra Pisano 3575", "city": "Haedo", "dni": 3344445555, "phone": 1550504040}
+]
