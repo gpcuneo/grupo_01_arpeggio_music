@@ -1,0 +1,24 @@
+git pull # actualizo mi repo con sprint4
+git chekcuot sprint4 # Me muevo a sprint4
+# Crear una nueva rama
+git branch 'nombreDeLaFuncionalidad' #El nombre asignado debe ser representativo a la nueva funcionalidad
+git checkout 'nombreDeLaFuncionalidad' # me muevo a la nueva rama
+git add / git commits a esta rama local # Ejecuto los git adds y commits a la rama local
+
+## una vez que terminamos la funcionalidad en desarrollo
+git checkout sprint4 # Nos movemos a la rama sprint4
+git pull # Descargamos los nuevos cambios de la rama sprint4
+git merge 'nombreDeLaFuncionalidad' # hacemos un merge en sprint4 trayendo las modificaciones que contiene la nueva funcionalidad
+git push origin sprint4 # Actualizamos la rama sprint4 en GitHub.
+
+### Arranca de nuevo el ciclo.
+# Crear una nueva rama
+git branch 'nombreDeLaFuncionalidad' #El nombre asignado debe ser representativo a la nueva funcionalidad
+git checkout 'nombreDeLaFuncionalidad' # me muevo a la nueva rama
+git add / git commits a esta rama local # Ejecuto los git adds y commits a la rama local
+
+## una vez que terminamos la funcionalidad en desarrollo
+git checkout sprint4 # Nos movemos a la rama sprint4
+git pull # Descargamos los nuevos cambios de la rama sprint4
+git merge 'nombreDeLaFuncionalidad' # hacemos un merge en sprint4 trayendo las modificaciones que contiene la nueva funcionalidad
+git push origin sprint4 # Actualizamos la rama sprint4 en GitHub.
