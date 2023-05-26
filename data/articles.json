@@ -1,0 +1,54 @@
+[
+    {
+        "id": 2,
+        "name": "Redoblante",
+        "characteristics": "Redoblante Roadshow 14x6,5 8 Torres Rsn1465s",
+        "img": "/images/productos/image-46.jpg",
+        "category": "Bateria",
+        "colors": "",
+        "price": 68800,
+        "discount": 20,
+        "stock": 1,
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident",
+        "store": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident"
+    },
+    {
+        "id": 3,
+        "name": "Pedal de bombo",
+        "characteristics": "Pedal de Bombo Hebikuo G610 Cadena Doble base metalica",
+        "img": "/images/productos/image-47.jpg",
+        "category": "Bateria",
+        "colors": "",
+        "price": 20000,
+        "discount": 20,
+        "stock": 1,
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident",
+        "store": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident"
+    },
+    {
+        "id": 4,
+        "name": "Bombo de Bateria",
+        "characteristics": "Bombo de Bateria Pearl Forum Fzh2218b/c 22x18",
+        "img": "/images/productos/image-48.jpg",
+        "category": "Bateria",
+        "colors": "",
+        "price": 100000,
+        "discount": 20,
+        "stock": 1,
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident",
+        "store": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident"
+    },
+    {
+        "id": 5,
+        "name": "Set de Platillos",
+        "characteristics": "Set de platillos Zildjian Zp1418 Hi Hat 14 Cash 18 Palillos",
+        "img": "/images/productos/image-49.jpg",
+        "category": "Bateria",
+        "colors": "",
+        "price": 25000,
+        "discount": 20,
+        "stock": 1,
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident",
+        "store": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident"
+    }
+]
