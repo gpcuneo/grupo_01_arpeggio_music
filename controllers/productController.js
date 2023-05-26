@@ -1,27 +1,30 @@
 const product={
     name:'Batería Acústica',
-    img:'/images/productos/image-32.jpg',
     price:250000,
     discount:20,
     characteristics:'Batería Acústica 5 cuerpos 20 14 12 10 Yamaha Rydeen Rdp0f5',
     stock: 1,
     descripcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident',
     store:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident',
+    img:[
+        {
+            img:'/images/productos/image-32.jpg'
+        },
+        {
+            img:'/images/productos/image-32.jpg'
+        },
+        {
+            img:'/images/productos/image-33.jpg'
+        },
+        {
+            img:'/images/productos/image-34.jpg'
+        },
+        {
+            img:'/images/productos/image-35.jpg'
+        },
+    ],
 }
-const images=[
-    {
-        img:'/images/productos/image-32.jpg'
-    },
-    {
-        img:'/images/productos/image-33.jpg'
-    },
-    {
-        img:'/images/productos/image-34.jpg'
-    },
-    {
-        img:'/images/productos/image-35.jpg'
-    },
-]
+
 const articles=[
     {
         name:'Redoblante',
@@ -50,7 +53,7 @@ const articles=[
 ]
 
 let getDetail=(req, res)=>{
-    res.render('productDetail', {title:'Detalle del Producto',product, articles, images});
+    res.render('productDetail', {title:'Detalle del Producto',product, articles});
 }
 let getDelete = (req, res)=>{
     res.render('productDelete')
@@ -66,7 +69,7 @@ let getId = (req, res)=>{
     if(req.params.id){
         console.log(req.params.id)
     }
-    res.render('productDetail', {title:'Detalle del Producto',product, articles, images})
+    res.render('productDetail', {title:'Detalle del Producto',product, articles})
 }
 const productController={
     product:getDetail,

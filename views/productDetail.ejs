@@ -20,12 +20,14 @@
                     <h4><%= product.name %></h4>
                 </div>
                 <div class="container-img-product-colum">
-                    <% images. forEach (images =>{ %>
-                        <img src="<%= images.img %>" alt="">
+                    <% let imgFirst = product.img[0] %>
+                    <% let imgSecond = product.img.slice(1,5) %>
+                    <% imgSecond.forEach (image =>{ %>
+                        <img src="<%=image.img %>" alt="">
                     <% }) %>
                 </div>
                 <div class="container-img">
-                    <img src="<%= product.img %>" alt="">
+                    <img src="<%= imgFirst.img %>" alt="">
                 </div>
                 <section class="box-text-product">
                     <h4><%= product.name %></h4>
