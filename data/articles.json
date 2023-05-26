@@ -1,9 +1,35 @@
 [
     {
+        "id": 1,
+        "name": "Batería Acústica",
+        "characteristics": "Batería Acústica 5 cuerpos 20 14 12 10 Yamaha Rydeen Rdp0f5",
+        "img": [
+            {"img": "/images/productos/image-32.jpg"},
+            {"img": "/images/productos/image-32.jpg"},
+            {"img": "/images/productos/image-33.jpg"},
+            {"img": "/images/productos/image-34.jpg"},
+            {"img": "/images/productos/image-35.jpg"}
+        ],
+        "category":"Batería",
+        "colors":"Negro",
+        "price": 250000,
+        "discount": 20,
+        "stock": 1,
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident",
+        "store": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident"
+        
+    },
+    {
         "id": 2,
         "name": "Redoblante",
         "characteristics": "Redoblante Roadshow 14x6,5 8 Torres Rsn1465s",
-        "img": "/images/productos/image-46.jpg",
+        "img": [
+            {"img":"/images/productos/image-46.jpg"},
+            {"img":"/images/productos/image-46.jpg"},
+            {"img":"/images/productos/image-46.jpg"},
+            {"img":"/images/productos/image-46.jpg"},
+            {"img":"/images/productos/image-46.jpg"}
+        ],
         "category": "Bateria",
         "colors": "",
         "price": 68800,
@@ -16,7 +42,13 @@
         "id": 3,
         "name": "Pedal de bombo",
         "characteristics": "Pedal de Bombo Hebikuo G610 Cadena Doble base metalica",
-        "img": "/images/productos/image-47.jpg",
+        "img": [
+            {"img":"/images/productos/image-47.jpg"},
+            {"img":"/images/productos/image-47.jpg"},
+            {"img":"/images/productos/image-47.jpg"},
+            {"img":"/images/productos/image-47.jpg"},
+            {"img":"/images/productos/image-47.jpg"}
+        ],
         "category": "Bateria",
         "colors": "",
         "price": 20000,
@@ -29,7 +61,13 @@
         "id": 4,
         "name": "Bombo de Bateria",
         "characteristics": "Bombo de Bateria Pearl Forum Fzh2218b/c 22x18",
-        "img": "/images/productos/image-48.jpg",
+        "img": [
+            {"img":"/images/productos/image-48.jpg"},
+            {"img":"/images/productos/image-48.jpg"},
+            {"img":"/images/productos/image-48.jpg"},
+            {"img":"/images/productos/image-48.jpg"},
+            {"img":"/images/productos/image-48.jpg"}
+        ],
         "category": "Bateria",
         "colors": "",
         "price": 100000,
@@ -42,7 +80,13 @@
         "id": 5,
         "name": "Set de Platillos",
         "characteristics": "Set de platillos Zildjian Zp1418 Hi Hat 14 Cash 18 Palillos",
-        "img": "/images/productos/image-49.jpg",
+        "img": [
+            {"img":"/images/productos/image-49.jpg"},
+            {"img":"/images/productos/image-49.jpg"},
+            {"img":"/images/productos/image-49.jpg"},
+            {"img":"/images/productos/image-49.jpg"},
+            {"img":"/images/productos/image-49.jpg"}
+        ],
         "category": "Bateria",
         "colors": "",
         "price": 25000,

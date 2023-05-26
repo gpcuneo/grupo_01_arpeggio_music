@@ -1,9 +1,19 @@
 const readJSON = require('../utils/readJSON')
-let product = readJSON('productDetail.json');
-let articles = readJSON('articles.json');
+let products = readJSON('articles.json');
+/* let articles = readJSON('articles.json'); */
 
-
+/* let productID = 3; // req.params.id;
+    let articles = productos;
+    let indice = articles.findIndex( ({id}) => id === productID );
+    let product = articles.splice(indice, 1); // Indice del arreglo, la cantidad de posiciones */
 let getDetail=(req, res)=>{
+    /* const productID = Number(req.params.id); */
+    const productID = 1;
+    let articles = products;
+    let indice = articles.findIndex(({id}) => id === productID);
+    let product = articles.splice(indice,1);
+    /* console.log(product);
+    console.log(articles); */
     res.render('productDetail', {title:'Detalle del Producto',product, articles});
 }
 let getDelete = (req, res)=>{
@@ -16,15 +26,12 @@ let getCreate = (req, res)=>{
 let getUpDate = (req, res)=>{
     res.render('product', {action:'update'})
 }
-let getId = (req, res)=>{
-    if(req.params.id){
-        /* console.log(req.params.id) */
-    }
+/* let getId = (req, res)=>{
     res.render('productDetail', {title:'Detalle del Producto',product, articles})
-}
+} */
 const productController={
     product:getDetail,
-    showbyid:getId,
+    /* showbyid:getId, */
     create:getCreate,
     update:getUpDate,
     delete:getDelete,
