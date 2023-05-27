@@ -9,7 +9,8 @@ const userController = require('../controllers/userController')
 // al metodo index del controlador de usuario y declaramos un parametro dinamico de nombre id
 // mediant el uso de ? indicamos que este parametro es dinamico, puede o no venis en la peticion
 router.use('/login', userController.login);
-router.use('/register', userController.register);
+router.get('/register', userController.register);
+router.post('/register', userController.create);
 router.use('/update/:id', userController.update);
 router.use('/:id', userController.showByID);
 router.use('/', userController.show);

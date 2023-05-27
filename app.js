@@ -8,6 +8,9 @@ app.set('view engine', 'ejs')
 const publicPath = path.resolve(__dirname, './public');
 app.use( express.static(publicPath) );
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // Importamos o requirimos el modulo de rutas de usuario (Creado por nosotros).
 const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/products');
