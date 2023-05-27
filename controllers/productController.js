@@ -1,6 +1,6 @@
-const readJSON = require('../utils/readJSON')
-let product = readJSON('productDetail.json');
-let articles = readJSON('articles.json');
+const jsonTools = require('../utils/JSONTools')
+let product = jsonTools.read('productDetail.json');
+let articles = jsonTools.read('articles.json');
 
 
 let getDetail=(req, res)=>{

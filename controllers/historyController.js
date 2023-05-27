@@ -1,5 +1,5 @@
-const readJson = require('../utils/readJSON');
-let article = readJson('shoppingHistory.json');
+const jsonTools = require('../utils/JSONTools');
+let article = jsonTools.read('shoppingHistory.json');
 
 const getHistory = (req, res) => {
     res.render('shoppingHistory', { title:'Historial de compras', article},);

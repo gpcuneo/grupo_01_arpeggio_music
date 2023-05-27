@@ -1,5 +1,5 @@
-const readJson= require('../utils/readJSON');
-let cart = readJson('cart.json');
+const jsonTools= require('../utils/JSONTools');
+let cart = jsonTools.read('cart.json');
 
 
 let getCart = (req, res)=>{
