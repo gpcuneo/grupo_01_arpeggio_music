@@ -1,8 +1,8 @@
 // dummy data
-const readJson = require('../utils/readJSON')
+const jsonTools = require('../utils/JSONTools')
 
-let userList = readJson('users.json');
-let orderHistory = readJson('horderHistory.json');
+let userList = jsonTools.read('users.json');
+let orderHistory = jsonTools.read('horderHistory.json');
 
 // Creamos las funciones que seran los metodos del controlador de usuarios.
 const showUser = (req, res) => {
