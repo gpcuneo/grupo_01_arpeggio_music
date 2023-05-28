@@ -1,10 +1,7 @@
-const jsonTools = require('../utils/JSONTools')
-/* let product = jsonTools.read('productDetail.json');
-let articles = jsonTools.read('articles.json'); */
+const jsonTools = require('../utils/JSONTools');
 
 
 let getDetail=(req, res)=>{
-    /* let products = readJSON('articles.json'); */
     let products = jsonTools.read('articles.json');
     const productID = Number(req.params.id);
     let articles = products;
