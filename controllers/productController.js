@@ -1,17 +1,12 @@
 const readJSON = require('../utils/readJSON')
 let products = readJSON('articles.json');
-/* let articles = readJSON('articles.json'); */
 
-/* let productID = 3; // req.params.id;
-    let articles = productos;
-    let indice = articles.findIndex( ({id}) => id === productID );
-    let product = articles.splice(indice, 1); // Indice del arreglo, la cantidad de posiciones */
 let getDetail=(req, res)=>{
-    /* const productID = Number(req.params.id); */
-    const productID = 1;
+    let products = readJSON('articles.json');
+    const productID = Number(req.params.id);
     let articles = products;
     let indice = articles.findIndex(({id}) => id === productID);
-    let product = articles.splice(indice,1);
+    let product = articles.splice(indice,1)[0];
     /* console.log(product);
     console.log(articles); */
     res.render('productDetail', {title:'Detalle del Producto',product, articles});
@@ -31,7 +26,7 @@ let getUpDate = (req, res)=>{
 } */
 const productController={
     product:getDetail,
-    /* showbyid:getId, */
+    showbyid:getDetail,
     create:getCreate,
     update:getUpDate,
     delete:getDelete,

@@ -20,14 +20,16 @@
                     <h4><%= product.name %></h4>
                 </div>
                 <div class="container-img-product-colum">
-                    <% let imgFirst = product.img[0] %>
-                    <% let imgSecond = product.img.slice(1,5) %>
-                    <% imgSecond.forEach (image =>{ %>
+                    <% let img1 = product.img[0].img; %>
+                    <% let selectedImg = product.img.find(obj => obj.img  === img1); %>
+                    <% product.img.forEach (image =>{ %>
+                        <% if (image !== selectedImg){ %>
                         <img src="<%=image.img %>" alt="">
+                        <% } %>
                     <% }) %>
                 </div>
                 <div class="container-img">
-                    <img src="<%= imgFirst.img %>" alt="">
+                    <img src="<%= selectedImg.img %>" alt="">
                 </div>
                 <section class="box-text-product">
                     <h4><%= product.name %></h4>
@@ -79,13 +81,13 @@
             <nav class="container-other-product">
                 <h5 class="name-other">Productos Similares</h5>
                 <div class="box-article">
-                    <% articles.forEach(articles=>{ %>
+                    <% articles.forEach(article=>{ %>
                         <article class="article-other">
-                            <img src="<%= articles.img %>" alt="">
+                            <img src="<%= article.img[0].img %>" alt="">
                             <div class="box-article-charact">
-                                <h5><%= articles.name %></h5>
-                                <p><%= articles.characteristics %></p>
-                                <p class="price-art">$<%= articles.price %></p>
+                                <h5><%= article.name %></h5>
+                                <p><%= article.characteristics %></p>
+                                <p class="price-art">$<%= article.price %></p>
                             </div>
                         </article>
                     <% }) %>
