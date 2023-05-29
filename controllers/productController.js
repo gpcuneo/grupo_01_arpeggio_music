@@ -15,20 +15,28 @@ let getDelete = (req, res)=>{
     res.render('productDelete')
 }
 let getCreate = (req, res)=>{
-    res.render('product', {action:'create'})
+    res.render('productManipulation', {action:'create'})
 }
 
 let getUpDate = (req, res)=>{
-    res.render('product', {action:'update'})
+    res.render('productManipulation', {action:'update'})
+}
+let postProducts = (req, res) =>{
+    res.render()
+}
+let upDate = (req,res)=>{
+    res.render()
 }
 /* let getId = (req, res)=>{
     res.render('productDetail', {title:'Detalle del Producto',product, articles})
 } */
 const productController={
     product:getDetail,
+    postProduct:postProducts,
     showbyid:getDetail,
     create:getCreate,
-    update:getUpDate,
+    update:upDate,
+    getUpDate:getUpDate,
     delete:getDelete,
 }
 
