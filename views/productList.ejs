@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>soy una lista de productos</h1>
+    <a href="/products/create">Crear nuevo producto</a>
+    <% products.forEach(producto => { %>
+        <article>
+            <h1><%= producto.name %></h1>
+            <p><%= producto.price %></p>
+            <a href="/products/<%= producto.id %>/detail"><button>ver detalle</button></a>
+            <br>
+        </article>
+        <% }) %>
+</body>
+</html>

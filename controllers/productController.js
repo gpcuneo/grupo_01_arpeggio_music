@@ -2,7 +2,9 @@ const jsonTools = require('../utils/JSONTools');
 
 
 let getProduct = (req, res)=>{
-    res.render('productList');
+    let products = jsonTools.read('articles.json');
+
+    res.render('productList', {products});
 }
 let getDetail=(req, res)=>{
     let products = jsonTools.read('articles.json');
@@ -23,6 +25,10 @@ let getUpDate = (req, res)=>{
     res.render('productManipulation', {action:'update'})
 }
 let postProducts = (req, res) =>{
+    const datos = req.body;
+    let products = jsonTools.read('articles.json');
+    datos.id = products.length + 1;
+    products.push(datos);
     res.redirect('/products')
 }
 let putUpDate = (req,res)=>{
