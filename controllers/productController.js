@@ -1,18 +1,19 @@
 const jsonTools = require('../utils/JSONTools');
 
 
+let getProduct = (req, res)=>{
+    res.render('productList');
+}
 let getDetail=(req, res)=>{
     let products = jsonTools.read('articles.json');
     const productID = Number(req.params.id);
     let articles = products;
     let indice = articles.findIndex(({id}) => id === productID);
     let product = articles.splice(indice,1)[0];
-    /* console.log(product);
-    console.log(articles); */
     res.render('productDetail', {title:'Detalle del Producto',product, articles});
 }
-let getDelete = (req, res)=>{
-    res.render('productDelete')
+let deleteProduct = (req, res)=>{
+    res.redirect('/products')
 }
 let getCreate = (req, res)=>{
     res.render('productManipulation', {action:'create'})
@@ -22,22 +23,19 @@ let getUpDate = (req, res)=>{
     res.render('productManipulation', {action:'update'})
 }
 let postProducts = (req, res) =>{
-    res.render()
+    res.redirect('/products')
 }
-let upDate = (req,res)=>{
-    res.render()
+let putUpDate = (req,res)=>{
+    res.redirect('/products')
 }
-/* let getId = (req, res)=>{
-    res.render('productDetail', {title:'Detalle del Producto',product, articles})
-} */
 const productController={
-    product:getDetail,
+    product:getProduct,
     postProduct:postProducts,
     showbyid:getDetail,
     create:getCreate,
-    update:upDate,
+    update:putUpDate,
     getUpDate:getUpDate,
-    delete:getDelete,
+    delete:deleteProduct,
 }
 
 
