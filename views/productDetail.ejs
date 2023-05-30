@@ -26,16 +26,15 @@
                         </h4>
                     </div>
                     <div class="container-img-product-colum">
-                        <% let img1=product.img[0].img; %>
-                            <% let selectedImg=product.img.find(obj=> obj.img === img1); %>
-                                <% product.img.forEach (image=>{ %>
-                                    <% if (image !==selectedImg){ %>
-                                        <img src="<%=image.img %>" alt="">
-                                        <% } %>
-                                            <% }) %>
+                            <% let selectedImg=product.img[0]; %>
+                            <% product.img.forEach (image=>{ %>
+                                <% if (image !==selectedImg){ %>
+                                    <img src="<%= image %>" alt="">
+                                <% } %>
+                            <% }) %>
                     </div>
                     <div class="container-img">
-                        <img src="<%= selectedImg.img %>" alt="">
+                        <img src="<%= selectedImg %>" alt="">
                     </div>
                     <section class="box-text-product">
                         <h4>
@@ -103,7 +102,7 @@
                         <% articles.forEach(article=>{ %>
                             <article class="article-other">
                                 <!-- <a href="/products/<%= article.id %>/detail"> -->
-                                    <img src="<%= article.img[0].img %>" alt="">
+                                    <img src="<%= article.img[0] %>" alt="">
                                     <div class="box-article-charact">
                                         <h5><%= article.name %></h5>
                                         <p><%= article.characteristics %></p>
