@@ -18,10 +18,10 @@ let getCategoryId = (req, res) => {
     res.render('category')
 }
 let getCategoryCreate = (req, res) => {
-    res.render('category', {action:'create'})
+    res.render('categoryEdit', {action:'create'})
 }
 let getCategoryUpDate = (req, res) => {
-    res.render('category', {action:'update'})
+    res.render('categoryEdit', {action:'update'})
 }
 let getCategoryDelete = (req, res) => {
     res.render('category')

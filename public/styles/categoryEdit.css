@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+}
+
+main{
+    background-color: #D9D9D9;
+    width: 100%;
+}
+
+.general{
+    display: flex;
+    width: 100%;
+}
