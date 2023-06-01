@@ -20,8 +20,8 @@ let getCategoryId = (req, res) => {
 let getCategoryCreate = (req, res) => {
     res.render('categoryEdit', {action:'create'})
 }
-let getCategoryUpDate = (req, res) => {
-    res.render('categoryEdit', {action:'update'})
+let getCategoryUpdate = (req,res) => {
+    res.render ('categoryEdit',{action:'update'})
 }
 let getCategoryDelete = (req, res) => {
     res.render('category')
@@ -31,7 +31,7 @@ const categoryController = {
     show:showCategories,
     showbyid:getCategoryId,
     create:getCategoryCreate,
-    update:getCategoryUpDate,
+    update:getCategoryUpdate,
     delete:getCategoryDelete,
 }
 
