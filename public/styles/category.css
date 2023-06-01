@@ -50,7 +50,16 @@
     width: 120px;
     margin: 15px 0 0 0;
 }
+.btn-category-edit{
+    border-radius: 10px;
 
+}
+.btn-category-delete{
+    border-radius: 10px;
+}
+   
+
+.bt
 .btn-create:hover {
     border: 2px solid;
     color: black;
