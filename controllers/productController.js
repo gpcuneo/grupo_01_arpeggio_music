@@ -25,7 +25,7 @@ let deleteProduct = (req, res)=>{
     /* res.redirect('/products') */
 }
 let getCreate = (req, res)=>{
-    res.render('productManipulation', {action:'create'})
+    res.render('productManipulation', {action:'create', 'product':false})
 }
 
 let getUpDate = (req, res)=>{
@@ -38,7 +38,7 @@ let getUpDate = (req, res)=>{
 let postProducts = (req, res) =>{
     const datos = req.body;
     let products = jsonTools.read('articles.json');
-    datos.id = products.length + 1;
+    datos.id = products[products.length - 1].id + 1;
     products.push(datos);
     /* res.json(products); */
     res.redirect('/products');
