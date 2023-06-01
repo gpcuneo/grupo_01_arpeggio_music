@@ -15,7 +15,14 @@ let getDetail=(req, res)=>{
     res.render('productDetail', {title:'Detalle del Producto',product, articles});
 }
 let deleteProduct = (req, res)=>{
-    res.redirect('/products')
+    let products = jsonTools.read('articles.json');
+    const id = Number(req.params.id);
+
+    const newProducts = products.filter(currentProduct => currentProduct.id !==id);
+    let newListProducts = newProducts;
+    console.log(newListProducts);
+    res.send("se quiere eliminar un producto");
+    /* res.redirect('/products') */
 }
 let getCreate = (req, res)=>{
     res.render('productManipulation', {action:'create'})
@@ -29,7 +36,8 @@ let postProducts = (req, res) =>{
     let products = jsonTools.read('articles.json');
     datos.id = products.length + 1;
     products.push(datos);
-    res.redirect('/products')
+    /* res.json(products); */
+    res.redirect('/products');
 }
 let putUpDate = (req,res)=>{
     res.redirect('/products')

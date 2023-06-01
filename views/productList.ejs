@@ -15,6 +15,10 @@
             <p><%= producto.price %></p>
             <a href="/products/<%= producto.id %>/detail"><button>ver detalle</button></a>
             <br>
+            <br>
+            <form action="/products/<%= producto.id %>/delete?_method=delete" method="post">
+                <input type="submit" value="Eliminar Producto">
+            </form>
         </article>
         <% }) %>
 </body>
