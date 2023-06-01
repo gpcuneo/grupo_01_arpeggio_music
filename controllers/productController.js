@@ -29,7 +29,11 @@ let getCreate = (req, res)=>{
 }
 
 let getUpDate = (req, res)=>{
-    res.render('productManipulation', {action:'update'})
+    let products = jsonTools.read('articles.json');
+    const id = Number(req.params.id);
+    const modifyProduct = products.find(currentProduct => currentProduct.id === id);
+
+    res.render('productManipulation', {action:'update','product': modifyProduct})
 }
 let postProducts = (req, res) =>{
     const datos = req.body;
@@ -40,6 +44,26 @@ let postProducts = (req, res) =>{
     res.redirect('/products');
 }
 let putUpDate = (req,res)=>{
+    let products = jsonTools.read('articles.json');
+    const id = Number(req.params.id);
+    const newData = req.body;
+    const index = products.findIndex(product => product.id === id);
+
+    const {name,category,price,stock,colors,characteristics,img,discount,description} =newData;
+    products[index] = {
+        id:products[index].id,
+        name,
+        category,
+        price,
+        stock,
+        colors,
+        characteristics,
+        img,
+        discount,
+        description
+    }
+    console.log(products);
+    /* res.send('se quiere actualizar un producto'); */
     res.redirect('/products')
 }
 const productController={

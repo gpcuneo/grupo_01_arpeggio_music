@@ -19,6 +19,10 @@
             <form action="/products/<%= producto.id %>/delete?_method=delete" method="post">
                 <input type="submit" value="Eliminar Producto">
             </form>
+            <br>
+            <a href="/products/<%= producto.id %>/update">
+                <button>Editar producto</button>
+            </a>
         </article>
         <% }) %>
 </body>
