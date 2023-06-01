@@ -1,15 +1,18 @@
 const express = require('express');
-const path = require('path')
-
+const path = require('path');
+//requeri method-override
+const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
 app.set('view engine', 'ejs')
 const publicPath = path.resolve(__dirname, './public');
-app.use( express.static(publicPath) );
 
+
+app.use( express.static(publicPath) );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
 // Importamos o requirimos el modulo de rutas de usuario (Creado por nosotros).
 const userRoutes = require('./routes/user');
