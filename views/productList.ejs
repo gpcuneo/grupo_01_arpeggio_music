@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/productList.css">
 </head>
+
 <body>
-    <h1>soy una lista de productos</h1>
-    <a href="/products/create">Crear nuevo producto</a>
-    <% products.forEach(producto => { %>
-        <article>
-            <h1><%= producto.name %></h1>
-            <p><%= producto.price %></p>
-            <a href="/products/<%= producto.id %>/detail"><button>ver detalle</button></a>
-            <br>
-            <br>
-            <form action="/products/<%= producto.id %>/delete?_method=delete" method="post">
-                <input type="submit" value="Eliminar Producto">
-            </form>
-            <br>
-            <a href="/products/<%= producto.id %>/update">
-                <button>Editar producto</button>
-            </a>
-        </article>
-        <% }) %>
+    <%- include('./partials/header') %>
+        <main>
+            <section class="container-general">
+            <h1>Lista de productos</h1>
+            <a href="/products/create"><button class="butto-create">Crear nuevo producto</button></a>
+            <h4 class="text-category">Categorias</h4>
+            <div class="box-articles">
+            <% products.forEach(product=> { %>
+                <article>
+                    <div class="box-img-text">
+                    <a href="/products/<%= product.id %>/detail">
+                    <img src="<%= product.img[0] %>" alt="">
+                    <div class="text-name-price-charac">
+                        <p class="title"><%= product.name %></p>
+                        <p class="text-charact"><%= product.characteristics %></p>
+                        <p class="text-price">$<%= product.price %></p>
+                    </div>
+                    </a>
+                    </div>
+                    <div class="container-delete-update">
+                    <div class="box-button-delete">
+                    <form action="/products/<%= product.id %>/delete?_method=delete" method="post">
+                        <input type="submit" value="Eliminar">
+                    </form>
+                    </div>
+                    <div class="box-button-update">
+                    <a href="/products/<%= product.id %>/update">
+                        <button>Editar</button>
+                    </a>
+                    </div>
+                    </div>
+                </article>
+                <% }) %>
+            </div>
+            </section>
+        </main>
 </body>
+
 </html>
