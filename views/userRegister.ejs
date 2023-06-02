@@ -18,7 +18,12 @@
     <main>
         <div class="main-container">
             <div class="left-column">
-                <form class="form-center" method="POST" action="/user/register">
+                <% if(action === 'register') { %>
+                    <form class="form-center" method="POST" action="/user/register">
+                <% } %>
+                <% if(action === 'update') { %>
+                    <form class="form-center" method="POST" action="/user/<%= user.id %>/edit?_method=PUT">
+                <% } %>
                     <div class="separacion">
                         <label for="userName">Usuario</label>
                         <input class="form-input <%= errors.userName? errors.userName : '' %>" type="text" name="userName" id="userName" value="<%= user ? user.userName : '' %>">

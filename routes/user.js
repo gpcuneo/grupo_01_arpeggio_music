@@ -11,8 +11,10 @@ const userController = require('../controllers/userController')
 router.use('/login', userController.login);
 router.get('/register', userController.register);
 router.post('/register', userController.create);
-router.use('/update/:id', userController.update);
-router.use('/:id', userController.showByID);
+router.get('/:id/edit', userController.edit);
+router.put('/:id/edit', userController.update);
+router.get('/:id', userController.showByID);
+router.put('/:id', userController.update);
 router.use('/', userController.show);
 
 // exportamos el modulo
