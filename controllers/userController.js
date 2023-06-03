@@ -4,11 +4,32 @@ const jsonTools = require('../utils/JSONTools')
 let userList = jsonTools.read('users.json');
 let orderHistory = jsonTools.read('horderHistory.json');
 
+const createUserObject = (req) => {
+    return {
+        userName: req.body.userName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        emailValidated: req.body.emailValidated,
+        address: req.body.address,
+        city: req.body.city,
+        dni: parseInt(req.body.dni),
+        phone: parseInt(req.body.phone),
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword,
+    }
+}
+
+const validateUserFields = (user, users) => {
+    errors = {};
+    users.find( ({dni}) => dni === user.dni) ? errors.dni = 'dni-error' : '' ;
+    users.find( ({userName}) => userName === user.userName) ? errors.userName = 'userName-error' : '' ;
+    users.find( ({email}) => email === user.email) ? errors.email = 'email-error' : '' ;
+    return errors
+}
+
 const showUser = (req, res) => {
     console.log('show user')
-    if(req.params.id) { // Si en la peticion viene el parametro id lo imprimimos por consola
-        console.log(req.params.id)
-    }
     const id = parseInt(req.params.id)
     let userInfo = {}
     userList.forEach( user => user['id'] === id ? userInfo = user : '');
@@ -27,29 +48,13 @@ const registerUser = (req, res) => {
 
 const createUser = (req, res) => {
     console.log('create user')
-    // Create user object
-    let user = {
-        userName: req.body.userName,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        emailValidated: req.body.emailValidated,
-        address: req.body.address,
-        city: req.body.city,
-        dni: parseInt(req.body.dni),
-        phone: parseInt(req.body.phone),
-        password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
-    }
-    
-    // load data from json file
+
+    let user = createUserObject(req);
     let users = jsonTools.read('users.json');
 
-    // validate user not exist in user list from dni and email.
-    errors = {};
-    users.find( ({dni}) => dni === user.dni) ? errors.dni = 'dni-error' : '' ;
-    users.find( ({userName}) => userName === user.userName) ? errors.userName = 'userName-error' : '' ;
-    users.find( ({email}) => email === user.email) ? errors.email = 'email-error' : '' ;
+    // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
+    // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
+    errors = validateUserFields(user, users);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('userRegister', {'user': user, 'errors': errors, 'action': 'register'});
@@ -59,7 +64,7 @@ const createUser = (req, res) => {
         users.push(user);
         jsonTools.write('users.json', users);
         console.log('Usuario guardado');
-        res.redirect ('/');
+        res.redirect ('/user/' + user.id);
     }
 }
 
@@ -73,30 +78,17 @@ const editUser = (req, res) => {
 
 const updateUser = (req, res) => {
     console.log('update user')
-    let user = {
-        id: parseInt(req.params.id),
-        userName: req.body.userName,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        emailValidated: req.body.emailValidated,
-        address: req.body.address,
-        city: req.body.city,
-        dni: parseInt(req.body.dni),
-        phone: parseInt(req.body.phone),
-        password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
-    }
+    let user = createUserObject(req);
+    user.id = parseInt(req.params.id);
     
     let users = jsonTools.read('users.json');
+    // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
+    // y asi poder validar los campos dni, userName y email con los del resto de los usuarios.
     let temp_users_validate = users.filter( ({id}) => { return id != user.id });
-    console.log(temp_users_validate)
 
-    errors = {};
-    temp_users_validate.find( ({dni}) => dni === user.dni) ? errors.dni = 'dni-error' : '' ;
-    temp_users_validate.find( ({userName}) => userName === user.userName) ? errors.userName = 'userName-error' : '' ;
-    temp_users_validate.find( ({email}) => email === user.email) ? errors.email = 'email-error' : '' ;
-
+    // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
+    // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
+    errors = validateUserFields(user, temp_users_validate);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('userRegister', {'user': user, 'errors': errors, 'action': 'update'});
@@ -105,7 +97,7 @@ const updateUser = (req, res) => {
         users[user_index] = user;
         jsonTools.write('users.json', users);
         console.log('Usuario actualizado');
-        res.redirect ('/');
+        res.redirect ('/user/' + user.id);
     }
 }
 
