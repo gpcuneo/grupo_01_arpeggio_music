@@ -33,20 +33,28 @@
                     </div>
                     <div class="container-btn">
                         <form action="/user/<%= userInfo.id %>" class="form-btn">
-                            <button class="btn-order-details" type="submmit">
+                            <button class="btn-order-details btn-perfil" type="submmit">
                                 Ver perfil
                             </button>
                         </form>
                         <form action="/user/<%= userInfo.id %>/edit" class="form-btn">
-                            <button class="btn-order-details" type="submmit">
+                            <button class="btn-order-details btn-edit" type="submmit">
                                 Editar perfil
                             </button>
                         </form>
-                        <form action="/user/<%= userInfo.id %>/delete" class="form-btn">
-                            <button class="btn-order-details" type="submmit">
-                                Eliminar
-                            </button>
-                        </form>
+                        <% if(userInfo.active) { %>
+                            <form action="/user/<%= userInfo.id %>/delete" class="form-btn">
+                                <button class="btn-order-details btn-delete" type="submmit">
+                                    Eliminar
+                                </button>
+                            </form>
+                        <% } else { %>
+                            <form action="/user/<%= userInfo.id %>/active" class="form-btn">
+                                <button class="btn-order-details btn-active" type="submmit">
+                                    Activar
+                                </button>
+                            </form>
+                        <% } %>
                     </div>
                 </article>
             <% }); %>
