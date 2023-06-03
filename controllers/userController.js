@@ -34,17 +34,17 @@ const showUser = (req, res) => {
     const id = parseInt(req.params.id)
     let userInfo = {}
     userList.forEach( user => user['id'] === id ? userInfo = user : '');
-    res.render('userProfile', {'userInfo': userInfo, 'orderHistory': orderHistory} );
+    res.render('User/profile', {'userInfo': userInfo, 'orderHistory': orderHistory} );
 }
 
 const listUsers = (req, res) => {
     console.log('list users')
-    res.render('userList', {'users': userList} );
+    res.render('User/list', {'users': userList} );
 }
 
 const registerUser = (req, res) => {
     console.log('user register')
-    res.render('userRegister', {'user': false, 'errors': false, 'action': 'register'});
+    res.render('User/register', {'user': false, 'errors': false, 'action': 'register'});
 }
 
 const createUser = (req, res) => {
@@ -58,7 +58,7 @@ const createUser = (req, res) => {
     errors = validateUserFields(user, users);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
-        res.render('userRegister', {'user': user, 'errors': errors, 'action': 'register'});
+        res.render('User/register', {'user': user, 'errors': errors, 'action': 'register'});
     } else {
         lastID = users[users.length -1]['id'];
         user.id = lastID + 1;
@@ -74,7 +74,7 @@ const editUser = (req, res) => {
     let users = jsonTools.read('users.json');
     let userID = parseInt(req.params.id);
     let user = users.filter( ({id}) => { return id === userID });
-    res.render('userRegister', {'user': user[0], 'errors': false, 'action': 'update'});
+    res.render('User/register', {'user': user[0], 'errors': false, 'action': 'update'});
 }
 
 const updateUser = (req, res) => {
@@ -92,7 +92,7 @@ const updateUser = (req, res) => {
     errors = validateUserFields(user, temp_users_validate);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
-        res.render('userRegister', {'user': user, 'errors': errors, 'action': 'update'});
+        res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
     } else {
         user_index = users.findIndex( ({id}) => id === user.id );
         users[user_index] = user;
@@ -107,7 +107,7 @@ const userDelete = (req, res) => {
     let users = jsonTools.read('users.json');
     let userID = parseInt(req.params.id);
     let user = users.filter( ({id}) => { return id === userID });
-    res.render('userDelete', {'user': user[0]});
+    res.render('User/delete', {'user': user[0]});
 }
 
 const userDisable = (req, res) => {
@@ -122,8 +122,18 @@ const userDisable = (req, res) => {
     res.redirect('/')
 }
 
+const userEnable = (req, res) => {
+    let userID = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    let user_index = users.findIndex( ({id}) => { return id === userID });
+    users[user_index].active = true;
+    jsonTools.write('users.json', users);
+    console.log('Se habilito el usuario: ' + userID);
+    res.redirect('/user')
+}
+
 const login = (req, res) => {
-    res.render('userLogin');
+    res.render('User/login');
 }
 
 // Declaramos el objeto userController el cual tendra metodos que invocaran a funciones
@@ -137,6 +147,7 @@ const userController = {
     update: updateUser,
     delete: userDelete,
     disable: userDisable,
+    enable: userEnable
 }
 
 // exportamos el modulo.

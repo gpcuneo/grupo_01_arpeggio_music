@@ -14,15 +14,15 @@
 </head>
 
 <body>
-    <%- include('./partials/header') %>
+    <%- include('../partials/header') %>
     <main>
         <div class="main-container">
             <div class="left-column">
                 <% if(action === 'register') { %>
-                    <form class="form-center" method="POST" action="/user/register">
+                    <form class="form-center" method="POST" action="/user">
                 <% } %>
                 <% if(action === 'update') { %>
-                    <form class="form-center" method="POST" action="/user/<%= user.id %>/edit?_method=PUT">
+                    <form class="form-center" method="POST" action="/user/<%= user.id %>?_method=PUT">
                 <% } %>
                     <div class="separacion">
                         <label for="userName">Usuario</label>
@@ -76,7 +76,7 @@
             </div>
         </div>
     </main>
-    <%- include('./partials/footer') %>
+    <%- include('../partials/footer') %>
 </body>
 
 </html>

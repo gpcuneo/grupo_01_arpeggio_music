@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/styles/userList.css">
 </head>
 <body>
-    <%- include('./partials/header') %>
+    <%- include('../partials/header') %>
     <main>
         <section class="user-info">
             <% users.forEach( userInfo => { %>
@@ -49,7 +49,7 @@
                                 </button>
                             </form>
                         <% } else { %>
-                            <form action="/user/<%= userInfo.id %>/active" class="form-btn">
+                            <form action="/user/<%= userInfo.id %>/active" method="post" class="form-btn">
                                 <button class="btn-order-details btn-active" type="submmit">
                                     Activar
                                 </button>
@@ -60,6 +60,6 @@
             <% }); %>
         </section>
     </main>
-    <%- include('./partials/footer') %>
+    <%- include('../partials/footer') %>
 </body>
 </html>
