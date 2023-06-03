@@ -21,19 +21,32 @@
                         <img class="user-image" src="/images/userProfile/profile3.avif" alt="Imagen de perfil del usuario">
                     </div>
                     <div class="user-detail">
-                        <p><b>Nombres: </b> <%=userInfo.name%></p>
-                        <p><b>Apellidos: </b> <%=userInfo.lastName%></p>
-                        <p><b>Email: </b> <%=userInfo.email%></p>
-                        <p><b>Direccion: </b> <%=userInfo.address%></p>
-                        <p><b>Ciudad: </b> <%=userInfo.city%></p>
-                        <p><b>DNI: </b> <%=userInfo.dni%></p>
-                        <p><b>Telefono: </b> <%=userInfo.phone%></p>
+                        <p> <b>ID: </b> <%=userInfo.id%></p>
+                        <p> <b>Usuario: </b> <%=userInfo.userName%></p>
+                        <p> <b>Nombres: </b> <%=userInfo.firstName%></p>
+                        <p> <b>Apellidos: </b> <%=userInfo.lastName%></p>
+                        <p> <b>Email: </b> <%=userInfo.email%></p>
+                        <p> <b>Direccion: </b> <%=userInfo.address%></p>
+                        <p> <b>Ciudad: </b> <%=userInfo.city%></p>
+                        <p> <b>DNI: </b> <%=userInfo.dni%></p>
+                        <p> <b>Telefono: </b> <%=userInfo.phone%></p>
                     </div>
-                    <form action="/user/<%= userInfo.id %>" class="form-btn">
-                        <button class="btn-order-details" type="submmit">
-                            Ver perfil
-                        </button>
-                    </form>
+                    <div class="container-btn">
+                        <form action="/user/<%= userInfo.id %>" class="form-btn">
+                            <button class="btn-order-details" type="submmit">
+                                Ver perfil
+                            </button>
+                        </form>
+                        <form action="/user/<%= userInfo.id %>/edit" class="form-btn">
+                            <button class="btn-order-details" type="submmit">
+                                Editar perfil
+                            </button>
+                        </form>
+                        <form action="/user/<%= userInfo.id %>/delete" class="form-btn">
+                            <button class="btn-order-details" type="submmit">
+                                Eliminar
+                            </button>
+                        </form>
                     </div>
                 </article>
             <% }); %>

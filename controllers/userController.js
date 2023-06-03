@@ -17,6 +17,7 @@ const createUserObject = (req) => {
         phone: parseInt(req.body.phone),
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
+        active: true,
     }
 }
 
@@ -101,6 +102,26 @@ const updateUser = (req, res) => {
     }
 }
 
+const userDelete = (req, res) => {
+    console.log('delete user')
+    let users = jsonTools.read('users.json');
+    let userID = parseInt(req.params.id);
+    let user = users.filter( ({id}) => { return id === userID });
+    res.render('userDelete', {'user': user[0]});
+}
+
+const userDisable = (req, res) => {
+    let userID = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    let user_index = users.findIndex( ({id}) => { return id === userID });
+    console.log(user_index)
+    console.log(users[user_index])
+    users[user_index].active = false;
+    jsonTools.write('users.json', users);
+    console.log('Se elimino el usuario: ' + userID);
+    res.redirect('/')
+}
+
 const login = (req, res) => {
     res.render('userLogin');
 }
@@ -114,7 +135,8 @@ const userController = {
     create: createUser,
     edit: editUser,
     update: updateUser,
-    // delete: '',
+    delete: userDelete,
+    disable: userDisable,
 }
 
 // exportamos el modulo.

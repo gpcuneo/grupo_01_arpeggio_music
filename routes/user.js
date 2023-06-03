@@ -13,6 +13,8 @@ router.get('/register', userController.register);
 router.post('/register', userController.create);
 router.get('/:id/edit', userController.edit);
 router.put('/:id/edit', userController.update);
+router.get('/:id/delete', userController.delete);
+router.delete('/:id/delete', userController.disable);
 router.get('/:id', userController.showByID);
 router.put('/:id', userController.update);
 router.use('/', userController.show);
