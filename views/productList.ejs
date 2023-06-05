@@ -17,39 +17,72 @@
     <%- include('./partials/header') %>
         <main>
             <section class="container-general">
-            <h1>Lista de productos</h1>
-            <a href="/products/create"><button class="butto-create">Crear nuevo producto</button></a>
-            <h4 class="text-category">Categorias</h4>
-            <div class="box-articles">
-            <% products.forEach(product=> { %>
-                <article>
-                    <div class="box-img-text">
-                    <a href="/products/<%= product.id %>/detail">
-                    <img src="<%= product.img[0] %>" alt="">
-                    <div class="text-name-price-charac">
-                        <p class="title"><%= product.name %></p>
-                        <p class="text-charact"><%= product.characteristics %></p>
-                        <p class="text-price">$<%= product.price %></p>
-                    </div>
-                    </a>
-                    </div>
-                    <div class="container-delete-update">
-                    <div class="box-button-delete">
-                    <form action="/products/<%= product.id %>/delete?_method=delete" method="post">
-                        <input type="submit" value="Eliminar">
+                <h1 class="first-title">Lista de productos</h1>
+                <div class="container-create-filter-search">
+                    <a href="/products/create"><button class="butto-create">Crear nuevo producto</button></a>
+                    <select name="category" id="category" class="select-filter">
+                        <option value="">Filtrar por Categoría</option>
+                        <option value="">Batería</option>
+                        <option value="">Guitarra</option>
+                        <option value="">Teclado</option>
+                        <option value="">Bajo</option>
+                    </select>
+                    <div class="nav-search">
+                    <form action="">
+                        <input type="search" placeholder="Burcar" class="">
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </form>
-                    </div>
-                    <div class="box-button-update">
-                    <a href="/products/<%= product.id %>/update">
-                        <button>Editar</button>
-                    </a>
-                    </div>
-                    </div>
-                </article>
-                <% }) %>
-            </div>
+                </div>
+                </div>
+                <div class="text-titles">
+                    <i class="fa-regular fa-image"></i>
+                    <h5 class="title-name">Nombre</h5>
+                    <h5 class="title-price">Precio</h5>
+                    <h4 class="text-category">Categorias</h4>
+                    <h5 class="text-date">Fecha</h5>
+                    <h5 class="update">Estado</h5>
+                </div>
+                <div class="box-articles">
+                    <% products.forEach(product=> { %>
+                        <article>
+                            <img src="<%= product.img[0] %>" alt="">
+                            <div class="text-name-price-charac">
+                                <p class="text-charact">
+                                    <%= product.characteristics %>
+                                </p>
+                                <p class="text-price">$<%= product.price %>
+                                </p>
+                                <a href="/products/<%= product.id %>/detail">Ver detalle</a>
+                            </div>
+                            <div class="text-price-second">
+                                <p >$<%= product.price %>
+                                </p>
+                            </div>
+                            <div class="box-category">
+                                <p>Bateria</p>
+                            </div>
+                            <div class="box-date">
+                                <p>fecha</p>
+                            </div>
+                            <div class="container-delete-update">
+                                <div class="box-button-update">
+                                    <a href="/products/<%= product.id %>/update">
+                                        <button>Editar</button>
+                                    </a>
+                                </div>
+                                <div class="box-button-delete">
+                                    <form action="/products/<%= product.id %>/delete?_method=delete" method="post">
+                                        <input type="submit" value="Eliminar">
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                        <% }) %>
+                </div>
             </section>
         </main>
+    <%- include('./partials/footer') %>
+
 </body>
 
 </html>
