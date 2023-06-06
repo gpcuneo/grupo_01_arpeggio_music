@@ -14,6 +14,7 @@ main{
 .container-create-filter-search{
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     margin: 15px;
 }
@@ -114,7 +115,6 @@ article img{
     display: none;
 }
 .container-delete-update{
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -160,73 +160,210 @@ article img{
     color: black;
     box-shadow: 0px 0px 10px rgb(100, 100, 100);
 }
-@media (min-width: 900px){
+@media (min-width: 800px){
     .container-general{
         padding-bottom: 20px;
     }
+    .first-title{
+        margin: 20px 20px 5px 20px;
+    }
+    .container-create-filter-search{
+        margin: 15px 20px;
+    }
     .nav-search{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        /* border: 1px dashed red; */
+        width: 30%;
+        box-sizing: border-box;
+    }
+    .nav-search form{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid black;
+        border-radius: 12px;
+        width: 100%;
+        padding: 2px;
+        box-sizing: border-box;
+    }
+    .nav-search input{
+        width: 85%;
+        height: 100%;
+        border: none;
+        padding-left: 5px;
+        box-sizing: border-box;
+    }
+    .nav-search i{
+        width: 10%;
+        font-size: 11px;
+        text-align: center;
+        box-sizing: border-box;
+        padding-left: 0px;
+    }
+    .text-titles{
+        padding: 0px 20px;
+        justify-content: flex-start;
+
+    }
+    .fa-image{
+        width: 10%;
+        text-align: center;
+    }
+    .title-name{
+        width: 35%;
+        padding-left: 5px;
+        font-weight: 500;
+        box-sizing: border-box;
+    }
+    .title-price{
         display: block;
+        font-size: 14px;
+        font-weight: 500;
+        width: 15%;
+        text-align: center;
+        box-sizing: border-box;
     }
     .text-category{
         display: block;
+        width: 15%;
         color: white;
         font-size: 14px;
         font-weight: 500;
+        text-align: center;
         margin: 5px 0;
     }
     .text-date{
         display: block;
+        width: 10%;
         color: white;
         font-size: 14px;
         font-weight: 500;
+        text-align: center;
         margin: 5px 0;
     }
     .update{
+        width: 15%;
         display: block;
         color: white;
         font-size: 14px;
         font-weight: 500;
+        text-align: center;
         margin: 5px 0;
-    }
-    .title-name{
-        font-weight: 500;
     }
     .text-price{
         display: none;
     }
     article{
         margin: 3px 20px;
-        justify-content: space-around;
     }
     article img{
-        border: 1px solid green;
         width: 10%;
-        padding: 0;
+        padding: 2px;
+        box-sizing: border-box;
     }
     .text-name-price-charac{
-        border: 1px dashed black;
-        width: 30%;
-    }
-    .title-price{
-        display: block;
-        font-size: 14px;
-        font-weight: 500;
+        width: 35%;
+        box-sizing: border-box;
     }
     .box-category{
-        border: 1px solid yellow;
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+        box-sizing: border-box;
     }
     .box-date{
-        border: 1px solid green;
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10%;
+        box-sizing: border-box;
     }
     .text-price-second{
-        border: 1px dashed red;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 15%;
+        box-sizing: border-box;
     }
     .container-delete-update{
-        border: 1px dashed blue;
         flex-direction: column;
-        width: 20%;
+        align-items: center;
+        justify-content: center;
+        width: 15%;
+        box-sizing: border-box;
+    }
+    .text-charact{
+        font-size: 12px;
+    }
+    .text-name-price-charac a{
+        font-size: 13px;
+        box-shadow: none;
+        color: white;
+        width: 30%;
+        background-color: black;
+        transition: all 0.5s;
+        box-sizing: border-box;
+    }
+    .text-name-price-charac:hover a{
+        color: black;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgb(100, 100, 100);
+    }
+    .text-price-second p {
+        font-size: 13px;
+    }
+    .box-category p{
+        font-size: 13px;
+    }
+    .box-date p{
+        font-size: 13px;
+    }
+    .box-button-delete,.box-button-update{
+        width: 50%;
+    }
+    .box-button-update button{
+        font-size: 13px;
+        background-color: white;
+        color: black;
+    }
+    .box-button-update:hover button{
+        background-color: white;
+        box-shadow: 0px 0px 10px rgb(100, 100, 100);
+
+    }
+    .box-button-delete input{
+        font-size: 13px;
+    }
+}
+@media (min-width:1200px){
+    .first-title, .container-create-filter-search, .box-articles{
+        max-width: 1200px;
+        margin: auto;
+    }
+    .container-create-filter-search{
+        padding: 10px 0;
+    }
+    .container-titles{
+        background-color: black;
+    }
+    .text-titles{
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 ;
+    }
+    .first-title{
+        width: 100%;
+        padding: 10px 0;
+        box-sizing: border-box;
+    }
+    .container-create-filter-search{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    article{
+        margin: 2px 0px;
     }
 }

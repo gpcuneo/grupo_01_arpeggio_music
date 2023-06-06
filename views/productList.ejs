@@ -28,19 +28,21 @@
                         <option value="">Bajo</option>
                     </select>
                     <div class="nav-search">
-                    <form action="">
-                        <input type="search" placeholder="Burcar" class="">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </form>
+                        <form action="">
+                            <input type="search" placeholder="Buscar producto" class="">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </form>
+                    </div>
                 </div>
-                </div>
-                <div class="text-titles">
-                    <i class="fa-regular fa-image"></i>
-                    <h5 class="title-name">Nombre</h5>
-                    <h5 class="title-price">Precio</h5>
-                    <h4 class="text-category">Categorias</h4>
-                    <h5 class="text-date">Fecha</h5>
-                    <h5 class="update">Estado</h5>
+                <div class="container-titles">
+                    <div class="text-titles">
+                        <i class="fa-regular fa-image"></i>
+                        <h5 class="title-name">Nombre</h5>
+                        <h5 class="title-price">Precio</h5>
+                        <h4 class="text-category">Categorias</h4>
+                        <h5 class="text-date">Fecha</h5>
+                        <h5 class="update">Estado</h5>
+                    </div>
                 </div>
                 <div class="box-articles">
                     <% products.forEach(product=> { %>
@@ -55,14 +57,14 @@
                                 <a href="/products/<%= product.id %>/detail">Ver detalle</a>
                             </div>
                             <div class="text-price-second">
-                                <p >$<%= product.price %>
+                                <p>$<%= product.price %>
                                 </p>
                             </div>
                             <div class="box-category">
                                 <p>Bateria</p>
                             </div>
                             <div class="box-date">
-                                <p>fecha</p>
+                                <p>12/06/2023</p>
                             </div>
                             <div class="container-delete-update">
                                 <div class="box-button-update">
@@ -81,7 +83,7 @@
                 </div>
             </section>
         </main>
-    <%- include('./partials/footer') %>
+        <%- include('./partials/footer') %>
 
 </body>
 
