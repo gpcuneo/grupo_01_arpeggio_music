@@ -10,29 +10,31 @@ const categoryList = [
     {id: '8', name: 'Clarinete'},
 ]
 
+const categoryControllers = {
+    getCategory: (req, res) => {
+        res.render('category', {'categoryList': categoryList})
+    },
+    getCategoryId: (req, res) => {
+        res.render('category')
+    },
+    getCategoryCreate: (req, res) => {
+        res.render('categoryEdit', {action:'create'})
+    },
+    getCategoryUpdate: (req,res) => {
+        res.render ('categoryEdit',{action:'update'})
+    },
+    getCategoryDelete: (req, res) => {
+        res.render('category')
+    },
+}
 
-let showCategories = (req, res) => {
-    res.render('category', {'categoryList': categoryList})
-}
-let getCategoryId = (req, res) => {
-    res.render('category')
-}
-let getCategoryCreate = (req, res) => {
-    res.render('categoryEdit', {action:'create'})
-}
-let getCategoryUpdate = (req,res) => {
-    res.render ('categoryEdit',{action:'update'})
-}
-let getCategoryDelete = (req, res) => {
-    res.render('category')
-}
 
-const categoryController = {
+/* const categoryController = {
     show:showCategories,
     showbyid:getCategoryId,
     create:getCategoryCreate,
     update:getCategoryUpdate,
     delete:getCategoryDelete,
-}
+} */
 
-module.exports = categoryController
+module.exports = categoryControllers;
