@@ -21,7 +21,7 @@ const categoryControllers = {
         res.redirect('/category')
     },
     getCategoryCreate: (req, res) => {
-        res.render('categoryEdit')
+        res.render('categoryEdit', { action:'create'})
     },
     getCategoryId: (req, res) => {
         const id = Number(req.params.id);
@@ -35,9 +35,9 @@ const categoryControllers = {
         const id = Number(req.params.id);
         const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
         if(!categoryUpDate) {
-            return res.send('error de ID)')
+            return res.send('error de ID')
         };
-        res.render ('categoryEdit', {category: categoryUpDate})
+        res.render ('categoryEdit', {category: categoryUpDate, action: 'update'})
     },
     getCategoryDelete: (req, res) => {
         const id = Number(req.params.id);
