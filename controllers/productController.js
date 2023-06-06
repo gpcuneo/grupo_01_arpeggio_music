@@ -32,6 +32,7 @@ let getUpDate = (req, res)=>{
     let products = jsonTools.read('articles.json');
     const id = Number(req.params.id);
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
+    /* console.log(modifyProduct); */
 
     res.render('productManipulation', {action:'update','product': modifyProduct})
 }
