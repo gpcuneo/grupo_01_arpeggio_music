@@ -14,20 +14,38 @@ const categoryControllers = {
     getCategory: (req, res) => {
         res.render('category', {'categoryList': categoryList})
     },
-    getCategoryId: (req, res) => {
-        res.render('category')
+    postCategory: (req, res) => {
+        let datos = req.body;
+        datos.id = categoryList.length+1;
+        categoryList.push(datos);
+        res.redirect('/category')
     },
     getCategoryCreate: (req, res) => {
-        res.render('categoryEdit', {action:'create'})
+        res.render('categoryEdit')
+    },
+    getCategoryId: (req, res) => {
+        const id = Number(req.params.id);
+        const categoryById = categoryList.find(categoryActual => categoryActual.id === id);
+        if(!categoryById) {
+            return res.send('error de Id')
+        };
+        res.render('category', {title: 'categoryById', category:categoryById});
     },
     getCategoryUpdate: (req,res) => {
-        res.render ('categoryEdit',{action:'update'})
+        const id = Number(req.params.id);
+        const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
+        if(!categoryUpDate) {
+            return res.send('error de ID)')
+        };
+        res.render ('categoryEdit', {category: categoryUpDate})
     },
     getCategoryDelete: (req, res) => {
-        res.render('category')
+        const id = Number(req.params.id);
+        const categoryDelete = categoryList.filter(categoryActual => categoryActual.id !== id);
+        categoryList = categoryDelete;
+        res.redirect('/category')
     },
 }
-
 
 /* const categoryController = {
     show:showCategories,
