@@ -4,7 +4,7 @@ const jsonTools = require('../utils/JSONTools');
 let getProduct = (req, res)=>{
     let products = jsonTools.read('articles.json');
 
-    res.render('productList', {products});
+    res.render('products/productList', {products});
 }
 let getDetail=(req, res)=>{
     let products = jsonTools.read('articles.json');
@@ -12,7 +12,7 @@ let getDetail=(req, res)=>{
     let articles = products;
     let indice = articles.findIndex(({id}) => id === productID);
     let product = articles.splice(indice,1)[0];
-    res.render('productDetail', {title:'Detalle del Producto',product, articles});
+    res.render('products/productDetail', {title:'Detalle del Producto',product, articles});
 }
 let deleteProduct = (req, res)=>{
     let products = jsonTools.read('articles.json');
@@ -26,7 +26,7 @@ let deleteProduct = (req, res)=>{
     res.redirect('/products')
 }
 let getCreate = (req, res)=>{
-    res.render('productManipulation', {action:'create', 'product':false})
+    res.render('products/productManipulation', {action:'create', 'product':false})
 }
 
 let getUpDate = (req, res)=>{
@@ -35,7 +35,7 @@ let getUpDate = (req, res)=>{
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
     /* console.log(modifyProduct); */
 
-    res.render('productManipulation', {action:'update','product': modifyProduct})
+    res.render('products/productManipulation', {action:'update','product': modifyProduct})
 }
 let postProducts = (req, res) =>{
     const datos = req.body;
