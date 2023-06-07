@@ -20,7 +20,7 @@ let deleteProduct = (req, res)=>{
 
     const newProducts = products.filter(currentProduct => currentProduct.id !==id);
     let newListProducts = newProducts;
-    console.log(newListProducts);
+    /* console.log(newListProducts); */
     res.send("se quiere eliminar un producto");
     /* res.redirect('/products') */
 }
@@ -41,6 +41,7 @@ let postProducts = (req, res) =>{
     let products = jsonTools.read('articles.json');
     datos.id = products[products.length - 1].id + 1;
     products.push(datos);
+    jsonTools.write('articles.json', products)
     /* res.json(products); */
     res.redirect('/products');
 }
@@ -63,7 +64,8 @@ let putUpDate = (req,res)=>{
         discount,
         description
     }
-    console.log(products);
+    jsonTools.write('articles.json', products);
+    /* console.log(products); */
     /* res.send('se quiere actualizar un producto'); */
     res.redirect('/products')
 }
