@@ -22,7 +22,6 @@ let deleteProduct = (req, res)=>{
     let newListProducts = newProducts;
     jsonTools.write('articles.json', newListProducts)
     console.log('se elimino un producto');
-    /* res.send("se quiere eliminar un producto"); */
     res.redirect('/products')
 }
 let getCreate = (req, res)=>{
@@ -33,7 +32,6 @@ let getUpDate = (req, res)=>{
     let products = jsonTools.read('articles.json');
     const id = Number(req.params.id);
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
-    /* console.log(modifyProduct); */
 
     res.render('products/productManipulation', {action:'update','product': modifyProduct})
 }
@@ -44,9 +42,10 @@ let postProducts = (req, res) =>{
     datos.price = Number(datos.price);
     datos.discount = Number(datos.discount);
     datos.stock = Number(datos.stock);
+    datos.img = req.files.map(file => '/images/productos/'+ file.filename);
+    /* console.log(req.files); */
     products.push(datos);
     jsonTools.write('articles.json', products)
-    /* res.json(products); */
     res.redirect('/products');
 }
 let putUpDate = (req,res)=>{
@@ -70,8 +69,6 @@ let putUpDate = (req,res)=>{
         store
     }
     jsonTools.write('articles.json', products);
-    /* console.log(products); */
-    /* res.send('se quiere actualizar un producto'); */
     res.redirect('/products')
 }
 const productController={
