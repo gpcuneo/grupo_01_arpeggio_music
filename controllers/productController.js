@@ -20,9 +20,10 @@ let deleteProduct = (req, res)=>{
 
     const newProducts = products.filter(currentProduct => currentProduct.id !==id);
     let newListProducts = newProducts;
-    /* console.log(newListProducts); */
-    res.send("se quiere eliminar un producto");
-    /* res.redirect('/products') */
+    jsonTools.write('articles.json', newListProducts)
+    console.log('se elimino un producto');
+    /* res.send("se quiere eliminar un producto"); */
+    res.redirect('/products')
 }
 let getCreate = (req, res)=>{
     res.render('productManipulation', {action:'create', 'product':false})
@@ -40,6 +41,9 @@ let postProducts = (req, res) =>{
     const datos = req.body;
     let products = jsonTools.read('articles.json');
     datos.id = products[products.length - 1].id + 1;
+    datos.price = Number(datos.price);
+    datos.discount = Number(datos.discount);
+    datos.stock = Number(datos.stock);
     products.push(datos);
     jsonTools.write('articles.json', products)
     /* res.json(products); */
@@ -51,7 +55,7 @@ let putUpDate = (req,res)=>{
     const newData = req.body;
     const index = products.findIndex(product => product.id === id);
 
-    const {name,category,price,stock,colors,characteristics,img,discount,description} =newData;
+    const {name,category,price,stock,colors,characteristics,img,discount,description,store} =newData;
     products[index] = {
         id:products[index].id,
         name,
@@ -62,7 +66,8 @@ let putUpDate = (req,res)=>{
         characteristics,
         img,
         discount,
-        description
+        description,
+        store
     }
     jsonTools.write('articles.json', products);
     /* console.log(products); */
