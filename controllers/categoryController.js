@@ -1,14 +1,15 @@
 // category data
 const categoryList = [
-    {id: '1', name: 'Guitarra criolla'},
-    {id: '3', name: 'Piano'},
-    {id: '4', name: 'Batería'},
-    {id: '5', name: 'Teclado'},
-    {id: '2', name: 'Guitarra eléctrica'},
-    {id: '6', name: 'Violín'},
-    {id: '7', name: 'Saxofón'},
-    {id: '8', name: 'Clarinete'},
+    {id: 1, name: 'Guitarra criolla'},
+    {id: 3, name: 'Piano'},
+    {id: 4, name: 'Batería'},
+    {id: 5, name: 'Teclado'},
+    {id: 2, name: 'Guitarra eléctrica'},
+    {id: 6, name: 'Violín'},
+    {id: 7, name: 'Saxofón'},
+    {id: 8, name: 'Clarinete'},
 ]
+
 
 const categoryControllers = {
     getCategory: (req, res) => {
@@ -20,24 +21,28 @@ const categoryControllers = {
         categoryList.push(datos);
         res.redirect('/category')
     },
-    getCategoryCreate: (req, res) => {
-        res.render('categoryEdit', {action:'create'})
-    },
     getCategoryId: (req, res) => {
         const id = Number(req.params.id);
         const categoryById = categoryList.find(categoryActual => categoryActual.id === id);
+        console.log(categoryById);
         if(!categoryById) {
             return res.send('error de Id')
         };
-        res.render('category', {title: 'categoryById', category:categoryById});
+        res.render('category', {title: 'categoryById', categoryList:categoryById});
+    },
+    getCategoryCreate: (req, res) => {
+        res.render('categoryEdit', {action:'create'})
     },
     getCategoryUpdate: (req,res) => {
         const id = Number(req.params.id);
         const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
+        console.log(categoryUpDate);
+        console.log(categoryList)
         if(!categoryUpDate) {
             return res.send('error de ID)')
         };
-        res.render ('categoryEdit', {category: categoryUpDate},{action:'update'})
+
+        res.render ('categoryEdit', {category: categoryUpDate, action:'update'})
     },
     getCategoryDelete: (req, res) => {
         const id = Number(req.params.id);
