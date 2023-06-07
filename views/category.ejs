@@ -13,33 +13,30 @@
 <body>
     <%- include('./partials/header') %>
         <main>
-
-            <div class="container">
-                <form action="/category" method="post" class="bar-select">
-                    <label class="label">
-                        Categorías de productos:
-                    </label>
-                    <% categoryList.forEach( category=> { %>
-                        <div class="category-form">
-                            <div class="text">
-                                <p><b>Instrumento: </b>
-                                    <%=category.name%>
-                                </p>
-                            </div>
-                            <div class="buttons">
-                                <button class="btn-category-edit" type="submit" href="">Editar</button>
-                                <button class="btn-category-delete" type="submit" href="">Eliminar</button>
-                            </div>
-                        </div>
-                        <% }) %>
-                            <div class="button-create">
-                                <button class="btn-create" type="submit" href="">Crear</button>
-                            </div>
-                </form>
+            <div>
+                <div class="categoryProductTitle">
+                    <p>Categorías de productos:</p>
+                </div>
+                <div class="categoryManipulation">
+                    <h2>¡Aquí podrás crear, modificar y eliminar las categorías de Arpeggio!</h2>
+                </div>
             </div>
-
-
-
+            <% categoryList.forEach(category=> { %>
+                <form action="/category" method="get">
+                    <div>
+                        <%= category.name %>
+                    </div>
+                </form>
+                <form action="/category/create" method="get">
+                    <input type="submit" value="Crear categoría">
+                </form>
+                <form action="/category/<%= category.id %>/update" method="get">
+                    <input type="submit" value="Modificar categoría">
+                </form>
+                <form action="/category/<%= category.id %>/delete" method="get">
+                    <input type="submit" value="Eliminar categoría">
+                </form>
+                <% }) %>
         </main>
         <%- include('./partials/footer') %>
 </body>
