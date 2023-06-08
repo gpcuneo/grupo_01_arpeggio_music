@@ -10,6 +10,7 @@ const categoryList = [
     {id: 8, name: 'Clarinete'},
 ]
 
+
 const categoryControllers = {
     getCategory: (req, res) => {
         res.render('category', {'categoryList': categoryList})

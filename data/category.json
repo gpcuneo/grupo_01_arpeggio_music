@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
     {"id": "1", "name": "Guitarra criolla"},
     {"id": "3", "name": "Piano"},
@@ -8,3 +9,6 @@
     {"id": "7", "name": "Saxofón"},
     {"id": "8", "name": "Clarinete"}
 ]
+=======
+[{"id":1,"name":"Guitarra criolla"},{"id":3,"name":"Piano"},{"id":4,"name":"Batería"},{"id":5,"name":"Teclado"},{"id":2,"name":"Guitarra eléctrica"},{"id":6,"name":"Violín"},{"id":7,"name":"Saxofón"},{"id":8,"name":"Clarinete"},{"name":"","id":9},{"id":10},{"id":11},{"name":"","id":12},{"name":"","id":13},{"id":14},{"id":15},{"id":16},{"id":17},{"id":18},{"id":19}]
+>>>>>>> e516fd2a415875fb296345399fbf92c122f9f7d9
