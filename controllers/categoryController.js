@@ -1,27 +1,18 @@
-// category data
-const categoryList = [
-    {id: 1, name: 'Guitarra criolla'},
-    {id: 3, name: 'Piano'},
-    {id: 4, name: 'Batería'},
-    {id: 5, name: 'Teclado'},
-    {id: 2, name: 'Guitarra eléctrica'},
-    {id: 6, name: 'Violín'},
-    {id: 7, name: 'Saxofón'},
-    {id: 8, name: 'Clarinete'},
-]
+const path = require ('path')
+const categoryModel = require('../models/category')
 
 
 const categoryControllers = {
     getCategory: (req, res) => {
-        res.render('category', {'categoryList': categoryList})
+        const categorias = categoryModel.findAll();
+        res.render('category', {'categoryList': categorias})
     },
     postCategory: (req, res) => {
         let datos = req.body;
-        datos.id = categoryList.length+1;
-        categoryList.push(datos);
+       categoryModel.createOne(datos)
         res.redirect('/category')
     },
-    getCategoryId: (req, res) => {
+    getCategoryId: (req, res) => { //falta
         const id = Number(req.params.id);
         const categoryById = categoryList.find(categoryActual => categoryActual.id === id);
         console.log(categoryById);
@@ -35,16 +26,17 @@ const categoryControllers = {
     },
     getCategoryUpdate: (req,res) => {
         const id = Number(req.params.id);
-        const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
-        console.log(categoryUpDate);
-        console.log(categoryList)
+        //const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
+        const categoryUpDate = categoryModel.findById(id)
+
+       
         if(!categoryUpDate) {
-            return res.send('error de ID')
+            return res.send('error de ID)')
         };
 
-        res.render ('categoryEdit', {category: categoryUpDate, action:'update'})
+        res.render ('categoryEdit', {category:categoryUpDate, action:'update'})
     },
-    getCategoryDelete: (req, res) => {
+    getCategoryDelete: (req, res) => { //falta
         const id = Number(req.params.id);
         const categoryDelete = categoryList.filter(categoryActual => categoryActual.id !== id);
         categoryList = categoryDelete;

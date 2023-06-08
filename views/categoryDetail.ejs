@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/category.css">
+</head>
+
+<body>
+    <%- include('./partials/header') %>
+        <main class="container">
+            <div>
+                <div class="categoryProductTitle">
+                    <p>Categorías del productos</p>
+                </div>
+                <div class="categoryManipulation">
+                    <h2>¡Aquí podrás modificar y eliminar las categorías de Arpeggio!</h2>
+                </div>
+            </div>
+             <div class="category-Container">
+            
+                <form action="/category" method="get">
+                    <div>
+                        <%= category.name %>
+                    </div>
+                </form>
+                <div class="category-Form">
+                    <form action="/category/<%= category.id %>/update" method="get">
+                        <input type="submit" value="Modificar categoría">
+                    </form>
+                    <form action="/category/<%= category.id %>/delete" method="get">
+                        <input type="submit" value="Eliminar categoría">
+                    </form>
+                </div>
+            </div>
+        </main>
+        <%- include('./partials/footer') %>
+</body>
+
+</html>
