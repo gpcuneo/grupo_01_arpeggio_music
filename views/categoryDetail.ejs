@@ -15,20 +15,16 @@
     <%- include('./partials/header') %>
         <main class="container">
             <div>
-                <div class="categoryProductTitle">
-                    <p>Categorías del productos</p>
-                </div>
                 <div class="categoryManipulation">
                     <h2>¡Aquí podrás modificar y eliminar las categorías de Arpeggio!</h2>
                 </div>
             </div>
              <div class="category-Container">
-            
-                <form action="/category" method="get">
                     <div>
+                        <%= category.id  %>
                         <%= category.name %>
                     </div>
-                </form>
+          
                 <div class="category-Form">
                     <form action="/category/<%= category.id %>/update" method="get">
                         <input type="submit" value="Modificar categoría">

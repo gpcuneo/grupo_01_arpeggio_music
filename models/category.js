@@ -25,6 +25,7 @@ const model = {
         }
 
         return buscado;
+      
     },
 
     // Eliminar un producto

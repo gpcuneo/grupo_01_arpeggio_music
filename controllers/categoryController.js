@@ -1,5 +1,6 @@
 const path = require ('path')
-const categoryModel = require('../models/category')
+const categoryModel = require('../models/category');
+
 
 
 const categoryControllers = {
@@ -14,12 +15,13 @@ const categoryControllers = {
     },
     getCategoryId: (req, res) => { //falta
         const id = Number(req.params.id);
-        const categoryById = categoryList.find(categoryActual => categoryActual.id === id);
-        console.log(categoryById);
-        if(!categoryById) {
-            return res.send('error de Id')
-        };
-        res.render('category', {title: 'categoryById', categoryList:categoryById});
+        const categoriaAMostrar = categoryModel.findById(id)
+     
+        if (!categoriaAMostrar){
+            return res.send ('Error de id')
+        }
+        res.render ('categoryDetail'), {title: 'Detalle de la categoria', category:categoriaAMostrar}
+       
     },
     getCategoryCreate: (req, res) => {
         res.render('categoryEdit', {action:'create'})
