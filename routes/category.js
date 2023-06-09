@@ -4,11 +4,13 @@ const categoryControllers = require('../controllers/categoryController');
 const multer = require ('multer')
 const storage = multer.diskStorage({
     destination: (req, res , cb) =>{
+        
         cb(null,'./public/images/categories' )
 
     },
     filename: (req,res,cb) =>{
-        cb (null,file.fieldname + '-' + Date.now())
+        
+        cb (null,Date.now()+'-'+ file.originalname)
 
     }
 })
@@ -20,7 +22,7 @@ router.get('/', categoryControllers.getCategory)
 router.post('/', categoryControllers.postCategory)
 //GET /category/create
 
-router.get('/create', categoryControllers.getCategoryCreate)
+router.get('/create',upload.single('img') ,categoryControllers.getCategoryCreate)
 
 //GET /category/:id  ¿¿¿QUE HACE ESTA RUTA??? te muestra una categoria determinada
 router.get('/:id/detail', categoryControllers.getCategoryId)
