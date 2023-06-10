@@ -28,7 +28,7 @@ router.get('/create',upload.single('img') ,categoryControllers.getCategoryCreate
 router.get('/:id/detail', categoryControllers.getCategoryId)
 
 //GET /category/:id/update
-router.get('/:id/update', categoryControllers.getCategoryUpdate)
+router.get('/:id/update',upload.single('img'), categoryControllers.getCategoryUpdate)
 //POST /category/:id/delete
 router.delete('/:id/delete', categoryControllers.getCategoryDelete)
 

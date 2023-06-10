@@ -34,9 +34,9 @@ const model = {
 
         categorys = categorys.filter(category => category.id !== id);
 
-        const productsJSON = JSON.stringify(categorys);
+        const categorysJSON = JSON.stringify(categorys);
 
-        fs.writeFileSync(path.join(__dirname, this.route), productsJSON);
+        fs.writeFileSync(path.join(__dirname, this.route),categorysJSON);
 
         return categorys;
     },
