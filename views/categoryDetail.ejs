@@ -9,6 +9,7 @@
     <title>Categorías</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/category.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -26,14 +27,38 @@
                     </div>
           
                 <div class="category-Form">
-                    <form action="/category/<%= category.id %>/update" method="get">
+                    <form id="formDelete" action="/category/<%= category.id %>/update" method="get">
                         <input type="submit" value="Modificar categoría">
                     </form>
                     <form action="/category/<%= category.id %>?_method=delete" method="get">
-                        <input type="submit" value="Eliminar categoría">
+                        <input id = "delCategory" type="submit" value="Eliminar categoría">
+                        <script>
+                            const btnDel =document.getElementById('delCategory')
+                            const formDel = document.getElementById('formDelete')
+                        
+                        
+                         Swal.fire({
+                          title: 'Estas Seguro de elimiar esta categoria?',
+                          text: "No podras volver a ver esta categoria",
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Si, Borrar'
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            formDel.submit()
+                          }
+                        })
+                        
+                        
+                        
+                        
+                                    </script>
                     </form>
                 </div>
             </div>
+           
         </main>
         <%- include('./partials/footer') %>
 </body>

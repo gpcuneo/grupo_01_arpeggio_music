@@ -27,7 +27,7 @@ router.get('/create',categoryControllers.getCategoryCreate)
 //GET /category/:id  ¿¿¿QUE HACE ESTA RUTA??? te muestra una categoria determinada
 router.get('/:id/detail', categoryControllers.getCategoryId)
 //POST /category/:id/delete
-router.delete('/:id', categoryControllers.getCategoryDelete)
+router.delete('/:id/delete', categoryControllers.getCategoryDelete)
 //GET /category/:id/update
 router.get('/:id/update', categoryControllers.getCategoryUpdate)
 

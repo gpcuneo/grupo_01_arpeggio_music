@@ -51,9 +51,9 @@ const categoryControllers = {
     }, // /category
     getCategoryDelete: (req, res) => { //falta
         const id = Number(req.params.id);
-        const categoryDelete = categoryList.filter(categoryActual => categoryActual.id !== id);
-        categoryList = categoryDelete;
-        res.redirect('/category')
+        categoryModel.deleteById(id);
+
+        res.redirect('/category');
     },
 }
 
