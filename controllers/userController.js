@@ -1,8 +1,14 @@
 // dummy data
 const jsonTools = require('../utils/JSONTools')
+const netTools = require('../utils/networkTools')
 
 let userList = jsonTools.read('users.json');
 let orderHistory = jsonTools.read('horderHistory.json');
+
+const getDateTimeNow = () => {
+    let now = new Date()
+    return now.toLocaleString('en-GB', { timeZone: 'UTC' });
+}
 
 const createUserObject = (req) => {
     return {
@@ -18,6 +24,7 @@ const createUserObject = (req) => {
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
         active: true,
+        lastIP : netTools.getUserIP(req),
     }
 }
 
@@ -62,6 +69,9 @@ const createUser = (req, res) => {
     } else {
         lastID = users[users.length -1]['id'];
         user.id = lastID + 1;
+        console.log(getDateTimeNow());
+        user.timeCreate = getDateTimeNow();
+        user.timeUpdate = getDateTimeNow();
         users.push(user);
         jsonTools.write('users.json', users);
         console.log('Usuario guardado');
@@ -81,6 +91,7 @@ const updateUser = (req, res) => {
     console.log('update user')
     let user = createUserObject(req);
     user.id = parseInt(req.params.id);
+    user.timeUpdate = getDateTimeNow;
     
     let users = jsonTools.read('users.json');
     // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
@@ -117,6 +128,7 @@ const userDisable = (req, res) => {
     console.log(user_index)
     console.log(users[user_index])
     users[user_index].active = false;
+    users[user_index].timeUpdate = getDateTimeNow;
     jsonTools.write('users.json', users);
     console.log('Se elimino el usuario: ' + userID);
     res.redirect('/')
@@ -127,6 +139,7 @@ const userEnable = (req, res) => {
     let users = jsonTools.read('users.json');
     let user_index = users.findIndex( ({id}) => { return id === userID });
     users[user_index].active = true;
+    users[user_index].timeUpdate = getDateTimeNow;
     jsonTools.write('users.json', users);
     console.log('Se habilito el usuario: ' + userID);
     res.redirect('/user')
