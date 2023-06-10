@@ -5,6 +5,7 @@ const { log } = require('console');
 
 
 const categoryControllers = {
+    // /category
     getCategory: (req, res) => {
         const categorias = categoryModel.findAll();
         res.render('category', {'categoryList': categorias})
@@ -17,20 +18,25 @@ const categoryControllers = {
         res.redirect('/category')
 
     },
+    // /category/:id/detail
     getCategoryId: (req, res) => { //falta
         const id = Number(req.params.id);
         const categoriaAMostrar = categoryModel.findById(id)
+        console.log(categoriaAMostrar)
      
         if (!categoriaAMostrar){
             return res.send ('Error de id')
+
         }
-        res.render ('categoryDetail'), {title: 'Detalle de la categoria', category:categoriaAMostrar}
+        res.render ('categoryDetail',{category:categoriaAMostrar,title: 'Detalle de la categoria' }) 
        
     },
+    // /category/create
     getCategoryCreate: (req, res) => {
         
         res.render('categoryEdit', {action:'create'})
     },
+    // /category/:id/update
     getCategoryUpdate: (req,res) => {
         const id = Number(req.params.id);
         //const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
@@ -39,10 +45,10 @@ const categoryControllers = {
        
         if(!categoryUpDate) {
             return res.send('error de ID)')
-        };
+        }
 
         res.render ('categoryEdit', {category:categoryUpDate, action:'update'})
-    },
+    }, // /category
     getCategoryDelete: (req, res) => { //falta
         const id = Number(req.params.id);
         const categoryDelete = categoryList.filter(categoryActual => categoryActual.id !== id);

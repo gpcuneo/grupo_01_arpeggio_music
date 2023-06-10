@@ -29,7 +29,7 @@
                     <form action="/category/<%= category.id %>/update" method="get">
                         <input type="submit" value="Modificar categoría">
                     </form>
-                    <form action="/category/<%= category.id %>/delete" method="get">
+                    <form action="/category/<%= category.id %>?_method=delete" method="get">
                         <input type="submit" value="Eliminar categoría">
                     </form>
                 </div>
