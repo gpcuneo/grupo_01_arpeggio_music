@@ -1,5 +1,6 @@
 const path = require ('path')
 const categoryModel = require('../models/category');
+const { log } = require('console');
 
 
 
@@ -10,8 +11,11 @@ const categoryControllers = {
     },
     postCategory: (req, res) => {
         let datos = req.body;
+        datos.img = '/images/categories'+ req.file.filename
+        
        categoryModel.createOne(datos)
         res.redirect('/category')
+
     },
     getCategoryId: (req, res) => { //falta
         const id = Number(req.params.id);
@@ -24,6 +28,7 @@ const categoryControllers = {
        
     },
     getCategoryCreate: (req, res) => {
+        
         res.render('categoryEdit', {action:'create'})
     },
     getCategoryUpdate: (req,res) => {
