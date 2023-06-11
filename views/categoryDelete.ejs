@@ -15,29 +15,23 @@
 <body>
     <%- include('./partials/header') %>
         <main class="container">
-            <div>
-                <div class="categoryManipulation">
-                    <h2>¡Aquí podrás modificar y eliminar las categorías de Arpeggio!</h2>
-                </div>
-            </div>
+    
              <div class="category-Container">
                     <div>
                         <%= category.id  %>
                         <%= category.name %>
                     </div>
+                <div>
+                    <p>¿Estas Seguro de que quieres eliminar este categoria?</p>
+                </div>
           
                 <div class="category-Form">
-                    <form id="formDelete" action="/category/<%= category.id %>/update" method="get">
-                        <input type="submit" value="Modificar categoría">
-                    </form>
                     <form action="/category/<%= category.id %>?_method=delete" method="get">
                         <input id = "delCategory" type="submit" value="Eliminar categoría">
                      
                     </form>
                 </div>
             </div>
-
-       
             
            
         </main>
@@ -45,4 +39,3 @@
 </body>
 
 </html>
-

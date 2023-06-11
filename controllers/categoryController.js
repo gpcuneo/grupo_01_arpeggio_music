@@ -48,8 +48,21 @@ const categoryControllers = {
         }
 
         res.render ('categoryEdit', {category:categoryUpDate, action:'update'})
-    }, // /category
-    getCategoryDelete: (req, res) => { //falta
+    },
+    getCategoryDelete1: (req, res) => { //falta
+        const id = Number(req.params.id);
+        const categoriaAMostrar = categoryModel.findById(id)
+        console.log(categoriaAMostrar)
+     
+        if (!categoriaAMostrar){
+            return res.send ('Error de id')
+
+        }
+        res.render ('categoryDelete',{title:'eliminar categoria',category:categoriaAMostrar }) 
+       
+    },
+     // /category
+    getCategoryDelete2: (req, res) => { //falta
         const id = Number(req.params.id);
         categoryModel.deleteById(id);
 
