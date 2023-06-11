@@ -15,41 +15,44 @@
     <%- include('../partials/header') %>
     <main>
         <section class="user-info">
-            <% users.forEach( userInfo => { %>
+            <% users.forEach( user => { %>
                 <article class="container-info">
                     <div class="container-image">
-                        <img class="user-image" src="/images/userProfile/profile3.avif" alt="Imagen de perfil del usuario">
+                        <% if(user.image) {%>
+                            <img class="user-image" src="/images/userProfile/<%=user.image%>" alt="Imagen de perfil del usuario">
+                        <% } else { %>
+                                <img class="user-image" src="/images/userProfile/default.avif" alt="Imagen de perfil del usuario">
+                        <% } %>
                     </div>
                     <div class="user-detail">
-                        <p> <b>ID: </b> <%=userInfo.id%></p>
-                        <p> <b>Usuario: </b> <%=userInfo.userName%></p>
-                        <p> <b>Nombres: </b> <%=userInfo.firstName%></p>
-                        <p> <b>Apellidos: </b> <%=userInfo.lastName%></p>
-                        <p> <b>Email: </b> <%=userInfo.email%></p>
-                        <p> <b>Direccion: </b> <%=userInfo.address%></p>
-                        <p> <b>Ciudad: </b> <%=userInfo.city%></p>
-                        <p> <b>DNI: </b> <%=userInfo.dni%></p>
-                        <p> <b>Telefono: </b> <%=userInfo.phone%></p>
+                        <p> <b>Usuario: </b> <%=user.userName%></p>
+                        <p> <b>Nombres: </b> <%=user.firstName%></p>
+                        <p> <b>Apellidos: </b> <%=user.lastName%></p>
+                        <p> <b>Email: </b> <%=user.email%></p>
+                        <p> <b>Direccion: </b> <%=user.address%></p>
+                        <p> <b>Ciudad: </b> <%=user.city%></p>
+                        <p> <b>DNI: </b> <%=user.dni%></p>
+                        <p> <b>Telefono: </b> <%=user.phone%></p>
                     </div>
                     <div class="container-btn">
-                        <form action="/user/<%= userInfo.id %>" class="form-btn">
+                        <form action="/user/<%= user.id %>" class="form-btn">
                             <button class="btn-order-details btn-perfil" type="submmit">
                                 Ver perfil
                             </button>
                         </form>
-                        <form action="/user/<%= userInfo.id %>/edit" class="form-btn">
+                        <form action="/user/<%= user.id %>/edit" class="form-btn">
                             <button class="btn-order-details btn-edit" type="submmit">
                                 Editar perfil
                             </button>
                         </form>
-                        <% if(userInfo.active) { %>
-                            <form action="/user/<%= userInfo.id %>/delete" class="form-btn">
+                        <% if(user.active) { %>
+                            <form action="/user/<%= user.id %>/delete" class="form-btn">
                                 <button class="btn-order-details btn-delete" type="submmit">
                                     Eliminar
                                 </button>
                             </form>
                         <% } else { %>
-                            <form action="/user/<%= userInfo.id %>/active" method="post" class="form-btn">
+                            <form action="/user/<%= user.id %>/active" method="post" class="form-btn">
                                 <button class="btn-order-details btn-active" type="submmit">
                                     Activar
                                 </button>

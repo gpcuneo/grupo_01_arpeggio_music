@@ -41,7 +41,7 @@ const showUser = (req, res) => {
     const id = parseInt(req.params.id)
     let userInfo = {}
     userList.forEach( user => user['id'] === id ? userInfo = user : '');
-    res.render('User/profile', {'userInfo': userInfo, 'orderHistory': orderHistory} );
+    res.render('User/profile', {'user': userInfo, 'orderHistory': orderHistory} );
 }
 
 const listUsers = (req, res) => {
@@ -72,6 +72,7 @@ const createUser = (req, res) => {
         console.log(getDateTimeNow());
         user.timeCreate = getDateTimeNow();
         user.timeUpdate = getDateTimeNow();
+        user.image = 'default.avif';
         users.push(user);
         jsonTools.write('users.json', users);
         console.log('Usuario guardado');
@@ -91,7 +92,7 @@ const updateUser = (req, res) => {
     console.log('update user')
     let user = createUserObject(req);
     user.id = parseInt(req.params.id);
-    user.timeUpdate = getDateTimeNow;
+    user.timeUpdate = getDateTimeNow();
     
     let users = jsonTools.read('users.json');
     // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
@@ -128,7 +129,7 @@ const userDisable = (req, res) => {
     console.log(user_index)
     console.log(users[user_index])
     users[user_index].active = false;
-    users[user_index].timeUpdate = getDateTimeNow;
+    users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
     console.log('Se elimino el usuario: ' + userID);
     res.redirect('/')
@@ -139,7 +140,7 @@ const userEnable = (req, res) => {
     let users = jsonTools.read('users.json');
     let user_index = users.findIndex( ({id}) => { return id === userID });
     users[user_index].active = true;
-    users[user_index].timeUpdate = getDateTimeNow;
+    users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
     console.log('Se habilito el usuario: ' + userID);
     res.redirect('/user')
@@ -147,6 +148,21 @@ const userEnable = (req, res) => {
 
 const login = (req, res) => {
     res.render('User/login');
+}
+
+const uploadImage = (req, res) => {
+    console.log('update user image')
+    userid = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    
+    user_index = users.findIndex( ({id}) => id === userid );
+    console.log(user_index)
+    users[user_index]['image'] = req.file.filename;
+    users[user_index]['timeUpdate'] = getDateTimeNow();
+    console.log(users[user_index])
+    jsonTools.write('users.json', users);
+    console.log('Usuario actualizado');
+    res.redirect ('/user/'+userid);
 }
 
 // Declaramos el objeto userController el cual tendra metodos que invocaran a funciones
@@ -160,7 +176,8 @@ const userController = {
     update: updateUser,
     delete: userDelete,
     disable: userDisable,
-    enable: userEnable
+    enable: userEnable,
+    updateImage: uploadImage,
 }
 
 // exportamos el modulo.
