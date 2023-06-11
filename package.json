@@ -4,7 +4,8 @@
   "description": "Tematica: Somos una tienda especializada en la venta de instrumentos musicales.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
