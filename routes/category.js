@@ -28,7 +28,7 @@ router.get('/create',categoryControllers.getCategoryCreate)
 router.get('/:id', categoryControllers.getCategoryId)
 //POST /category/:id/delete
 router.get('/:id/delete', categoryControllers.getCategoryDelete1)
-router.delete('/:id/delete', categoryControllers.getCategoryDelete2)
+router.delete('/:id', categoryControllers.getCategoryDelete2)
 //GET /category/:id/update
 router.get('/:id/update', categoryControllers.getCategoryUpdate)
 

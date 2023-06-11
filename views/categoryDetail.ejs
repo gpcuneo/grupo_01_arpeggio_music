@@ -27,10 +27,10 @@
                     </div>
           
                 <div class="category-Form">
-                    <form id="formDelete" action="/category/<%= category.id %>/update" method="get">
+                    <form id="formDelete" action="/category/<%= category.id %>/update" method="post">
                         <input type="submit" value="Modificar categoría">
                     </form>
-                    <form action="/category/<%= category.id %>?_method=delete" method="get">
+                    <form action="/category/<%= category.id %>?_method=delete" method="post">
                         <input id = "delCategory" type="submit" value="Eliminar categoría">
                      
                     </form>
