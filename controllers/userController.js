@@ -115,7 +115,7 @@ const updateUser = (req, res) => {
 }
 
 const userDelete = (req, res) => {
-    console.log('delete user')
+    console.log('delete user');
     let users = jsonTools.read('users.json');
     let userID = parseInt(req.params.id);
     let user = users.filter( ({id}) => { return id === userID });
@@ -126,13 +126,13 @@ const userDisable = (req, res) => {
     let userID = parseInt(req.params.id);
     let users = jsonTools.read('users.json');
     let user_index = users.findIndex( ({id}) => { return id === userID });
-    console.log(user_index)
-    console.log(users[user_index])
+    console.log(user_index);
+    console.log(users[user_index]);
     users[user_index].active = false;
     users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
     console.log('Se elimino el usuario: ' + userID);
-    res.redirect('/')
+    res.redirect('/');
 }
 
 const userEnable = (req, res) => {
@@ -143,7 +143,7 @@ const userEnable = (req, res) => {
     users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
     console.log('Se habilito el usuario: ' + userID);
-    res.redirect('/user')
+    res.redirect('/user');
 }
 
 const login = (req, res) => {
@@ -152,20 +152,27 @@ const login = (req, res) => {
 
 const uploadImage = (req, res) => {
     console.log('update user image')
-    userid = parseInt(req.params.id);
+    let userid = parseInt(req.params.id);
     let users = jsonTools.read('users.json');
     
-    user_index = users.findIndex( ({id}) => id === userid );
-    console.log(user_index)
+    let user_index = users.findIndex( ({id}) => id === userid );
+    console.log(user_index);
     users[user_index]['image'] = req.file.filename;
     users[user_index]['timeUpdate'] = getDateTimeNow();
-    console.log(users[user_index])
+    console.log(users[user_index]);
     jsonTools.write('users.json', users);
     console.log('Usuario actualizado');
     res.redirect ('/user/'+userid);
 }
 
-// Declaramos el objeto userController el cual tendra metodos que invocaran a funciones
+const exportUserlist = (req, res) => {
+    console.log('export user list');
+    const fileName = jsonTools.exportToCSV('users.json');
+    const pathFile = './tmp/'+fileName;
+    res.download(pathFile); // Set disposition and send it.
+}
+
+
 const userController = {
     show: listUsers,
     showByID: showUser,
@@ -178,6 +185,7 @@ const userController = {
     disable: userDisable,
     enable: userEnable,
     updateImage: uploadImage,
+    export: exportUserlist,
 }
 
 // exportamos el modulo.

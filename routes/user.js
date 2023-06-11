@@ -7,6 +7,7 @@ const upload = storageFile.upload('userProfile');
 
 router.get('/login', userController.login);
 router.get('/register', userController.register);
+router.get('/export', userController.export);
 router.get('/:id/edit', userController.edit);
 router.get('/:id/delete', userController.delete);
 router.post('/:id/active', userController.enable);
