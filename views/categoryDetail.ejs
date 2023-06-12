@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,42 +9,40 @@
     <title>Categorías</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/category.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <%- include('./partials/header') %>
         <main class="container">
             <div>
-                <div class="categoryProductTitle">
-                    <p>Categorías de productos:</p>
-                </div>
                 <div class="categoryManipulation">
-                    <h2>¡Aquí podrás crear, modificar y eliminar las categorías de Arpeggio!</h2>
+                    <h2>¡Aquí podrás modificar y eliminar las categorías de Arpeggio!</h2>
                 </div>
             </div>
              <div class="category-Container">
-            <% categoryList.forEach(category=> { %>
-                <form action="/category" method="get">
                     <div>
+                        <%= category.id  %>
                         <%= category.name %>
                     </div>
-                </form>
+          
                 <div class="category-Form">
-                    <form action="/category/create" method="get">
-                        <input type="submit" value="Crear categoría">
-                    </form>
-                    <form action="/category/<%= category.id %>/update" method="get">
+                    <form id="formDelete" action="/category/<%= category.id %>/update" method="post">
                         <input type="submit" value="Modificar categoría">
                     </form>
-                    <form action="/category/<%= category.id %>/delete" method="get">
-                        <input type="submit" value="Eliminar categoría">
+                    <form action="/category/<%= category.id %>?_method=delete" method="post">
+                        <input id = "delCategory" type="submit" value="Eliminar categoría">
+                     
                     </form>
                 </div>
-             
-                <% }) %>
             </div>
+
+       
+            
+           
         </main>
         <%- include('./partials/footer') %>
 </body>
 
 </html>
+
