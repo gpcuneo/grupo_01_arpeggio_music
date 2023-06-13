@@ -27,9 +27,13 @@ Se corrijio un problema en las vistas de categoria, ya que no se podia crear una
 
 ## Rebeca:
 ### Que hice: 
-- Tareas...
+- Actualizar los formularios de create y edición de producto con sus respectivos atributos
+- trabajar en el MVC de product, historyShopping y cart.
+- Crear los archivos JSON de product, history y cart.
+
 ### Que voy a hacer:
-- Tareas...
+-Trabajar en el CRUD de listado de productos
+-Modificar la propiedad de img de un array de objetos a un array simple
 
 # Semana 2 (Lunes 5):
 
@@ -64,6 +68,10 @@ Repasar conceptos sobre middlewares y cookies
 
 ## Rebeca:
 ### Que hice: 
-- Tareas...
+-Creé una vista para el listado de productos para la edición, creación y detalle de producto.
+-Crear el CRUD de producto
+-Implementación del multer para las imagenes del producto 
+
 ### Que voy a hacer:
-- Tareas...
+-Fortalezer conceptos de middlewares
+-Fortalezer conceptos de cookies y session.
