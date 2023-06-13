@@ -1,0 +1,24 @@
+# Primero crear una nueva rama en relacion a la tarjeta o tarea que vamos a resolver:
+git branch nombreDeLaTarea
+
+# Nos movemos a la nueva rama
+git checkout nombreDeLaTarea
+
+# Resolvemos la tarea y hacemos commit en esta rama
+git add .
+git commit -m 'detalle del log'
+
+# Nos movemos a la rama del sprint que corresponda
+git checkout sprint4
+
+# Bajamos los nuevos cambios que pueda tener la rama del sprint en github
+git pull origin sprint4
+
+# Fusionamos o 'mergeamos' la rama de la tarea que resolvimos a la rama del sprint actual
+git merge nombreDeLaTarea
+
+# Subimos la nueva version o nuevos cambios del sprint actual a github
+gir push origin sprint4
+
+# Crear Tag
+git tag -a finSprint4 42f4101 -m "Se finaliza el sprint4"

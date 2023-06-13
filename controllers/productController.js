@@ -1,79 +1,84 @@
-const product={
-    name:'Batería Acústica',
-    img:'/images/productos/image-32.jpg',
-    price:250000,
-    discount:20,
-    characteristics:'Batería Acústica 5 cuerpos 20 14 12 10 Yamaha Rydeen Rdp0f5',
-    stock: 1,
-    descripcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident',
-    store:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident',
-}
-const images=[
-    {
-        img:'/images/productos/image-32.jpg'
-    },
-    {
-        img:'/images/productos/image-33.jpg'
-    },
-    {
-        img:'/images/productos/image-34.jpg'
-    },
-    {
-        img:'/images/productos/image-35.jpg'
-    },
-]
-const articles=[
-    {
-        name:'Redoblante',
-        price:68800,
-        characteristics:'Redoblante Roadshow 14x6,5 8 Torres Rsn1465s',
-        img:'/images/productos/image-46.jpg'
-    },
-    {
-        name:'Pedal de bombo',
-        price:20000,
-        characteristics:'Pedal de Bombo Hebikuo G610 Cadena Doble base metalica',
-        img:'/images/productos/image-47.jpg'
-    },
-    {
-        name:'Bombo de Bateria',
-        price:100000,
-        characteristics:'Bombo de Bateria Pearl Forum Fzh2218b/c 22x18',
-        img:'/images/productos/image-48.jpg'
-    },
-    {
-        name:'Set de Platillos',
-        price:25000,
-        characteristics:'Set de platillos Zildjian Zp1418 Hi Hat 14 Cash 18 Palillos',
-        img:'/images/productos/image-49.jpg'
-    },
-]
+const jsonTools = require('../utils/JSONTools');
 
-let getDetail=(req, res)=>{
-    res.render('productDetail', {title:'Detalle del Producto',product, articles, images});
+
+let getProduct = (req, res)=>{
+    let products = jsonTools.read('articles.json');
+
+    res.render('products/productList', {products});
 }
-let getDelete = (req, res)=>{
-    res.render('productDelete')
+let getDetail=(req, res)=>{
+    let products = jsonTools.read('articles.json');
+    const productID = Number(req.params.id);
+    let articles = products;
+    let indice = articles.findIndex(({id}) => id === productID);
+    let product = articles.splice(indice,1)[0];
+    res.render('products/productDetail', {title:'Detalle del Producto',product, articles});
+}
+let deleteProduct = (req, res)=>{
+    let products = jsonTools.read('articles.json');
+    const id = Number(req.params.id);
+
+    const newProducts = products.filter(currentProduct => currentProduct.id !==id);
+    let newListProducts = newProducts;
+    jsonTools.write('articles.json', newListProducts)
+    console.log('se elimino un producto');
+    res.redirect('/products')
 }
 let getCreate = (req, res)=>{
-    res.render('product', {action:'create'})
+    res.render('products/productManipulation', {action:'create', 'product':false})
 }
 
 let getUpDate = (req, res)=>{
-    res.render('product', {action:'update'})
+    let products = jsonTools.read('articles.json');
+    const id = Number(req.params.id);
+    const modifyProduct = products.find(currentProduct => currentProduct.id === id);
+
+    res.render('products/productManipulation', {action:'update','product': modifyProduct})
 }
-let getId = (req, res)=>{
-    if(req.params.id){
-        console.log(req.params.id)
+let postProducts = (req, res) =>{
+    const datos = req.body;
+    let products = jsonTools.read('articles.json');
+    datos.id = products[products.length - 1].id + 1;
+    datos.price = Number(datos.price);
+    datos.discount = Number(datos.discount);
+    datos.stock = Number(datos.stock);
+    datos.img = req.files.map(file => '/images/productos/'+ file.filename);
+    /* console.log(req.files); */
+    products.push(datos);
+    jsonTools.write('articles.json', products)
+    res.redirect('/products');
+}
+let putUpDate = (req,res)=>{
+    let products = jsonTools.read('articles.json');
+    const id = Number(req.params.id);
+    const newData = req.body;
+    const index = products.findIndex(product => product.id === id);
+
+    const {name,category,price,stock,colors,characteristics,img,discount,description,store} =newData;
+    products[index] = {
+        id:products[index].id,
+        name,
+        category,
+        price,
+        stock,
+        colors,
+        characteristics,
+        img,
+        discount,
+        description,
+        store
     }
-    res.render('productDetail', {title:'Detalle del Producto',product, articles, images})
+    jsonTools.write('articles.json', products);
+    res.redirect('/products')
 }
 const productController={
-    product:getDetail,
-    showbyid:getId,
+    product:getProduct,
+    postProduct:postProducts,
+    showbyid:getDetail,
     create:getCreate,
-    update:getUpDate,
-    delete:getDelete,
+    update:putUpDate,
+    getUpDate:getUpDate,
+    delete:deleteProduct,
 }
 
 

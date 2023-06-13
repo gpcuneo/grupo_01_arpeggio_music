@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <% if (action=='create' ) { %>
+        <title>Crear nuevo producto</title>
+        <%} else { %>
+            <title>Editar producto</title>
+            <% } %>
+                <link rel="stylesheet" href="/styles/index.css">
+                <link rel="stylesheet" href="/styles/productManipulation.css">
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+        <main>
+            <div class="container">
+                <% if (action=='create' ) { %>
+                    <h4 class="form-title">Crear nuevo producto</h4>
+                    <form action="/products" method="POST" class="form-container" enctype="multipart/form-data">
+                        <%} else { %>
+                            <h4 class="form-title">Editar producto</h4>
+                            <form action="/products/<%=product.id %>/update?_method=put" method="POST" class="form-container">
+                                <% } %>
+                                    <div class="form-group">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" name="name" value="<%= product? product.name: '' %>"
+                                            id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">Categoría</label>
+                                        <input type="text" name="category" value="<%= product? product.category: '' %>"
+                                            id="category">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Precio</label>
+                                        <input type="number" name="price" value="<%= product? product.price: '' %>"
+                                            id="price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="discount">Eliga un descuento</label>
+                                        <select name="discount" id="" class="select-discount">
+                                            <option value="ninguno" <% if (!product || !product.discount) { %> selected <% } %>>Ninguno</option>
+                                            <option value="20" <% if (product && product.discount === 20) { %> selected <% } %>>% 20</option>
+                                            <option value="30" <% if (product && product.discount === 30) { %> selected <% } %>>% 30</option>
+                                            <option value="50" <% if (product && product.discount === 50) { %> selected <% } %>>% 50</option>
+                                            <option value="60" <% if (product && product.discount === 60) { %> selected <% } %>>% 60</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="stock">Stock</label>
+                                        <input type="number" name="stock" value="<%= product? product.stock: '' %>"
+                                            id="stock">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="colors">Color</label>
+                                        <input type="color" name="colors" value="<%= product? product.colors: '' %>"
+                                            id="colors">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="img">Cargar imagen</label>
+                                        <input type="file" multiple accept=".jpg, .jpeg, .png" name="img"   id="img" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="characteristics">Características del producto</label>
+                                        <textarea name="characteristics"  cols="30" rows="10" maxlength="500" ><%= product? product.characteristics: '' %></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Descripción del producto</label>
+                                        <textarea name="description" cols="30" rows="10" maxlength="500"><%= product? product.description: '' %></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="store">Información de la tienda</label>
+                                        <textarea name="store" cols="30" rows="10" maxlength="500"><%= product? product.store: '' %></textarea>
+                                    </div>
+                                    <% if (action=='create' ) { %>
+                                        <button class="btn-black" type="submit">Guardar</button>
+                                        <%} else { %>
+                                            <button class="btn-black" type="submit">Editar</button>
+                                            <% } %>
+                            </form>
+            </div>
+        </main>
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

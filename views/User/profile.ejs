@@ -12,23 +12,38 @@
     <link rel="stylesheet" href="/styles/userProfile.css">
 </head>
 <body>
-    <%- include('./partials/header') %>
+    <%- include('../partials/header') %>
     <main>
         <section class="user-info">
             <div class="container-image">
-                <img class="user-image" src="/images/userProfile/profile3.avif" alt="Imagen de perfil del usuario">
+                <img class="user-image" src="/images/userProfile/<%= user.image %>" alt="Imagen de perfil del usuario">
+                <a href="#openModal">cambiar imagen</a>
+                <div id="openModal" class="modalDialog">
+                    <div>
+                        <a href="#close" title="Close" class="close">X</a>
+                        <h2>Actualizar foto de perfil</h2>
+                        <form method="POST" enctype="multipart/form-data" action="/user/<%= user.id %>/image?_method=PUT">
+                            <div class="form-group">
+                                <label for="userimage">Seleccionar imagen</label>
+                                <input type="file" multiple accept=".jpg, .jpeg, .png" name="userimage"   id="userimage" >
+                            </div>
+                            <button type="submmit">Actualizar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="user-detail">
-                <p> <b>Nombres: </b> <%=userInfo.name%></p>
-                <p> <b>Apellidos: </b> <%=userInfo.lastName%></p>
-                <p> <b>Email: </b> <%=userInfo.email%></p>
-                <p> <b>Direccion: </b> <%=userInfo.address%></p>
-                <p> <b>Ciudad: </b> <%=userInfo.city%></p>
-                <p> <b>DNI: </b> <%=userInfo.dni%></p>
-                <p> <b>Telefono: </b> <%=userInfo.phone%></p>
+                <p> <b>Usuario: </b> <%=user.userName%></p>
+                <p> <b>Nombres: </b> <%=user.firstName%></p>
+                <p> <b>Apellidos: </b> <%=user.lastName%></p>
+                <p> <b>Email: </b> <%=user.email%></p>
+                <p> <b>Direccion: </b> <%=user.address%></p>
+                <p> <b>Ciudad: </b> <%=user.city%></p>
+                <p> <b>DNI: </b> <%=user.dni%></p>
+                <p> <b>Telefono: </b> <%=user.phone%></p>
             </div>
             <div class="edit-profile">
-                <form action="/user/update/<%= userInfo.id %>">
+                <form action="/user/<%= user.id %>/edit">
                     <button type="submmit">Editar informacion</button>
                 </form>
             </div>
@@ -63,6 +78,6 @@
             <% }); %>
         </section>
     </main>
-    <%- include('./partials/footer') %>
+    <%- include('../partials/footer') %>
 </body>
 </html>

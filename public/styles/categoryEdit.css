@@ -1,0 +1,47 @@
+*{
+    box-sizing: border-box;
+}
+
+main{
+    background-color: #D9D9D9;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 500px;
+    
+}
+
+.general{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  
+  
+}
+.name{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.btn-black {
+   background-color: black;
+   color: white;
+   border-radius: 10px;
+   margin: 30px;
+   width: 100px;
+   height: 40px;
+}
+.button{
+    text-align:  center;
+}
+.text {
+    border-radius: 1em;
+    width: 500px;
+    border: none;
+margin: 10px;
+height: 30px;
+
+}
+label {
+    margin: 10px;
+}

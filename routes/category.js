@@ -1,11 +1,37 @@
 const express = require('express');
 const router = express.Router();
-const category = require('../controllers/categoryController')
+const categoryControllers = require('../controllers/categoryController');
+const multer = require ('multer')
+const storage = multer.diskStorage({
+    destination: (req, file , cb) =>{
+        
+        cb(null,'./public/images/categories' )
 
-router.use('/create', category.create);
-router.use('/:id', category.showbyid)
-router.use('/id/update', category.update);
-router.use('/id/delete', category.delete)
-router.use('/', category.show);
+    },
+    filename: (req,file,cb) =>{
+        
+        cb (null,Date.now() + '-' + file.originalname)
+
+    }
+})
+const upload = multer ({storage})
+
+//GET /category
+router.get('/', categoryControllers.getCategory)
+//POST /category
+router.post('/',upload.single('img') , categoryControllers.postCategory)
+//GET /category/create
+
+router.get('/create',categoryControllers.getCategoryCreate)
+
+//GET /category/:id  ¿¿¿QUE HACE ESTA RUTA??? te muestra una categoria determinada
+router.get('/:id', categoryControllers.getCategoryId)
+//POST /category/:id/delete
+router.get('/:id/delete', categoryControllers.getCategoryDelete1)
+router.delete('/:id', categoryControllers.getCategoryDelete2)
+//GET /category/:id/update
+router.get('/:id/update', categoryControllers.getCategoryUpdate)
+
 
 module.exports = router
+

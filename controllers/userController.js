@@ -1,58 +1,191 @@
 // dummy data
-const userList = [
-    {id: '1', name: 'Andres Lautaro', lastName: 'Gonzalez', email: 'andreslautarogonzalez@gmail.com', address: 'Pastor Luna 6919', city: 'Martin Coronado', dni: '33.333.333', phone: '15-5555-5555'},
-    {id: '2', name: 'Norma Lorena', lastName: 'Perez', email: 'norma.perez@hotmail.com', address: 'Av. Corrientes 2355', city: 'Almagro', dni: '33.333.333', phone: '15-5555-5555'},
-    {id: '3', name: 'Julio Estaban', lastName: 'Martins', email: 'jemartins@outlook.com.ar', address: 'Aviador Rohland 2323', city: 'El Palomar', dni: '33.333.333', phone: '15-5555-5555'},
-    {id: '4', name: 'Maria Laura ', lastName: 'Acevedo', email: 'marialacevedo@gmail.com', address: 'Campo de Mayo 8215', city: 'Loma Hermosa', dni: '33.333.333', phone: '15-5555-5555'},
-    {id: '5', name: 'Jose Pedro', lastName: 'Lopez', email: 'jplopez90@hotmail.com', address: 'Sandra Pisano 3575', city: 'Haedo', dni: '33.333.333', phone: '15-5555-5555'}
-]
+const jsonTools = require('../utils/JSONTools')
+const netTools = require('../utils/networkTools')
 
-const orderHistory = [
-    {id: '1342', date: '3/1/2020', mount: '45726', status: 'Entregado'},
-    {id: '2321', date: '5/2/2021', mount: '75982', status: 'Cancelado'},
-    {id: '3543', date: '6/3/2022', mount: '101357', status: 'Cargado'},
-    {id: '4776', date: '8/4/2023', mount: '275384', status: 'Facturado'},
-    {id: '5321', date: '5/5/2021', mount: '329374', status: 'Enviado'}
-]
+let userList = jsonTools.read('users.json');
+let orderHistory = jsonTools.read('horderHistory.json');
 
+const getDateTimeNow = () => {
+    let now = new Date()
+    return now.toLocaleString('en-GB', { timeZone: 'UTC' });
+}
 
-// Creamos las funciones que seran los metodos del controlador de usuarios.
-const showUser = (req, res) => {
-    if(req.params.id) { // Si en la peticion viene el parametro id lo imprimimos por consola
-        console.log(req.params.id)
+const createUserObject = (req) => {
+    return {
+        userName: req.body.userName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        emailValidated: req.body.emailValidated,
+        address: req.body.address,
+        city: req.body.city,
+        dni: parseInt(req.body.dni),
+        phone: parseInt(req.body.phone),
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword,
+        active: true,
+        lastIP : netTools.getUserIP(req),
     }
-    const id = req.params.id
+}
+
+const validateUserFields = (user, users) => {
+    errors = {};
+    users.find( ({dni}) => dni === user.dni) ? errors.dni = 'dni-error' : '' ;
+    users.find( ({userName}) => userName === user.userName) ? errors.userName = 'userName-error' : '' ;
+    users.find( ({email}) => email === user.email) ? errors.email = 'email-error' : '' ;
+    return errors
+}
+
+const showUser = (req, res) => {
+    console.log('show user')
+    const id = parseInt(req.params.id)
     let userInfo = {}
     userList.forEach( user => user['id'] === id ? userInfo = user : '');
-    console.log(userInfo)
-    res.render('userProfile', {'userInfo': userInfo, 'orderHistory': orderHistory} );
+    res.render('User/profile', {'user': userInfo, 'orderHistory': orderHistory} );
 }
 
 const listUsers = (req, res) => {
-    res.render('userList', {'users': userList} );
+    console.log('list users')
+    res.render('User/list', {'users': userList} );
 }
 
-const register = (req, res) => {
-    res.render('userRegister');
+const registerUser = (req, res) => {
+    console.log('user register')
+    res.render('User/register', {'user': false, 'errors': false, 'action': 'register'});
 }
 
-const update = (req, res) => {
-    res.render('userRegister');
+const createUser = (req, res) => {
+    console.log('create user')
+
+    let user = createUserObject(req);
+    let users = jsonTools.read('users.json');
+
+    // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
+    // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
+    errors = validateUserFields(user, users);
+    if (Object.keys(errors) != 0) {
+        console.log('hay errores', errors);
+        res.render('User/register', {'user': user, 'errors': errors, 'action': 'register'});
+    } else {
+        lastID = users[users.length -1]['id'];
+        user.id = lastID + 1;
+        console.log(getDateTimeNow());
+        user.timeCreate = getDateTimeNow();
+        user.timeUpdate = getDateTimeNow();
+        user.image = 'default.avif';
+        users.push(user);
+        jsonTools.write('users.json', users);
+        console.log('Usuario guardado');
+        res.redirect ('/user/' + user.id);
+    }
+}
+
+const editUser = (req, res) => {
+    console.log('edit user')
+    let users = jsonTools.read('users.json');
+    let userID = parseInt(req.params.id);
+    let user = users.filter( ({id}) => { return id === userID });
+    res.render('User/register', {'user': user[0], 'errors': false, 'action': 'update'});
+}
+
+const updateUser = (req, res) => {
+    console.log('update user')
+    let user = createUserObject(req);
+    user.id = parseInt(req.params.id);
+    user.timeUpdate = getDateTimeNow();
+    
+    let users = jsonTools.read('users.json');
+    // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
+    // y asi poder validar los campos dni, userName y email con los del resto de los usuarios.
+    let temp_users_validate = users.filter( ({id}) => { return id != user.id });
+
+    // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
+    // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
+    errors = validateUserFields(user, temp_users_validate);
+    if (Object.keys(errors) != 0) {
+        console.log('hay errores', errors);
+        res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
+    } else {
+        user_index = users.findIndex( ({id}) => id === user.id );
+        users[user_index] = user;
+        jsonTools.write('users.json', users);
+        console.log('Usuario actualizado');
+        res.redirect ('/user/' + user.id);
+    }
+}
+
+const userDelete = (req, res) => {
+    console.log('delete user');
+    let users = jsonTools.read('users.json');
+    let userID = parseInt(req.params.id);
+    let user = users.filter( ({id}) => { return id === userID });
+    res.render('User/delete', {'user': user[0]});
+}
+
+const userDisable = (req, res) => {
+    let userID = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    let user_index = users.findIndex( ({id}) => { return id === userID });
+    console.log(user_index);
+    console.log(users[user_index]);
+    users[user_index].active = false;
+    users[user_index].timeUpdate = getDateTimeNow();
+    jsonTools.write('users.json', users);
+    console.log('Se elimino el usuario: ' + userID);
+    res.redirect('/');
+}
+
+const userEnable = (req, res) => {
+    let userID = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    let user_index = users.findIndex( ({id}) => { return id === userID });
+    users[user_index].active = true;
+    users[user_index].timeUpdate = getDateTimeNow();
+    jsonTools.write('users.json', users);
+    console.log('Se habilito el usuario: ' + userID);
+    res.redirect('/user');
 }
 
 const login = (req, res) => {
-    res.render('userLogin');
+    res.render('User/login');
 }
 
-// Declaramos el objeto userController el cual tendra metodos que invocaran a funciones
+const uploadImage = (req, res) => {
+    console.log('update user image')
+    let userid = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    
+    let user_index = users.findIndex( ({id}) => id === userid );
+    console.log(user_index);
+    users[user_index]['image'] = req.file.filename;
+    users[user_index]['timeUpdate'] = getDateTimeNow();
+    console.log(users[user_index]);
+    jsonTools.write('users.json', users);
+    console.log('Usuario actualizado');
+    res.redirect ('/user/'+userid);
+}
+
+const exportUserlist = (req, res) => {
+    console.log('export user list');
+    const fileName = jsonTools.exportToCSV('users.json');
+    const pathFile = './tmp/'+fileName;
+    res.download(pathFile); // Set disposition and send it.
+}
+
+
 const userController = {
     show: listUsers,
     showByID: showUser,
     login: login,
-    register: register,
-    // create: '',
-    update: update,
-    // delete: '',
+    register: registerUser,
+    create: createUser,
+    edit: editUser,
+    update: updateUser,
+    delete: userDelete,
+    disable: userDisable,
+    enable: userEnable,
+    updateImage: uploadImage,
+    export: exportUserlist,
 }
 
 // exportamos el modulo.

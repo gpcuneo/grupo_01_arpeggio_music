@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "name":"Bajo Eléctrico",
+        "characteristics":"Bajo Eléctrico Aston Reed Ebs150-20 con funda y cable",
+        "img":"/images/productos/image-37.jpg",
+        "category":"",
+        "colors":"",
+        "price":23000,
+        "total":23000,
+        "stock":1
+    },
+    {
+        "id": 2,
+        "name":"Microfóno Inalámbrico",
+        "characteristics":"Microfóno Inalámbrico AKG P3 S dinámico cardioide negro",
+        "img":"/images/productos/image-38.jpg",
+        "category":"",
+        "colors":"",
+        "price":10000,
+        "total":10000,
+        "stock":1
+    },
+    {
+        "id": 3,
+        "name":"Teclado Portátil",
+        "characteristics":"Teclado Portátil Yamaha Psr-f52 Psr-f52 Psr-f52",
+        "img":"/images/productos/image-39.jpg",
+        "category":"",
+        "colors":"",
+        "price":45000,
+        "total":45000,
+        "stock":1
+    }
+]

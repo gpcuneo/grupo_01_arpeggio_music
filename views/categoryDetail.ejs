@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/category.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <%- include('./partials/header') %>
+        <main class="container">
+            <div>
+                <div class="categoryManipulation">
+                    <h2>¡Aquí podrás modificar y eliminar las categorías de Arpeggio!</h2>
+                </div>
+            </div>
+             <div class="category-Container">
+                    <div>
+                        <%= category.id  %>
+                        <%= category.name %>
+                    </div>
+          
+                <div class="category-Form">
+                    <form id="formDelete" action="/category/<%= category.id %>/update" method="post">
+                        <input type="submit" value="Modificar categoría">
+                    </form>
+                    <form action="/category/<%= category.id %>?_method=delete" method="post">
+                        <input id = "delCategory" type="submit" value="Eliminar categoría">
+                     
+                    </form>
+                </div>
+            </div>
+
+       
+            
+           
+        </main>
+        <%- include('./partials/footer') %>
+</body>
+
+</html>
+

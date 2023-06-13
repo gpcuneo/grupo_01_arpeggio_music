@@ -26,8 +26,26 @@
     background-color: white;
     border-radius: 10px;
     border: none;
+    padding: 0px 10px;
 }
-
+.form-group textarea {
+    padding: 5px 10px;
+    height: 40px;
+}
+.form-group input[type=number]{
+    height: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 0 10px;
+}
+.form-group select{
+    height: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 0 10px;
+}
 .btn-black {
     background-color: black;
     color: white;

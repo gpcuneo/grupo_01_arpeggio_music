@@ -1,0 +1,68 @@
+[
+    {
+        "id":20,
+        "name":"",
+        "characteristics":"Bajo Eléctrico Aston Reed Ebs 150-20 Con funda y cable",
+        "img":"/images/productos/image-37.jpg",
+        "category":"",
+        "colors":"",
+        "price":30000,
+        "date":"24/11/2022",
+        "state":"Entregado"
+    },
+    {
+        "id":21,
+        "name":"",
+        "characteristics":"Microfóno Inalámbrico AKG P3 S dinámico cardioide negro",
+        "img":"/images/productos/image-38.jpg",
+        "category":"",
+        "colors":"",
+        "price":30000,
+        "date":"24/11/2022",
+        "state":"Cancelado"
+    },
+    {
+        "id":22,
+        "name":"",
+        "characteristics":"Teclado Portátil Yamaha Psr-f52 Psr-f52 Psr-f52",
+        "img":"/images/productos/image-39.jpg",
+        "category":"",
+        "colors":"",
+        "price":30000,
+        "date":"24/11/2022",
+        "state":"Cargado"
+    },
+    {
+        "id":23,
+        "name":"",
+        "characteristics":"Bajo Eléctrico Aston Reed Ebs 150-20 Con funda y cable",
+        "img":"/images/productos/image-37.jpg",
+        "category":"",
+        "colors":"",
+        "price":30000,
+        "date":"24/11/2022",
+        "state":"Cancelado"
+    },
+    {
+        "id":24,
+        "name":"",
+        "characteristics":"Microfóno Inalámbrico AKG P3 S dinámico cardioide negro",
+        "img":"/images/productos/image-38.jpg",
+        "category":"",
+        "colors":"",
+        "price":30000,
+        "date":"24/11/2022",
+        "state":"Facturado"
+    },
+    {
+        "id":25,
+        "name":"",
+        "characteristics":"Teclado Portátil Yamaha Psr-f52 Psr-f52 Psr-f52",
+        "img":"/images/productos/image-39.jpg",
+        "category":"",
+        "colors":"",
+        "price":30000,
+        "date":"24/11/2022",
+        "state":"Entregado"
+    }
+]

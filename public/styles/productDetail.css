@@ -32,7 +32,7 @@ main{
 .container-img-product-colum{
     display: none;
 }
-h4{
+.name-product h4{
     font-size: 20px;
     text-align: center;
     margin: 0;
