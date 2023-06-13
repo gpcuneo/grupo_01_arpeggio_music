@@ -19,3 +19,6 @@ git merge nombreDeLaTarea
 
 # Subimos la nueva version o nuevos cambios del sprint actual a github
 gir push origin sprint4
+
+# Crear Tag
+git tag -a finSprint4 42f4101 -m "Se finaliza el sprint4"
