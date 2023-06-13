@@ -2,9 +2,10 @@
 
 ## Agustina:
 ### Que hice: 
-- Tareas...
+- Vistas dinamicas de Category
+- Repaso de clases de Playground
 ### Que voy a hacer:
-- Tareas...
+- Crear el CRUD de Category
 
 ## Guillermo:
 ### Que hice: 
@@ -32,9 +33,12 @@
 
 ## Agustina:
 ### Que hice: 
-- Tareas...
+- Cree el Controller y el Router para Category.
+- Nos reunimos con Maxi para avanzar con nuestras tareas.
+- Repasé las clases de CRUD de la curzada para fortalecer conceptos.
+- Rehice la vista de Category de acuerdo a lo establecido en la reunión grupal
 ### Que voy a hacer:
-- Tareas...
+- Repasar clases de Middleware y Cookies
 
 ## Guillermo:
 ### Que hice: 
