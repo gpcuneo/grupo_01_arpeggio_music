@@ -23,6 +23,7 @@ const aboutRoutes = require('./routes/about');
 const cartRoutes = require('./routes/cart');
 const historyRoutes = require('./routes/history');
 const mainRoutes = require('./routes/main');
+const { log } = require('console');
 
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
 
