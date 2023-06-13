@@ -46,3 +46,30 @@ Menos de:
 
 Dejar de hacer:
 - NA
+
+
+***************************************************************
+
+Sprint 4:
+
+Comenzar a hacer:
+- Marcar roadmap inicial sobre la funcionalidad a desarrollar.
+- Pair programing.
+- Breve expo de 5 o 10 minutos por integrante del equipo.
+
+Más de:
+- Mirar mas el trello y documentar el grado de avance de las tareas.
+- Commitear mas seguido y mas chiquito.
+- Explicar mas en el log del commit.
+- Utilizar nombres de variables mas representativas.
+
+Seguir haciendo:
+- Reuniones semanales
+- Comunicacion y documentacion fluida por trello
+- Division de trabajo
+
+Menos de:
+- N/A
+
+Dejar de hacer:
+- N/A
