@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: db
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    env_file: .env
+    environment:
+      - PMA_HOST=$PMA_HOST
+      - PMA_PORT=$PMA_PORT
+      - PMA_ARBITRARY=$PMA_ARBITRARY
+    restart: always
+    ports:
+      - 8081:80
+
+volumes:
+  dbdata:
