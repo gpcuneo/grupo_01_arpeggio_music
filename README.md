@@ -25,3 +25,17 @@ Maximiliano Martinez: Hola soy Maximiliano Martinez, tengo 26 años,soy estudian
 Agustina Rodriguez: Tengo 34 años, vivo en Roque Pérez (Pcia. de Buenos Aires). Soy arquitecta y docente en nivel medio. Este año decidí comenzar a estudiar Programación, porque quiero producir cambios en mi área laboral y quiero permitirme conocer otras opciones de trabajo, otras realidades y aspiraciones. 
 
 Link al board de Trello: [https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic](https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic)
+
+
+# Ejecucion de MySQL y PhpMyAdmin sobre Docker:
+Crear un archivo .env en la raiz del proyecto y configurar las siguientes variables:
+- MYSQL_ROOT_PASSWORD=password
+- MYSQL_DATABASE=database
+- MYSQL_USER=appuser
+- MYSQL_PASSWORD=apppass
+- PMA_HOST=db
+- PMA_PORT=3306
+- PMA_ARBITRARY=1
+
+Lanzar los contenedores:
+- docker compose up -d
