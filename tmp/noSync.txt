@@ -1,0 +1,1 @@
+Este directorio es temporal y lo que se guarde en el no se subira a github.
