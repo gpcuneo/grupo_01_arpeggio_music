@@ -18,12 +18,14 @@ services:
   app:
     build:
       context: .
-      target: production
+      target: dev
     container_name: ${APP_NAME}-app
     links:
       - db
     ports:
       - "${APP_PORT}:3000"
+    volumes:
+      - .:/app
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

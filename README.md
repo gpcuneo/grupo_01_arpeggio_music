@@ -27,15 +27,70 @@ Agustina Rodriguez: Tengo 34 años, vivo en Roque Pérez (Pcia. de Buenos Aires)
 Link al board de Trello: [https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic](https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic)
 
 
-# Ejecucion de MySQL y PhpMyAdmin sobre Docker:
-Crear un archivo .env en la raiz del proyecto y configurar las siguientes variables:
-- MYSQL_ROOT_PASSWORD=password
-- MYSQL_DATABASE=database
-- MYSQL_USER=appuser
-- MYSQL_PASSWORD=apppass
-- PMA_HOST=db
-- PMA_PORT=3306
-- PMA_ARBITRARY=1
 
-Lanzar los contenedores:
-- docker compose up -d
+---
+
+# **Ejecutar proyecto en contenedores Docker**
+
+**Configurar .env con las siguientes variables de entorno:**
+
+```bash
+APP_NAME=Arpegio              # Nombre de la aplicacion
+APP_PORT=3000                 # Puerto de la aplicacion
+MYSQL_ROOT_PASSWORD=password  # Password de root
+MYSQL_DATABASE=database       # Nombre de la base de datos
+MYSQL_USER=appuser            # Usuario de conexión de la aplicación 
+MYSQL_PASSWORD=apppass        # Contraseña del usuario de la aplicación
+MYSQL_PORT=3306               # Puerto de conexion de MySQL
+PMA_HOST=db                   # Nombre del host del contenedor de la base de datos.
+PMA_ARBITRARY=1               # Configuracion 
+PMA_WEB_PORT=8080             # Puerto para conectarse al PHPMyAdmin
+```
+
+**Ejecutar entorno de desarrollo (nodemon):**
+
+```bash
+docker compose -f docker-compose-dev.yaml up -d
+[+] Building 0.0s (0/0)
+[+] Running 4/4
+ ✔ Network grupo_01_arpeggio_music_default  Created 
+ ✔ Container Arpegio-db                     Started 
+ ✔ Container Arpegio-phpmyadmin             Started 
+ ✔ Container Arpegio-app                    Started
+```
+
+Se crearan 3 contenedores:
+
+- Aplicación NodeJS
+- Base de datos MySQL
+- PHPMyAdmin
+
+Para visualizar los logs de nodemon en una terminal ejecutar:
+
+```bash
+docker logs -f Arpegio-app
+
+> grupo_01_arpeggio_music@1.0.0 dev
+> nodemon app.js
+
+[nodemon] 2.0.22
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node app.js`
+Servidor corriendo en el puerto 3000
+```
+
+Se podra visualizar la aplicacion en:
+
+[`http://localhost:3000/`](http://localhost:3000/)
+
+Se podrá visualizar PHPMyAdmin en:
+
+[`http://localhost:8080/`](http://localhost:8080/)
+
+**Ejecutar entorno de producción:**
+
+```bash
+docker compose -f docker-compose.yaml up -d
+```
