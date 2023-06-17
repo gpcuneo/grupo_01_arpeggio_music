@@ -59,6 +59,10 @@ body {
     border-color: red;
     color: red;
 }
+.password-error {
+    border-color: red;
+    color: red;
+}
 
 /* XS */
 @media (max-width: 480px) {

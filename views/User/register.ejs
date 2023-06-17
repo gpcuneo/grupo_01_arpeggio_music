@@ -58,11 +58,11 @@
                     </div>
                     <div class="separacion">
                         <label for="password">Contraseña</label>
-                        <input class="form-input" type="password" name="password" id="password" value="<%= user ? user.password : '' %>">
+                        <input class="form-input <%= errors.password? errors.password : '' %>" type="password" name="password" id="password" value="<%= user ? user.password : '' %>">
                     </div>
                     <div class="separacion">
                         <label for="confirmPassword">Confirmar contraseña</label>
-                        <input class="form-input" type="password" name="confirmPassword" id="confirmPassword" value="<%= user ? user.confirmPassword : '' %>">
+                        <input class="form-input <%= errors.password? errors.password : '' %>" type="password" name="confirmPassword" id="confirmPassword" value="<%= user ? user.confirmPassword : '' %>">
                     </div>
                     <div>
                         <button class="btn-format" type="submmit">Enviar</button>

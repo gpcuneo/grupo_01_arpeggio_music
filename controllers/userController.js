@@ -28,12 +28,18 @@ const createUserObject = (req) => {
     }
 }
 
+const comparePassword = (user) => {
+    let result = user.password === user.confirmPassword ? true : false;
+    return result;
+}
+
 const validateUserFields = (user, users) => {
     errors = {};
     users.find( ({dni}) => dni === user.dni) ? errors.dni = 'dni-error' : '' ;
     users.find( ({userName}) => userName === user.userName) ? errors.userName = 'userName-error' : '' ;
     users.find( ({email}) => email === user.email) ? errors.email = 'email-error' : '' ;
-    return errors
+    comparePassword(user) ? '' : errors.password = 'password-error';
+    return errors 
 }
 
 const showUser = (req, res) => {
@@ -56,7 +62,6 @@ const registerUser = (req, res) => {
 
 const createUser = (req, res) => {
     console.log('create user')
-
     let user = createUserObject(req);
     let users = jsonTools.read('users.json');
 
