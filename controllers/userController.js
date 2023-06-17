@@ -1,4 +1,5 @@
 // dummy data
+const bcrypt = require('bcryptjs');
 const jsonTools = require('../utils/JSONTools')
 const netTools = require('../utils/networkTools')
 
@@ -78,6 +79,8 @@ const createUser = (req, res) => {
         user.timeCreate = getDateTimeNow();
         user.timeUpdate = getDateTimeNow();
         user.image = 'default.avif';
+        user.password = bcrypt.hashSync(user.password, 10);
+        delete(user.confirmPassword);
         users.push(user);
         jsonTools.write('users.json', users);
         console.log('Usuario guardado');
@@ -90,6 +93,8 @@ const editUser = (req, res) => {
     let users = jsonTools.read('users.json');
     let userID = parseInt(req.params.id);
     let user = users.filter( ({id}) => { return id === userID });
+    delete(user[0]['password'])
+    delete(user[0]['confirmPassword'])
     res.render('User/register', {'user': user[0], 'errors': false, 'action': 'update'});
 }
 
@@ -112,6 +117,9 @@ const updateUser = (req, res) => {
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
     } else {
         user_index = users.findIndex( ({id}) => id === user.id );
+        user.password = users[user_index]['password'];
+        user.image = users[user_index]['image'];
+        delete(user.confirmPassword);
         users[user_index] = user;
         jsonTools.write('users.json', users);
         console.log('Usuario actualizado');
