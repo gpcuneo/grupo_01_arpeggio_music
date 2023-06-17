@@ -5,7 +5,7 @@ COPY --chown=node:node ./package-lock.json ./package-lock.json
 RUN npm install --loglevel warn --production
 
 FROM base AS dev
-COPY --chown=node:node ./app/ ./
+COPY --chown=node:node ./ ./
 USER node
 RUN npm install --loglevel warn
 EXPOSE 3000
