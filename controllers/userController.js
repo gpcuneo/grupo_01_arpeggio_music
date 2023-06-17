@@ -26,6 +26,7 @@ const createUserObject = (req) => {
         confirmPassword: req.body.confirmPassword,
         active: true,
         lastIP : netTools.getUserIP(req),
+        rol: 'user'
     }
 }
 
@@ -119,6 +120,7 @@ const updateUser = (req, res) => {
         user_index = users.findIndex( ({id}) => id === user.id );
         user.password = users[user_index]['password'];
         user.image = users[user_index]['image'];
+        user.rol = users[user_index]['rol'];
         delete(user.confirmPassword);
         users[user_index] = user;
         jsonTools.write('users.json', users);
@@ -160,7 +162,29 @@ const userEnable = (req, res) => {
 }
 
 const login = (req, res) => {
-    res.render('User/login');
+    res.render('User/login', {'user': false, 'error': false});
+}
+
+const userLogin = (req, res) => {
+    console.log('POST: userLogin');
+    let user = createUserObject(req);
+    console.log(user.userName);
+    let users = jsonTools.read('users.json');
+    let userCompare = users.filter( ({userName}) => { return userName === user.userName });
+    if(userCompare.length != 0) {
+        console.log(userCompare);
+        if(bcrypt.compareSync(user.password, userCompare[0].password)) {
+            console.log('logged');
+            res.cookie('userName', user.userName);
+            res.redirect('/');
+        } else {
+            console.log('Error pwd');
+            res.render('User/login', {'user': user, 'error': true});
+        }
+    } else {
+        console.log('error de mail');
+        res.render('User/login', {'user': user, 'error': true});
+    }
 }
 
 const uploadImage = (req, res) => {
@@ -190,6 +214,7 @@ const userController = {
     show: listUsers,
     showByID: showUser,
     login: login,
+    auth: userLogin,
     register: registerUser,
     create: createUser,
     edit: editUser,

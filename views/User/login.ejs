@@ -19,20 +19,22 @@
         <div class="general">
             <section class="login">
                 <div class="container-form">
-                    <form action="/login" method="POST">
+                    <form action="/user/login" method="POST">
                         <div class="input">
                             <label>Usuario</label>
-                            <input type="text" name="User">
+                            <input type="text" class=" <%= error? 'error' : '' %>" name="userName" id="userName" value="<%= user ? user.userName : '' %>">
                         </div>
                         <div class="input">
                             <label>Contraseña</label>
-                            <input type="password" name="password">
+                            <input type="password" name="password" class=" <%= error? 'error' : '' %>" id="userName" value="<%= user ? user.password : '' %>">
                         </div>
-
                         <button>Continuar</button>
-
                     </form>
-
+                    <% if(error){ %>
+                        <div>
+                            <p class="text-error">Fallo el login, usuario y/o contraseña incorrectos.</p>
+                        </div>
+                    <% } %>
                     <div class="img-button">
                         <div class="box-img">
                             <img class="redes" src="/images/logos/image 1.png" alt="redes">
@@ -40,7 +42,6 @@
                         <div class="box-img">
                             <img class="redes" src="/images/logos/image 3.png" alt="redes">
                         </div>
-
                         <div class="input-crear">
                             <button class="redes" class="new-account">Crear Cuenta</button>
                         </div>
@@ -50,17 +51,10 @@
             <section class="logo">
                 <div>
                     <img src="/images/productos/studio.JPG" alt="logo">
-
                 </div>
-
-
             </section>
         </div>
-
-
-
     </main>
     <%- include('../partials/footer') %>
 </body>
-
 </html>

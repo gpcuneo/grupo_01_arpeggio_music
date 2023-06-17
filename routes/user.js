@@ -6,6 +6,7 @@ const storageFile = require('../utils/storageTools')
 const upload = storageFile.upload('userProfile');
 
 router.get('/login', userController.login);
+router.post('/login', userController.auth);
 router.get('/register', userController.register);
 router.get('/export', userController.export);
 router.get('/:id/edit', userController.edit);

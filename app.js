@@ -4,6 +4,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 app.set('view engine', 'ejs')
@@ -13,6 +14,7 @@ app.use( express.static(publicPath) );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride('_method'));
+app.use(cookieParser());
 app.use(session({
     secret: process.env.APP_SESSION_SECRET,
     resave: false,
