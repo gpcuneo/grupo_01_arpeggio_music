@@ -21,6 +21,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use(middlewares.loggerMiddleware);
 app.use(middlewares.authenticationMiddleware);
 
 const userRoutes = require('./routes/user');
