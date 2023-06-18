@@ -122,6 +122,23 @@ const updateUser = (req, res) => {
     }
 }
 
+const updatePassword = (req, res) => {
+    userID = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    if(req.body.password === req.body.confirmPassword) {
+        userIndex = users.findIndex( ({id}) => id === userID );
+        user = users[userIndex];
+        user.password = bcrypt.hashSync(req.body.password, 10);
+        user.timeUpdate = getDateTimeNow();
+        user.lastIP = netTools.getUserIP(req),
+        console.log(user)
+        users['userIndex'] = user;
+        jsonTools.write('users.json', users);
+        console.log('Usuario actualizado');
+    }
+    res.redirect ('/user/' + user.id);
+}
+
 const userDelete = (req, res) => {
     let users = jsonTools.read('users.json');
     let userID = parseInt(req.params.id);
@@ -158,9 +175,10 @@ const login = (req, res) => {
 const userLogin = (req, res) => {
     let user = createUserObject(req);
     let users = jsonTools.read('users.json');
-    let userFound = users.filter( ({userName}) => { return userName === user.userName });
+    let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
     if(userFound.length != 0) {
-        if(bcrypt.compareSync(user.password, userFound[0].password) && userFound.active) {
+
+        if(bcrypt.compareSync(user.password, userFound.password) && userFound.active) {
             console.log('logged');
             if(!!req.body.remember) {
                 res.cookie('userName', user.userName, {
@@ -206,11 +224,12 @@ const userController = {
     register: registerUser,
     create: createUser,
     edit: editUser,
-    update: updateUser,
+    updateInfo: updateUser,
+    updatePwd: updatePassword,
+    updateImage: uploadImage,
     delete: userDelete,
     disable: userDisable,
     enable: userEnable,
-    updateImage: uploadImage,
     export: exportUserlist,
 }
 

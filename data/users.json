@@ -1,1 +1,56 @@
-[{"userName":"pepegrillo","firstName":"Pepe","lastName":"Grillo","email":"pepe.grillo@gmail.com","address":"Calle falsa 123","city":"Bs As","dni":30333303,"phone":1134879328,"password":"$2a$10$mE93RPHdm3K1dN7i7hv3aOPHMrLBGbNKAobzZ0YBSqpPSYzcVkKLu","active":true,"lastIP":"1","id":1,"timeCreate":"17/06/2023, 22:33:35","timeUpdate":"17/06/2023, 22:36:39","image":"1687041398999-slow_internet.jpeg","role":"admin"},{"userName":"cosmefulanito","firstName":"Cosme","lastName":"Fulanito","email":"cosme.fulanito@hotmail.com","address":"San Lorenzo 123","city":"Tucuman","dni":44555666,"phone":1167873923,"password":"$2a$10$dU8TJNX4wRRl2EkKHOnGDONVIXyKswH6dR0duGghae9wxIqDfAVOm","active":true,"lastIP":"1","rol":"user","id":2,"timeCreate":"17/06/2023, 22:37:40","timeUpdate":"17/06/2023, 22:37:58","image":"1687041478406-200112anonymous.jpeg"},{"userName":"arodriguez","firstName":"Andrea","lastName":"Rodriguez","email":"arodriguez@outlook.com","address":"Alguna Calle 1234","city":"Formosa","dni":28764839,"phone":1147568902,"password":"$2a$10$.W3mzDelKNb/DMnsiXSbpeB3.UlhFDCKxaxZtDjkw7PoR.zHApYfy","active":true,"lastIP":"1","rol":"user","id":3,"timeCreate":"17/06/2023, 22:39:03","timeUpdate":"17/06/2023, 22:39:16","image":"1687041556551-5652.jpg"}]
+[
+    {
+        "userName": "pepegrillo",
+        "firstName": "Pepe",
+        "lastName": "Grillo",
+        "email": "pepe.grillo@gmail.com",
+        "address": "Calle falsa 123",
+        "city": "Bs As",
+        "dni": 30333303,
+        "phone": 1134879328,
+        "password": "$2a$10$kRObdcU71fdXuoEYXkb2yOLPxk5H53vGlwnM1XImj02hFNg/tIVLW",
+        "active": true,
+        "lastIP": "172.18.0.1",
+        "id": 1,
+        "timeCreate": "17/06/2023, 22:33:35",
+        "timeUpdate": "18/06/2023, 17:23:10",
+        "image": "1687041398999-slow_internet.jpeg",
+        "role": "admin"
+    },
+    {
+        "userName": "cosmefulanito",
+        "firstName": "Cosme",
+        "lastName": "Fulanito",
+        "email": "cosme.fulanito@hotmail.com",
+        "address": "San Lorenzo 123",
+        "city": "Tucuman",
+        "dni": 44555666,
+        "phone": 1167873923,
+        "password": "$2a$10$dU8TJNX4wRRl2EkKHOnGDONVIXyKswH6dR0duGghae9wxIqDfAVOm",
+        "active": true,
+        "lastIP": "1",
+        "rol": "user",
+        "id": 2,
+        "timeCreate": "17/06/2023, 22:37:40",
+        "timeUpdate": "17/06/2023, 22:37:58",
+        "image": "1687041478406-200112anonymous.jpeg"
+    },
+    {
+        "userName": "arodriguez",
+        "firstName": "Andrea",
+        "lastName": "Rodriguez",
+        "email": "arodriguez@outlook.com",
+        "address": "Alguna Calle 1234",
+        "city": "Formosa",
+        "dni": 28764839,
+        "phone": 1147568902,
+        "password": "$2a$10$.W3mzDelKNb/DMnsiXSbpeB3.UlhFDCKxaxZtDjkw7PoR.zHApYfy",
+        "active": true,
+        "lastIP": "1",
+        "rol": "user",
+        "id": 3,
+        "timeCreate": "17/06/2023, 22:39:03",
+        "timeUpdate": "17/06/2023, 22:39:16",
+        "image": "1687041556551-5652.jpg"
+    }
+]

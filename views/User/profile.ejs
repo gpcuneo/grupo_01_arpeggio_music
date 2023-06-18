@@ -47,6 +47,28 @@
                     <button type="submmit">Editar informacion</button>
                 </form>
             </div>
+            <div>
+                <a href="#openModalPwd">Cambiar contrasena</a>
+                    <div id="openModalPwd" class="modalDialog">
+                        <div>
+                            <a href="#close" title="Close" class="close">X</a>
+                            <h2>Actualizar contrasena</h2>
+                            <form method="POST" action="/user/<%= user.id %>/password?_method=PUT">
+                                <div class="form-group">
+                                    <div>
+                                        <input type="password" name="password" id="password">
+                                        <label for="password">Nueva contrasena</label>
+                                    </div>
+                                    <div>
+                                        <input type="password" name="confirmPassword" id="confirmPassword">
+                                        <label for="confirmPassword">Confirmar contrasena</label>
+                                    </div>
+                                </div>
+                                <button type="submmit">Actualizar</button>
+                            </form>
+                        </div>
+                    </div>
+            </div>
         </section>
         <hr>
         <section class="order-history">
