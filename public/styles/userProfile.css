@@ -40,6 +40,10 @@ hr {
     margin-bottom: 25px;
 }
 
+.edit-pwd {
+    margin-top: 10px;
+}
+
 .tittle {
     background-color: gray;
     border: solid white 1px;

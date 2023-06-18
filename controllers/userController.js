@@ -1,4 +1,3 @@
-// dummy data
 const bcrypt = require('bcryptjs');
 const jsonTools = require('../utils/JSONTools')
 const netTools = require('../utils/networkTools')
@@ -128,13 +127,17 @@ const updatePassword = (req, res) => {
     if(req.body.password === req.body.confirmPassword) {
         userIndex = users.findIndex( ({id}) => id === userID );
         user = users[userIndex];
-        user.password = bcrypt.hashSync(req.body.password, 10);
-        user.timeUpdate = getDateTimeNow();
-        user.lastIP = netTools.getUserIP(req),
-        console.log(user)
-        users['userIndex'] = user;
-        jsonTools.write('users.json', users);
-        console.log('Usuario actualizado');
+            if(req.body.Oldassword === user.password) {
+                user.password = bcrypt.hashSync(req.body.password, 10);
+                user.timeUpdate = getDateTimeNow();
+                user.lastIP = netTools.getUserIP(req),
+                console.log(user)
+                users['userIndex'] = user;
+                jsonTools.write('users.json', users);
+                console.log('Usuario actualizado');
+            } else {
+                console.log('Error el clave anteriro')
+            }
     }
     res.redirect ('/user/' + user.id);
 }
@@ -173,12 +176,13 @@ const login = (req, res) => {
 }
 
 const userLogin = (req, res) => {
-    let user = createUserObject(req);
+    //let user = createUserObject(req);
+    let user = req.body;
+    //console.log(user);
     let users = jsonTools.read('users.json');
     let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
     if(userFound.length != 0) {
-
-        if(bcrypt.compareSync(user.password, userFound.password) && userFound.active) {
+        if(bcrypt.compareSync(user.password, userFound.password) && userFound.active){
             console.log('logged');
             if(!!req.body.remember) {
                 res.cookie('userName', user.userName, {
@@ -213,7 +217,7 @@ const uploadImage = (req, res) => {
 const exportUserlist = (req, res) => {
     const fileName = jsonTools.exportToCSV('users.json');
     const pathFile = './tmp/'+fileName;
-    res.download(pathFile); // Set disposition and send it.
+    res.download(pathFile);
 }
 
 const userController = {
@@ -233,5 +237,4 @@ const userController = {
     export: exportUserlist,
 }
 
-// exportamos el modulo.
 module.exports = userController;

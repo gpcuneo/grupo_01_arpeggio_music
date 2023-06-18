@@ -17,18 +17,20 @@
         <section class="user-info">
             <div class="container-image">
                 <img class="user-image" src="/images/userProfile/<%= user.image %>" alt="Imagen de perfil del usuario">
-                <a href="#openModal">cambiar imagen</a>
-                <div id="openModal" class="modalDialog">
-                    <div>
-                        <a href="#close" title="Close" class="close">X</a>
-                        <h2>Actualizar foto de perfil</h2>
-                        <form method="POST" enctype="multipart/form-data" action="/user/<%= user.id %>/image?_method=PUT">
-                            <div class="form-group">
-                                <label for="userimage">Seleccionar imagen</label>
-                                <input type="file" multiple accept=".jpg, .jpeg, .png" name="userimage"   id="userimage" >
-                            </div>
-                            <button type="submmit">Actualizar</button>
-                        </form>
+                <div>
+                    <a href="#openModal">cambiar imagen</a>
+                    <div id="openModal" class="modalDialog">
+                        <div>
+                            <a href="#close" title="Close" class="close">X</a>
+                            <h2>Actualizar foto de perfil</h2>
+                            <form method="POST" enctype="multipart/form-data" action="/user/<%= user.id %>/image?_method=PUT">
+                                <div class="form-group">
+                                    <label for="userimage">Seleccionar imagen</label>
+                                    <input type="file" multiple accept=".jpg, .jpeg, .png" name="userimage"   id="userimage" >
+                                </div>
+                                <button type="submmit">Actualizar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,31 +45,40 @@
                 <p> <b>Telefono: </b> <%=user.phone%></p>
             </div>
             <div class="edit-profile">
-                <form action="/user/<%= user.id %>/edit">
-                    <button type="submmit">Editar informacion</button>
-                </form>
+                <div>
+                    <form action="/user/<%= user.id %>/edit">
+                        <button type="submmit">Editar informacion</button>
+                    </form>
+                </div>
+                <div class="edit-pwd">
+                    <a href="#openModalPwd">Cambiar clave</a>
+                        <div id="openModalPwd" class="modalDialog">
+                            <div>
+                                <a href="#close" title="Close" class="close">X</a>
+                                <h2>Actualizar clave</h2>
+                                <form method="POST" action="/user/<%= user.id %>/password?_method=PUT">
+                                    <div class="form-group">
+                                        <div>
+                                            <label for="oldPassword">Clave actual</label>
+                                            <input type="password" name="oldPassword" id="oldPassword">
+                                        </div>
+                                        <div>
+                                            <label for="password">Nueva clave</label>
+                                            <input type="password" name="password" id="password">
+                                        </div>
+                                        <div>
+                                            <label for="confirmPassword">Confirmar clave</label>
+                                            <input type="password" name="confirmPassword" id="confirmPassword">
+                                        </div>
+                                    </div>
+                                    <button type="submmit">Actualizar</button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
             </div>
             <div>
-                <a href="#openModalPwd">Cambiar contrasena</a>
-                    <div id="openModalPwd" class="modalDialog">
-                        <div>
-                            <a href="#close" title="Close" class="close">X</a>
-                            <h2>Actualizar contrasena</h2>
-                            <form method="POST" action="/user/<%= user.id %>/password?_method=PUT">
-                                <div class="form-group">
-                                    <div>
-                                        <input type="password" name="password" id="password">
-                                        <label for="password">Nueva contrasena</label>
-                                    </div>
-                                    <div>
-                                        <input type="password" name="confirmPassword" id="confirmPassword">
-                                        <label for="confirmPassword">Confirmar contrasena</label>
-                                    </div>
-                                </div>
-                                <button type="submmit">Actualizar</button>
-                            </form>
-                        </div>
-                    </div>
+                
             </div>
         </section>
         <hr>
