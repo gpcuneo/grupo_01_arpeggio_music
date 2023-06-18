@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 const cookieParser = require('cookie-parser');
+const middlewares = require('./middlewares/index');
 require('dotenv').config();
 
 app.set('view engine', 'ejs')
@@ -20,6 +21,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use(middlewares.authenticationMiddleware);
 
 const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/products');

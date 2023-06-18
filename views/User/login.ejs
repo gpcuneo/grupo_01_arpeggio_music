@@ -28,6 +28,10 @@
                             <label>Contraseña</label>
                             <input type="password" name="password" class=" <%= error? 'error' : '' %>" id="userName" value="<%= user ? user.password : '' %>">
                         </div>
+                        <div>
+                            <input type="checkbox" name="remember" class="remember">
+                            <label for="remember">Recordar usuario</label>
+                        </div>
                         <button>Continuar</button>
                     </form>
                     <% if(error){ %>

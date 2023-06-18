@@ -170,12 +170,19 @@ const userLogin = (req, res) => {
     let user = createUserObject(req);
     console.log(user.userName);
     let users = jsonTools.read('users.json');
-    let userCompare = users.filter( ({userName}) => { return userName === user.userName });
-    if(userCompare.length != 0) {
-        console.log(userCompare);
-        if(bcrypt.compareSync(user.password, userCompare[0].password)) {
+    let userFound = users.filter( ({userName}) => { return userName === user.userName });
+    if(userFound.length != 0) {
+        console.log(userFound);
+        if(bcrypt.compareSync(user.password, userFound[0].password) && userFound.active) {
             console.log('logged');
-            res.cookie('userName', user.userName);
+            if(!!req.body.remember) {
+                res.cookie('userName', user.userName, {
+                    maxAge: 1000 * 60 * 60 * 24 * 30
+                });
+            }
+            delete userFound.id;
+            delete userFound.password;
+            req.session.user = userFound;
             res.redirect('/');
         } else {
             console.log('Error pwd');
