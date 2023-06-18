@@ -1,4 +1,4 @@
-const jsonTools = require('../utils/JSONTools')
+const jsonTools = require('../utils/JSONTools');
 const authenticationMiddleware = (req, res, next) => {
     if(req.cookies.userName) {
         let users = jsonTools.read('users.json');
