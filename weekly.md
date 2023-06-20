@@ -20,10 +20,10 @@
 
 ## Maximiliano:
 ### Que hice: 
-- 
+- Repasar conceptos sobre middlewares y cookies 
 - 
 ### Que voy a hacer:
-- 
+- Practicar lo visto en middlewares y cookies para comenzar a aplicarlo en categorias 
 - 
 
 ## Rebeca:
