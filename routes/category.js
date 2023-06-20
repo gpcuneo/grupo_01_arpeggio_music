@@ -24,7 +24,7 @@ router.post('/',upload.single('img') , categoryControllers.postCategory)
 
 router.get('/create',categoryControllers.getCategoryCreate)
 
-//GET /category/:id  ¿¿¿QUE HACE ESTA RUTA??? te muestra una categoria determinada
+//GET /category/:id 
 router.get('/:id', categoryControllers.getCategoryId)
 //POST /category/:id/delete
 router.get('/:id/delete', categoryControllers.getCategoryDelete1)
