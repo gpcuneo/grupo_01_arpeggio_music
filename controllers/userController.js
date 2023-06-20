@@ -1,4 +1,3 @@
-// dummy data
 const bcrypt = require('bcryptjs');
 const jsonTools = require('../utils/JSONTools')
 const netTools = require('../utils/networkTools')
@@ -7,7 +6,7 @@ let userList = jsonTools.read('users.json');
 let orderHistory = jsonTools.read('horderHistory.json');
 
 const getDateTimeNow = () => {
-    let now = new Date()
+    let now = new Date();
     return now.toLocaleString('en-GB', { timeZone: 'UTC' });
 }
 
@@ -45,7 +44,6 @@ const validateUserFields = (user, users) => {
 }
 
 const showUser = (req, res) => {
-    console.log('show user')
     const id = parseInt(req.params.id)
     let userInfo = {}
     userList.forEach( user => user['id'] === id ? userInfo = user : '');
@@ -53,17 +51,14 @@ const showUser = (req, res) => {
 }
 
 const listUsers = (req, res) => {
-    console.log('list users')
     res.render('User/list', {'users': userList} );
 }
 
 const registerUser = (req, res) => {
-    console.log('user register')
     res.render('User/register', {'user': false, 'errors': false, 'action': 'register'});
 }
 
 const createUser = (req, res) => {
-    console.log('create user')
     let user = createUserObject(req);
     let users = jsonTools.read('users.json');
 
@@ -76,7 +71,6 @@ const createUser = (req, res) => {
     } else {
         lastID = users[users.length -1]['id'];
         user.id = lastID + 1;
-        console.log(getDateTimeNow());
         user.timeCreate = getDateTimeNow();
         user.timeUpdate = getDateTimeNow();
         user.image = 'default.avif';
@@ -90,7 +84,6 @@ const createUser = (req, res) => {
 }
 
 const editUser = (req, res) => {
-    console.log('edit user')
     let users = jsonTools.read('users.json');
     let userID = parseInt(req.params.id);
     let user = users.filter( ({id}) => { return id === userID });
@@ -100,7 +93,6 @@ const editUser = (req, res) => {
 }
 
 const updateUser = (req, res) => {
-    console.log('update user')
     let user = createUserObject(req);
     user.id = parseInt(req.params.id);
     user.timeUpdate = getDateTimeNow();
@@ -129,8 +121,28 @@ const updateUser = (req, res) => {
     }
 }
 
+const updatePassword = (req, res) => {
+    userID = parseInt(req.params.id);
+    let users = jsonTools.read('users.json');
+    if(req.body.password === req.body.confirmPassword) {
+        userIndex = users.findIndex( ({id}) => id === userID );
+        user = users[userIndex];
+            if(req.body.Oldassword === user.password) {
+                user.password = bcrypt.hashSync(req.body.password, 10);
+                user.timeUpdate = getDateTimeNow();
+                user.lastIP = netTools.getUserIP(req),
+                console.log(user)
+                users['userIndex'] = user;
+                jsonTools.write('users.json', users);
+                console.log('Usuario actualizado');
+            } else {
+                console.log('Error el clave anteriro')
+            }
+    }
+    res.redirect ('/user/' + user.id);
+}
+
 const userDelete = (req, res) => {
-    console.log('delete user');
     let users = jsonTools.read('users.json');
     let userID = parseInt(req.params.id);
     let user = users.filter( ({id}) => { return id === userID });
@@ -141,8 +153,6 @@ const userDisable = (req, res) => {
     let userID = parseInt(req.params.id);
     let users = jsonTools.read('users.json');
     let user_index = users.findIndex( ({id}) => { return id === userID });
-    console.log(user_index);
-    console.log(users[user_index]);
     users[user_index].active = false;
     users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
@@ -166,16 +176,22 @@ const login = (req, res) => {
 }
 
 const userLogin = (req, res) => {
-    console.log('POST: userLogin');
-    let user = createUserObject(req);
-    console.log(user.userName);
+    //let user = createUserObject(req);
+    let user = req.body;
+    //console.log(user);
     let users = jsonTools.read('users.json');
-    let userCompare = users.filter( ({userName}) => { return userName === user.userName });
-    if(userCompare.length != 0) {
-        console.log(userCompare);
-        if(bcrypt.compareSync(user.password, userCompare[0].password)) {
+    let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
+    if(userFound.length != 0) {
+        if(bcrypt.compareSync(user.password, userFound.password) && userFound.active){
             console.log('logged');
-            res.cookie('userName', user.userName);
+            if(!!req.body.remember) {
+                res.cookie('userName', user.userName, {
+                    maxAge: 1000 * 60 * 60 * 24 * 30
+                });
+            }
+            delete userFound.id;
+            delete userFound.password;
+            req.session.user = userFound;
             res.redirect('/');
         } else {
             console.log('Error pwd');
@@ -188,27 +204,21 @@ const userLogin = (req, res) => {
 }
 
 const uploadImage = (req, res) => {
-    console.log('update user image')
     let userid = parseInt(req.params.id);
     let users = jsonTools.read('users.json');
-    
     let user_index = users.findIndex( ({id}) => id === userid );
-    console.log(user_index);
     users[user_index]['image'] = req.file.filename;
     users[user_index]['timeUpdate'] = getDateTimeNow();
-    console.log(users[user_index]);
     jsonTools.write('users.json', users);
     console.log('Usuario actualizado');
     res.redirect ('/user/'+userid);
 }
 
 const exportUserlist = (req, res) => {
-    console.log('export user list');
     const fileName = jsonTools.exportToCSV('users.json');
     const pathFile = './tmp/'+fileName;
-    res.download(pathFile); // Set disposition and send it.
+    res.download(pathFile);
 }
-
 
 const userController = {
     show: listUsers,
@@ -218,13 +228,13 @@ const userController = {
     register: registerUser,
     create: createUser,
     edit: editUser,
-    update: updateUser,
+    updateInfo: updateUser,
+    updatePwd: updatePassword,
+    updateImage: uploadImage,
     delete: userDelete,
     disable: userDisable,
     enable: userEnable,
-    updateImage: uploadImage,
     export: exportUserlist,
 }
 
-// exportamos el modulo.
 module.exports = userController;

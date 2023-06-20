@@ -92,6 +92,10 @@ button {
     color: red;
 }
 
+.remember {
+    margin-bottom: 15px;
+}
+
 @media (min-width:1200px) {
     main {
         background: url("/images/userProfile/background_user_register.png") no-repeat center center fixed;
