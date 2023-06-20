@@ -12,11 +12,13 @@ const categoryControllers = {
     },
     postCategory: (req, res) => {
         let datos = req.body;
-        datos.img = '/images/categories/'+ req.file.filename
+
+        if(req.file) {
+            datos.img = '/images/categories/'+ req.file.filename
+        }
         
        categoryModel.createOne(datos)
         res.redirect('/category')
-
     },
     // /category/:id/detail
     getCategoryId: (req, res) => { //falta
@@ -41,12 +43,24 @@ const categoryControllers = {
         //const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
         const categoryUpDate = categoryModel.findById(id)
 
-       
         if(!categoryUpDate) {
             return res.send('error de ID)')
         }
 
         res.render ('categoryEdit', {category:categoryUpDate, action:'update'})
+    },
+     // /category/:id/update
+     putCategoryUpdate: (req,res) => {
+        console.log("update");
+        const id = Number(req.params.id);
+        let datos = req.body;
+
+        if(req.file) {
+            datos.img = '/images/categories/'+ req.file.filename
+        }
+        
+       categoryModel.updateById(id, datos)
+        res.redirect('/category')
     },
     getCategoryDelete1: (req, res) => { //falta
         const id = Number(req.params.id);

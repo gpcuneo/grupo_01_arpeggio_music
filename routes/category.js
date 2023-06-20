@@ -31,7 +31,8 @@ router.get('/:id/delete', categoryControllers.getCategoryDelete1)
 router.delete('/:id', categoryControllers.getCategoryDelete2)
 //GET /category/:id/update
 router.get('/:id/update', categoryControllers.getCategoryUpdate)
-
+//PUT /category/:id/update
+router.put('/:id/update', upload.single('img'), categoryControllers.putCategoryUpdate)
 
 module.exports = router
 
