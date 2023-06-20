@@ -43,6 +43,9 @@ Se corrijio un problema en las vistas de categoria, ya que no se podia crear una
 - Nos reunimos con Maxi para avanzar con nuestras tareas.
 - Repasé las clases de CRUD de la curzada para fortalecer conceptos.
 - Rehice la vista de Category de acuerdo a lo establecido en la reunión grupal
+- Dar formato CSS a la vista del listado de categorías
+- Guardar la nueva categoría e imagen en el JSON
+- Crear el método Put en Category
 ### Que voy a hacer:
 - Repasar clases de Middleware y Cookies
 
