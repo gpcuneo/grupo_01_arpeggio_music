@@ -12,7 +12,7 @@ const categoryControllers = {
     },
     postCategory: (req, res) => {
         let datos = req.body;
-        datos.img = '/images/categories'+ req.file.filename
+        datos.img = '/images/categories/'+ req.file.filename
         
        categoryModel.createOne(datos)
         res.redirect('/category')
@@ -33,7 +33,6 @@ const categoryControllers = {
     },
     // /category/create
     getCategoryCreate: (req, res) => {
-        
         res.render('categoryEdit', {action:'create'})
     },
     // /category/:id/update
@@ -69,13 +68,5 @@ const categoryControllers = {
         res.redirect('/category');
     },
 }
-
-/* const categoryController = {
-    show:showCategories,
-    showbyid:getCategoryId,
-    create:getCategoryCreate,
-    update:getCategoryUpdate,
-    delete:getCategoryDelete,
-} */
 
 module.exports = categoryControllers;
