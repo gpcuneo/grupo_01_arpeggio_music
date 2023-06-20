@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const uuid = require('uuid');
 const jsonTools = require('../utils/JSONTools')
 const netTools = require('../utils/networkTools')
 
@@ -44,9 +45,11 @@ const validateUserFields = (user, users) => {
 }
 
 const showUser = (req, res) => {
-    const id = parseInt(req.params.id)
+    const userName = req.params.userName;
+    console.log(userName);
     let userInfo = {}
-    userList.forEach( user => user['id'] === id ? userInfo = user : '');
+    console.log(userInfo)
+    userList.forEach( user => user.userName === userName ? userInfo = user : '');
     res.render('User/profile', {'user': userInfo, 'orderHistory': orderHistory} );
 }
 
@@ -69,8 +72,8 @@ const createUser = (req, res) => {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'register'});
     } else {
-        lastID = users[users.length -1]['id'];
-        user.id = lastID + 1;
+        //lastID = users[users.length -1]['id'];
+        user.id = uuid.v4();
         user.timeCreate = getDateTimeNow();
         user.timeUpdate = getDateTimeNow();
         user.image = 'default.avif';
@@ -85,8 +88,8 @@ const createUser = (req, res) => {
 
 const editUser = (req, res) => {
     let users = jsonTools.read('users.json');
-    let userID = parseInt(req.params.id);
-    let user = users.filter( ({id}) => { return id === userID });
+    let userName = req.params.userName;
+    let user = users.filter( ({arrUserName}) => { return arrUserName === userName });
     delete(user[0]['password'])
     delete(user[0]['confirmPassword'])
     res.render('User/register', {'user': user[0], 'errors': false, 'action': 'update'});
@@ -94,13 +97,13 @@ const editUser = (req, res) => {
 
 const updateUser = (req, res) => {
     let user = createUserObject(req);
-    user.id = parseInt(req.params.id);
+    userName = req.params.userName;
     user.timeUpdate = getDateTimeNow();
     
     let users = jsonTools.read('users.json');
     // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
     // y asi poder validar los campos dni, userName y email con los del resto de los usuarios.
-    let temp_users_validate = users.filter( ({id}) => { return id != user.id });
+    let temp_users_validate = users.filter( ({arrUserName}) => { return arrUserName != userName });
 
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
@@ -109,7 +112,7 @@ const updateUser = (req, res) => {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
     } else {
-        user_index = users.findIndex( ({id}) => id === user.id );
+        user_index = users.findIndex( ({arrUserName}) => arrUserName === userName );
         user.password = users[user_index]['password'];
         user.image = users[user_index]['image'];
         user.rol = users[user_index]['rol'];
@@ -117,15 +120,15 @@ const updateUser = (req, res) => {
         users[user_index] = user;
         jsonTools.write('users.json', users);
         console.log('Usuario actualizado');
-        res.redirect ('/user/' + user.id);
+        res.redirect ('/user/' + userName);
     }
 }
 
 const updatePassword = (req, res) => {
-    userID = parseInt(req.params.id);
+    userName = req.params.userName;
     let users = jsonTools.read('users.json');
     if(req.body.password === req.body.confirmPassword) {
-        userIndex = users.findIndex( ({id}) => id === userID );
+        userIndex = users.findIndex( ({arrUserName}) => arrUserName === userName );
         user = users[userIndex];
             if(req.body.Oldassword === user.password) {
                 user.password = bcrypt.hashSync(req.body.password, 10);
@@ -139,35 +142,35 @@ const updatePassword = (req, res) => {
                 console.log('Error el clave anteriro')
             }
     }
-    res.redirect ('/user/' + user.id);
+    res.redirect ('/user/' + userName);
 }
 
 const userDelete = (req, res) => {
     let users = jsonTools.read('users.json');
-    let userID = parseInt(req.params.id);
-    let user = users.filter( ({id}) => { return id === userID });
+    let userName = req.params.arrUserName;
+    let user = users.filter( ({arrUserName}) => { return arrUserName === userName });
     res.render('User/delete', {'user': user[0]});
 }
 
 const userDisable = (req, res) => {
-    let userID = parseInt(req.params.id);
+    let userName = req.params.userName;
     let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({id}) => { return id === userID });
+    let user_index = users.findIndex( ({arrUserName}) => { return arrUserName === userName });
     users[user_index].active = false;
     users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
-    console.log('Se elimino el usuario: ' + userID);
+    console.log('Se elimino el usuario: ' + userName);
     res.redirect('/');
 }
 
 const userEnable = (req, res) => {
-    let userID = parseInt(req.params.id);
+    let userName = req.params.arrUserName;
     let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({id}) => { return id === userID });
+    let user_index = users.findIndex( ({arrUserName}) => { return arrUserName === userName });
     users[user_index].active = true;
     users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
-    console.log('Se habilito el usuario: ' + userID);
+    console.log('Se habilito el usuario: ' + userName);
     res.redirect('/user');
 }
 
@@ -204,14 +207,14 @@ const userLogin = (req, res) => {
 }
 
 const uploadImage = (req, res) => {
-    let userid = parseInt(req.params.id);
+    let userName = req.params.userName;
     let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({id}) => id === userid );
+    let user_index = users.findIndex( ({arrUserName}) => arrUserName === userName );
     users[user_index]['image'] = req.file.filename;
     users[user_index]['timeUpdate'] = getDateTimeNow();
     jsonTools.write('users.json', users);
     console.log('Usuario actualizado');
-    res.redirect ('/user/'+userid);
+    res.redirect ('/user/'+userName);
 }
 
 const exportUserlist = (req, res) => {
