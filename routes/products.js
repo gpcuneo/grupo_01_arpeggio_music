@@ -1,14 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const storageFile = require('../utils/storageTools');
-const upload = storageFile.upload('productos')
+//controllers
 const productController = require('../controllers/productController');
+
+//Middlewares
+const storageFile = require('../utils/storageTools');
+const upload = storageFile.upload('productos');
+const validations = require('../middlewares/validateCreateProductMiddleware');
 
 //GET /products  
 router.get('/', productController.product);
 
 //POST /products 
-router.post('/', upload.any('img'), productController.postProduct);
+router.post('/', upload.any('img'), validations ,productController.postProduct);
 
 //GET /products/:id/detail
 router.get('/:id/detail', productController.showbyid);

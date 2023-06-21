@@ -1,4 +1,5 @@
 const jsonTools = require('../utils/JSONTools');
+const {validationResult} = require('express-validator');
 
 
 let getProduct = (req, res)=>{
@@ -36,6 +37,10 @@ let getUpDate = (req, res)=>{
     res.render('products/productManipulation', {action:'update','product': modifyProduct})
 }
 let postProducts = (req, res) =>{
+    const resultValidation = validationResult(req);
+    console.log(resultValidation);
+    return res.send(resultValidation);
+
     const datos = req.body;
     let products = jsonTools.read('articles.json');
     datos.id = products[products.length - 1].id + 1;
