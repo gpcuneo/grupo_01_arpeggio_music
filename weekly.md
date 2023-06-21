@@ -28,11 +28,11 @@
 
 ## Rebeca:
 ### Que hice: 
-- 
-- 
+- Estuve práticando la validación de formularios con express-validator con middlewares.
+- Y también práctique el armado de login con session y cookies 
 ### Que voy a hacer:
-- 
-- 
+- voy a implementar la validación de formularios en create product con middlewares y express-validator
+- Y también proteger algunas rutas de donde solo el administrador puede ingresar.
 
 
 # Semana 2 (Lunes 27):
