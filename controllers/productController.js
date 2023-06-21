@@ -38,8 +38,13 @@ let getUpDate = (req, res)=>{
 }
 let postProducts = (req, res) =>{
     const resultValidation = validationResult(req);
-    console.log(resultValidation);
-    return res.send(resultValidation);
+    if(resultValidation.errors.length > 0){
+        return res.render('products/productManipulation',{
+            errors:resultValidation.mapped(),
+            action:'create',
+            'product': false,
+        })
+    }
 
     const datos = req.body;
     let products = jsonTools.read('articles.json');
@@ -48,7 +53,6 @@ let postProducts = (req, res) =>{
     datos.discount = Number(datos.discount);
     datos.stock = Number(datos.stock);
     datos.img = req.files.map(file => '/images/productos/'+ file.filename);
-    /* console.log(req.files); */
     products.push(datos);
     jsonTools.write('articles.json', products)
     res.redirect('/products');
