@@ -41,8 +41,9 @@ let postProducts = (req, res) =>{
     if(resultValidation.errors.length > 0){
         return res.render('products/productManipulation',{
             errors:resultValidation.mapped(),
+            oldData: req.body,
             action:'create',
-            'product': false,
+            'product':false,
         })
     }
 

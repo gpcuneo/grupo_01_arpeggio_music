@@ -24,92 +24,121 @@
                 <% if (action=='create' ) { %>
                     <h4 class="form-title">Crear nuevo producto</h4>
                     <form action="/products" method="POST" class="form-container" enctype="multipart/form-data">
-                        <%} else { %>
-                            <h4 class="form-title">Editar producto</h4>
-                            <form action="/products/<%=product.id %>/update?_method=put" method="POST" class="form-container">
+                <%} else { %>
+                    <h4 class="form-title">Editar producto</h4>
+                    <form action="/products/<%=product.id %>/update?_method=put" method="POST" class="form-container">
+                <% } %>
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" name="name" 
+                            <% if (action=='create' ) { %>
+                                value ="<%= locals.oldData? oldData.name: null %>"
+                            <% }else {%>
+                                value="<%= product.name %>"
+                            <% } %>
+                                id="name"
+                            >
+                                <% if (locals.errors && errors.name) { %>
+                                    <div style="color: red;">
+                                        <%= errors.name.msg %>
+                                    </div>
                                 <% } %>
-                                    <div class="form-group">
-                                        <label for="name">Nombre</label>
-                                        <input type="text" name="name" value="<%= product? product.name: '' %>" id="name">
-                                        <% if (locals.errors && errors.name) { %>
-                                            <div style="color: red;">
-                                                <%= errors.name.msg %>
-                                            </div>
-                                        <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Categoría</label>
+                            <input type="text" name="category" 
+                            <% if (action=='create' ) { %>
+                                value ="<%= locals.oldData? oldData.category: null %>"
+                            <% }else {%>
+                                value="<%= product.category %>"
+                            <% } %>
+                                id="category"
+                            >
+                                <% if (locals.errors && errors.category) { %>
+                                    <div style="color: red;">
+                                        <%= errors.category.msg %>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="category">Categoría</label>
-                                        <input type="text" name="category" value="<%= product? product.category: '' %>" id="category">
-                                        <% if (locals.errors && errors.category) { %>
-                                            <div style="color: red;">
-                                                <%= errors.category.msg %>
-                                            </div>
-                                        <% } %>
+                                <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Precio</label>
+                            <input type="number" name="price" 
+                            <% if (action=='create' ) { %>
+                                value ="<%= locals.oldData? oldData.price: null %>"
+                            <% }else {%>
+                                value="<%= product.price %>"
+                            <% } %>
+                                id="price"
+                            >
+                                <% if (locals.errors && errors.price) { %>
+                                    <div style="color: red;">
+                                        <%= errors.price.msg %>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="price">Precio</label>
-                                        <input type="number" name="price" value="<%= product? product.price: '' %>" id="price">
-                                        <% if (locals.errors && errors.price) { %>
-                                            <div style="color: red;">
-                                                <%= errors.price.msg %>
-                                            </div>
-                                        <% } %>
+                                <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="discount">Eliga un descuento</label>
+                            <select name="discount" id="" class="select-discount">
+                                <option value="ninguno" <% if (!product || !product.discount) { %> selected <% } %>>Ninguno</option>
+                                <option value="20" <% if (product && product.discount===20) { %> selected <% } %>>% 20</option>
+                                <option value="30" <% if (product && product.discount===30) { %> selected <% } %>>% 30</option>
+                                <option value="50" <% if (product && product.discount===50) { %> selected <% } %>>% 50</option>
+                                <option value="60" <% if (product && product.discount===60) { %> selected <% } %>>% 60</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Stock</label>
+                            <input type="number" name="stock" 
+                            <% if (action=='create' ) { %>
+                                value ="<%= locals.oldData? oldData.stock: null %>"
+                            <% }else {%>
+                                value="<%= product.stock %>"
+                            <% } %>
+                                id="stock"
+                            >
+                                <% if (locals.errors && errors.stock) { %>
+                                    <div style="color: red;">
+                                        <%= errors.stock.msg %>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="discount">Eliga un descuento</label>
-                                        <select name="discount" id="" class="select-discount">
-                                            <option value="ninguno" <% if (!product || !product.discount) { %> selected <% } %>>Ninguno</option>
-                                            <option value="20" <% if (product && product.discount === 20) { %> selected <% } %>>% 20</option>
-                                            <option value="30" <% if (product && product.discount === 30) { %> selected <% } %>>% 30</option>
-                                            <option value="50" <% if (product && product.discount === 50) { %> selected <% } %>>% 50</option>
-                                            <option value="60" <% if (product && product.discount === 60) { %> selected <% } %>>% 60</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="stock">Stock</label>
-                                        <input type="number" name="stock" value="<%= product? product.stock: '' %>" id="stock">
-                                        <% if (locals.errors && errors.stock) { %>
-                                            <div style="color: red;">
-                                                <%= errors.stock.msg %>
-                                            </div>
-                                        <% } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="colors">Color</label>
-                                        <input type="color" name="colors" value="<%= product? product.colors: '' %>" id="colors">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="img">Cargar imagen</label>
-                                        <input type="file" multiple accept=".jpg, .jpeg, .png" name="img"   id="img" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="characteristics">Características del producto</label>
-                                        <textarea name="characteristics"  cols="30" rows="10" maxlength="500" ><%= product? product.characteristics: '' %></textarea>
-                                        <% if (locals.errors && errors.characteristics) { %>
-                                            <div style="color: red;">
-                                                <%= errors.characteristics.msg %>
-                                            </div>
-                                        <% } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Descripción del producto</label>
-                                        <textarea name="description" cols="30" rows="10" maxlength="500"><%= product? product.description: '' %></textarea>
-                                        <% if (locals.errors && errors.description) { %>
-                                            <div style="color: red;">
-                                                <%= errors.description.msg %>
-                                            </div>
-                                        <% } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="store">Información de la tienda</label>
-                                        <textarea name="store" cols="30" rows="10" maxlength="500"><%= product? product.store: '' %></textarea>
-                                    </div>
-                                    <% if (action=='create' ) { %>
-                                        <button class="btn-black" type="submit">Guardar</button>
-                                        <%} else { %>
-                                            <button class="btn-black" type="submit">Editar</button>
-                                            <% } %>
-                            </form>
+                                <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="colors">Color</label>
+                            <input type="color" name="colors" value="<%= product? product.colors: '' %>"
+                                id="colors">
+                        </div>
+                        <div class="form-group">
+                            <label for="img">Cargar imagen</label>
+                            <input type="file" multiple accept=".jpg, .jpeg, .png" name="img" id="img">
+                        </div>
+                        <div class="form-group">
+                            <label for="characteristics">Características del producto</label>
+                            <textarea name="characteristics" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.characteristics: null ): product.characteristics %></textarea>
+                            <% if (locals.errors && errors.characteristics) { %>
+                                <div style="color: red;">
+                                    <%= errors.characteristics.msg %>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción del producto</label>
+                            <textarea name="description" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.description: null ): product.description %></textarea>
+                            <% if (locals.errors && errors.description) { %>
+                                <div style="color: red;">
+                                    <%= errors.description.msg %>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="store">Información de la tienda</label>
+                            <textarea name="store" cols="30" rows="10" maxlength="500"><%= product? product.store: '' %></textarea>
+                        </div>
+                        <% if (action=='create' ) { %>
+                            <button class="btn-black" type="submit">Guardar</button>
+                        <%} else { %>
+                            <button class="btn-black" type="submit">Editar</button>
+                        <% } %>
+                    </form>
             </div>
         </main>
         <%- include('../partials/footer') %>
