@@ -30,18 +30,30 @@
                                 <% } %>
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <input type="text" name="name" value="<%= product? product.name: '' %>"
-                                            id="name">
+                                        <input type="text" name="name" value="<%= product? product.name: '' %>" id="name">
+                                        <% if (locals.errors && errors.name) { %>
+                                            <div style="color: red;">
+                                                <%= errors.name.msg %>
+                                            </div>
+                                        <% } %>
                                     </div>
                                     <div class="form-group">
                                         <label for="category">Categoría</label>
-                                        <input type="text" name="category" value="<%= product? product.category: '' %>"
-                                            id="category">
+                                        <input type="text" name="category" value="<%= product? product.category: '' %>" id="category">
+                                        <% if (locals.errors && errors.category) { %>
+                                            <div style="color: red;">
+                                                <%= errors.category.msg %>
+                                            </div>
+                                        <% } %>
                                     </div>
                                     <div class="form-group">
                                         <label for="price">Precio</label>
-                                        <input type="number" name="price" value="<%= product? product.price: '' %>"
-                                            id="price">
+                                        <input type="number" name="price" value="<%= product? product.price: '' %>" id="price">
+                                        <% if (locals.errors && errors.price) { %>
+                                            <div style="color: red;">
+                                                <%= errors.price.msg %>
+                                            </div>
+                                        <% } %>
                                     </div>
                                     <div class="form-group">
                                         <label for="discount">Eliga un descuento</label>
@@ -55,13 +67,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="stock">Stock</label>
-                                        <input type="number" name="stock" value="<%= product? product.stock: '' %>"
-                                            id="stock">
+                                        <input type="number" name="stock" value="<%= product? product.stock: '' %>" id="stock">
+                                        <% if (locals.errors && errors.stock) { %>
+                                            <div style="color: red;">
+                                                <%= errors.stock.msg %>
+                                            </div>
+                                        <% } %>
                                     </div>
                                     <div class="form-group">
                                         <label for="colors">Color</label>
-                                        <input type="color" name="colors" value="<%= product? product.colors: '' %>"
-                                            id="colors">
+                                        <input type="color" name="colors" value="<%= product? product.colors: '' %>" id="colors">
                                     </div>
                                     <div class="form-group">
                                         <label for="img">Cargar imagen</label>
@@ -70,10 +85,20 @@
                                     <div class="form-group">
                                         <label for="characteristics">Características del producto</label>
                                         <textarea name="characteristics"  cols="30" rows="10" maxlength="500" ><%= product? product.characteristics: '' %></textarea>
+                                        <% if (locals.errors && errors.characteristics) { %>
+                                            <div style="color: red;">
+                                                <%= errors.characteristics.msg %>
+                                            </div>
+                                        <% } %>
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Descripción del producto</label>
                                         <textarea name="description" cols="30" rows="10" maxlength="500"><%= product? product.description: '' %></textarea>
+                                        <% if (locals.errors && errors.description) { %>
+                                            <div style="color: red;">
+                                                <%= errors.description.msg %>
+                                            </div>
+                                        <% } %>
                                     </div>
                                     <div class="form-group">
                                         <label for="store">Información de la tienda</label>
