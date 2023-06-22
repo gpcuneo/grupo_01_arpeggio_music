@@ -8,40 +8,43 @@
     <title>Document</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/categoryEdit.css">
-  
+
 </head>
 
 <body>
     <%- include('./partials/header') %>
         <main>
-            <div class="general">
-
-        
-
-                <form action="/category"  method="post" enctype="multipart/form-data">
-                    <div class="name">
-                    <label>
-                        Nombre:
-                    </label>
-                    <input class="text" type="text" name="name">
-                </div>
-                <input type="file"accept=".png, .jpg, .jpge" name="img" id="img">
-                    <div class="button">
-                        <% if (action === 'create') { %>
+            <div class="container">
+                <% if (action==='create' ) { %>
+                    <form action="/category" method="post" enctype="multipart/form-data">
+                        <div class="name">
+                            <label>
+                                Nombre:
+                            </label>
+                            <input class="text" type="text" name="name">
+                        </div>
+                        <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                        <div class="button">
                             <button class="btn-black" type="submit">Guardar</button>
-                        <%} else if (action === "update") { %>
-                            <button class="btn-black" type="submit">Cargar</button>
-                        <% } %>
-                     
-                    </div>
-
+                        </div>
+                        <%} else if (action==="update" ) { %>
+                            <form action="/category/<%= category.id %>/update?_method=put" method="post" enctype="multipart/form-data">
+                                <div class="name">
+                                    <label>
+                                        Nombre:
+                                    </label>
+                                    <input class="text" type="text" name="name" value="<%= category.name %>">
+                                </div>
+                                <img class="category-img" src="<%= category.img %>">
+                                <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                                <div class="button">
+                                    <button class="btn-black" type="submit">Guardar</button>
+                                </div>
+                                <% } %>
+            </div>
             </form>
-        </div>
-         
+            </div>
 
-
-
-          
         </main>
         <%- include('./partials/footer') %>
 

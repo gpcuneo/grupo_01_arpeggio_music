@@ -20,7 +20,6 @@
                     <img class="user-image" src="/images/userProfile/profile3.avif" alt="Imagen de perfil del usuario">
                 </div>
                 <div class="user-detail">
-                    <p> <b>ID: </b> <%=user.id%></p>
                     <p> <b>Usuario: </b> <%=user.userName%></p>
                     <p> <b>Nombres: </b> <%=user.firstName%></p>
                     <p> <b>Apellidos: </b> <%=user.lastName%></p>
@@ -39,7 +38,7 @@
                             CANCELAR
                         </button>
                     </form>
-                    <form action="/user/<%= user.id %>?_method=delete" method="post" class="form-btn">
+                    <form action="/user/<%= user.userName %>?_method=delete" method="post" class="form-btn">
                         <button class="btn-order-details btn-delete" type="submmit">
                             ELIMINAR
                         </button>

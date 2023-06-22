@@ -35,24 +35,24 @@
                         <p> <b>Telefono: </b> <%=user.phone%></p>
                     </div>
                     <div class="container-btn">
-                        <form action="/user/<%= user.id %>" class="form-btn">
+                        <form action="/user/<%= user.userName %>" class="form-btn">
                             <button class="btn-order-details btn-perfil" type="submmit">
                                 Ver perfil
                             </button>
                         </form>
-                        <form action="/user/<%= user.id %>/edit" class="form-btn">
+                        <form action="/user/<%= user.userName %>/edit" class="form-btn">
                             <button class="btn-order-details btn-edit" type="submmit">
                                 Editar perfil
                             </button>
                         </form>
                         <% if(user.active) { %>
-                            <form action="/user/<%= user.id %>/delete" class="form-btn">
+                            <form action="/user/<%= user.userName %>/delete" class="form-btn">
                                 <button class="btn-order-details btn-delete" type="submmit">
                                     Eliminar
                                 </button>
                             </form>
                         <% } else { %>
-                            <form action="/user/<%= user.id %>/active" method="post" class="form-btn">
+                            <form action="/user/<%= user.userName %>/active" method="post" class="form-btn">
                                 <button class="btn-order-details btn-active" type="submmit">
                                     Activar
                                 </button>

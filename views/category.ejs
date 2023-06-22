@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categorías</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/category.css">
 </head>
@@ -13,34 +16,36 @@
 <body>
     <%- include('./partials/header') %>
         <main class="container">
-            <div>
+            <div class="category-header">
                 <div class="categoryProductTitle">
-                    <p>Categorías de productos:</p>
+                    <h2>Categorías de productos:</h2>
                 </div>
-                <div class="categoryManipulation">
-                    <h2>¡Aquí podrás crear, modificar y eliminar las categorías de Arpeggio!</h2>
+                <div class="category-p">
+                    <p>¡Aquí podrás crear, modificar y eliminar las categorías de Arpeggio!</p>
                 </div>
-            </div>
-             <div class="category-Container">
-            <% categoryList.forEach(category=> { %>
-                <form action="/category" method="get">
-                    <div>
-                        <%= category.name %>
-                    </div>
+                <form action="/category/create" method="get">
+                    <button type="submit" class="btn">Crear categoría</button>
                 </form>
-                <div class="category-Form">
-                    <form action="/category/create" method="get">
-                        <input type="submit" value="Crear categoría">
-                    </form>
-                    <form action="/category/<%= category.id %>/update" method="get">
-                        <input type="submit" value="Modificar categoría">
-                    </form>
-                    <form action="/category/<%= category.id %>/delete" method="get">
-                        <input type="submit" value="Eliminar categoría">
-                    </form>
-                </div>
-             
-                <% }) %>
+            </div>
+            <div class="category-container">
+                <% categoryList.forEach(category=> { %>
+                    <div class="category">
+                        <div class="title-category">
+                            <%= category.name %>
+                        </div>
+                        <img src="<%= category.img %>" />
+                        <div class="form-actions">
+                            <form action="/category/<%= category.id %>/update" method="get">
+                                <button type="submit" class="btn btn-success"><i
+                                        class="fa-solid fa-pen-to-square"></i>Editar</button>
+                            </form>
+                            <form action="/category/<%= category.id %>/delete" method="get">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-solid fa-trash"></i>Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% }) %>
             </div>
         </main>
         <%- include('./partials/footer') %>

@@ -50,9 +50,11 @@ const model = {
         const indice = categorys.findIndex(categoriaActual => categoriaActual.id === id);
 
         // Actualizamos los datos del producto que corresponda, con los datos que nos pasaron por parámetros
-        categorys[indice].title = newData.title;
-        categorys[indice].price = newData.price;
-
+        categorys[indice].name = newData.name;
+        if(newData.img) {
+            categorys[indice].img = newData.img;
+        }
+       
         // Convertimos nuestro array de JS a un array de JSON
         const categoryJSON = JSON.stringify(categorys);
 

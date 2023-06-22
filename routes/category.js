@@ -24,14 +24,15 @@ router.post('/',upload.single('img') , categoryControllers.postCategory)
 
 router.get('/create',categoryControllers.getCategoryCreate)
 
-//GET /category/:id  ¿¿¿QUE HACE ESTA RUTA??? te muestra una categoria determinada
+//GET /category/:id 
 router.get('/:id', categoryControllers.getCategoryId)
 //POST /category/:id/delete
 router.get('/:id/delete', categoryControllers.getCategoryDelete1)
 router.delete('/:id', categoryControllers.getCategoryDelete2)
 //GET /category/:id/update
 router.get('/:id/update', categoryControllers.getCategoryUpdate)
-
+//PUT /category/:id/update
+router.put('/:id/update', upload.single('img'), categoryControllers.putCategoryUpdate)
 
 module.exports = router
 
