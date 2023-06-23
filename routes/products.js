@@ -14,7 +14,7 @@ const isAdmin = middlewares.authorizationMiddleware.isAdmin;
 router.get('/',isAdmin ,productController.product);
 
 //POST /products 
-router.post('/', isAdmin,upload.any('img'), validateCreate,productController.postProduct);
+router.post('/',upload.any('img'), validateCreate,productController.postProduct);
 
 //GET /products/:id/detail
 router.get('/:id/detail', productController.showbyid);
