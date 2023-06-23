@@ -30,7 +30,7 @@
                 <% } %>
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" name="name" 
+                            <input type="text" name="name" class="group-input <%= locals.errors && errors.name?'invalid':null %>"
                             <% if (action=='create' ) { %>
                                 value ="<%= locals.oldData? oldData.name: null %>"
                             <% }else {%>
@@ -39,14 +39,14 @@
                                 id="name"
                             >
                                 <% if (locals.errors && errors.name) { %>
-                                    <div style="color: red;">
+                                    <div class="text-danger">
                                         <%= errors.name.msg %>
                                     </div>
                                 <% } %>
                         </div>
                         <div class="form-group">
                             <label for="category">Categoría</label>
-                            <input type="text" name="category" 
+                            <input type="text" name="category" class="group-input <%= locals.errors && errors.category?'invalid':null %>"
                             <% if (action=='create' ) { %>
                                 value ="<%= locals.oldData? oldData.category: null %>"
                             <% }else {%>
@@ -55,14 +55,14 @@
                                 id="category"
                             >
                                 <% if (locals.errors && errors.category) { %>
-                                    <div style="color: red;">
+                                    <div class="text-danger">
                                         <%= errors.category.msg %>
                                     </div>
                                 <% } %>
                         </div>
                         <div class="form-group">
                             <label for="price">Precio</label>
-                            <input type="number" name="price" 
+                            <input type="number" name="price" class="group-input <%= locals.errors && errors.price?'invalid':null %>"
                             <% if (action=='create' ) { %>
                                 value ="<%= locals.oldData? oldData.price: null %>"
                             <% }else {%>
@@ -71,14 +71,14 @@
                                 id="price"
                             >
                                 <% if (locals.errors && errors.price) { %>
-                                    <div style="color: red;">
+                                    <div class="text-danger">
                                         <%= errors.price.msg %>
                                     </div>
                                 <% } %>
                         </div>
                         <div class="form-group">
                             <label for="discount">Eliga un descuento</label>
-                            <select name="discount" id="" class="select-discount">
+                            <select name="discount" id="" class="group-input <%= locals.errors && errors.discount?'invalid':null %>">
                                 <option value="">Ninguno</option>
                                 <% let discounts = ['20','30','50','60'] %>
                                 <% for (const oneDiscount of discounts) { %>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="form-group">
                             <label for="stock">Stock</label>
-                            <input type="number" name="stock" 
+                            <input type="number" name="stock" class="group-input <%= locals.errors && errors.stock?'invalid':null %>"
                             <% if (action=='create' ) { %>
                                 value ="<%= locals.oldData? oldData.stock: null %>"
                             <% }else {%>
@@ -103,46 +103,46 @@
                                 id="stock"
                             >
                                 <% if (locals.errors && errors.stock) { %>
-                                    <div style="color: red;">
+                                    <div class="text-danger">
                                         <%= errors.stock.msg %>
                                     </div>
                                 <% } %>
                         </div>
                         <div class="form-group">
                             <label for="colors">Color</label>
-                            <input type="color" name="colors" value="<%= product? product.colors: '' %>"
+                            <input type="color" name="colors" value="<%= product? product.colors: '' %>" 
                                 id="colors">
                         </div>
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>
                             <input type="file" multiple accept=".jpg, .jpeg, .png" name="img" id="img">
                             <% if (locals.errors && errors.img) { %>
-                                <div style="color: red;">
+                                <div class="text-danger">
                                     <%= errors.img.msg %>
                                 </div>
                             <% } %>
                         </div>
                         <div class="form-group">
                             <label for="characteristics">Características del producto</label>
-                            <textarea name="characteristics" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.characteristics: null ): product.characteristics %></textarea>
+                            <textarea class="group-input <%= locals.errors && errors.characteristics?'invalid':null %>" name="characteristics" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.characteristics: null ): product.characteristics %></textarea>
                             <% if (locals.errors && errors.characteristics) { %>
-                                <div style="color: red;">
+                                <div class="text-danger">
                                     <%= errors.characteristics.msg %>
                                 </div>
                             <% } %>
                         </div>
                         <div class="form-group">
                             <label for="description">Descripción del producto</label>
-                            <textarea name="description" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.description: null ): product.description %></textarea>
+                            <textarea class="group-input <%= locals.errors && errors.description?'invalid':null %>" name="description" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.description: null ): product.description %></textarea>
                             <% if (locals.errors && errors.description) { %>
-                                <div style="color: red;">
+                                <div class="text-danger">
                                     <%= errors.description.msg %>
                                 </div>
                             <% } %>
                         </div>
                         <div class="form-group">
                             <label for="store">Información de la tienda</label>
-                            <textarea name="store" cols="30" rows="10" maxlength="500"><%= product? product.store: '' %></textarea>
+                            <textarea class="group-input" name="store" cols="30" rows="10" maxlength="500"><%= product? product.store: '' %></textarea>
                         </div>
                         <% if (action=='create' ) { %>
                             <button class="btn-black" type="submit">Guardar</button>
