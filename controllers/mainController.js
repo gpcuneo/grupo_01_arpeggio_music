@@ -1,3 +1,5 @@
+const userTools = require('../utils/User')
+
 // Dummy data
 const products = [
     {id: '1', name: 'Guittarra criolla', details: 'Guitarra electrica lorem lorem lorem', price: '274000', image: '/images/productos/guitarra02.png'},
@@ -6,15 +8,30 @@ const products = [
     {id: '4', name: 'Violin', details: 'Violin lorem lorem lorem lorem', price: '325738', image: '/images/productos/violin.png'}
 ]
 
-const home = (req, res) => res.render('index', {products: products});
+const home = (req, res) => {
+    let userInfo = userTools.isLogged(req);
+    res.render('index', {products: products, user: userInfo});
+}
 
-const about = (req, res) => res.render('about');
+const about = (req, res) => {
+    let userInfo = userTools.isLogged(req);
+    res.render('about', {user: userInfo});
+} 
 
-const shipping = (req, res) => res.render('shipping')
+const shipping = (req, res) => {
+    let userInfo = userTools.isLogged(req);
+    res.render('shipping', {user: userInfo})
+} 
 
-const error = (req, res) => res.render('error')
+const error = (req, res) => {
+    let userInfo = userTools.isLogged(req);
+    res.render('error', {user: userInfo})
+} 
 
-const store = (req, res) => res.render('store', {products: products});
+const store = (req, res) => {
+    let userInfo = userTools.isLogged(req);
+    res.render('store', {products: products, user: userInfo});
+} 
 
 const mainController = {
     home: home,
