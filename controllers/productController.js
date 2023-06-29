@@ -1,19 +1,22 @@
 const jsonTools = require('../utils/JSONTools');
 const {validationResult} = require('express-validator');
+const userTools = require('../utils/User')
 
 
 let getProduct = (req, res)=>{
     let products = jsonTools.read('articles.json');
+    let userInfo = userTools.isLogged(req);
 
-    res.render('products/productList', {products});
+    res.render('products/productList', {products, 'user':userInfo});
 }
 let getDetail=(req, res)=>{
     let products = jsonTools.read('articles.json');
+    let userInfo = userTools.isLogged(req);
     const productID = Number(req.params.id);
     let articles = products;
     let indice = articles.findIndex(({id}) => id === productID);
     let product = articles.splice(indice,1)[0];
-    res.render('products/productDetail', {title:'Detalle del Producto',product, articles});
+    res.render('products/productDetail', {title:'Detalle del Producto',product, articles,'user':userInfo});
 }
 let deleteProduct = (req, res)=>{
     let products = jsonTools.read('articles.json');
@@ -26,24 +29,28 @@ let deleteProduct = (req, res)=>{
     res.redirect('/products')
 }
 let getCreate = (req, res)=>{
-    res.render('products/productManipulation', {action:'create', 'product':false})
+    let userInfo = userTools.isLogged(req);
+    res.render('products/productManipulation', {action:'create', 'product':false,'user':userInfo})
 }
 
 let getUpDate = (req, res)=>{
     let products = jsonTools.read('articles.json');
+    let userInfo = userTools.isLogged(req);
     const id = Number(req.params.id);
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
 
-    res.render('products/productManipulation', {action:'update','product': modifyProduct})
+    res.render('products/productManipulation', {action:'update','product': modifyProduct,'user':userInfo})
 }
 let postProducts = (req, res) =>{
     const resultValidation = validationResult(req);
+    let userInfo = userTools.isLogged(req);
     if(resultValidation.errors.length > 0){
         return res.render('products/productManipulation',{
             errors:resultValidation.mapped(),
             oldData: req.body,
             action:'create',
             'product':false,
+            'user':userInfo
         })
     }
 
