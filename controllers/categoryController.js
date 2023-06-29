@@ -1,5 +1,6 @@
 const path = require ('path')
 const categoryModel = require('../models/category');
+const expressValidator = require ('express-validator')
 const { log } = require('console');
 
 
@@ -12,6 +13,11 @@ const categoryControllers = {
     },
     postCategory: (req, res) => {
         let datos = req.body;
+        const validations = expressValidator.validationResult(req);
+
+        if(validations.errors.length > 0){
+            return res.render('categoryEdit', { errors: validations.errors, values: req.body , action:'create' });
+        }
 
         if(req.file) {
             datos.img = '/images/categories/'+ req.file.filename
@@ -35,24 +41,33 @@ const categoryControllers = {
     },
     // /category/create
     getCategoryCreate: (req, res) => {
-        res.render('categoryEdit', {action:'create'})
+        res.render('categoryEdit', {errors:[],action:'create'})
     },
     // /category/:id/update
     getCategoryUpdate: (req,res) => {
         const id = Number(req.params.id);
         //const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
         const categoryUpDate = categoryModel.findById(id)
+        
 
         if(!categoryUpDate) {
             return res.send('error de ID)')
         }
 
-        res.render ('categoryEdit', {category:categoryUpDate, action:'update'})
+        res.render ('categoryEdit', {category:categoryUpDate,errors:[], action:'update'})
     },
      // /category/:id/update
      putCategoryUpdate: (req,res) => {
-        console.log("update");
+       
         const id = Number(req.params.id);
+        const categoryUpDate = categoryModel.findById(id);
+
+        const validations = expressValidator.validationResult(req);
+
+        if(validations.errors.length > 0){
+            return res.render('categoryEdit', { errors: validations.errors, values: req.body , action:'update',category:categoryUpDate });
+        }
+
         let datos = req.body;
 
         if(req.file) {

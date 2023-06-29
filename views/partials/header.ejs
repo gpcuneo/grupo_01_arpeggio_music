@@ -33,16 +33,7 @@
                 </div>
             </div>
             <div class="register-bar">
-                <div class="caja-login">
-                    <% if(user) { %>
-                        <a href="/user/<%= user.userName %>"><i class="fa-regular fa-circle-user"></i></a>
-                    <% } else { %>
-                        <ul class="lista-login">
-                            <li id="text-log-in"><a href="/user/login">Log in</a></li>
-                            <li><a href="/user/register">Sign up</a></li>
-                        </ul>
-                    <% } %>
-                </div>
+                
                 <div class="cart">
                     <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a> 
                 </div>

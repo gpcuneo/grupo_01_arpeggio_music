@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const categoryControllers = require('../controllers/categoryController');
 const multer = require ('multer')
+const categoryMiddleware = require ('../middlewares/validationsCategory')
 const storage = multer.diskStorage({
     destination: (req, file , cb) =>{
         
@@ -15,11 +16,12 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer ({storage})
+const validation = categoryMiddleware.validateCreateCategory 
 
 //GET /category
 router.get('/', categoryControllers.getCategory)
 //POST /category
-router.post('/',upload.single('img') , categoryControllers.postCategory)
+router.post('/',upload.single('img') ,validation ,categoryControllers.postCategory)
 //GET /category/create
 
 router.get('/create',categoryControllers.getCategoryCreate)
@@ -32,7 +34,7 @@ router.delete('/:id', categoryControllers.getCategoryDelete2)
 //GET /category/:id/update
 router.get('/:id/update', categoryControllers.getCategoryUpdate)
 //PUT /category/:id/update
-router.put('/:id/update', upload.single('img'), categoryControllers.putCategoryUpdate)
+router.put('/:id/update', upload.single('img'),validation ,categoryControllers.putCategoryUpdate)
 
 module.exports = router
 
