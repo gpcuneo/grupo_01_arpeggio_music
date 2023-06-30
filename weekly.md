@@ -55,9 +55,11 @@
 
 ## Maximiliano:
  -Que hice:
+ aplicados middlewares de categoria y proteccion de rutas
 
 
 -Que Voy a hacer:
+practicar conceptos de bases de datos y sql 
 
 
 
