@@ -1,5 +1,4 @@
 const {body} = require('express-validator');
-//const path = require('path'); 
 
 const userFields = [
     body('userName').trim().notEmpty().isLength({ min: 8}).withMessage('El usuario debe tener minimo 8 caracteres'),
@@ -37,9 +36,16 @@ const productFields = [
     })
 ]
 
+const categoryFields = [
+        expressValidator.body('name')
+        .notEmpty()
+        .withMessage('campo obligatorio')
+    ]
+
 const validations = {
     userFields: userFields,
     productFields:productFields,
+    categoryFields: categoryFields,
 }
 
 module.exports = validations;
