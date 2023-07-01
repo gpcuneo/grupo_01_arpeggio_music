@@ -7,7 +7,7 @@ const productController = require('../controllers/productController');
 const middlewares = require('../middlewares/index');
 const storageFile = require('../utils/storageTools');
 const upload = storageFile.upload('productos');
-const validateCreate = middlewares.validations;
+const validateCreate = middlewares.validations.productFields;
 const isAdmin = middlewares.authorizationMiddleware.isAdmin;
 
 //GET /products  
