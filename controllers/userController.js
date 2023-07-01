@@ -197,7 +197,6 @@ const userLogin = (req, res) => {
     let user = req.body;
     let users = jsonTools.read('users.json');
     let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
-    console.log(userFound)
     if(userFound) {
         if(bcrypt.compareSync(user.password, userFound.password) && userFound.active){
             console.log('logged');
