@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const categoryControllers = require('../controllers/categoryController');
 const multer = require ('multer')
-const categoryMiddleware = require ('../middlewares/validationsCategory')
-const indexAdmin = require ('../middlewares/index')
+const middlewares = require('../middlewares/index');
+
 const storage = multer.diskStorage({
     destination: (req, file , cb) =>{
         
@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer ({storage})
-const validation = categoryMiddleware.validateCreateCategory 
-const isAdmin = indexAdmin.authorizationMiddleware.isAdmin
+const validation = middlewares.validations.categoryFields
+const isAdmin = middlewares.authorizationMiddleware.isAdmin
 
 //GET /category
 router.get('/',isAdmin ,categoryControllers.getCategory)
