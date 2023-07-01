@@ -197,7 +197,8 @@ const userLogin = (req, res) => {
     let user = req.body;
     let users = jsonTools.read('users.json');
     let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
-    if(userFound.length != 0) {
+    console.log(userFound)
+    if(userFound) {
         if(bcrypt.compareSync(user.password, userFound.password) && userFound.active){
             console.log('logged');
             if(!!req.body.remember) {
@@ -214,7 +215,7 @@ const userLogin = (req, res) => {
             res.render('User/login', {'user': user, 'error': true});
         }
     } else {
-        console.log('error de mail');
+        console.log('userName error');
         res.render('User/login', {'user': user, 'error': true});
     }
 }
