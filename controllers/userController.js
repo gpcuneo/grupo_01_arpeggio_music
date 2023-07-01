@@ -3,6 +3,7 @@ const uuid = require('uuid');
 const jsonTools = require('../utils/JSONTools')
 const netTools = require('../utils/networkTools')
 const userTools = require('../utils/User')
+const {validationResult} = require('express-validator');
 
 let userList = jsonTools.read('users.json');
 let orderHistory = jsonTools.read('horderHistory.json');
@@ -36,12 +37,14 @@ const comparePassword = (user) => {
     return result;
 }
 
-const validateUserFields = (user, users) => {
-    errors = {};
-    users.find( ({dni}) => dni === user.dni) ? errors.dni = 'dni-error' : '' ;
-    users.find( ({userName}) => userName === user.userName) ? errors.userName = 'userName-error' : '' ;
-    users.find( ({email}) => email === user.email) ? errors.email = 'email-error' : '' ;
-    comparePassword(user) ? '' : errors.password = 'password-error';
+const validateUserFields = (user, users, req) => {
+    const errors = validationResult(req).mapped();
+    console.log(errors)
+    users.find( ({dni}) => dni === user.dni) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
+    users.find( ({userName}) => userName === user.userName) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
+    users.find( ({email}) => email === user.email) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
+    comparePassword(user) ? '' : errors.password = {msg :'Las contrasenas no coinciden'};
+    console.log(errors)
     return errors 
 }
 
@@ -70,15 +73,13 @@ const registerUser = (req, res) => {
 const createUser = (req, res) => {
     let user = createUserObject(req);
     let users = jsonTools.read('users.json');
-
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
-    errors = validateUserFields(user, users);
+    errors = validateUserFields(user, users, req);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'register'});
     } else {
-        //lastID = users[users.length -1]['id'];
         user.id = uuid.v4();
         user.timeCreate = getDateTimeNow();
         user.timeUpdate = getDateTimeNow();
@@ -118,7 +119,7 @@ const updateUser = (req, res) => {
 
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
-    errors = validateUserFields(user, temp_users_validate);
+    errors = validateUserFields(user, temp_users_validate. req);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});

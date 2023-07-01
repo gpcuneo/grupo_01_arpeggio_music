@@ -13,7 +13,7 @@ const upload = storageFile.upload('userProfile');
 router.get('/login', userController.login);
 router.post('/login', userController.auth);
 router.get('/:userName/logout', isOwner, userController.logout);
-router.get('/register', validateUserFields, userController.register);
+router.get('/register', userController.register);
 router.get('/export', isAdmin, userController.export);
 router.get('/:userName/edit', isOwnerOrAdmin, userController.edit);
 router.get('/:userName/delete', isOwnerOrAdmin, userController.delete);
@@ -23,7 +23,7 @@ router.put('/:userName', isOwnerOrAdmin, validateUserFields,userController.updat
 router.put('/:userName/password', isOwnerOrAdmin, userController.updatePwd);
 router.put('/:userName/image', isOwnerOrAdmin, upload.single('userimage'), userController.updateImage);
 router.get('/:userName', isOwnerOrAdmin, userController.showByID);
-router.post('/', userController.create);
+router.post('/', validateUserFields, userController.create);
 router.get('/', isAdmin, userController.show);
 
 // exportamos el modulo

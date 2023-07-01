@@ -43,26 +43,11 @@ body {
     margin-bottom: 15px;
 }
 
-.dni-error {
+.error-info {
     border-color: red;
     color: red;
 }
-.userName-error {
-    border-color: red;
-    color: red;
-}
-.email-error {
-    border-color: red;
-    color: red;
-}
-.text-error{
-    border-color: red;
-    color: red;
-}
-.password-error {
-    border-color: red;
-    color: red;
-}
+
 
 /* XS */
 @media (max-width: 480px) {
