@@ -37,10 +37,8 @@ const productFields = [
 ]
 
 const categoryFields = [
-        expressValidator.body('name')
-        .notEmpty()
-        .withMessage('campo obligatorio')
-    ]
+    body('name').notEmpty().withMessage('campo obligatorio')
+]
 
 const validations = {
     userFields: userFields,
