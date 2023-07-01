@@ -1,7 +1,22 @@
+const e = require("express");
+
 const isAdmin = (req, res, next) => {
     if(req.session.user) {
         if(req.session.user.rol === 'admin') {
             next();
+        }
+    }
+    res.redirect('/user/login');
+}
+
+const isOwner = (req, res, next) => {
+    if(req.session.user) {
+        let reqUserName = req.params.userName;
+        let userName = req.session.user.userName;
+        if(userName == reqUserName) {
+            next();
+        } else {
+            res.redirect('/user/' + userName);
         }
     }
     res.redirect('/user/login');
@@ -19,13 +34,15 @@ const isOwnerOrAdmin = (req, res, next) => {
         } else {
             res.redirect('/user/' + userName);
         }
+    } else {
+        res.redirect('/user/login');
     }
-    res.redirect('/user/login');
 }
 
 const authorizationMiddleware = {
     isAdmin: isAdmin,
     isOwnerOrAdmin: isOwnerOrAdmin,
+    isOwner:isOwner,
 }
 
 module.exports = authorizationMiddleware;

@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const jsonTools = require('../utils/JSONTools')
 const netTools = require('../utils/networkTools')
+const userTools = require('../utils/User')
 
 let userList = jsonTools.read('users.json');
 let orderHistory = jsonTools.read('horderHistory.json');
@@ -54,11 +55,16 @@ const showUser = (req, res) => {
 }
 
 const listUsers = (req, res) => {
-    res.render('User/list', {'users': userList} );
+    let userInfo = userTools.isLogged(req);
+    res.render('User/list', {'users': userList, user: userInfo} );
 }
 
 const registerUser = (req, res) => {
-    res.render('User/register', {'user': false, 'errors': false, 'action': 'register'});
+    if(userTools.isLogged(req)) {
+        res.redirect('/')
+    } else {
+        res.render('User/register', {'user': false, 'errors': false, 'action': 'register'});
+    }
 }
 
 const createUser = (req, res) => {
@@ -88,8 +94,13 @@ const createUser = (req, res) => {
 
 const editUser = (req, res) => {
     let users = jsonTools.read('users.json');
-    let userName = req.params.userName;
-    let user = users.filter( ({arrUserName}) => { return arrUserName === userName });
+    let userSearch = req.params.userName;
+    console.log('userSearch')
+    console.log(userSearch)
+    console.log(users)
+    let user = users.filter( ({userName}) => { return userName == userSearch });
+    console.log('user')
+    console.log(user)
     delete(user[0]['password'])
     delete(user[0]['confirmPassword'])
     res.render('User/register', {'user': user[0], 'errors': false, 'action': 'update'});
@@ -97,13 +108,13 @@ const editUser = (req, res) => {
 
 const updateUser = (req, res) => {
     let user = createUserObject(req);
-    userName = req.params.userName;
+    userSearch = req.params.userName;
     user.timeUpdate = getDateTimeNow();
     
     let users = jsonTools.read('users.json');
     // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
     // y asi poder validar los campos dni, userName y email con los del resto de los usuarios.
-    let temp_users_validate = users.filter( ({arrUserName}) => { return arrUserName != userName });
+    let temp_users_validate = users.filter( ({userName}) => { return userName != userSearch });
 
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
@@ -112,7 +123,7 @@ const updateUser = (req, res) => {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
     } else {
-        user_index = users.findIndex( ({arrUserName}) => arrUserName === userName );
+        user_index = users.findIndex( ({userName}) => userName === userSearch );
         user.password = users[user_index]['password'];
         user.image = users[user_index]['image'];
         user.rol = users[user_index]['rol'];
@@ -120,15 +131,15 @@ const updateUser = (req, res) => {
         users[user_index] = user;
         jsonTools.write('users.json', users);
         console.log('Usuario actualizado');
-        res.redirect ('/user/' + userName);
+        res.redirect ('/user/' + userSearch);
     }
 }
 
 const updatePassword = (req, res) => {
-    userName = req.params.userName;
+    userSearch = req.params.userName;
     let users = jsonTools.read('users.json');
     if(req.body.password === req.body.confirmPassword) {
-        userIndex = users.findIndex( ({arrUserName}) => arrUserName === userName );
+        userIndex = users.findIndex( ({userName}) => userName === userSearch );
         user = users[userIndex];
             if(req.body.Oldassword === user.password) {
                 user.password = bcrypt.hashSync(req.body.password, 10);
@@ -142,46 +153,48 @@ const updatePassword = (req, res) => {
                 console.log('Error el clave anteriro')
             }
     }
-    res.redirect ('/user/' + userName);
+    res.redirect ('/user/' + userSearch);
 }
 
 const userDelete = (req, res) => {
     let users = jsonTools.read('users.json');
-    let userName = req.params.arrUserName;
-    let user = users.filter( ({arrUserName}) => { return arrUserName === userName });
+    let userSearch = req.params.arrUserName;
+    let user = users.filter( ({userName}) => { return userName === userSearch });
     res.render('User/delete', {'user': user[0]});
 }
 
 const userDisable = (req, res) => {
-    let userName = req.params.userName;
+    let userSearch = req.params.userName;
     let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({arrUserName}) => { return arrUserName === userName });
+    let user_index = users.findIndex( ({userName}) => { return userName === userSearch });
     users[user_index].active = false;
     users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
-    console.log('Se elimino el usuario: ' + userName);
+    console.log('Se elimino el usuario: ' + userSearch);
     res.redirect('/');
 }
 
 const userEnable = (req, res) => {
-    let userName = req.params.arrUserName;
+    let userSearch = req.params.arrUserName;
     let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({arrUserName}) => { return arrUserName === userName });
+    let user_index = users.findIndex( ({userName}) => { return userName === userSearch });
     users[user_index].active = true;
     users[user_index].timeUpdate = getDateTimeNow();
     jsonTools.write('users.json', users);
-    console.log('Se habilito el usuario: ' + userName);
+    console.log('Se habilito el usuario: ' + userSearch);
     res.redirect('/user');
 }
 
 const login = (req, res) => {
-    res.render('User/login', {'user': false, 'error': false});
+    if(userTools.isLogged(req)) {
+        res.redirect('/');    
+    } else {
+        res.render('User/login', {'user': false, 'error': false});
+    }
 }
 
 const userLogin = (req, res) => {
-    //let user = createUserObject(req);
     let user = req.body;
-    //console.log(user);
     let users = jsonTools.read('users.json');
     let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
     if(userFound.length != 0) {
@@ -206,15 +219,21 @@ const userLogin = (req, res) => {
     }
 }
 
+const signOut = (req, res) => {
+    res.clearCookie('userName');
+    delete req.session.user;
+    res.redirect('/');
+}
+
 const uploadImage = (req, res) => {
-    let userName = req.params.userName;
+    let userSearch = req.params.userName;
     let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({arrUserName}) => arrUserName === userName );
+    let user_index = users.findIndex( ({userName}) => userName === userSearch );
     users[user_index]['image'] = req.file.filename;
     users[user_index]['timeUpdate'] = getDateTimeNow();
     jsonTools.write('users.json', users);
     console.log('Usuario actualizado');
-    res.redirect ('/user/'+userName);
+    res.redirect ('/user/'+userSearch);
 }
 
 const exportUserlist = (req, res) => {
@@ -227,6 +246,7 @@ const userController = {
     show: listUsers,
     showByID: showUser,
     login: login,
+    logout: signOut,
     auth: userLogin,
     register: registerUser,
     create: createUser,

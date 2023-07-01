@@ -4,12 +4,14 @@ const userController = require('../controllers/userController')
 const middlewares = require('../middlewares/index');
 const isAdmin = middlewares.authorizationMiddleware.isAdmin;
 const isOwnerOrAdmin = middlewares.authorizationMiddleware.isOwnerOrAdmin;
+const isOwner = middlewares.authorizationMiddleware.isOwner;
 
 const storageFile = require('../utils/storageTools')
 const upload = storageFile.upload('userProfile');
 
 router.get('/login', userController.login);
 router.post('/login', userController.auth);
+router.get('/:userName/logout', isOwner, userController.logout);
 router.get('/register', userController.register);
 router.get('/export', isAdmin, userController.export);
 router.get('/:userName/edit', isOwnerOrAdmin, userController.edit);

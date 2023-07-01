@@ -35,7 +35,16 @@
             <div class="register-bar">
                 <div class="caja-login">
                     <% if(user) { %>
-                        <a href="/user/<%= user.userName %>"><i class="fa-regular fa-circle-user"></i></a>
+                        <div class="logo-user">
+                            <a href="/user/<%= user.userName %>"><img src="/images/userProfile/1687041398999-slow_internet.jpeg" alt="Logo del usuario"></a>
+                            
+                            <div class="menu-user">
+                                <ul>
+                                    <li><a href="/user/<%= user.userName %>">Perfil</a></li>
+                                    <li><a href="/user/<%= user.userName %>/logout">Salir</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     <% } else { %>
                         <ul class="lista-login">
                             <li id="text-log-in"><a href="/user/login">Log in</a></li>
