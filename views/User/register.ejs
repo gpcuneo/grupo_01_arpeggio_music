@@ -26,44 +26,54 @@
                 <% } %>
                     <div class="separacion">
                         <label for="userName">Usuario</label>
-                        <input class="form-input <%= errors.userName? errors.userName : '' %>" type="text" name="userName" id="userName" value="<%= user ? user.userName : '' %>">
+                        <input class="form-input <%= errors.userName? 'error-info' : '' %>" type="text" name="userName" id="userName" value="<%= user ? user.userName : '' %>">
+                        <div class="error-info"><%= errors.userName? errors.userName.msg : '' %></div>
                     </div>
                     <div class="separacion">
                         <label for="firstName">Nombre</label>
-                        <input class="form-input" type="text" name="firstName" id="firstName" value="<%= user ? user.firstName : '' %>">
+                        <input class="form-input <%= errors.firstName? 'error-info' : '' %>" type="text" name="firstName" id="firstName" value="<%= user ? user.firstName : '' %>">
+                        <div class="error-info"><%= errors.firstName? errors.firstName.msg : '' %></div>
                     </div>
                     <div class="separacion">
                         <label for="lastName">Apellido</label>
-                        <input class="form-input" type="text" name="lastName" id="lastName" value="<%= user ? user.lastName : '' %>">
+                        <input class="form-input <%= errors.lastName? 'error-info' : '' %>" type="text" name="lastName" id="lastName" value="<%= user ? user.lastName : '' %>">
+                        <div class="error-info"><%= errors.lastName? errors.lastName.msg : '' %></div>
                     </div>
                     <div class="separacion">
                         <label for="dni">DNI</label>
-                        <input class="form-input <%= errors.dni? errors.dni : '' %>" type="number" name="dni" id="dni" value="<%= user ? user.dni : '' %>">
+                        <input class="form-input <%= errors.dni? 'error-info' : '' %>" type="number" name="dni" id="dni" value="<%= user ? user.dni : '' %>">
+                        <div class="error-info"><%= errors.dni? errors.dni.msg : '' %></div>
                     </div>
                     <div class="separacion">
                         <label for="email">E-mail</label>
-                        <input class="form-input <%= errors.email? errors.email : '' %>" type="email" name="email" id="email" value="<%= user ? user.email : '' %>">
+                        <input class="form-input <%= errors.email? 'error-info' : '' %>" type="email" name="email" id="email" value="<%= user ? user.email : '' %>">
+                        <div class="error-info"><%= errors.email? errors.email.msg : '' %></div>
                     </div>
                     <div class="separacion">
                         <label for="address">Direccion</label>
-                        <input class="form-input" type="text" name="address" id="address" value="<%= user ? user.address : '' %>">
+                        <input class="form-input <%= errors.address? 'error-info' : '' %>" type="text" name="address" id="address" value="<%= user ? user.address : '' %>">
+                        <div class="error-info"><%= errors.address? errors.address.msg : '' %></div>
                     </div>
                     <div class="separacion">
                         <label for="city">Provincia</label>
-                        <input class="form-input" type="text" name="city" id="city" value="<%= user ? user.city : '' %>">
+                        <input class="form-input <%= errors.city? 'error-info' : '' %>" type="text" name="city" id="city" value="<%= user ? user.city : '' %>">
+                        <div class="error-info"><%= errors.city? errors.city.msg : '' %></div>
                     </div>
                     <div class="separacion">
                         <label for="phone">Teléfono</label>
-                        <input class="form-input" required type="tel" name="phone" id="phone" value="<%= user ? user.phone : '' %>">
+                        <input class="form-input <%= errors.phone? 'error-info' : '' %>" required type="tel" name="phone" id="phone" value="<%= user ? user.phone : '' %>">
+                        <div class="error-info"><%= errors.phone? errors.phone.msg : '' %></div>
                     </div>
                     <% if(action !== 'update') { %>
                         <div class="separacion">
                             <label for="password">Contraseña</label>
-                            <input class="form-input <%= errors.password? errors.password : '' %>" type="password" name="password" id="password" value="<%= user ? user.password : '' %>">
+                            <input class="form-input <%= errors.password? 'error-info' : '' %>" type="password" name="password" id="password" value="<%= user ? user.password : '' %>">
+                            <div class="error-info"><%= errors.password? errors.password.msg : '' %></div>
                         </div>
                         <div class="separacion">
                             <label for="confirmPassword">Confirmar contraseña</label>
-                            <input class="form-input <%= errors.password? errors.password : '' %>" type="password" name="confirmPassword" id="confirmPassword" value="<%= user ? user.confirmPassword : '' %>">
+                            <input class="form-input <%= errors.confirmPassword? 'error-info' : '' %>" type="password" name="confirmPassword" id="confirmPassword" value="<%= user ? user.confirmPassword : '' %>">
+                            <div class="error-info"><%= errors.confirmPassword? errors.confirmPassword.msg : '' %></div>
                         </div>
                     <% } %>
                     <div>
@@ -71,7 +81,7 @@
                     </div>
                     <% if(errors){ %>
                         <div>
-                            <p class="text-error">Por favor verifique los datos cargados</p>
+                            <p class="error-info">Por favor verifique los datos cargados</p>
                         </div>
                     <% } %>
                 </form>
