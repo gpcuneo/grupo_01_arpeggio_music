@@ -21,6 +21,10 @@
     {
         "id": 2,
         "name": "Redoblante",
+        "category": "Bateria",
+        "price": 68800,
+        "stock": 1,
+        "colors": "#000000",
         "characteristics": "Redoblante Roadshow 14x6,5 8 Torres Rsn1465s",
         "img": [
             "/images/productos/image-46.jpg",
@@ -29,11 +33,7 @@
             "/images/productos/image-46.jpg",
             "/images/productos/image-46.jpg"
         ],
-        "category": "Bateria",
-        "colors": "",
-        "price": 68800,
         "discount": 30,
-        "stock": 1,
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident",
         "store": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nobis eveniet harum non, suscipit mollitia recusandae quidem blanditiis aperiam assumenda a corrupti quaerat enim fugiat eum veniam corporisminus quia.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem est nihil accusamus esse deserunt iste? Odio quo magni excepturi molestiae maiores cupiditate hic repellendus ipsum! Eius maxime ad assumenda provident"
     },

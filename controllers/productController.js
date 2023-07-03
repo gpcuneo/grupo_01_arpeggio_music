@@ -68,6 +68,18 @@ let postProducts = (req, res) =>{
 let putUpDate = (req,res)=>{
     let products = jsonTools.read('articles.json');
     const id = Number(req.params.id);
+    const modifyProduct = products.find(currentProduct => currentProduct.id === id);
+    const resultValidation = validationResult(req);
+    let userInfo = userTools.isLogged(req);
+    if(resultValidation.errors.length > 0){
+        return res.render('products/productManipulation',{
+            errors:resultValidation.mapped(),
+            oldData: req.body,
+            action:'update',
+            'product':modifyProduct,
+            'user':userInfo
+        })
+    }
     const newData = req.body;
     const index = products.findIndex(product => product.id === id);
 
