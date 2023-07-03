@@ -70,3 +70,65 @@
     border: #83a94c solid 1px;
     border-radius: 5px;
 }
+/*css de delete*/
+.btn-danger-delete {
+    background-color: #c83025;
+    color: white;
+    border: #c83025 solid 1px;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+.container-delete{
+    background-color: #D9D9D9;
+    padding: 50px 0 50px 0;
+    padding-bottom: 450px;
+}
+.category-container-delete{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+    padding: 15px 0;
+}
+.text-delete{
+    font-size: 30px;
+}
+/*css de id*/
+
+.container-detail{
+    background-color: #D9D9D9;
+    padding: 15px 0 50px 0;
+    padding-bottom: 450px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+   
+}
+.btn-danger-delete {
+    background-color: #c83025;
+    color: white;
+    border: #c83025 solid 1px;
+    border-radius: 5px;
+    font-size: 30px;
+    
+}
+
+.btn-success-detail {
+    background-color: #83a94c;
+    color: white;
+    border: #83a94c solid 1px;
+    border-radius: 5px;
+    font-size: 30px; 
+}
+.form-detail{
+    padding-top: 70px;
+    padding-bottom: 50px;
+}
+.detail-text{
+    font-size: 50px;
+}
+.category-Manipulation{
+    font-size:35px;
+}
