@@ -14,25 +14,24 @@
 
 <body>
     <%- include('./partials/header') %>
-        <main class="container">
-    
-             <div class="category-Container">
-                    <div>
+        <main class="container-delete">
+             <div class="category-container-delete">
+                    <div class="text-delete">
                         <%= category.id  %>
                         <%= category.name %>
                     </div>
-                <div>
-                    <p>¿Estas Seguro de que quieres eliminar este categoria?</p>
+                <div class="text-delete">
+                    <p>¿Estas seguro de que quieres eliminar este categoria?</p>
                 </div>
           
                 <div class="category-Form">
                     <form action="/category/<%= category.id %>?_method=delete" method="post">
-                        <input id = "delCategory" type="submit" value="Eliminar categoría">
+                        <input class="btn-danger-delete" id = "delCategory" type="submit" value="Eliminar categoría">
                      
                     </form>
                 </div>
             </div>
-            
+   
            
         </main>
         <%- include('./partials/footer') %>
