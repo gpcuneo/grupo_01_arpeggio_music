@@ -65,8 +65,8 @@ practicar conceptos de bases de datos y sql
 
 ## Rebeca:
 ### Que hice: 
-- 
-- 
+- Estuve haciendo la validación de formulario de create de producto.
+- También hice la validación para el update de producto.
+- Cree un wireframe para la vista de pagos.
 ### Que voy a hacer:
-- 
-- 
+- Fortalezer conceptos de base de datos y sequelize
