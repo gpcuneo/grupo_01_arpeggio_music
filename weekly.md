@@ -2,11 +2,9 @@
 
 ## Agustina:
 ### Que hice: 
-- 
-- 
+- Repaso de clases anteriores: CRUD.
 ### Que voy a hacer:
-- 
-- 
+- Práctica login, cookies y session.
 
 ## Guillermo:
 ### Que hice: 
@@ -39,9 +37,9 @@
 
 ## Agustina:
 ### Que hice: 
-- 
+- Repaso de clases anteriores: middleware, cookies, y login.
 ### Que voy a hacer:
-- 
+- Práctica de bases de datos y sql.
 
 ## Guillermo:
 ### Que hice: 
