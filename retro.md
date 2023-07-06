@@ -73,3 +73,26 @@ Menos de:
 
 Dejar de hacer:
 - N/A
+
+***************************************************************
+
+Sprint 5:
+
+Comenzar a hacer:
+- N/A 
+
+Más de:
+- Mirar mas el trello y documentar el grado de avance de las tareas.
+- Commitear mas seguido y mas chiquito.
+- Explicar mas en el log del commit.
+
+Seguir haciendo:
+- Reuniones semanales
+- Comunicacion y documentacion fluida por trello
+- Division de trabajo
+
+Menos de:
+- N/A
+
+Dejar de hacer:
+- N/A
