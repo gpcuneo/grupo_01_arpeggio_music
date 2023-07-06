@@ -40,25 +40,25 @@
 ## Agustina:
 ### Que hice: 
 - 
-- 
 ### Que voy a hacer:
-- 
 - 
 
 ## Guillermo:
 ### Que hice: 
-- 
-- 
+- Cierre de sesion de usuario
+- Customizar header en base a si el usuario esta logueado
+- Aplique middlewares de validacion de los campos de usuario
+- Refactorice algunos middleware
+- Aplique visualizacion de errores a la hora de cargar campos por el usuario
 ### Que voy a hacer:
-- 
-- 
+- Voy a estar desglozando tareas del sprint 6, cargando y asignando al equipo.
+
 
 ## Maximiliano:
- -Que hice:
+- Que hice:
  aplicados middlewares de categoria y proteccion de rutas
 
-
--Que Voy a hacer:
+- Que Voy a hacer:
 practicar conceptos de bases de datos y sql 
 
 
