@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `email` TINYTEXT NOT NULL,
     `address` TINYTEXT NOT NULL,
     `id_location` TINYTEXT NOT NULL,
+    `id_province` TINYTEXT NOT NULL,
     `dni` INT NOT NULL,
     `phone` INT NOT NULL,
     `password` CHAR(60) NOT NULL,
@@ -22,7 +23,8 @@ CREATE TABLE IF NOT EXISTS `users` (
     `id_rol` INT NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`id_rol`) REFERENCES 'roles'(`id`),
-    FOREIGN KEY (`id_location`) REFERENCES 'location'(`id`),
+    FOREIGN KEY (`id_location`) REFERENCES 'locations'(`id`),
+    FOREIGN KEY (`id_province`) REFERENCES 'provinces'(`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 --
