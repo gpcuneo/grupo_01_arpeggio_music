@@ -5,8 +5,8 @@
 DROP TABLE IF EXISTS `products`;   --condicional (verifica si existe otra tabla `products`)
 CREATE TABLE IF NOT EXISTS `products` (
     `id` INT PRIMARY KEY NOT NULL,
-    `name` VARCHAR(36) NOT NULL,
-    `characteristics` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(35) NOT NULL,
+    `characteristics` VARCHAR(150) NOT NULL,
     `price` FLOAT NOT NULL,
     `discount` FLOAT NULL,
     `stock` INT NOT NULL,
