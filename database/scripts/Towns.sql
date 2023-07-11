@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS `towns` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `id_province` int(11) NOT NULL,
     `town` varchar(255) NOT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_province`) REFERENCES 'provinces'(`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2383 ;
 
 --
