@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `lastName` VARCHAR(24) NOT NULL,
     `email` TINYTEXT NOT NULL,
     `address` TINYTEXT NOT NULL,
-    `city` TINYTEXT NOT NULL,
+    `id_location` TINYTEXT NOT NULL,
     `dni` INT NOT NULL,
     `phone` INT NOT NULL,
     `password` CHAR(60) NOT NULL,
@@ -19,8 +19,10 @@ CREATE TABLE IF NOT EXISTS `users` (
     `createdAt` DateTime NOT NULL,
     `updatedAt` DateTime NOT NULL,
     `image` TINYTEXT NOT NULL,
-    `rol` INT NOT NULL,
-    PRIMARY KEY (`id`)
+    `id_rol` INT NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_rol`) REFERENCES 'roles'(`id`),
+    FOREIGN KEY (`id_location`) REFERENCES 'location'(`id`),
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 --
