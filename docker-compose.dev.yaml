@@ -6,10 +6,10 @@ services:
     container_name: ${APP_NAME}-db
     env_file: .env
     environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQL_DATABASE
-      - MYSQL_USER=$MYSQL_USER
-      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:
@@ -19,6 +19,7 @@ services:
     # build:
     #   context: .
     #   target: dev
+    env_file: .env
     image: arpegio:${APP_VERSION}
     container_name: ${APP_NAME}-app
     links:
@@ -35,9 +36,9 @@ services:
       - db
     env_file: .env
     environment:
-      - PMA_HOST=$PMA_HOST
-      - PMA_PORT=${MYSQL_PORT}
-      - PMA_ARBITRARY=$PMA_ARBITRARY
+      - PMA_HOST=${DB_HOST}
+      - PMA_PORT=${DB_PORT}
+      - PMA_ARBITRARY=${PMA_ARBITRARY}
     restart: always
     ports:
       - ${PMA_WEB_PORT}:80

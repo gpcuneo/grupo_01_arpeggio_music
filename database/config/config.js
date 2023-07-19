@@ -1,23 +1,25 @@
+const envs = process.env;
+
 module.exports={
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": envs.DB_USER,
+    "password": envs.DB_PASSWORD,
+    "database": envs.DB_DATABASE,
+    "host": envs.DB_HOST,
+    "dialect": envs.DB_DIALECT
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": envs.DB_USER,
+    "password": envs.DB_PASSWORD,
+    "database": envs.DB_DATABASE,
+    "host": envs.DB_HOST,
+    "dialect": envs.DB_DIALECT
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": envs.DB_USER,
+    "password": envs.DB_PASSWORD,
+    "database": envs.DB_DATABASE,
+    "host": envs.DB_HOST,
+    "dialect": envs.DB_DIALECT
   }
 }
