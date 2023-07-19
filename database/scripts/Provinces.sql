@@ -4,38 +4,40 @@
 
 DROP TABLE IF EXISTS `provinces`;
 CREATE TABLE IF NOT EXISTS `provinces` (
-    `id` int(10) NOT NULL AUTO_INCREMENT,
-    `province` varchar(255) NOT NULL,
+    `id` int(100) NOT NULL AUTO_INCREMENT,
+    `province` varchar(100) NOT NULL,
+    `createdAt` DateTime NOT NULL,
+    `updatedAt` DateTime NOT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Volcar la base de datos para la tabla `provinces`
 --
 
-INSERT INTO `provinces` (`id`, `province`) VALUES
-(1, 'Buenos Aires'),
-(2, 'Buenos Aires-GBA'),
-(3, 'Capital Federal'),
-(4, 'Catamarca'),
-(5, 'Chaco'),
-(6, 'Chubut'),
-(7, 'Córdoba'),
-(8, 'Corrientes'),
-(9, 'Entre Ríos'),
-(10, 'Formosa'),
-(11, 'Jujuy'),
-(12, 'La Pampa'),
-(13, 'La Rioja'),
-(14, 'Mendoza'),
-(15, 'Misiones'),
-(16, 'Neuquén'),
-(17, 'Río Negro'),
-(18, 'Salta'),
-(19, 'San Juan'),
-(20, 'San Luis'),
-(21, 'Santa Cruz'),
-(22, 'Santa Fe'),
-(23, 'Santiago del Estero'),
-(24, 'Tierra del Fuego'),
-(25, 'Tucumán');
+SET @datetimenow := NOW();
+INSERT INTO `provinces` (`province`, `createdAt`, `updatedAt`) VALUES
+('Buenos Aires', @datetimenow, @datetimenow),
+('Buenos Aires-GBA', @datetimenow, @datetimenow),
+('Capital Federal', @datetimenow, @datetimenow),
+('Catamarca', @datetimenow, @datetimenow),
+('Chaco', @datetimenow, @datetimenow),
+('Chubut', @datetimenow, @datetimenow),
+('Córdoba', @datetimenow, @datetimenow),
+('Corrientes', @datetimenow, @datetimenow),
+('Entre Ríos', @datetimenow, @datetimenow),
+('Formosa', @datetimenow, @datetimenow),
+('Jujuy', @datetimenow, @datetimenow),
+('La Pampa', @datetimenow, @datetimenow),
+('La Rioja', @datetimenow, @datetimenow),
+('Mendoza', @datetimenow, @datetimenow),
+('Misiones', @datetimenow, @datetimenow),
+('Neuquén', @datetimenow, @datetimenow),
+('Río Negro', @datetimenow, @datetimenow),
+('Salta', @datetimenow, @datetimenow),
+('San Juan', @datetimenow, @datetimenow),
+('San Luis', @datetimenow, @datetimenow),
+('Santa Cruz', @datetimenow, @datetimenow),
+('Santa Fe', @datetimenow, @datetimenow),
+('Santiago del Estero', @datetimenow, @datetimenow),
+('Tierra del Fuego', @datetimenow, @datetimenow),
+('Tucumán', @datetimenow, @datetimenow);
