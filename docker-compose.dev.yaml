@@ -16,9 +16,10 @@ services:
       - dbdata:/var/lib/mysql
 
   app:
-    build:
-      context: .
-      target: dev
+    # build:
+    #   context: .
+    #   target: dev
+    image: arpegio:${APP_VERSION}
     container_name: ${APP_NAME}-app
     links:
       - db

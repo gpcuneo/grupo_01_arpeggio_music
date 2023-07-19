@@ -2,7 +2,7 @@ FROM node:20-alpine AS base
 WORKDIR /app
 COPY --chown=node:node ./package.json ./package.json
 COPY --chown=node:node ./package-lock.json ./package-lock.json
-RUN npm install --loglevel warn --production
+RUN npm install --loglevel warn
 
 FROM base AS dev
 COPY --chown=node:node ./ ./
