@@ -32,25 +32,43 @@ Link al board de Trello: [https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic](
 
 # **Ejecutar proyecto en contenedores Docker**
 
-**Configurar .env con las siguientes variables de entorno:**
+**Clone el proyecto:**
 
 ```bash
-APP_NAME=Arpegio              # Nombre de la aplicacion
-APP_PORT=3000                 # Puerto de la aplicacion
-MYSQL_ROOT_PASSWORD=password  # Password de root
-MYSQL_DATABASE=database       # Nombre de la base de datos
-MYSQL_USER=appuser            # Usuario de conexión de la aplicación 
-MYSQL_PASSWORD=apppass        # Contraseña del usuario de la aplicación
-MYSQL_PORT=3306               # Puerto de conexion de MySQL
-PMA_HOST=db                   # Nombre del host del contenedor de la base de datos.
-PMA_ARBITRARY=1               # Configuracion 
-PMA_WEB_PORT=8080             # Puerto para conectarse al PHPMyAdmin
+git clone git@github.com:gpcuneo/grupo_01_arpeggio_music.git
+```
+
+**Configurar variables de entorno:**
+
+Renombre el archivo .env.template por .env y modifique las variables de entorno segun sus necesidades
+
+```bash
+# Modifique el archivo en base a su entorno
+APP_NAME=Arpegio                # Nombre de la aplicacion
+APP_VERSION=1.0                 # Version de la aplicacion
+APP_SESSION_SECRET=Reemplazar   # Secreto de la aplicacion
+APP_PORT=3000                   # Puerto de la aplicacion
+DB_HOST=db                      # Nombre de host del servidor de base de datos
+DB_PORT=3306                    # Puerto del servidor de base de datos
+DB_DIALECT=mysql                # Motor de base de datos
+DB_DATABASE=database            # Nombre de la base de datos
+DB_USER=appuser                 # Usuario de coneccion de la base de datos
+DB_PASSWORD=apppass             # Password de coneccion del usuario de la base de datos
+DB_ROOT_PASSWORD=password       # Password de mysql root
+PMA_WEB_PORT=8080               # Puerto para conectarse al PHPMyAdmin
+PMA_ARBITRARY=1                 # PMA para PHPMyAdmin
+```
+
+**Build de la imagen de la aplicacion:**
+
+```bash
+docker build --target dev -t arpegio:1.0 .
 ```
 
 **Ejecutar entorno de desarrollo (nodemon):**
 
 ```bash
-docker compose -f docker-compose-dev.yaml up -d
+docker compose -f docker-compose.dev.yaml up -d
 [+] Building 0.0s (0/0)
 [+] Running 4/4
  ✔ Network grupo_01_arpeggio_music_default  Created 
