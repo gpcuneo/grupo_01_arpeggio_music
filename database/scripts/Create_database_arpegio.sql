@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db:3306
--- Tiempo de generación: 20-07-2023 a las 01:45:40
+-- Tiempo de generación: 20-07-2023 a las 15:59:26
 -- Versión del servidor: 5.7.42
 -- Versión de PHP: 8.1.17
 
@@ -195,7 +195,7 @@ INSERT INTO `products` (`id`, `name`, `characteristics`, `price`, `discount`, `s
 
 CREATE TABLE `provinces` (
   `id` int(100) NOT NULL,
-  `province` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -204,7 +204,7 @@ CREATE TABLE `provinces` (
 -- Volcado de datos para la tabla `provinces`
 --
 
-INSERT INTO `provinces` (`id`, `province`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `provinces` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 (1, 'Buenos Aires', '2023-07-17 11:55:08', '2023-07-17 11:55:08'),
 (2, 'Buenos Aires-GBA', '2023-07-17 11:55:08', '2023-07-17 11:55:08'),
 (3, 'Capital Federal', '2023-07-17 11:55:08', '2023-07-17 11:55:08'),
@@ -239,7 +239,7 @@ INSERT INTO `provinces` (`id`, `province`, `createdAt`, `updatedAt`) VALUES
 
 CREATE TABLE `roles` (
   `id` int(10) NOT NULL,
-  `rol` varchar(25) NOT NULL,
+  `name` varchar(25) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -248,7 +248,7 @@ CREATE TABLE `roles` (
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`id`, `rol`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `roles` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
 (1, 'user', '2023-07-19 13:29:40', '2023-07-19 13:29:40'),
 (2, 'admin', '2023-07-19 13:29:40', '2023-07-19 13:29:40'),
 (3, 'editor', '2023-07-19 13:29:40', '2023-07-19 13:29:40');
@@ -292,7 +292,7 @@ CREATE TABLE `shippings` (
 CREATE TABLE `towns` (
   `id` int(100) NOT NULL,
   `id_province` int(100) NOT NULL,
-  `town` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -301,7 +301,7 @@ CREATE TABLE `towns` (
 -- Volcado de datos para la tabla `towns`
 --
 
-INSERT INTO `towns` (`id`, `id_province`, `town`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `towns` (`id`, `id_province`, `name`, `createdAt`, `updatedAt`) VALUES
 (1, 1, '25 de Mayo', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (2, 1, '3 de febrero', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (3, 1, 'A. Alsina', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
@@ -1028,7 +1028,7 @@ INSERT INTO `towns` (`id`, `id_province`, `town`, `createdAt`, `updatedAt`) VALU
 (724, 7, 'Luque', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (725, 7, 'Luyaba', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (726, 7, 'Malagueño', '2023-07-19 13:26:46', '2023-07-19 13:26:46');
-INSERT INTO `towns` (`id`, `id_province`, `town`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `towns` (`id`, `id_province`, `name`, `createdAt`, `updatedAt`) VALUES
 (727, 7, 'Malena', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (728, 7, 'Malvinas Argentinas', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (729, 7, 'Manfredi', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
@@ -1736,7 +1736,7 @@ INSERT INTO `towns` (`id`, `id_province`, `town`, `createdAt`, `updatedAt`) VALU
 (1431, 13, 'Gral. Ocampo', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (1432, 13, 'Gral. San Martín', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (1433, 13, 'Independencia', '2023-07-19 13:26:46', '2023-07-19 13:26:46');
-INSERT INTO `towns` (`id`, `id_province`, `town`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `towns` (`id`, `id_province`, `name`, `createdAt`, `updatedAt`) VALUES
 (1434, 13, 'Rosario Penaloza', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (1435, 13, 'San Blas de Los Sauces', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (1436, 13, 'Sanagasta', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
@@ -2444,7 +2444,7 @@ INSERT INTO `towns` (`id`, `id_province`, `town`, `createdAt`, `updatedAt`) VALU
 (2138, 22, 'San Martín N.', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (2139, 22, 'San Vicente', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (2140, 22, 'Sancti Spititu', '2023-07-19 13:26:46', '2023-07-19 13:26:46');
-INSERT INTO `towns` (`id`, `id_province`, `town`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `towns` (`id`, `id_province`, `name`, `createdAt`, `updatedAt`) VALUES
 (2141, 22, 'Sanford', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (2142, 22, 'Santo Domingo', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),
 (2143, 22, 'Santo Tomé', '2023-07-19 13:26:46', '2023-07-19 13:26:46'),

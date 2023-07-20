@@ -2,20 +2,20 @@
 -- Estructura de tabla para la tabla `provincias`
 --
 
-DROP TABLE IF EXISTS `provinces`;
-CREATE TABLE IF NOT EXISTS `provinces` (
+DROP TABLE IF EXISTS `Provinces`;
+CREATE TABLE IF NOT EXISTS `Provinces` (
     `id` int(100) NOT NULL AUTO_INCREMENT,
-    `province` varchar(100) NOT NULL,
+    `name` varchar(100) NOT NULL,
     `createdAt` DateTime NOT NULL,
     `updatedAt` DateTime NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
--- Volcar la base de datos para la tabla `provinces`
+-- Volcar la base de datos para la tabla `Provinces`
 --
 
 SET @datetimenow := NOW();
-INSERT INTO `provinces` (`province`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `Provinces` (`name`, `createdAt`, `updatedAt`) VALUES
 ('Buenos Aires', @datetimenow, @datetimenow),
 ('Buenos Aires-GBA', @datetimenow, @datetimenow),
 ('Capital Federal', @datetimenow, @datetimenow),

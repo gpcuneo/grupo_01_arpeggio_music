@@ -30,7 +30,7 @@ module.exports = (sequelize, DataType) => {
     let Province = sequelize.define(alias, cols, config);
 
     Province.associate = (models) => {
-        Province.hasMany(models.Town, {foreignKey: 'id_province'});
+        Province.hasMany(models.Town, {as: 'Towns', foreignKey: 'id_province'});
     }
 
     return Province

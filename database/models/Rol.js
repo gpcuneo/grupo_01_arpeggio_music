@@ -30,7 +30,7 @@ module.exports = (sequelize, DataType) => {
     let Rol = sequelize.define(alias, cols, config);
 
     Rol.associate = (models) => {
-        Rol.hasMany(models.User, {foreignKey: 'id_rol'});
+        Rol.hasMany(models.User, {as: 'Users', foreignKey: 'id_rol'});
     }
 
     return Rol
