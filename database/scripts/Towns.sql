@@ -2,12 +2,12 @@
 -- Estructura de tabla para la tabla `towns`
 --
 
-DROP TABLE IF EXISTS `towns`;
+DROP TABLE IF EXISTS `Towns`;
 
-CREATE TABLE IF NOT EXISTS `towns` (
+CREATE TABLE IF NOT EXISTS `Towns` (
     `id` int(100) NOT NULL AUTO_INCREMENT,
     `id_province` int(100) NOT NULL,
-    `town` varchar(255) NOT NULL,
+    `name` varchar(255) NOT NULL,
     `createdAt` DateTime NOT NULL,
     `updatedAt` DateTime NOT NULL,
     PRIMARY KEY (`id`),
@@ -16,10 +16,10 @@ CREATE TABLE IF NOT EXISTS `towns` (
 
 
 --
--- Volcar la base de datos para la tabla `towns`
+-- Volcar la base de datos para la tabla `Towns`
 --
 SET @datetimenow := NOW();
-INSERT INTO `towns` (`id_province`, `town`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `Towns` (`id_province`, `name`, `createdAt`, `updatedAt`) VALUES
 (1, '25 de Mayo', @datetimenow, @datetimenow),
 (1, '3 de febrero', @datetimenow, @datetimenow),
 (1, 'A. Alsina', @datetimenow, @datetimenow),
@@ -2093,7 +2093,7 @@ INSERT INTO `towns` (`id_province`, `town`, `createdAt`, `updatedAt`) VALUES
 (22, 'Palacios', @datetimenow, @datetimenow),
 (22, 'Pavón', @datetimenow, @datetimenow),
 (22, 'Pavón Arriba', @datetimenow, @datetimenow);
-INSERT INTO `towns` (`id_province`, `town`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `Towns` (`id_province`, `name`, `createdAt`, `updatedAt`) VALUES
 (22, 'Pedro Gómez Cello', @datetimenow, @datetimenow),
 (22, 'Pérez', @datetimenow, @datetimenow),
 (22, 'Peyrano', @datetimenow, @datetimenow),
