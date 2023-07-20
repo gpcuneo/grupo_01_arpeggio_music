@@ -41,5 +41,16 @@ module.exports=(sequelize, DataType) =>{
 
     const Sale = sequelize.define(alias, cols, config)
 
+    Sale.associate= models=>{
+        Sale.belongsTo(models.ProductColor,{
+            as:'product-color',
+            foreignKey:'product_color_id'     //preguntar o avisar el nombre de la foreignkey
+        });
+        Sale.belongsTo(models.Order,{
+            as:'orders',
+            foreignKey:'order_id'
+        })
+    }
+
     return Sale;
 }
