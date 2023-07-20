@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `colors` (
     `name` VARCHAR(40) NOT NULL,
     `createdAt` DATETIME NOT NULL,
     `updatedAt` DATETIME NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Volcar la base de datos para la tabla `colors`
 --
