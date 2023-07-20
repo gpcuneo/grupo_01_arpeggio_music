@@ -41,5 +41,12 @@ module.exports=(sequelize, DataType) =>{
 
     const Invoice = sequelize.define(alias, cols, config);
 
+    Invoice.associate= models=>{
+        Invoice.belongTo(models.Order, {
+            as:'orders',
+            foreignKey:'order_id'
+        })
+    }
+
     return Invoice;
 }
