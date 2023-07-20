@@ -1,5 +1,5 @@
+require('dotenv').config();
 const envs = process.env;
-
 module.exports={
   "development": {
     "username": envs.DB_USER,
