@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db:3306
--- Tiempo de generación: 20-07-2023 a las 00:17:02
+-- Tiempo de generación: 20-07-2023 a las 01:45:40
 -- Versión del servidor: 5.7.42
 -- Versión de PHP: 8.1.17
 
@@ -105,6 +105,59 @@ INSERT INTO `deliveries` (`id`, `type`, `createdAt`, `updatedAt`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `sub_total` float NOT NULL,
+  `taxes` float NOT NULL,
+  `total` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` char(36) NOT NULL,
+  `delivery_id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `product-color`
+--
+
+CREATE TABLE `product-color` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `product-color`
+--
+
+INSERT INTO `product-color` (`id`, `product_id`, `color_id`, `quantity`) VALUES
+(11, 1, 1, 2),
+(12, 2, 3, 1),
+(13, 3, 4, 3),
+(14, 4, 5, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `products`
 --
 
@@ -199,6 +252,36 @@ INSERT INTO `roles` (`id`, `rol`, `createdAt`, `updatedAt`) VALUES
 (1, 'user', '2023-07-19 13:29:40', '2023-07-19 13:29:40'),
 (2, 'admin', '2023-07-19 13:29:40', '2023-07-19 13:29:40'),
 (3, 'editor', '2023-07-19 13:29:40', '2023-07-19 13:29:40');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sales`
+--
+
+CREATE TABLE `sales` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product-color_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `shippings`
+--
+
+CREATE TABLE `shippings` (
+  `id` int(11) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -2662,6 +2745,29 @@ ALTER TABLE `deliveries`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indices de la tabla `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `delivery_id` (`delivery_id`);
+
+--
+-- Indices de la tabla `product-color`
+--
+ALTER TABLE `product-color`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `color_id` (`color_id`);
+
+--
 -- Indices de la tabla `products`
 --
 ALTER TABLE `products`
@@ -2679,6 +2785,21 @@ ALTER TABLE `provinces`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product-color_id` (`product-color_id`);
+
+--
+-- Indices de la tabla `shippings`
+--
+ALTER TABLE `shippings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indices de la tabla `towns`
@@ -2718,6 +2839,24 @@ ALTER TABLE `deliveries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `product-color`
+--
+ALTER TABLE `product-color`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
@@ -2736,6 +2875,18 @@ ALTER TABLE `roles`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `sales`
+--
+ALTER TABLE `sales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `shippings`
+--
+ALTER TABLE `shippings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `towns`
 --
 ALTER TABLE `towns`
@@ -2746,10 +2897,43 @@ ALTER TABLE `towns`
 --
 
 --
+-- Filtros para la tabla `invoices`
+--
+ALTER TABLE `invoices`
+  ADD CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+
+--
+-- Filtros para la tabla `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`delivery_id`) REFERENCES `deliveries` (`id`);
+
+--
+-- Filtros para la tabla `product-color`
+--
+ALTER TABLE `product-color`
+  ADD CONSTRAINT `product-color_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `product-color_ibfk_2` FOREIGN KEY (`color_id`) REFERENCES `colors` (`id`);
+
+--
 -- Filtros para la tabla `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Filtros para la tabla `sales`
+--
+ALTER TABLE `sales`
+  ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`product-color_id`) REFERENCES `product-color` (`id`);
+
+--
+-- Filtros para la tabla `shippings`
+--
+ALTER TABLE `shippings`
+  ADD CONSTRAINT `shippings_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 
 --
 -- Filtros para la tabla `towns`
