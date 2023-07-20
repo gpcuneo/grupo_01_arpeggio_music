@@ -34,8 +34,8 @@ module.exports = (sequelize, DataType) => {
     let Town = sequelize.define(alias, cols, config);
 
     Town.associate = (models) => {
-        Town.hasMany(models.User, {foreignKey: 'id_town'});
-        Town.belongsTo(models.Province, {foreignKey: 'id_province'});
+        Town.hasMany(models.User, {as: 'Users', foreignKey: 'id_town'});
+        Town.belongsTo(models.Province, {as: 'Province', foreignKey: 'id_province'});
     }
     
     return Town
