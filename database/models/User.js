@@ -75,5 +75,12 @@ module.exports = (sequelize, DataType) => {
         timestamps: true,
     }
 
-    return sequelize.define(alias, cols, config);
+    let User = sequelize.define(alias, cols, config);
+
+    User.associate = (models) => {
+        User.belongsTo(models.Town, {as:'Town', foreignKey: 'id_town'});
+        User.belongsTo(models.Rol, {as:'Rol', foreignKey: 'id_rol'});
+    }
+
+    return User
 }

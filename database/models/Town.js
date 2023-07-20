@@ -31,5 +31,12 @@ module.exports = (sequelize, DataType) => {
         timestamps: true,
     }
 
-    return sequelize.define(alias, cols, config);
+    let Town = sequelize.define(alias, cols, config);
+
+    Town.associate = (models) => {
+        Town.hasMany(models.User, {foreignKey: 'id_town'});
+        Town.belongsTo(models.Province, {foreignKey: 'id_province'});
+    }
+    
+    return Town
 }

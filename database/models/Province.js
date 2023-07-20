@@ -27,5 +27,11 @@ module.exports = (sequelize, DataType) => {
         timestamps: true,
     }
 
-    return sequelize.define(alias, cols, config);
+    let Province = sequelize.define(alias, cols, config);
+
+    Province.associate = (models) => {
+        Province.hasMany(models.Town, {foreignKey: 'id_province'});
+    }
+
+    return Province
 }
