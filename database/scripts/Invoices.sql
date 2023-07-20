@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS `invoices`(
     `createdAt` DateTime NOT NULL,
     `updatedAt` DateTime NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`order_id`) REFERENCES 'orders'(`id`),
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+    FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 --
 -- Volcar la base de datos para la tabla `invoices`
