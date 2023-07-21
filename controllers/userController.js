@@ -195,21 +195,20 @@ const login = (req, res) => {
     }
 }
 
-const userLogin = (req, res) => {
-    let user = req.body;
-    let users = jsonTools.read('users.json');
-    let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
-    if(userFound) {
-        if(bcrypt.compareSync(user.password, userFound.password) && userFound.active){
+const userLogin = async (req, res) => {
+    //let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
+    let user = await db.User.findOne({where: {userName: req.body.userName}})
+    if(user) {
+        if(bcrypt.compareSync(req.body.password, user.password) && user.active){
             console.log('logged');
             if(!!req.body.remember) {
                 res.cookie('userName', user.userName, {
                     maxAge: 1000 * 60 * 60 * 24 * 30
                 });
             }
-            delete userFound.id;
-            delete userFound.password;
-            req.session.user = userFound;
+            delete user.id;
+            delete user.password;
+            req.session.user = user;
             res.redirect('/');
         } else {
             console.log('Error pwd');
