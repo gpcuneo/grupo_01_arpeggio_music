@@ -29,6 +29,14 @@ module.exports= (sequelize, DataType) =>{
             type:DataType.INTEGER,
             allowNull:false,
             default:0
+        },
+        createdAt: {
+            type: DataType.DATE,
+            allowNull: false,
+        },
+        updatedAt: {
+            type: DataType.DATE,
+            allowNull: false,
         }
     }
 
