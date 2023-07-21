@@ -12,7 +12,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.INTEGER,
             allowNull: false,
         },
-        town: {
+        name: {
             type: DataType.STRING(255),
             allowNull: false,
         },
