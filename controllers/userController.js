@@ -29,8 +29,7 @@ const createUserObject = (req) => {
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
         active: true,
-        lastIP : netTools.getUserIP(req),
-        id_rol: 1
+        lastIP : netTools.getUserIP(req)
     }
 }
 
@@ -39,22 +38,28 @@ const comparePassword = (user) => {
     return result;
 }
 
-const validateUserFields = async (user, req) => {
-    const errors = validationResult(req).mapped();
-    await db.User.findOne({where: {userName : user.userName}}) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
-    await db.User.findOne({where: {dni : user.dni}}) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
-    await db.User.findOne({where: {email : user.email}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
+const validateUserFields = async (user, req, id=false) => {
+    let errors = validationResult(req).mapped();
+    if(id) { 
+        delete errors.password
+    } else {
+        comparePassword(user) ? '' : errors.password = {msg :'Las contrasenas no coinciden'};
+    }
+    console.log(errors)
+    await db.User.findOne({where: {userName : user.userName, id: {[Op.ne]: id}}}) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
+    await db.User.findOne({where: {dni : user.dni, id: {[Op.ne]: id}}}) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
+    await db.User.findOne({where: {email : user.email, id: {[Op.ne]: id}}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
     // Query mas eficiente pero no puedo controlar el mensaje de error por campo.
     // const users = await db.User.findAll({
     //     where: {
     //         [Op.or]: [
     //             { dni: user.dni},
-    //             { userName: user.userName},
+    //             { userName: user.userName}, 
     //             { email: user.email},
     //         ],
-    //     },
+    //     }, 
     //     });
-    comparePassword(user) ? '' : errors.password = {msg :'Las contrasenas no coinciden'};
+    console.log( " ------------ errors")
     console.log(errors)
     return errors 
 }
@@ -92,6 +97,7 @@ const createUser = async (req, res) => {
     } else {
         user.id = uuid.v4();
         user.image = 'default.avif';
+        user.id_rol = 1
         user.password = bcrypt.hashSync(user.password, 10);
         delete(user.confirmPassword);
         db.User.create(user);
@@ -100,68 +106,54 @@ const createUser = async (req, res) => {
     }
 }
 
-const editUser = (req, res) => {
-    let users = jsonTools.read('users.json');
-    let userSearch = req.params.userName;
-    console.log('userSearch')
-    console.log(userSearch)
-    console.log(users)
-    let user = users.filter( ({userName}) => { return userName == userSearch });
-    console.log('user')
-    console.log(user)
-    delete(user[0]['password'])
-    delete(user[0]['confirmPassword'])
-    res.render('User/register', {'user': user[0], 'errors': false, 'action': 'update'});
+const editUser = async (req, res) => {
+    let user = await db.User.findOne({where: {userName: req.params.userName}})
+    delete(user.password)
+    delete(user.confirmPassword)
+    res.render('User/register', {'user': user, 'errors': false, 'action': 'update'});
 }
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
     let user = createUserObject(req);
-    userSearch = req.params.userName;
-    user.timeUpdate = getDateTimeNow();
-    
-    let users = jsonTools.read('users.json');
-    // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
-    // y asi poder validar los campos dni, userName y email con los del resto de los usuarios.
-    let temp_users_validate = users.filter( ({userName}) => { return userName != userSearch });
-
+    let userID = await db.User.findOne({
+        where: {userName: req.params.userName},
+        attributes: ['id']
+    });
+    //userSearch = req.params.userName;
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
-    errors = validateUserFields(user, temp_users_validate. req);
+    errors = await validateUserFields(user, req, userID.id);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
     } else {
-        user_index = users.findIndex( ({userName}) => userName === userSearch );
-        user.password = users[user_index]['password'];
-        user.image = users[user_index]['image'];
-        user.rol = users[user_index]['rol'];
-        delete(user.confirmPassword);
-        users[user_index] = user;
-        jsonTools.write('users.json', users);
-        console.log('Usuario actualizado');
-        res.redirect ('/user/' + userSearch);
+        delete user.password;
+        await db.User.update(user, {
+            where: { id: userID.id },
+            returning: false
+        });
+        console.log('Usuario actualizado: ' + user.userName);
+        res.redirect ('/user/' + user.userName);
     }
 }
 
-const updatePassword = (req, res) => {
-    userSearch = req.params.userName;
-    let users = jsonTools.read('users.json');
+const updatePassword = async (req, res) => {
+    let userName = req.params.userName;
     if(req.body.password === req.body.confirmPassword) {
-        userIndex = users.findIndex( ({userName}) => userName === userSearch );
-        user = users[userIndex];
-            if(req.body.Oldassword === user.password) {
-                user.password = bcrypt.hashSync(req.body.password, 10);
-                user.timeUpdate = getDateTimeNow();
-                user.lastIP = netTools.getUserIP(req),
-                console.log(user)
-                users['userIndex'] = user;
-                jsonTools.write('users.json', users);
-                console.log('Usuario actualizado');
-            } else {
-                console.log('Error el clave anteriro')
-            }
+        let userID = await db.User.findOne({
+            where: {userName: userName},
+            attributes: ['id']
+        });
+        let user = {}
+        user.password = bcrypt.hashSync(req.body.password, 10);
+        user.lastIP = netTools.getUserIP(req);
+        await db.User.update(user, {
+            where: { id: userID.id },
+            returning: false
+        });
+        console.log('Password actualizado del usuario: ' + userName );
     }
-    res.redirect ('/user/' + userSearch);
+    res.redirect ('/user/' + userName);
 }
 
 const userDelete = (req, res) => {
