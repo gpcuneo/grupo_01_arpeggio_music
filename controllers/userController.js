@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
+const ExcelJS = require('exceljs');
+const fs = require('fs');
 const jsonTools = require('../utils/JSONTools');
 const netTools = require('../utils/networkTools');
 const userTools = require('../utils/User');
@@ -227,11 +229,51 @@ const uploadImage = async (req, res) => {
     res.redirect ('/user/'+userName);
 }
 
-const exportUserlist = (req, res) => {
-    const fileName = jsonTools.exportToCSV('users.json');
-    const pathFile = './tmp/'+fileName;
-    res.download(pathFile);
-}
+const exportUserlist = async (req, res) => {
+    try {
+        // Realiza el findAll() para obtener los datos de la tabla User
+        const columns = ['userName', 'firstName', 'lastName', 'email', 'dni', 'phone', 'city', 'address', ];
+        const users = await db.User.findAll({ attributes: columns });
+
+        // Crea un nuevo libro de Excel
+        const workbook = new ExcelJS.Workbook();
+
+        // Crea una nueva hoja en el libro
+        const worksheet = workbook.addWorksheet('Usuarios');
+
+        // Crea el encabezado de la hoja con los nombres de las columnas
+        worksheet.addRow(columns);
+
+        // Agrega los datos de los usuarios a la hoja
+        users.forEach((user) => {
+            const values = columns.map((column) => user[column]);
+            worksheet.addRow(values);
+        });
+
+        // Crea un stream para guardar el archivo Excel
+        const tempFileName = 'usuarios.xlsx';
+        const stream = fs.createWriteStream(tempFileName);
+        await workbook.xlsx.write(stream);
+
+        // Configura la respuesta para descargar el archivo
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', 'attachment; filename=usuarios.xlsx');
+
+        // Envía el archivo Excel como respuesta
+        const fileStream = fs.createReadStream(tempFileName);
+        fileStream.pipe(res);
+
+        // Elimina el archivo temporal después de enviarlo
+        fileStream.on('end', () => {
+            fs.unlinkSync(tempFileName);
+        });
+
+        console.log('Archivo Excel generado correctamente:', fileName);
+    } catch (error) {
+        console.error('Error al generar el archivo Excel:', error);
+    }
+};
+
 
 const userController = {
     show: listUsers,
