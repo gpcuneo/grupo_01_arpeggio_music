@@ -224,15 +224,15 @@ const signOut = (req, res) => {
     res.redirect('/');
 }
 
-const uploadImage = (req, res) => {
-    let userSearch = req.params.userName;
-    let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({userName}) => userName === userSearch );
-    users[user_index]['image'] = req.file.filename;
-    users[user_index]['timeUpdate'] = getDateTimeNow();
-    jsonTools.write('users.json', users);
-    console.log('Usuario actualizado');
-    res.redirect ('/user/'+userSearch);
+const uploadImage = async (req, res) => {
+    let userName = req.params.userName;
+    let img = { image: req.file.filename}
+    await db.User.update(img, {
+        where: { userName: userName },
+        returning: false
+    });
+    console.log('Se actualizo la imagen del usuario: ' + userName);
+    res.redirect ('/user/'+userName);
 }
 
 const exportUserlist = (req, res) => {
