@@ -4,6 +4,7 @@ const jsonTools = require('../utils/JSONTools');
 const netTools = require('../utils/networkTools');
 const userTools = require('../utils/User');
 const db = require('../database/models');
+const { Op } = require('sequelize');
 const {validationResult} = require('express-validator');
 
 let userList = jsonTools.read('users.json');
@@ -22,14 +23,14 @@ const createUserObject = (req) => {
         email: req.body.email,
         emailValidated: req.body.emailValidated,
         address: req.body.address,
-        city: req.body.city,
+        id_town: parseInt(req.body.city),
         dni: parseInt(req.body.dni),
         phone: parseInt(req.body.phone),
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
         active: true,
         lastIP : netTools.getUserIP(req),
-        rol: 'user'
+        id_rol: 1
     }
 }
 
@@ -38,12 +39,21 @@ const comparePassword = (user) => {
     return result;
 }
 
-const validateUserFields = (user, users, req) => {
+const validateUserFields = async (user, req) => {
     const errors = validationResult(req).mapped();
-    console.log(errors)
-    users.find( ({dni}) => dni === user.dni) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
-    users.find( ({userName}) => userName === user.userName) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
-    users.find( ({email}) => email === user.email) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
+    await db.User.findOne({where: {userName : user.userName}}) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
+    await db.User.findOne({where: {dni : user.dni}}) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
+    await db.User.findOne({where: {email : user.email}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
+    // Query mas eficiente pero no puedo controlar el mensaje de error por campo.
+    // const users = await db.User.findAll({
+    //     where: {
+    //         [Op.or]: [
+    //             { dni: user.dni},
+    //             { userName: user.userName},
+    //             { email: user.email},
+    //         ],
+    //     },
+    //     });
     comparePassword(user) ? '' : errors.password = {msg :'Las contrasenas no coinciden'};
     console.log(errors)
     return errors 
@@ -71,26 +81,22 @@ const registerUser = (req, res) => {
     }
 }
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
     let user = createUserObject(req);
-    let users = jsonTools.read('users.json');
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
-    errors = validateUserFields(user, users, req);
+    errors = await validateUserFields(user, req);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'register'});
     } else {
         user.id = uuid.v4();
-        user.timeCreate = getDateTimeNow();
-        user.timeUpdate = getDateTimeNow();
         user.image = 'default.avif';
         user.password = bcrypt.hashSync(user.password, 10);
         delete(user.confirmPassword);
-        users.push(user);
-        jsonTools.write('users.json', users);
+        db.User.create(user);
         console.log('Usuario guardado');
-        res.redirect ('/user/' + user.id);
+        res.redirect ('/user/' + user.userName);
     }
 }
 
