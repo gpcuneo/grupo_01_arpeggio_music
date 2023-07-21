@@ -156,33 +156,25 @@ const updatePassword = async (req, res) => {
     res.redirect ('/user/' + userName);
 }
 
-const userDelete = (req, res) => {
-    let users = jsonTools.read('users.json');
-    let userSearch = req.params.arrUserName;
-    let user = users.filter( ({userName}) => { return userName === userSearch });
-    res.render('User/delete', {'user': user[0]});
+const userDelete = async (req, res) => {
+    let userName = req.params.userName;
+    console.log(userName) 
+    let user = await db.User.findOne({where:{ userName: userName}})
+    res.render('User/delete', {'user': user});
 }
 
-const userDisable = (req, res) => {
-    let userSearch = req.params.userName;
-    let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({userName}) => { return userName === userSearch });
-    users[user_index].active = false;
-    users[user_index].timeUpdate = getDateTimeNow();
-    jsonTools.write('users.json', users);
-    console.log('Se elimino el usuario: ' + userSearch);
+const changeStatus = async (req, res) => {
+    let userName = req.params.userName;
+    let status = await db.User.findOne({
+        where: {userName: userName},
+        attributes: ['active']
+    });
+    await db.User.update({ active: !status.active }, {
+        where: { userName: userName },
+        returning: false
+    });
+    console.log('Se Modifico el estado del usuario: ' + userName);
     res.redirect('/');
-}
-
-const userEnable = (req, res) => {
-    let userSearch = req.params.arrUserName;
-    let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({userName}) => { return userName === userSearch });
-    users[user_index].active = true;
-    users[user_index].timeUpdate = getDateTimeNow();
-    jsonTools.write('users.json', users);
-    console.log('Se habilito el usuario: ' + userSearch);
-    res.redirect('/user');
 }
 
 const login = (req, res) => {
@@ -254,8 +246,8 @@ const userController = {
     updatePwd: updatePassword,
     updateImage: uploadImage,
     delete: userDelete,
-    disable: userDisable,
-    enable: userEnable,
+    disable: changeStatus,
+    enable: changeStatus,
     export: exportUserlist,
 }
 
