@@ -1,8 +1,9 @@
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
-const jsonTools = require('../utils/JSONTools')
-const netTools = require('../utils/networkTools')
-const userTools = require('../utils/User')
+const jsonTools = require('../utils/JSONTools');
+const netTools = require('../utils/networkTools');
+const userTools = require('../utils/User');
+const db = require('../database/models');
 const {validationResult} = require('express-validator');
 
 let userList = jsonTools.read('users.json');
@@ -59,7 +60,10 @@ const showUser = (req, res) => {
 
 const listUsers = (req, res) => {
     let userInfo = userTools.isLogged(req);
-    res.render('User/list', {'users': userList, user: userInfo} );
+        db.User.findAll().then(
+            (usersData) => res.render('User/list', {'users': usersData, user: userInfo}
+        )
+    );
 }
 
 const registerUser = (req, res) => {
