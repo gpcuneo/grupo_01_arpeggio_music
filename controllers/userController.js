@@ -49,13 +49,10 @@ const validateUserFields = (user, users, req) => {
     return errors 
 }
 
-const showUser = (req, res) => {
-    const userName = req.params.userName;
-    console.log(userName);
-    let userInfo = {}
-    console.log(userInfo)
-    userList.forEach( user => user.userName === userName ? userInfo = user : '');
-    res.render('User/profile', {'user': userInfo, 'orderHistory': orderHistory} );
+const showUser = async (req, res) => {
+    const user = await db.User.findOne({ where: { userName: req.params.userName } });
+    console.log('Show profile: ' + user);
+    res.render('User/profile', {'user': user, 'orderHistory': orderHistory} );
 }
 
 const listUsers = (req, res) => {
