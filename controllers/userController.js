@@ -9,13 +9,8 @@ const db = require('../database/models');
 const { Op } = require('sequelize');
 const {validationResult} = require('express-validator');
 
-let userList = jsonTools.read('users.json');
-let orderHistory = jsonTools.read('horderHistory.json');
 
-const getDateTimeNow = () => {
-    let now = new Date();
-    return now.toLocaleString('en-GB', { timeZone: 'UTC' });
-}
+let orderHistory = jsonTools.read('horderHistory.json');
 
 const createUserObject = (req) => {
     return {
@@ -47,7 +42,6 @@ const validateUserFields = async (user, req, id=false) => {
     } else {
         comparePassword(user) ? '' : errors.password = {msg :'Las contrasenas no coinciden'};
     }
-    console.log(errors)
     await db.User.findOne({where: {userName : user.userName, id: {[Op.ne]: id}}}) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
     await db.User.findOne({where: {dni : user.dni, id: {[Op.ne]: id}}}) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
     await db.User.findOne({where: {email : user.email, id: {[Op.ne]: id}}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
@@ -61,14 +55,12 @@ const validateUserFields = async (user, req, id=false) => {
     //         ],
     //     }, 
     //     });
-    console.log( " ------------ errors")
-    console.log(errors)
     return errors 
 }
 
 const showUser = async (req, res) => {
     const user = await db.User.findOne({ where: { userName: req.params.userName } });
-    console.log('Show profile: ' + user);
+    console.log('Show profile: ' + user.userName);
     res.render('User/profile', {'user': user, 'orderHistory': orderHistory} );
 }
 
@@ -90,8 +82,6 @@ const registerUser = (req, res) => {
 
 const createUser = async (req, res) => {
     let user = createUserObject(req);
-    // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
-    // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
     errors = await validateUserFields(user, req);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
@@ -103,13 +93,14 @@ const createUser = async (req, res) => {
         user.password = bcrypt.hashSync(user.password, 10);
         delete(user.confirmPassword);
         db.User.create(user);
-        console.log('Usuario guardado');
+        console.log('Usuario creo el usuario: ' + user.userName);
         res.redirect ('/user/' + user.userName);
     }
 }
 
 const editUser = async (req, res) => {
     let user = await db.User.findOne({where: {userName: req.params.userName}})
+    delete(user.id)
     delete(user.password)
     delete(user.confirmPassword)
     res.render('User/register', {'user': user, 'errors': false, 'action': 'update'});
@@ -121,12 +112,9 @@ const updateUser = async (req, res) => {
         where: {userName: req.params.userName},
         attributes: ['id']
     });
-    //userSearch = req.params.userName;
-    // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
-    // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
     errors = await validateUserFields(user, req, userID.id);
     if (Object.keys(errors) != 0) {
-        console.log('hay errores', errors);
+        console.log(' --- hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
     } else {
         delete user.password;
@@ -153,14 +141,13 @@ const updatePassword = async (req, res) => {
             where: { id: userID.id },
             returning: false
         });
-        console.log('Password actualizado del usuario: ' + userName );
+        console.log('Se actualizo el password del usuario: ' + userName );
     }
     res.redirect ('/user/' + userName);
 }
 
 const userDelete = async (req, res) => {
     let userName = req.params.userName;
-    console.log(userName) 
     let user = await db.User.findOne({where:{ userName: userName}})
     res.render('User/delete', {'user': user});
 }
@@ -188,11 +175,11 @@ const login = (req, res) => {
 }
 
 const userLogin = async (req, res) => {
-    //let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
+    userName = req.body.userName;
     let user = await db.User.findOne({where: {userName: req.body.userName}})
     if(user) {
         if(bcrypt.compareSync(req.body.password, user.password) && user.active){
-            console.log('logged');
+            console.log('Se logueo el usuario: ' + userName);
             if(!!req.body.remember) {
                 res.cookie('userName', user.userName, {
                     maxAge: 1000 * 60 * 60 * 24 * 30
@@ -203,17 +190,18 @@ const userLogin = async (req, res) => {
             req.session.user = user;
             res.redirect('/');
         } else {
-            console.log('Error pwd');
+            console.log('Error de login: ' + userName);
             res.render('User/login', {'user': user, 'error': true});
         }
     } else {
-        console.log('userName error');
+        console.log('userName error: ' + userName);
         res.render('User/login', {'user': user, 'error': true});
     }
 }
 
 const signOut = (req, res) => {
     res.clearCookie('userName');
+    console.log('userName error: ' + req.session.user.userName);
     delete req.session.user;
     res.redirect('/');
 }
