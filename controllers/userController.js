@@ -1,8 +1,12 @@
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
-const jsonTools = require('../utils/JSONTools')
-const netTools = require('../utils/networkTools')
-const userTools = require('../utils/User')
+const ExcelJS = require('exceljs');
+const fs = require('fs');
+const jsonTools = require('../utils/JSONTools');
+const netTools = require('../utils/networkTools');
+const userTools = require('../utils/User');
+const db = require('../database/models');
+const { Op } = require('sequelize');
 const {validationResult} = require('express-validator');
 
 let userList = jsonTools.read('users.json');
@@ -21,14 +25,13 @@ const createUserObject = (req) => {
         email: req.body.email,
         emailValidated: req.body.emailValidated,
         address: req.body.address,
-        city: req.body.city,
+        id_town: parseInt(req.body.city),
         dni: parseInt(req.body.dni),
         phone: parseInt(req.body.phone),
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
         active: true,
-        lastIP : netTools.getUserIP(req),
-        rol: 'user'
+        lastIP : netTools.getUserIP(req)
     }
 }
 
@@ -37,29 +40,44 @@ const comparePassword = (user) => {
     return result;
 }
 
-const validateUserFields = (user, users, req) => {
-    const errors = validationResult(req).mapped();
+const validateUserFields = async (user, req, id=false) => {
+    let errors = validationResult(req).mapped();
+    if(id) { 
+        delete errors.password
+    } else {
+        comparePassword(user) ? '' : errors.password = {msg :'Las contrasenas no coinciden'};
+    }
     console.log(errors)
-    users.find( ({dni}) => dni === user.dni) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
-    users.find( ({userName}) => userName === user.userName) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
-    users.find( ({email}) => email === user.email) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
-    comparePassword(user) ? '' : errors.password = {msg :'Las contrasenas no coinciden'};
+    await db.User.findOne({where: {userName : user.userName, id: {[Op.ne]: id}}}) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
+    await db.User.findOne({where: {dni : user.dni, id: {[Op.ne]: id}}}) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
+    await db.User.findOne({where: {email : user.email, id: {[Op.ne]: id}}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
+    // Query mas eficiente pero no puedo controlar el mensaje de error por campo.
+    // const users = await db.User.findAll({
+    //     where: {
+    //         [Op.or]: [
+    //             { dni: user.dni},
+    //             { userName: user.userName}, 
+    //             { email: user.email},
+    //         ],
+    //     }, 
+    //     });
+    console.log( " ------------ errors")
     console.log(errors)
     return errors 
 }
 
-const showUser = (req, res) => {
-    const userName = req.params.userName;
-    console.log(userName);
-    let userInfo = {}
-    console.log(userInfo)
-    userList.forEach( user => user.userName === userName ? userInfo = user : '');
-    res.render('User/profile', {'user': userInfo, 'orderHistory': orderHistory} );
+const showUser = async (req, res) => {
+    const user = await db.User.findOne({ where: { userName: req.params.userName } });
+    console.log('Show profile: ' + user);
+    res.render('User/profile', {'user': user, 'orderHistory': orderHistory} );
 }
 
 const listUsers = (req, res) => {
     let userInfo = userTools.isLogged(req);
-    res.render('User/list', {'users': userList, user: userInfo} );
+        db.User.findAll().then(
+            (usersData) => res.render('User/list', {'users': usersData, user: userInfo}
+        )
+    );
 }
 
 const registerUser = (req, res) => {
@@ -70,120 +88,95 @@ const registerUser = (req, res) => {
     }
 }
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
     let user = createUserObject(req);
-    let users = jsonTools.read('users.json');
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
-    errors = validateUserFields(user, users, req);
+    errors = await validateUserFields(user, req);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'register'});
     } else {
         user.id = uuid.v4();
-        user.timeCreate = getDateTimeNow();
-        user.timeUpdate = getDateTimeNow();
         user.image = 'default.avif';
+        user.id_rol = 1
         user.password = bcrypt.hashSync(user.password, 10);
         delete(user.confirmPassword);
-        users.push(user);
-        jsonTools.write('users.json', users);
+        db.User.create(user);
         console.log('Usuario guardado');
-        res.redirect ('/user/' + user.id);
+        res.redirect ('/user/' + user.userName);
     }
 }
 
-const editUser = (req, res) => {
-    let users = jsonTools.read('users.json');
-    let userSearch = req.params.userName;
-    console.log('userSearch')
-    console.log(userSearch)
-    console.log(users)
-    let user = users.filter( ({userName}) => { return userName == userSearch });
-    console.log('user')
-    console.log(user)
-    delete(user[0]['password'])
-    delete(user[0]['confirmPassword'])
-    res.render('User/register', {'user': user[0], 'errors': false, 'action': 'update'});
+const editUser = async (req, res) => {
+    let user = await db.User.findOne({where: {userName: req.params.userName}})
+    delete(user.password)
+    delete(user.confirmPassword)
+    res.render('User/register', {'user': user, 'errors': false, 'action': 'update'});
 }
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
     let user = createUserObject(req);
-    userSearch = req.params.userName;
-    user.timeUpdate = getDateTimeNow();
-    
-    let users = jsonTools.read('users.json');
-    // Este filtro negativo se aplica para tener un arreglo que no contenga al usuario actual
-    // y asi poder validar los campos dni, userName y email con los del resto de los usuarios.
-    let temp_users_validate = users.filter( ({userName}) => { return userName != userSearch });
-
+    let userID = await db.User.findOne({
+        where: {userName: req.params.userName},
+        attributes: ['id']
+    });
+    //userSearch = req.params.userName;
     // Se crea un objeto de errores con la finalidad de poblarlo con aquellos datos que 
     // ya se encuentren registrados por otro usuario y poder notificarle al usuario enviandolo a la vista.
-    errors = validateUserFields(user, temp_users_validate. req);
+    errors = await validateUserFields(user, req, userID.id);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
         res.render('User/register', {'user': user, 'errors': errors, 'action': 'update'});
     } else {
-        user_index = users.findIndex( ({userName}) => userName === userSearch );
-        user.password = users[user_index]['password'];
-        user.image = users[user_index]['image'];
-        user.rol = users[user_index]['rol'];
-        delete(user.confirmPassword);
-        users[user_index] = user;
-        jsonTools.write('users.json', users);
-        console.log('Usuario actualizado');
-        res.redirect ('/user/' + userSearch);
+        delete user.password;
+        await db.User.update(user, {
+            where: { id: userID.id },
+            returning: false
+        });
+        console.log('Usuario actualizado: ' + user.userName);
+        res.redirect ('/user/' + user.userName);
     }
 }
 
-const updatePassword = (req, res) => {
-    userSearch = req.params.userName;
-    let users = jsonTools.read('users.json');
+const updatePassword = async (req, res) => {
+    let userName = req.params.userName;
     if(req.body.password === req.body.confirmPassword) {
-        userIndex = users.findIndex( ({userName}) => userName === userSearch );
-        user = users[userIndex];
-            if(req.body.Oldassword === user.password) {
-                user.password = bcrypt.hashSync(req.body.password, 10);
-                user.timeUpdate = getDateTimeNow();
-                user.lastIP = netTools.getUserIP(req),
-                console.log(user)
-                users['userIndex'] = user;
-                jsonTools.write('users.json', users);
-                console.log('Usuario actualizado');
-            } else {
-                console.log('Error el clave anteriro')
-            }
+        let userID = await db.User.findOne({
+            where: {userName: userName},
+            attributes: ['id']
+        });
+        let user = {}
+        user.password = bcrypt.hashSync(req.body.password, 10);
+        user.lastIP = netTools.getUserIP(req);
+        await db.User.update(user, {
+            where: { id: userID.id },
+            returning: false
+        });
+        console.log('Password actualizado del usuario: ' + userName );
     }
-    res.redirect ('/user/' + userSearch);
+    res.redirect ('/user/' + userName);
 }
 
-const userDelete = (req, res) => {
-    let users = jsonTools.read('users.json');
-    let userSearch = req.params.arrUserName;
-    let user = users.filter( ({userName}) => { return userName === userSearch });
-    res.render('User/delete', {'user': user[0]});
+const userDelete = async (req, res) => {
+    let userName = req.params.userName;
+    console.log(userName) 
+    let user = await db.User.findOne({where:{ userName: userName}})
+    res.render('User/delete', {'user': user});
 }
 
-const userDisable = (req, res) => {
-    let userSearch = req.params.userName;
-    let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({userName}) => { return userName === userSearch });
-    users[user_index].active = false;
-    users[user_index].timeUpdate = getDateTimeNow();
-    jsonTools.write('users.json', users);
-    console.log('Se elimino el usuario: ' + userSearch);
+const changeStatus = async (req, res) => {
+    let userName = req.params.userName;
+    let status = await db.User.findOne({
+        where: {userName: userName},
+        attributes: ['active']
+    });
+    await db.User.update({ active: !status.active }, {
+        where: { userName: userName },
+        returning: false
+    });
+    console.log('Se Modifico el estado del usuario: ' + userName);
     res.redirect('/');
-}
-
-const userEnable = (req, res) => {
-    let userSearch = req.params.arrUserName;
-    let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({userName}) => { return userName === userSearch });
-    users[user_index].active = true;
-    users[user_index].timeUpdate = getDateTimeNow();
-    jsonTools.write('users.json', users);
-    console.log('Se habilito el usuario: ' + userSearch);
-    res.redirect('/user');
 }
 
 const login = (req, res) => {
@@ -194,21 +187,20 @@ const login = (req, res) => {
     }
 }
 
-const userLogin = (req, res) => {
-    let user = req.body;
-    let users = jsonTools.read('users.json');
-    let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
-    if(userFound) {
-        if(bcrypt.compareSync(user.password, userFound.password) && userFound.active){
+const userLogin = async (req, res) => {
+    //let userFound = users.filter( ({userName}) => { return userName === user.userName })[0];
+    let user = await db.User.findOne({where: {userName: req.body.userName}})
+    if(user) {
+        if(bcrypt.compareSync(req.body.password, user.password) && user.active){
             console.log('logged');
             if(!!req.body.remember) {
                 res.cookie('userName', user.userName, {
                     maxAge: 1000 * 60 * 60 * 24 * 30
                 });
             }
-            delete userFound.id;
-            delete userFound.password;
-            req.session.user = userFound;
+            delete user.id;
+            delete user.password;
+            req.session.user = user;
             res.redirect('/');
         } else {
             console.log('Error pwd');
@@ -226,22 +218,62 @@ const signOut = (req, res) => {
     res.redirect('/');
 }
 
-const uploadImage = (req, res) => {
-    let userSearch = req.params.userName;
-    let users = jsonTools.read('users.json');
-    let user_index = users.findIndex( ({userName}) => userName === userSearch );
-    users[user_index]['image'] = req.file.filename;
-    users[user_index]['timeUpdate'] = getDateTimeNow();
-    jsonTools.write('users.json', users);
-    console.log('Usuario actualizado');
-    res.redirect ('/user/'+userSearch);
+const uploadImage = async (req, res) => {
+    let userName = req.params.userName;
+    let img = { image: req.file.filename}
+    await db.User.update(img, {
+        where: { userName: userName },
+        returning: false
+    });
+    console.log('Se actualizo la imagen del usuario: ' + userName);
+    res.redirect ('/user/'+userName);
 }
 
-const exportUserlist = (req, res) => {
-    const fileName = jsonTools.exportToCSV('users.json');
-    const pathFile = './tmp/'+fileName;
-    res.download(pathFile);
-}
+const exportUserlist = async (req, res) => {
+    try {
+        // Realiza el findAll() para obtener los datos de la tabla User
+        const columns = ['userName', 'firstName', 'lastName', 'email', 'dni', 'phone', 'city', 'address', ];
+        const users = await db.User.findAll({ attributes: columns });
+
+        // Crea un nuevo libro de Excel
+        const workbook = new ExcelJS.Workbook();
+
+        // Crea una nueva hoja en el libro
+        const worksheet = workbook.addWorksheet('Usuarios');
+
+        // Crea el encabezado de la hoja con los nombres de las columnas
+        worksheet.addRow(columns);
+
+        // Agrega los datos de los usuarios a la hoja
+        users.forEach((user) => {
+            const values = columns.map((column) => user[column]);
+            worksheet.addRow(values);
+        });
+
+        // Crea un stream para guardar el archivo Excel
+        const tempFileName = 'usuarios.xlsx';
+        const stream = fs.createWriteStream(tempFileName);
+        await workbook.xlsx.write(stream);
+
+        // Configura la respuesta para descargar el archivo
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', 'attachment; filename=usuarios.xlsx');
+
+        // Envía el archivo Excel como respuesta
+        const fileStream = fs.createReadStream(tempFileName);
+        fileStream.pipe(res);
+
+        // Elimina el archivo temporal después de enviarlo
+        fileStream.on('end', () => {
+            fs.unlinkSync(tempFileName);
+        });
+
+        console.log('Archivo Excel generado correctamente:', fileName);
+    } catch (error) {
+        console.error('Error al generar el archivo Excel:', error);
+    }
+};
+
 
 const userController = {
     show: listUsers,
@@ -256,8 +288,8 @@ const userController = {
     updatePwd: updatePassword,
     updateImage: uploadImage,
     delete: userDelete,
-    disable: userDisable,
-    enable: userEnable,
+    disable: changeStatus,
+    enable: changeStatus,
     export: exportUserlist,
 }
 
