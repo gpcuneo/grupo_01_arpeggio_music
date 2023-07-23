@@ -1,17 +1,15 @@
-const path = require ('path')
-const categoryModel = require('../models/category');
 const expressValidator = require ('express-validator')
 const userTools = require('../utils/User')
-const { log } = require('console');
+const db = require('../database/models');
 
 
 
 const categoryControllers = {
     // /category
-    getCategory: (req, res) => {
-        const categorias = categoryModel.findAll();
+    getCategory: async (req, res) => {
+        const categorias = await db.Category.findAll({attributes: ['id', 'name', 'img']});
         let userInfo = userTools.isLogged(req);
-        res.render('category', {'categoryList': categorias,user: userInfo})
+        res.render('category', {'categoryList': categorias, user: userInfo})
     },
     postCategory: (req, res) => {
         let datos = req.body;
@@ -22,22 +20,21 @@ const categoryControllers = {
         }
 
         if(req.file) {
-            datos.img = '/images/categories/'+ req.file.filename
+            datos.img = req.file.filename
         }
         
-       categoryModel.createOne(datos)
+        db.Category.create(datos);
         res.redirect('/category')
     },
     // /category/:id/detail
-    getCategoryId: (req, res) => { //falta
+    getCategoryId: async (req, res) => { //falta
         let userInfo = userTools.isLogged(req);
-        const id = Number(req.params.id);
-        const categoriaAMostrar = categoryModel.findById(id)
+        const categoriaAMostrar = await db.Category.findOne({ 
+            where: { id: req.params.id }
+        });
        
-     
         if (!categoriaAMostrar){
             return res.send ('Error de id')
-
         }
         res.render ('categoryDetail',{category:categoriaAMostrar,title: 'Detalle de la categoria',user: userInfo }) 
        
@@ -48,12 +45,11 @@ const categoryControllers = {
         res.render('categoryEdit', {errors:[],action:'create',user: userInfo})
     },
     // /category/:id/update
-    getCategoryUpdate: (req,res) => {
+    getCategoryUpdate: async (req,res) => {
         let userInfo = userTools.isLogged(req);
-        const id = Number(req.params.id);
-        //const categoryUpDate = categoryList.find(categoryActual => categoryActual.id === id);
-        const categoryUpDate = categoryModel.findById(id)
-        
+        const categoryUpDate = await db.Category.findOne({ 
+            where: { id: req.params.id }
+        });
 
         if(!categoryUpDate) {
             return res.send('error de ID)')
@@ -62,10 +58,10 @@ const categoryControllers = {
         res.render ('categoryEdit', {category:categoryUpDate,errors:[], action:'update',user: userInfo})
     },
      // /category/:id/update
-     putCategoryUpdate: (req,res) => {
-       
-        const id = Number(req.params.id);
-        const categoryUpDate = categoryModel.findById(id);
+     putCategoryUpdate: async (req,res) => {
+        const categoryUpDate = await db.Category.findOne({ 
+            where: { id: req.params.id }
+        });
 
         const validations = expressValidator.validationResult(req);
 
@@ -76,16 +72,21 @@ const categoryControllers = {
         let datos = req.body;
 
         if(req.file) {
-            datos.img = '/images/categories/'+ req.file.filename
+            datos.img = req.file.filename
         }
         
-       categoryModel.updateById(id, datos)
+        await db.Category.update(datos, {
+            where: { id: req.params.id },
+            returning: false
+        });
+
         res.redirect('/category')
     },
-    getCategoryDelete1: (req, res) => { //falta
+    getCategoryDelete1: async (req, res) => { 
         let userInfo = userTools.isLogged(req);
-        const id = Number(req.params.id);
-        const categoriaAMostrar = categoryModel.findById(id)
+        const categoriaAMostrar = await db.Category.findOne({ 
+            where: { id: req.params.id }
+        });
         console.log(categoriaAMostrar)
      
         if (!categoriaAMostrar){
@@ -96,9 +97,9 @@ const categoryControllers = {
        
     },
      // /category
-    getCategoryDelete2: (req, res) => { //falta
+    getCategoryDelete2: (req, res) => { //TODO falta
         const id = Number(req.params.id);
-        categoryModel.deleteById(id);
+        //categoryModel.deleteById(id); //TODO definir si se hace borrado logico o no
 
         res.redirect('/category');
     },
