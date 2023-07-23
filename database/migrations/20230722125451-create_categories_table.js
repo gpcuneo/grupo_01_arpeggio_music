@@ -5,24 +5,24 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('categories', { 
       id: {
-        type: DataType.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
       name: {
-          type: DataType.STRING(40),
+          type: Sequelize.DataTypes.STRING(40),
           allowNull: false,
       },
       img: {
-          type: DataType.STRING(40),
+          type: Sequelize.DataTypes.STRING(40),
           allowNull: false,
       },
       createdAt: {
-          type: DataType.DATE,
+          type: Sequelize.DataTypes.DATE,
           allowNull: false,
       },
       updatedAt: {
-          type: DataType.DATE,
+          type: Sequelize.DataTypes.DATE,
           allowNull: false,
       }  
     });
