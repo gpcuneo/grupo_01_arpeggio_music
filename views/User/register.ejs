@@ -54,7 +54,7 @@
                     </div>
                     <div class="separacion">
                         <label for="city">Provincia</label>
-                        <select name="city" id="city" class="form-input <%= errors.city? 'error-info' : '' %>" value="<%= user ? user.city : '' %>" >
+                        <select name="city" id="city" class="form-input <%= errors.city? 'error-info' : '' %>" >
                             <% if(user.id_province) { %>
                                 <% for (let i=0; i < provinces.length; i++) { %>
                                     <option value="<%=provinces[i].id %>" <%= provinces[i].id == user.id_province ? 'selected' : '' %> > <%=provinces[i].name %> </option>
@@ -69,12 +69,12 @@
                     </div>
                     <div class="separacion">
                         <label for="town">Partido/Localidad</label>
-                        <select name="town" id="town" class="form-input <%= errors.town? 'error-info' : '' %>" value="<%= user ? user.town : '' %>">
+                        <select name="town" id="town" class="form-input <%= errors.town? 'error-info' : '' %>" >
                             <% if(user.id_town) { %>
                                 <% for (let i=0; i < towns.length; i++) { %>
                                     <option value="<%=towns[i].id %>" <%= towns[i].id == user.id_town ? 'selected' : '' %> > <%=towns[i].name %> </option>
                                 <% } %>        
-                            <% } %>
+                            <% } %>                            
                         </select>
                         <div class="error-info"><%= errors.town? errors.town.msg : '' %></div>
                     </div>
@@ -108,8 +108,7 @@
         </div>
     </main>
     <%- include('../partials/footer') %>
-    <script src="../js/register.js">
-        type
+    <script src="/js/register.js">
     </script>
 </body>
 </html>
