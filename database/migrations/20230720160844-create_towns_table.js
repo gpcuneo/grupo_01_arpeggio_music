@@ -3,26 +3,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('roles', {
+    await queryInterface.createTable('towns', {
       id: {
-          type: DataType.INTEGER,
+          type: Sequelize.DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true,
       },
       id_province: {
-          type: DataType.INTEGER,
+          type: Sequelize.DataTypes.INTEGER,
           allowNull: false,
       },
-      town: {
-          type: DataType.STRING(255),
+      name: {
+          type: Sequelize.DataTypes.STRING(255),
           allowNull: false,
       },
       createdAt: {
-          type: DataType.DATE,
+          type: Sequelize.DataTypes.DATE,
           allowNull: false,
       },
       updatedAt: {
-          type: DataType.DATE,
+          type: Sequelize.DataTypes.DATE,
           allowNull: false,
       }
     });

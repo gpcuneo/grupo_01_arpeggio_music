@@ -4,75 +4,79 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
-      id: {
-          type: DataType.CHAR(36),
-          primaryKey: true,
-          allowNull: false,
-      },
-      userName: {
-          type: DataType.STRING(36),
-          allowNull: false,
-      },
-      firstName: {
-          type: DataType.STRING(24),
-          allowNull: false,
-      },
-      lastName: {
-          type: DataType.STRING(24),
-          allowNull: false,
-      },
-      email: {
-          type: DataType.TEXT,
-          allowNull: false,
-      },
-      address: {
-          type: DataType.TEXT,
-          allowNull: false,
-      },
-      id_town: {
-          type: DataType.INTEGER,
-          allowNull: false,
-      },
-      id_rol: {
-          type: DataType.INTEGER,
-          allowNull: false,
-      },
-      dni: {
-          type: DataType.INTEGER,
-          allowNull: false,
-      },
-      phone: {
-          type: DataType.INTEGER,
-          allowNull: false,
-      },
-      password: {
-          type: DataType.CHAR(60),
-          allowNull: false,
-      },
-      active: {
-          type: DataType.BOOLEAN,
-          allowNull: false,
-      },
-      lastIP: {
-          type: DataType.TEXT,
-          allowNull: false,
-      },
-      image: {
-          type: DataType.TEXT,
-          allowNull: false,
-      },
-      createdAt: {
-          type: DataType.DATE,
-          allowNull: false,
-      },
-      updatedAt: {
-          type: DataType.DATE,
-          allowNull: false,
-      }
+        id: {
+            type: Sequelize.DataTypes.CHAR(36),
+            primaryKey: true,
+            allowNull: false,
+        },
+        userName: {
+            type: Sequelize.DataTypes.STRING(36),
+            allowNull: false,
+        },
+        firstName: {
+            type: Sequelize.DataTypes.STRING(24),
+            allowNull: false,
+        },
+        lastName: {
+            type: Sequelize.DataTypes.STRING(24),
+            allowNull: false,
+        },
+        email: {
+            type: Sequelize.DataTypes.TEXT,
+            allowNull: false,
+        },
+        address: {
+            type: Sequelize.DataTypes.TEXT,
+            allowNull: false,
+        },
+        id_town: {
+            type: Sequelize.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        id_province: {
+            type: Sequelize.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        id_rol: {
+            type: Sequelize.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        dni: {
+            type: Sequelize.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        phone: {
+            type: Sequelize.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        password: {
+            type: Sequelize.DataTypes.CHAR(60),
+            allowNull: false,
+        },
+        active: {
+            type: Sequelize.DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        lastIP: {
+            type: Sequelize.DataTypes.TEXT,
+            allowNull: false,
+        },
+        image: {
+            type: Sequelize.DataTypes.TEXT,
+            allowNull: false,
+        },
+        createdAt: {
+            type: Sequelize.DataTypes.DATE,
+            allowNull: false,
+        },
+        updatedAt: {
+            type: Sequelize.DataTypes.DATE,
+            allowNull: false,
+        }
     });
-  },
+    },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
-  }
+    async down (queryInterface, Sequelize) {
+        await queryInterface.dropTable('users');
+    }
 };
