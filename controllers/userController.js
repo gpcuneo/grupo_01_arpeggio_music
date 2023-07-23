@@ -20,7 +20,8 @@ const createUserObject = (req) => {
         email: req.body.email,
         emailValidated: req.body.emailValidated,
         address: req.body.address,
-        id_town: parseInt(req.body.city),
+        id_province: parseInt(req.body.city),
+        id_town: parseInt(req.body.town),
         dni: parseInt(req.body.dni),
         phone: parseInt(req.body.phone),
         password: req.body.password,
@@ -45,6 +46,8 @@ const validateUserFields = async (user, req, id=false) => {
     await db.User.findOne({where: {userName : user.userName, id: {[Op.ne]: id}}}) ? errors.dni = {msg : 'El DNI ya se encuentra registrado'} : '' ;
     await db.User.findOne({where: {dni : user.dni, id: {[Op.ne]: id}}}) ? errors.userName = {msg : 'El nombre de usuario ya fue usado'} : '' ;
     await db.User.findOne({where: {email : user.email, id: {[Op.ne]: id}}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
+    user.city === 0 ? errors.city = {msg : 'Seleccione una provincia valida'} : '' ;
+    user.town === 0 ? errors.town = {msg : 'Selecciona una localidad valida'} : '' ;
     // Query mas eficiente pero no puedo controlar el mensaje de error por campo.
     // const users = await db.User.findAll({
     //     where: {
@@ -75,11 +78,12 @@ const listUsers = (req, res) => {
     );
 }
 
-const registerUser = (req, res) => {
+const registerUser = async (req, res) => {
     if(userTools.isLogged(req)) {
         res.redirect('/')
     } else {
-        res.render('User/register', {'user': false, 'errors': false, 'action': 'register'});
+        const provinces = await db.Province.findAll({attributes: ['id', 'name']});
+        res.render('User/register', {'user': false, 'errors': false, 'action': 'register', provinces});
     }
 }
 
@@ -106,7 +110,13 @@ const editUser = async (req, res) => {
     delete(user.id)
     delete(user.password)
     delete(user.confirmPassword)
-    res.render('User/register', {'user': user, 'errors': false, 'action': 'update'});
+    console.log(user)
+    const provinces = await db.Province.findAll({attributes: ['id', 'name']});
+    const towns = await db.Town.findAll({
+        where: {id_province: user.id_province},
+        attributes: ['id', 'name']}
+    );
+    res.render('User/register', {'user': user, 'errors': false, 'action': 'update', provinces, towns});
 }
 
 const updateUser = async (req, res) => {

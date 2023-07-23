@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db:3306
--- Tiempo de generación: 20-07-2023 a las 15:59:26
+-- Tiempo de generación: 23-07-2023 a las 13:52:17
 -- Versión del servidor: 5.7.42
 -- Versión de PHP: 8.1.17
 
@@ -2710,17 +2710,22 @@ CREATE TABLE `users` (
   `lastIP` tinytext NOT NULL,
   `image` tinytext NOT NULL,
   `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `updatedAt` datetime NOT NULL,
+  `id_province` int(100) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `userName`, `firstName`, `lastName`, `email`, `address`, `id_town`, `id_rol`, `dni`, `phone`, `password`, `active`, `lastIP`, `image`, `createdAt`, `updatedAt`) VALUES
-('b3b91cc1-4f6a-4bb5-bd2f-20d3925ef59e', 'cosmefulanito', 'Cosme', 'Fulanito', 'cosme.fulanito@hotmail.com', 'San Lorenzo 123', 212, 1, 30135790, 1167873923, '$2a$10$OEOgKoxA5Pi0nkqw5hiSkO7ZMBm38GUikYotxIF8CsCrpWRjdwW72', 1, '172.18.0.1', '1687041478406-200112anonymous.jpeg', '2023-07-19 14:05:56', '2023-07-19 14:05:56'),
-('d72f98b1-dbb2-41d8-88e1-9c0e8eb4fc7c', 'pepegrillo', 'Pepe', 'Grillo', 'pepe.grillo@gmail.com', 'Calle falsa 123', 163, 2, 30123456, 1134879328, '$2a$10$alxXME9Q.ot51jTDmhzdJuAHXumUXgqvOmHpy0u7O7dQUGGDTr1me', 1, '172.18.0.1', '1687041398999-slow_internet.jpeg', '2023-07-19 14:05:56', '2023-07-19 14:05:56'),
-('f5431d56-a2c6-470d-9f88-90eb8621b323', 'arodriguez', 'Andrea', 'Rodriguez', 'arodriguez@outlook.com', 'Alguna Calle 1234', 14, 1, 30123123, 1147568902, '$2a$10$abzCDSfHT3pVUtnpFPKvD.PzoUE.NeVw8JwfeefimcfOg.5ccT8hu', 1, '172.18.0.1', '1687041556551-5652.jpg', '2023-07-19 14:05:56', '2023-07-19 14:05:56');
+INSERT INTO `users` (`id`, `userName`, `firstName`, `lastName`, `email`, `address`, `id_town`, `id_rol`, `dni`, `phone`, `password`, `active`, `lastIP`, `image`, `createdAt`, `updatedAt`, `id_province`) VALUES
+('01cd1e41-d56a-4190-a463-35032ffc9dcf', 'test01test01', 'test', 'test', 'test@test.test', 'test de test 123', 4, 1, 90999999, 15678678, '$2a$10$9JM.WYGDVbEmD.6q/gk7.eJbngzTLP9oWmPG4Azn1n2P3/x.WC6W6', 0, '172.27.0.1', 'default.avif', '2023-07-21 14:11:22', '2023-07-21 17:25:21', 1),
+('0f7023ba-6304-44b9-8e33-17b559cead7b', 'test04test04', 'testdetest', 'testestets', 'test04test04@test04test04.com', 'Alguna 1234', 282, 1, 80808808, 1156728376, '$2a$10$xEvSGPsNl4Jf0T0iYngh/uDmLVB1DOAl42Gi7QtvxJzyBfHvgurti', 1, '172.28.0.1', 'default.avif', '2023-07-23 13:17:54', '2023-07-23 13:17:54', 3),
+('32de8d81-c77c-4c9f-bf68-a13ee6d848ef', 'jvilla00', 'Juan Pablo', 'Villa', 'jvilla@gmail.com', 'Alguna 123', 1, 1, 20200200, 1145432345, '$2a$10$lRu9SCaPIzj2WNoY6kqSpOUTNTPuQMa4og1P6kToEA9XYrHOmkFp2', 1, '172.27.0.1', '1689955352182-Captura de pantalla 2023-05-14 a la(s) 18.21.36.png', '2023-07-21 15:53:41', '2023-07-21 16:02:32', 1),
+('8755d1a5-0908-4608-8837-cc27f3cf3224', 'usertest01', 'usertest', 'usertest', 'usertest01@usertest01.com', 'usertest01 1234', 3, 1, 90909909, 1178763562, '$2a$10$RCn53oCTl6ot0k2.NQNrFuk3E9Jn3PUWLXh1WDxQEaOLoj/o5YLKO', 1, '172.28.0.1', '1689968195703-descarga.jpeg', '2023-07-21 19:35:22', '2023-07-21 19:36:35', 1),
+('b3b91cc1-4f6a-4bb5-bd2f-20d3925ef59e', 'cosmefulanito', 'Cosme', 'Fulanito', 'cosme.fulanito@hotmail.com', 'San Lorenzo 123', 212, 1, 30135790, 1167873923, '$2a$10$OEOgKoxA5Pi0nkqw5hiSkO7ZMBm38GUikYotxIF8CsCrpWRjdwW72', 1, '172.18.0.1', '1687041478406-200112anonymous.jpeg', '2023-07-19 14:05:56', '2023-07-19 14:05:56', 1),
+('d72f98b1-dbb2-41d8-88e1-9c0e8eb4fc7c', 'pepegrillo', 'Pepe', 'Grillo', 'pepe.grillo@gmail.com', 'Calle falsa 123', 5, 2, 30333303, 1134879328, '', 1, '172.27.0.1', '1687041398999-slow_internet.jpeg', '2023-07-19 14:05:56', '2023-07-21 15:42:19', 1),
+('f5431d56-a2c6-470d-9f88-90eb8621b323', 'arodriguez', 'Andrea', 'Rodriguez', 'arodriguez@outlook.com', 'Alguna Calle 1234', 14, 1, 30123123, 1147568902, '$2a$10$abzCDSfHT3pVUtnpFPKvD.PzoUE.NeVw8JwfeefimcfOg.5ccT8hu', 1, '172.18.0.1', '1687041556551-5652.jpg', '2023-07-19 14:05:56', '2023-07-19 14:05:56', 1);
 
 --
 -- Índices para tablas volcadas
@@ -2814,7 +2819,8 @@ ALTER TABLE `towns`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_rol` (`id_rol`),
-  ADD KEY `id_town` (`id_town`);
+  ADD KEY `id_town` (`id_town`),
+  ADD KEY `province_fk_id` (`id_province`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -2945,6 +2951,7 @@ ALTER TABLE `towns`
 -- Filtros para la tabla `users`
 --
 ALTER TABLE `users`
+  ADD CONSTRAINT `province_fk_id` FOREIGN KEY (`id_province`) REFERENCES `provinces` (`id`),
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id`),
   ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`id_town`) REFERENCES `towns` (`id`);
 COMMIT;

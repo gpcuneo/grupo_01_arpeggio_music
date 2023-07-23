@@ -8,7 +8,7 @@ module.exports = (sequelize, DataType) => {
             autoIncrement: true,
             primaryKey: true,
         },
-        province: {
+        name: {
             type: DataType.STRING(100),
             allowNull: false,
         },
@@ -31,6 +31,7 @@ module.exports = (sequelize, DataType) => {
 
     Province.associate = (models) => {
         Province.hasMany(models.Town, {as: 'Towns', foreignKey: 'id_province'});
+        Province.hasMany(models.User, {as: 'Users', foreignKey: 'id_province'});
     }
 
     return Province

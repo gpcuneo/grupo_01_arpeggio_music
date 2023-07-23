@@ -32,6 +32,10 @@ module.exports = (sequelize, DataType) => {
             type: DataType.INTEGER,
             allowNull: false,
         },
+        id_province: {
+            type: DataType.INTEGER,
+            allowNull: false,
+        },
         id_rol: {
             type: DataType.INTEGER,
             allowNull: false,
@@ -79,6 +83,7 @@ module.exports = (sequelize, DataType) => {
 
     User.associate = (models) => {
         User.belongsTo(models.Town, {as:'Town', foreignKey: 'id_town'});
+        User.belongsTo(models.Province, {as:'Province', foreignKey: 'id_province'});
         User.belongsTo(models.Rol, {as:'Rol', foreignKey: 'id_rol'});
     }
 
