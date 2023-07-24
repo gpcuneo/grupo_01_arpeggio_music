@@ -32,8 +32,9 @@ let deleteProduct = (req, res)=>{
 }
 let getCreate = async (req, res)=>{
     const categorys = await db.Category.findAll({raw:true});
+    const colors = await db.Color.findAll({raw:true})
     let userInfo = userTools.isLogged(req);
-    res.render('products/productManipulation', {action:'create', 'product':false,'user':userInfo, categorys})
+    res.render('products/productManipulation', {action:'create', 'product':false,'user':userInfo, categorys,colors})
 }
 
 let getUpDate = (req, res)=>{
@@ -46,6 +47,7 @@ let getUpDate = (req, res)=>{
 }
 let postProducts = async(req, res) =>{
     const categorys= await db.Category.findAll({raw:true})
+    const colors = await db.Color.findAll({raw:true})
     const resultValidation = validationResult(req);
     let userInfo = userTools.isLogged(req);
     if(resultValidation.errors.length > 0){
@@ -55,7 +57,8 @@ let postProducts = async(req, res) =>{
             action:'create',
             'product':false,
             'user':userInfo,
-            categorys
+            categorys,
+            colors
         })
     }
 
