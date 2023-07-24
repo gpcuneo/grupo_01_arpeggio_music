@@ -130,8 +130,12 @@
                         </div>
                         <div class="form-group">
                             <label for="colors">Color</label>
-                            <input type="color" name="colors" value="<%= product? product.colors: '' %>" 
-                                id="colors">
+                            <select name="colors" id="" class="group-input">
+                                <option value="">Elija un color</option>
+                                <% colors.forEach(color => { %>
+                                    <option value=""><%= color.name %></option>
+                                <% }) %>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>
