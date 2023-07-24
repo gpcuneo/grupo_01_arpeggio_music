@@ -32,7 +32,11 @@ module.exports = {
       },
       category_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'categories',
+          key: 'id'
+      },
       },
       description: {
         type: Sequelize.TEXT,

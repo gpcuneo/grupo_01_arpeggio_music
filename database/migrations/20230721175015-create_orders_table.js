@@ -12,11 +12,18 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.CHAR(36),
-        allowNull: false
+        allowNull: false,references: {
+          model: 'users',
+          key: 'id'
+        },
       },
       delivery_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'deliveries',
+          key: 'id'
+        },
       },
       createdAt: {
         type: Sequelize.DATE,

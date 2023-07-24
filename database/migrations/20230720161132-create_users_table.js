@@ -32,14 +32,26 @@ module.exports = {
         id_town: {
             type: Sequelize.DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: 'towns',
+                key: 'id'
+            },
         },
         id_province: {
             type: Sequelize.DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: 'provinces',
+                key: 'id'
+            },
         },
         id_rol: {
             type: Sequelize.DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: 'roles',
+                key: 'id'
+            },
         },
         dni: {
             type: Sequelize.DataTypes.INTEGER,

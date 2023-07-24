@@ -12,6 +12,10 @@ module.exports = {
       id_province: {
           type: Sequelize.DataTypes.INTEGER,
           allowNull: false,
+          references: {
+            model: 'provinces',
+            key: 'id'
+        },
       },
       name: {
           type: Sequelize.DataTypes.STRING(255),
