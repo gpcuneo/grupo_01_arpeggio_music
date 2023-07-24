@@ -97,6 +97,22 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="trademark">Eliga una Marca (Opcional)</label>
+                            <select name="trademark" id="" class="group-input">
+                                <option value="">Seleccione una marca</option>
+                                <% let trademarks = ['CASIO','YAMAHA','PEARL','JACKSON','SAMSON','REMO','IBANEZ'] %>
+                                <% for (const oneTrademark of trademarks) { %>
+                                    <% if (action == 'create') { %>
+                                        <option value="<%=oneTrademark %>"
+                                            <%= locals.oldData && (oneTrademark == oldData.trademark)?'selected':null %> ><%= oneTrademark %></option>
+                                    <% } else { %>
+                                    <option value="<%=oneTrademark %>"
+                                        <%= product && (product.trademark == oneTrademark)?'selected':null %> ><%= oneTrademark %></option>
+                                <% } %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="stock">Stock</label>
                             <input type="number" name="stock" class="group-input <%= locals.errors && errors.stock?'invalid':null %>"
                             <% if (action=='create' ) { %>
