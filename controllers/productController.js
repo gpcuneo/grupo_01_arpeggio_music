@@ -1,13 +1,15 @@
 const jsonTools = require('../utils/JSONTools');
 const {validationResult} = require('express-validator');
 const userTools = require('../utils/User')
+const db = require('../database/models')
 
 
-let getProduct = (req, res)=>{
+let getProduct =  async (req, res)=>{
     let products = jsonTools.read('articles.json');
     let userInfo = userTools.isLogged(req);
+    const categorys= await db.Category.findAll({raw:true})
 
-    res.render('products/productList', {products, 'user':userInfo});
+    res.render('products/productList', {products, 'user':userInfo, categorys});
 }
 let getDetail=(req, res)=>{
     let products = jsonTools.read('articles.json');
@@ -28,9 +30,10 @@ let deleteProduct = (req, res)=>{
     console.log('se elimino un producto');
     res.redirect('/products')
 }
-let getCreate = (req, res)=>{
+let getCreate = async (req, res)=>{
+    const categorys = await db.Category.findAll({raw:true});
     let userInfo = userTools.isLogged(req);
-    res.render('products/productManipulation', {action:'create', 'product':false,'user':userInfo})
+    res.render('products/productManipulation', {action:'create', 'product':false,'user':userInfo, categorys})
 }
 
 let getUpDate = (req, res)=>{
@@ -41,7 +44,8 @@ let getUpDate = (req, res)=>{
 
     res.render('products/productManipulation', {action:'update','product': modifyProduct,'user':userInfo})
 }
-let postProducts = (req, res) =>{
+let postProducts = async(req, res) =>{
+    const categorys= await db.Category.findAll({raw:true})
     const resultValidation = validationResult(req);
     let userInfo = userTools.isLogged(req);
     if(resultValidation.errors.length > 0){
@@ -50,7 +54,8 @@ let postProducts = (req, res) =>{
             oldData: req.body,
             action:'create',
             'product':false,
-            'user':userInfo
+            'user':userInfo,
+            categorys
         })
     }
 
