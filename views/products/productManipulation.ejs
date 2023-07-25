@@ -97,7 +97,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="trademark">Eliga una Marca (Opcional)</label>
+                            <label for="trademark">Elija una Marca (Opcional)</label>
                             <select name="trademark" id="" class="group-input">
                                 <option value="">Seleccione una marca</option>
                                 <% let trademarks = ['CASIO','YAMAHA','PEARL','JACKSON','SAMSON','REMO','IBANEZ'] %>
@@ -130,12 +130,16 @@
                         </div>
                         <div class="form-group">
                             <label for="colors">Color</label>
-                            <select name="colors" id="" class="group-input">
-                                <option value="">Elija un color</option>
                                 <% colors.forEach(color => { %>
-                                    <option value=""><%= color.name %></option>
+                                    <div class="container-color">
+                                        <p><%= color.name %></p>
+                                        <div class="wrap-toggle">
+                                            <input type="checkbox" id="<%= color.id %>" class="offscreen">
+                                            <label for="<%= color.id %>" class="switch" ></label>
+                                        </div>
+                                        <input type="number" class="group-input" name="quantity" placeholder="Cantidad" >
+                                    </div>
                                 <% }) %>
-                            </select>
                         </div>
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>

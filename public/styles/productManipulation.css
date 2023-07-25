@@ -68,6 +68,59 @@
     box-shadow: 0px 0px 5px 0px rgba(255,15,23,1);
     outline: rgba(255,15,23,0.2) 0.5px solid;
 }
+.container-color{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+.container-color p{
+    background-color: white;
+    width: 15%;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 5px 0px;
+    text-align: center;
+}
+.container-color input{
+    width: 20%;
+}
+.switch{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+.switch::after{
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    background-color: grey;
+    left: 2.5px;
+    top:2.5px;
+    transition: all 0.4s;
+}
+input[type='checkbox']:checked + .switch::after{
+    transform: translateX(30px);
+    background-color: white;
+}
+input[type='checkbox']:checked + .switch{
+    border: solid rgba(26, 85, 255, 1) 1px;
+    background-color: rgba(26, 85, 255, 1);
+}
+.offscreen{
+    position: absolute;
+    left: -99999999px;
+}
 
 @media (min-width: 769px) {
     .form-container {
