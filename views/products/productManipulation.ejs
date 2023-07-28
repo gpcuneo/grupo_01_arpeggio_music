@@ -135,7 +135,15 @@
                                         <p><%= color.name %></p>
                                         <div class="wrap-toggle">
                                             <input type="checkbox" id="<%= color.id %>" class="offscreen" name="colors" value="<%= color.name %>"
-                                            <%= locals.oldData&& (Array.isArray(oldData.colors)? oldData.colors:[oldData.colors])&& oldData.colors? (oldData.colors.includes(color.name)?'checked':null):null %>
+                                            <% if (action == 'create') { %>
+                                                <%= locals.oldData&& (Array.isArray(oldData.colors)? oldData.colors:[oldData.colors])&& oldData.colors? (oldData.colors.includes(color.name)?'checked':null):null %>
+                                            <% } else { %>
+                                                <% if (locals.oldData&& (Array.isArray(oldData.colors)? oldData.colors:[oldData.colors])) { %>
+                                                    <%= oldData.colors ?(oldData.colors.includes(color.name)?'checked':null):null %>
+                                                <% } else {%>
+                                                <%= product.colors.includes(color.name)? 'checked': null %>
+                                                <% } %>
+                                            <% } %>
                                             >
                                             <label for="<%= color.id %>" class="switch" ></label>
                                         </div>
