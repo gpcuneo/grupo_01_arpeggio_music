@@ -45,7 +45,11 @@ module.exports = (sequelize, DataType) =>{
             allowNull:false
         },
         colors:{
-            type:DataType.STRING(255),
+            type:DataType.STRING(250),
+            allowNull:false
+        },
+        trademark:{
+            type:DataType.STRING(46),
             allowNull:false
         },
         createdAt: {
