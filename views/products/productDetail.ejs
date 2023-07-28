@@ -42,9 +42,11 @@
                         </h4>
                         <p class="price">$<%= product.price %>
                         </p>
-                        <p class="discount" <%= product.discount? '': 'style="display:none"' %>>
-                            <%= product.discount %> % de descuento
-                        </p>
+                        <p class="discount"  
+                        <% if (product.discount == 0) { %>
+                            style= "display:none"
+                        <% } %>
+                        ><%= product.discount %> % de descuento</p>
                         <div class="box-characteristics">
                             <h5>Características</h5>
                             <p>

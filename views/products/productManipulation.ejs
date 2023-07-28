@@ -50,11 +50,11 @@
                                     <option value="">Elija una categoria</option>
                                 <% categorys.forEach(category =>{ %>
                                     <% if (action=='create') { %>
-                                        <option value="<%= category.name %>"
-                                            <%= locals.oldData && (category.name == oldData.category)?'selected':null %> ><%= category.name %></option>
+                                        <option value="<%= category.id %>"
+                                            <%= locals.oldData && (category.id == oldData.category)?'selected':null %> ><%= category.name %></option>
                                     <% }else { %>
-                                        <option value="<%=category.name %>"
-                                            <%= product && (product.category == category.name)?'selected':null %> ><%= category.name %></option>
+                                        <option value="<%=category.id %>"
+                                            <%= product && (product.category == category.id)?'selected':null %> ><%= category.name %></option>
                                     <% } %>
                                 <% }) %>
                             </select>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>
-                            <input type="file" multiple accept=".jpg, .jpeg, .png" name="img" id="img">
+                            <input type="file" multiple accept=".jpg, .jpeg, .png" name="image" id="img">
                             <% if (locals.errors && errors.img) { %>
                                 <div class="text-danger">
                                     <%= errors.img.msg %>
