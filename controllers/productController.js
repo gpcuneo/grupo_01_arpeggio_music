@@ -32,7 +32,6 @@ let getDetail= async (req, res)=>{
 let deleteProduct = (req, res)=>{
     let products = jsonTools.read('articles.json');
     const id = Number(req.params.id);
-
     const newProducts = products.filter(currentProduct => currentProduct.id !==id);
     let newListProducts = newProducts;
     jsonTools.write('articles.json', newListProducts)
@@ -61,8 +60,6 @@ let postProducts = async(req, res) =>{
     const colors = await db.Color.findAll({raw:true})
     const resultValidation = validationResult(req);
     let userInfo = userTools.isLogged(req);
-    console.log(req.body);
-
     if(resultValidation.errors.length > 0){
         return res.render('products/productManipulation',{
             errors:resultValidation.mapped(),
@@ -74,16 +71,21 @@ let postProducts = async(req, res) =>{
             colors
         })
     }
-
-    const datos = req.body;
-    let products = jsonTools.read('articles.json');
-    datos.id = products[products.length - 1].id + 1;
-    datos.price = Number(datos.price);
-    datos.discount = Number(datos.discount);
-    datos.stock = Number(datos.stock);
-    datos.img = req.files.map(file => '/images/productos/'+ file.filename);
-    products.push(datos);
-    jsonTools.write('articles.json', products)
+    const newProduct = {
+        name:req.body.name,
+        characteristics:req.body.characteristics,
+        price:parseInt(req.body.price),
+        discount:parseInt(req.body.discount),
+        stock:parseInt(req.body.stock),
+        category_id:parseInt(req.body.category),
+        description:req.body.description,
+        store:req.body.store,
+        image:JSON.stringify(req.files.map(file => file.filename)),
+        colors:JSON.stringify(req.body.colors),
+        trademark:req.body.trademark,
+    }
+    const create = await db.Product.create(newProduct)
+    console.log(create);
     res.redirect('/products');
 }
 let putUpDate = async (req,res)=>{
