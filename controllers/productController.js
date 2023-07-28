@@ -3,12 +3,13 @@ const {validationResult} = require('express-validator');
 const userTools = require('../utils/User')
 const db = require('../database/models')
 
-
 let getProduct =  async (req, res)=>{
-    let products = jsonTools.read('articles.json');
     let userInfo = userTools.isLogged(req);
+    const products = await db.Product.findAll({nest:true, include:['category']})
     const categorys= await db.Category.findAll({raw:true})
-
+    products.forEach(product =>{
+        product.image = JSON.parse(product.image).map(imgName => '/images/productos/' + imgName);
+    })
     res.render('products/productList', {products, 'user':userInfo, categorys});
 }
 let getDetail=(req, res)=>{
