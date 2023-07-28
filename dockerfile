@@ -6,7 +6,6 @@ RUN npm install --loglevel warn
 
 FROM base AS dev
 COPY --chown=node:node ./ ./
-USER node
 RUN npm install --loglevel warn
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
