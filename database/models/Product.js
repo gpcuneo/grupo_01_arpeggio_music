@@ -24,6 +24,10 @@ module.exports = (sequelize, DataType) =>{
             type:DataType.FLOAT,
             allowNull:false
         },
+        stock:{
+            type:DataType.INTEGER,
+            allowNull:false
+        },
         category_id:{
             type:DataType.INTEGER,
             allowNull:false
@@ -37,6 +41,10 @@ module.exports = (sequelize, DataType) =>{
             allowNull:true
         },
         image:{
+            type:DataType.STRING(255),
+            allowNull:false
+        },
+        colors:{
             type:DataType.STRING(255),
             allowNull:false
         },
@@ -64,13 +72,13 @@ module.exports = (sequelize, DataType) =>{
             foreignKey:'category_id'
         });
 
-        Product.belongsToMany(models.Color,{
+        /* Product.belongsToMany(models.Color,{
             as:'colors',
             through:'product-color',
             foreignKey:'product_id',
             otherKey:'color_id',
             timestamps:true
-        })
+        }) */
     }
 
     return Product;
