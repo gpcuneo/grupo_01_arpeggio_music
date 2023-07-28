@@ -26,10 +26,10 @@
                         </h4>
                     </div>
                     <div class="container-img-product-colum">
-                            <% let selectedImg=product.img[0]; %>
-                            <% product.img.forEach (image=>{ %>
-                                <% if (image !==selectedImg){ %>
-                                    <img src="<%= image %>" alt="">
+                            <% let selectedImg=product.image[0]; %>
+                            <% product.image.forEach (img=>{ %>
+                                <% if (img !==selectedImg){ %>
+                                    <img src="<%= img %>" alt="">
                                 <% } %>
                             <% }) %>
                     </div>
@@ -42,7 +42,7 @@
                         </h4>
                         <p class="price">$<%= product.price %>
                         </p>
-                        <p class="discount">
+                        <p class="discount" <%= product.discount? '': 'style="display:none"' %>>
                             <%= product.discount %> % de descuento
                         </p>
                         <div class="box-characteristics">
@@ -59,10 +59,9 @@
                             <h5>Seleccione un color</h5>
                             <label for="">Color:</label>
                             <select name="color" id="">
-                                <option value="#ff0000">Rojo</option>
-                                <option value="#00ff00">Verde</option>
-                                <option value="#0000ff">Azul</option>
-                                <option value="#000000">Negro</option>
+                                <% product.colors.forEach(color =>{ %>
+                                    <option value="<%= color %>"><%= color %></option>
+                                <% }) %>
                             </select>
                         </div>
                         <div class="box-stock">
@@ -102,7 +101,7 @@
                         <% articles.forEach(article=>{ %>
                             <article class="article-other">
                                 <!-- <a href="/products/<%= article.id %>/detail"> -->
-                                    <img src="<%= article.img[0] %>" alt="">
+                                    <img src="<%= article.image[0] %>" alt="">
                                     <div class="box-article-charact">
                                         <h5><%= article.name %></h5>
                                         <p><%= article.characteristics %></p>
@@ -111,7 +110,7 @@
                                     </div>
                                 <!-- </a> -->
                             </article>
-                            <% }) %>
+                        <% }) %>
                     </div>
                 </nav>
             </article>
