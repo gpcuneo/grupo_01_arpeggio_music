@@ -19,11 +19,22 @@ services:
     build:
       context: .
       target: production
+    env_file: .env
+    image: arpegio:${APP_VERSION}
     container_name: ${APP_NAME}-app
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npx sequelize-cli db:migrate
+        npx sequelize-cli db:seed:all
+        npm start
     links:
       - db
     ports:
       - "${APP_PORT}:3000"
+    volumes:
+      - ./:/app
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
