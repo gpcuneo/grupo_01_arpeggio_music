@@ -134,11 +134,18 @@
                                     <div class="container-color">
                                         <p><%= color.name %></p>
                                         <div class="wrap-toggle">
-                                            <input type="checkbox" id="<%= color.id %>" class="offscreen">
+                                            <input type="checkbox" id="<%= color.id %>" class="offscreen" name="colors" value="<%= color.name %>"
+                                            <%= locals.oldData&& (Array.isArray(oldData.colors)? oldData.colors:[oldData.colors])&& oldData.colors? (oldData.colors.includes(color.name)?'checked':null):null %>
+                                            >
                                             <label for="<%= color.id %>" class="switch" ></label>
                                         </div>
-                                    </div>
+                                    </div>   
                                 <% }) %>
+                                <% if (locals.errors && errors.colors) { %>
+                                    <div class="text-danger">
+                                        <%= errors.colors.msg %>
+                                    </div>
+                                <% } %>
                         </div>
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>
