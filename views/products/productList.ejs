@@ -22,10 +22,9 @@
                     <a href="/products/create"><button class="butto-create">Crear nuevo producto</button></a>
                     <select name="category" id="category" class="select-filter">
                         <option value="">Filtrar por Categoría</option>
-                        <option value="">Batería</option>
-                        <option value="">Guitarra</option>
-                        <option value="">Teclado</option>
-                        <option value="">Bajo</option>
+                        <% categorys.forEach(category =>{ %>
+                            <option value="<%= category.name %>"><%= category.name %></option>
+                        <% }) %>
                     </select>
                     <div class="nav-search">
                         <form action="">
@@ -47,7 +46,7 @@
                 <div class="box-articles">
                     <% products.forEach(product=> { %>
                         <article>
-                            <img src="<%= product.img[0] %>" alt="">
+                            <img src="<%= product.image[0] %>" alt="">
                             <div class="text-name-price-charac">
                                 <p class="text-charact">
                                     <%= product.characteristics %>
@@ -61,10 +60,10 @@
                                 </p>
                             </div>
                             <div class="box-category">
-                                <p>Bateria</p>
+                                <p><%= product.category.name %></p>
                             </div>
                             <div class="box-date">
-                                <p>12/06/2023</p>
+                                <p><%= product.updatedAt %></p>
                             </div>
                             <div class="container-delete-update">
                                 <div class="box-button-update">
