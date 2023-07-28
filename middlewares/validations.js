@@ -26,7 +26,7 @@ const productFields = [
     body('colors').notEmpty().withMessage('Debes elegir un color'),
     body('characteristics').notEmpty().withMessage('Tienes que escribir las características del producto'),
     body('description').notEmpty().withMessage('Tienes que escribir la descripción del producto'),
-    body('img').custom((value,{req})=>{
+    body('image').custom((value,{req})=>{
         let files = req.files;
         if(files.length == 0){
             throw new Error('Tienes que subir como mínimo una imagen');

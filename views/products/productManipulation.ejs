@@ -54,7 +54,7 @@
                                             <%= locals.oldData && (category.id == oldData.category)?'selected':null %> ><%= category.name %></option>
                                     <% }else { %>
                                         <option value="<%=category.id %>"
-                                            <%= product && (product.category == category.id)?'selected':null %> ><%= category.name %></option>
+                                            <%= product && (product.category_id == category.id)?'selected':null %> ><%= category.name %></option>
                                     <% } %>
                                 <% }) %>
                             </select>
@@ -157,10 +157,10 @@
                         </div>
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>
-                            <input type="file" multiple accept=".jpg, .jpeg, .png" name="image" id="img">
-                            <% if (locals.errors && errors.img) { %>
+                            <input type="file" multiple accept=".jpg, .jpeg, .png" name="image" id="image" >
+                            <% if (locals.errors && errors.image) { %>
                                 <div class="text-danger">
-                                    <%= errors.img.msg %>
+                                    <%= errors.image.msg %>
                                 </div>
                             <% } %>
                         </div>

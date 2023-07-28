@@ -14,7 +14,7 @@ const isAdmin = middlewares.authorizationMiddleware.isAdmin;
 router.get('/',isAdmin ,productController.product);
 
 //POST /products 
-router.post('/',upload.any('img'), validateCreate,productController.postProduct);
+router.post('/',upload.any('image'), validateCreate,productController.postProduct);
 
 //GET /products/:id/detail
 router.get('/:id/detail', productController.showbyid);
@@ -23,7 +23,7 @@ router.get('/:id/detail', productController.showbyid);
 router.get('/create', isAdmin ,productController.create);
 
 //PUT /products/:id/update
-router.put('/:id/update',upload.any('img'),validateCreate,productController.update);
+router.put('/:id/update',upload.any('image'),validateCreate,productController.update);
 
 //GET /products/:id/update
 router.get('/:id/update',isAdmin ,productController.getUpDate);
