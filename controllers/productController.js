@@ -29,12 +29,13 @@ let getDetail= async (req, res)=>{
     let product = articles.splice(indice,1)[0]; */
     res.render('products/productDetail', {title:'Detalle del Producto',product, articles,'user':userInfo});
 }
-let deleteProduct = (req, res)=>{
-    let products = jsonTools.read('articles.json');
-    const id = Number(req.params.id);
-    const newProducts = products.filter(currentProduct => currentProduct.id !==id);
-    let newListProducts = newProducts;
-    jsonTools.write('articles.json', newListProducts)
+let deleteProduct = async (req, res)=>{
+    try {
+        const deleteProduct = await db.Product.destroy({where:{id:req.params.id}})
+        console.log(deleteProduct);
+    } catch (error) {
+        console.log(error);
+    }
     console.log('se elimino un producto');
     res.redirect('/products')
 }
