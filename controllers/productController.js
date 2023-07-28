@@ -37,13 +37,15 @@ let getCreate = async (req, res)=>{
     res.render('products/productManipulation', {action:'create', 'product':false,'user':userInfo, categorys,colors})
 }
 
-let getUpDate = (req, res)=>{
+let getUpDate = async (req, res)=>{
+    const categorys= await db.Category.findAll({raw:true})
+    const colors = await db.Color.findAll({raw:true})
     let products = jsonTools.read('articles.json');
     let userInfo = userTools.isLogged(req);
     const id = Number(req.params.id);
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
 
-    res.render('products/productManipulation', {action:'update','product': modifyProduct,'user':userInfo})
+    res.render('products/productManipulation', {action:'update','product': modifyProduct,'user':userInfo,colors,categorys})
 }
 let postProducts = async(req, res) =>{
     const categorys= await db.Category.findAll({raw:true})
@@ -73,19 +75,25 @@ let postProducts = async(req, res) =>{
     jsonTools.write('articles.json', products)
     res.redirect('/products');
 }
-let putUpDate = (req,res)=>{
+let putUpDate = async (req,res)=>{
     let products = jsonTools.read('articles.json');
+    const categorys= await db.Category.findAll({raw:true})
+    const dbcolors = await db.Color.findAll({raw:true})
     const id = Number(req.params.id);
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
     const resultValidation = validationResult(req);
     let userInfo = userTools.isLogged(req);
+    console.log(req.body.colors);
+    console.log(req.body);
     if(resultValidation.errors.length > 0){
         return res.render('products/productManipulation',{
             errors:resultValidation.mapped(),
             oldData: req.body,
             action:'update',
             'product':modifyProduct,
-            'user':userInfo
+            'user':userInfo,
+            categorys,
+            'colors':dbcolors
         })
     }
     const newData = req.body;
