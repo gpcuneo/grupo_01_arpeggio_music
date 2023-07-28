@@ -12,13 +12,21 @@ let getProduct =  async (req, res)=>{
     })
     res.render('products/productList', {products, 'user':userInfo, categorys});
 }
-let getDetail=(req, res)=>{
-    let products = jsonTools.read('articles.json');
+let getDetail= async (req, res)=>{
     let userInfo = userTools.isLogged(req);
-    const productID = Number(req.params.id);
-    let articles = products;
+    const articles = await db.Product.findAll({nest:true, include:['category']})
+    const product = await db.Product.findByPk(req.params.id)
+    /* return res.json(product) */
+    product.image = JSON.parse(product.image).map(image => '/images/productos/'+image)
+    product.colors = JSON.parse(product.colors)
+    console.log(product.stock);
+    articles.forEach(article =>{
+        article.image = JSON.parse(article.image).map(imgName => '/images/productos/' + imgName);
+    })
+    //const productID = Number(req.params.id);
+    /* let articles = products;
     let indice = articles.findIndex(({id}) => id === productID);
-    let product = articles.splice(indice,1)[0];
+    let product = articles.splice(indice,1)[0]; */
     res.render('products/productDetail', {title:'Detalle del Producto',product, articles,'user':userInfo});
 }
 let deleteProduct = (req, res)=>{
