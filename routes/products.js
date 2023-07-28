@@ -23,7 +23,7 @@ router.get('/:id/detail', productController.showbyid);
 router.get('/create', isAdmin ,productController.create);
 
 //PUT /products/:id/update
-router.put('/:id/update', /* isAdmin, */validateCreate,productController.update);
+router.put('/:id/update',upload.any('img'),validateCreate,productController.update);
 
 //GET /products/:id/update
 router.get('/:id/update',isAdmin ,productController.getUpDate);

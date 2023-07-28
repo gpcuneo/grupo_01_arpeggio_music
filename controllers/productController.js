@@ -44,7 +44,7 @@ let getUpDate = async (req, res)=>{
     let userInfo = userTools.isLogged(req);
     const id = Number(req.params.id);
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
-
+    console.log(modifyProduct);
     res.render('products/productManipulation', {action:'update','product': modifyProduct,'user':userInfo,colors,categorys})
 }
 let postProducts = async(req, res) =>{
@@ -52,6 +52,8 @@ let postProducts = async(req, res) =>{
     const colors = await db.Color.findAll({raw:true})
     const resultValidation = validationResult(req);
     let userInfo = userTools.isLogged(req);
+    console.log(req.body);
+
     if(resultValidation.errors.length > 0){
         return res.render('products/productManipulation',{
             errors:resultValidation.mapped(),
@@ -82,8 +84,8 @@ let putUpDate = async (req,res)=>{
     const id = Number(req.params.id);
     const modifyProduct = products.find(currentProduct => currentProduct.id === id);
     const resultValidation = validationResult(req);
+    //const img = req.files && req.files.length>0?  req.files.map(file => '/image/productos/'+file.filename): modifyProduct.img;
     let userInfo = userTools.isLogged(req);
-    console.log(req.body.colors);
     console.log(req.body);
     if(resultValidation.errors.length > 0){
         return res.render('products/productManipulation',{
@@ -98,8 +100,7 @@ let putUpDate = async (req,res)=>{
     }
     const newData = req.body;
     const index = products.findIndex(product => product.id === id);
-
-    const {name,category,price,stock,colors,characteristics,img,discount,description,store} =newData;
+    const {name,category,price,stock,colors,img,characteristics,discount,description,store} =newData;
     products[index] = {
         id:products[index].id,
         name,
@@ -108,8 +109,8 @@ let putUpDate = async (req,res)=>{
         stock,
         colors,
         characteristics,
-        img,
         discount,
+        img,
         description,
         store
     }
