@@ -109,6 +109,28 @@ hr {
     border-radius: 5px;
 }
 
+.container-pagination {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 20px;
+}
+.paginacion a {
+  border: 1px solid gray;
+  margin: 0 4px;
+  padding: 10px;
+}
+.paginacion a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.paginacion a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 @media (min-width: 768px) {
     .container-info {
         width: 100%;

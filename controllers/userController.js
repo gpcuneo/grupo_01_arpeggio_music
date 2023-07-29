@@ -6,8 +6,10 @@ const jsonTools = require('../utils/JSONTools');
 const netTools = require('../utils/networkTools');
 const userTools = require('../utils/User');
 const db = require('../database/models');
-const { Op } = require('sequelize');
+const { Op, INTEGER } = require('sequelize');
 const {validationResult} = require('express-validator');
+const { log } = require('console');
+const { off } = require('process');
 
 
 let orderHistory = jsonTools.read('horderHistory.json');
@@ -72,13 +74,26 @@ const showUser = async (req, res) => {
     res.render('User/profile', {'user': user, 'orderHistory': orderHistory} );
 }
 
-const listUsers = (req, res) => {
-    let userInfo = userTools.isLogged(req);
-        db.User.findAll({include: [
-                {association: 'Town', as: 'town'},
-                {association: 'Province', as: 'province'},
-            ]}).then( (usersData) => res.render('User/list', {'users': usersData, user: userInfo}));
-}
+const listUsers = async (req, res) => {
+    const limit = 3;
+    const page = parseInt(req.query.page) || 0
+    const offset = page * limit;
+    const userInfo = userTools.isLogged(req);
+    const usersCount = await db.User.count()
+    console.log(usersCount)
+    const pageLimit = Math.ceil(usersCount / 3) -1
+    console.log(pageLimit)
+    db.User.findAll({
+        limit,
+        offset,
+        include: [
+            {association: 'Town', as: 'town'},
+            {association: 'Province', as: 'province'},
+            ]
+        }).then( 
+            (usersData) => res.render('User/list', {'users': usersData, user: userInfo, page, pageLimit})
+        );
+} 
 
 const registerUser = async (req, res) => {
     if(userTools.isLogged(req)) {

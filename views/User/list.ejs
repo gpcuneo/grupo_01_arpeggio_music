@@ -63,11 +63,26 @@
                 </article>
             <% }); %>
         </section>
-        <div class="center-items order-item">
-            <form action="/user/export">
-                <button type="submit">Exportar listado</button>
-            </form>
-        </div>
+        <section class="container-pagination">
+            <div class="paginacion">
+                <% if(page > 0) { %>
+                    <a href="/user?page=<%= page -1 %>">&laquo;</a>
+                    <a href="/user?page=<%= page -1 %>"><%= page %></a>
+                <% } %>
+                <a href="#" class="activo"><%= page +1 %></a>
+                <% if(page !== pageLimit) { %>
+                    <a href="/user?page=<%= page +1 %>"><%= page +2 %></a>
+                    <a href="/user?page=<%= page +1 %>">&raquo;</a>
+                <% } %>
+            </div>
+        </section>
+        <section class="container-pagination">
+            <div class="center-items order-item">
+                <form action="/user/export">
+                    <button type="submit">Exportar listado</button>
+                </form>
+            </div>
+        </section>
     </main>
     <hr>
     <%- include('../partials/footer') %>
