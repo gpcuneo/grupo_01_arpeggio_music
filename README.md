@@ -48,7 +48,7 @@ APP_NAME=Arpegio                # Nombre de la aplicacion
 APP_VERSION=1.0                 # Version de la aplicacion
 APP_SESSION_SECRET=Reemplazar   # Secreto de la aplicacion
 APP_PORT=3000                   # Puerto de la aplicacion
-DB_HOST=db                      # Nombre de host del servidor de base de datos
+DB_HOST=Arpegio-db              # Nombre de host del servidor de base de datos
 DB_PORT=3306                    # Puerto del servidor de base de datos
 DB_DIALECT=mysql                # Motor de base de datos
 DB_DATABASE=database            # Nombre de la base de datos
@@ -204,13 +204,19 @@ Servidor corriendo en el puerto 3000
 
 **5- La aplicacion ya se encuentra corriendo y podemos acceder de la siguiente manera:**
 
-Se podra visualizar la aplicacion en:
+Si se dejaron las variables de entorno asignadas como en el archivo de ejemplo se podra visualizar la aplicacion en:
 
 [`http://localhost:3000/`](http://localhost:3000/)
+- Usuario administrador: pepegrillo
+- Contraseña: 123
 
 Se podrá visualizar PHPMyAdmin en:
 
 [`http://localhost:8080/`](http://localhost:8080/)
+
+- Servidor: Arpegio-db (nombre del contenedor de la base de datos).
+- Usuario: root
+- Contraseña: password
 
 **Ejecutar entorno de producción:**
 
