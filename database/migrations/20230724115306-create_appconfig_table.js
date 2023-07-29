@@ -3,16 +3,15 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('app_config', {
+    await queryInterface.createTable('seedersMeta', {
       id: {
         type: Sequelize.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      initialized: {
-          type: Sequelize.DataTypes.TINYINT,
+      name: {
+          type: Sequelize.DataTypes.STRING(255),
           allowNull: false,
-          defaultValue: 0,
       },
     });
   },
