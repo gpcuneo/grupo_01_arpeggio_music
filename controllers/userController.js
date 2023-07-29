@@ -235,9 +235,9 @@ const uploadImage = async (req, res) => {
 const exportUserlist = async (req, res) => {
     try {
         // Realiza el findAll() para obtener los datos de la tabla User
-        const columns = ['userName', 'firstName', 'lastName', 'email', 'dni', 'phone', 'city', 'address', ];
-        const users = await db.User.findAll({ attributes: columns });
-
+        const columns = ['userName', 'firstName', 'lastName', 'email', 'dni', 'phone', 'address', ];
+        const users = await db.User.findAll();
+        console.log(users[1])
         // Crea un nuevo libro de Excel
         const workbook = new ExcelJS.Workbook();
 
@@ -271,7 +271,7 @@ const exportUserlist = async (req, res) => {
             fs.unlinkSync(tempFileName);
         });
 
-        console.log('Archivo Excel generado correctamente:', fileName);
+        console.log('Archivo Excel generado correctamente:', tempFileName);
     } catch (error) {
         console.error('Error al generar el archivo Excel:', error);
     }
