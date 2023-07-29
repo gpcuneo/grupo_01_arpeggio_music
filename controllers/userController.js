@@ -64,18 +64,20 @@ const validateUserFields = async (user, req, id=false) => {
 const showUser = async (req, res) => {
     const user = await db.User.findOne({ 
                                 where: { userName: req.params.userName },
-                                include: [{association: 'Town', as: 'town'}]
+                                include: [
+                                    {association: 'Town', as: 'town'},
+                                    {association: 'Province', as: 'province'},
+                                ]
                             });
-    console.log('Show profile: ' + user.userName);
     res.render('User/profile', {'user': user, 'orderHistory': orderHistory} );
 }
 
 const listUsers = (req, res) => {
     let userInfo = userTools.isLogged(req);
-        db.User.findAll({include: [{association: 'Town', as: 'town'}]}).then(
-            (usersData) => res.render('User/list', {'users': usersData, user: userInfo}
-        )
-    );
+        db.User.findAll({include: [
+                {association: 'Town', as: 'town'},
+                {association: 'Province', as: 'province'},
+            ]}).then( (usersData) => res.render('User/list', {'users': usersData, user: userInfo}));
 }
 
 const registerUser = async (req, res) => {
