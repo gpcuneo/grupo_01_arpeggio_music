@@ -28,6 +28,7 @@ const productFields = [
     body('description').notEmpty().withMessage('Tienes que escribir la descripción del producto'),
     body('image').custom((value,{req})=>{
         let files = req.files;
+        console.log(req);
         if(files.length == 0){
             throw new Error('Tienes que subir como mínimo una imagen');
         }

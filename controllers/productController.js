@@ -101,7 +101,7 @@ let putUpDate = async (req,res)=>{
     /* const id = Number(req.params.id); */
     /* const modifyProduct = products.find(currentProduct => currentProduct.id === id); */
     const resultValidation = validationResult(req);
-    //const img = req.files && req.files.length>0?  req.files.map(file => '/image/productos/'+file.filename): modifyProduct.img;
+    //const img = req.files && req.files.length>0?  req.files.map(file => '/image/productos/'+file.filename): product.img;
     let userInfo = userTools.isLogged(req);
     console.log(req.body.image);
     console.log(req.body);

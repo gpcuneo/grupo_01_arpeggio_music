@@ -26,7 +26,7 @@
                     <form action="/products" method="POST" class="form-container" enctype="multipart/form-data">
                 <%} else { %>
                     <h4 class="form-title">Editar producto</h4>
-                    <form action="/products/<%=product.id %>/update?_method=put" method="POST" class="form-container">
+                    <form action="/products/<%=product.id %>/update?_method=put" method="POST" class="form-container" enctype="multipart/form-data">
                 <% } %>
                         <div class="form-group">
                             <label for="name">Nombre</label>
