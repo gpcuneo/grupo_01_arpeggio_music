@@ -50,7 +50,7 @@ module.exports = (sequelize, DataType) =>{
         },
         trademark:{
             type:DataType.STRING(46),
-            allowNull:false
+            allowNull:true
         },
         createdAt: {
             type: DataType.DATE,

@@ -26,10 +26,11 @@ services:
       - /bin/sh
       - -c
       - |
+        sleep 15
         npx sequelize-cli db:migrate
         npx sequelize-cli db:seed:all
         npm run dev
-    links:
+    depends_on:
       - db
     ports:
       - "${APP_PORT}:3000"

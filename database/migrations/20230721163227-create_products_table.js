@@ -56,7 +56,7 @@ module.exports = {
       },
       trademark: {
         type: Sequelize.STRING(46),
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         type: Sequelize.DATE,
