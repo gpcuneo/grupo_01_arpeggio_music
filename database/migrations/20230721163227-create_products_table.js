@@ -36,7 +36,7 @@ module.exports = {
         references: {
           model: 'categories',
           key: 'id'
-      },
+        },
       },
       description: {
         type: Sequelize.TEXT,
@@ -48,6 +48,14 @@ module.exports = {
       },
       image: {
         type: Sequelize.STRING(255),
+        allowNull: false
+      },
+      colors: {
+        type: Sequelize.STRING(250),
+        allowNull: false
+      },
+      trademark: {
+        type: Sequelize.STRING(46),
         allowNull: false
       },
       createdAt: {

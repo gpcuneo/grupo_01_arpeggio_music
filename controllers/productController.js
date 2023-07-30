@@ -94,7 +94,6 @@ let postProducts = async(req, res) =>{
     res.redirect('/products');
 }
 let putUpDate = async (req,res)=>{
-    /* let products = jsonTools.read('articles.json'); */
     const categorys= await db.Category.findAll({raw:true})
     const dbcolors = await db.Color.findAll({raw:true})
     const product = await db.Product.findByPk(req.params.id)
