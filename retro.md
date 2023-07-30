@@ -123,4 +123,5 @@ Menos de:
 - Excusas
 
 Dejar de hacer:
-- N/A
+- No comunicar dificultades
+- Ausentarse sin avisar
