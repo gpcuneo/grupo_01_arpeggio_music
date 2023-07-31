@@ -2,15 +2,17 @@ const jsonTools = require('../utils/JSONTools');
 const {validationResult} = require('express-validator');
 const userTools = require('../utils/User')
 const db = require('../database/models')
+const Op = db.Sequelize.Op;
 
 let getProduct =  async (req, res)=>{
     let userInfo = userTools.isLogged(req);
-    const products = await db.Product.findAll({nest:true, include:['category']})
+    const products = await db.Product.findAll({nest:true, include:['category'],})
     const categorys= await db.Category.findAll({raw:true})
+    const name = req.query.name || ''
     products.forEach(product =>{
         product.image = JSON.parse(product.image).map(imgName => '/images/productos/' + imgName);
-    })
-    res.render('products/productList', {products, 'user':userInfo, categorys});
+    })        
+    return res.render('products/productList', {products,'user':userInfo, categorys,name});
 }
 let getDetail= async (req, res)=>{
     let userInfo = userTools.isLogged(req);
@@ -52,12 +54,6 @@ let getUpDate = async (req, res)=>{
     product.image = JSON.parse(product.image).map(image => '/images/productos/'+image)
     product.colors = JSON.parse(product.colors)
     let userInfo = userTools.isLogged(req);
-    console.log(product.image);
-
-    /* let products = jsonTools.read('articles.json');
-    const id = Number(req.params.id);
-    const modifyProduct = products.find(currentProduct => currentProduct.id === id);
-    console.log(modifyProduct); */
     res.render('products/productManipulation', {action:'update',product,'user':userInfo,colors,categorys})
 }
 let postProducts = async(req, res) =>{
@@ -90,15 +86,12 @@ let postProducts = async(req, res) =>{
         trademark:req.body.trademark,
     }
     const create = await db.Product.create(newProduct)
-    console.log(create);
     res.redirect('/products');
 }
 let putUpDate = async (req,res)=>{
     const categorys= await db.Category.findAll({raw:true})
     const dbcolors = await db.Color.findAll({raw:true})
     const product = await db.Product.findByPk(req.params.id)
-    /* const id = Number(req.params.id); */
-    /* const modifyProduct = products.find(currentProduct => currentProduct.id === id); */
     const resultValidation = validationResult(req);
     //const img = req.files && req.files.length>0?  req.files.map(file => '/image/productos/'+file.filename): product.img;
     let userInfo = userTools.isLogged(req);
@@ -125,25 +118,22 @@ let putUpDate = async (req,res)=>{
             id:req.params.id
         }
     })
-    console.log(updateProduct);
-    /* const newData = req.body;
-    const index = products.findIndex(product => product.id === id);
-    const {name,category,price,stock,colors,img,characteristics,discount,description,store} =newData;
-    products[index] = {
-        id:products[index].id,
-        name,
-        category,
-        price,
-        stock,
-        colors,
-        characteristics,
-        discount,
-        img,
-        description,
-        store
-    }
-    jsonTools.write('articles.json', products); */
     res.redirect('/products')
+}
+let search= async (req,res)=>{
+    let userInfo = userTools.isLogged(req);
+    const categorys= await db.Category.findAll({raw:true})
+    const name= req.query.name||'';
+    const search = await db.Product.findAll({
+        where:{
+            name:{[Op.like]: '%'+ name +'%'}
+        },
+        include:['category']
+    })
+    search.forEach(product =>{
+        product.image = JSON.parse(product.image).map(imgName => '/images/productos/' + imgName);
+    })  
+    return res.render('products/productList', {'products':search,'user':userInfo, name ,categorys});
 }
 const productController={
     product:getProduct,
@@ -153,6 +143,7 @@ const productController={
     update:putUpDate,
     getUpDate:getUpDate,
     delete:deleteProduct,
+    search:search
 }
 
 
