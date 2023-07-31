@@ -23,4 +23,3 @@ INSERT INTO `trademarks` (`name`, `createdAt`, `updatedAt`) VALUES
 ('IBANEZ',@datetimenow,@datetimenow),
 
 
-['CASIO','YAMAHA','PEARL','JACKSON','SAMSON','REMO','IBANEZ']
