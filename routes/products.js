@@ -15,6 +15,8 @@ router.get('/',isAdmin ,productController.product);
 
 //POST /products 
 router.post('/',upload.any('image'), validateCreate,productController.postProduct);
+router.get('/search',isAdmin ,productController.search);
+
 
 //GET /products/:id/detail
 router.get('/:id/detail', productController.showbyid);
