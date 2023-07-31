@@ -27,9 +27,9 @@
                         <% }) %>
                     </select>
                     <div class="nav-search">
-                        <form action="">
-                            <input type="search" placeholder="Buscar producto" class="">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                        <form action="/products/search?name=<%= name %>" method="get">
+                            <input type="text" placeholder="Buscar producto" name="name">
+                            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
                 </div>
