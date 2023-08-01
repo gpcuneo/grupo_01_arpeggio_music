@@ -48,8 +48,8 @@ module.exports = (sequelize, DataType) =>{
             type:DataType.STRING(250),
             allowNull:false
         },
-        trademark:{
-            type:DataType.STRING(46),
+        trademark_id:{
+            type:DataType.INTEGER,
             allowNull:true
         },
         createdAt: {
@@ -75,7 +75,10 @@ module.exports = (sequelize, DataType) =>{
             as:'category',
             foreignKey:'category_id'
         });
-
+        Product.belongsTo(models.Trademark,{
+            as:'trademark',
+            foreignKey:'trademark_id'
+        });
         /* Product.belongsToMany(models.Color,{
             as:'colors',
             through:'product-color',
