@@ -32,10 +32,10 @@ Link al board de Trello: [https://trello.com/b/Emsmc07T/dggrupo01arpeggiomusic](
 
 # **Ejecutar entorno de desarrollo en contenedores Docker**
 
-**1- Clone el proyecto:**
+**1- Clonar la rama sprint6 del proyecto :**
 
 ```bash
-git clone git@github.com:gpcuneo/grupo_01_arpeggio_music.git
+git clone -b sprint6 git@github.com:gpcuneo/grupo_01_arpeggio_music.git
 ```
 
 **2- Configure el archivo .env para cargar las variables de entorno:**
