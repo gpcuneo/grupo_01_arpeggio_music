@@ -24,6 +24,35 @@ main {
     z-index: 1;
 }
 
+.nav {
+    background-color: black;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.menu {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    margin-right: 15px;
+}
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+.menu-toggle {
+    display: block; /* Mostrar el ícono del menú en versión móvil */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
 .container-general {
     width: 100vw;
     font-family: 'Roboto', sans-serif;
@@ -169,6 +198,31 @@ input.src {
 .menu-user li a {
     color: black;
 }
+.nav-bar {
+    display: none;
+}
+
+
+/* Estilos para versión móvil */
+@media (max-width: 768px) {
+    .menu.active {
+        display: flex; /* Mostrar el menú al hacer clic en el ícono */
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        left: 10px;
+        background-color: #444;
+        padding: 10px;
+        border-radius: 4px;
+        z-index: 9999;
+    }
+
+    .menu li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
 
 @media (min-width: 769px) {
     header {
