@@ -54,9 +54,13 @@ module.exports = {
         type: Sequelize.STRING(250),
         allowNull: false
       },
-      trademark: {
-        type: Sequelize.STRING(46),
-        allowNull: true
+      trademark_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'trademarks',
+          key: 'id'
+        },
       },
       createdAt: {
         type: Sequelize.DATE,

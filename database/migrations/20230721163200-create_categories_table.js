@@ -14,7 +14,7 @@ module.exports = {
           allowNull: false,
       },
       img: {
-          type: Sequelize.DataTypes.STRING(40),
+          type: Sequelize.DataTypes.STRING(100),
           allowNull: false,
       },
       createdAt: {

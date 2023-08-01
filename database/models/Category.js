@@ -13,7 +13,7 @@ module.exports = (sequelize, DataType) => {
             allowNull: false,
         },
         img: {
-            type: DataType.STRING(40),
+            type: DataType.STRING(100),
             allowNull: false,
         },
         createdAt: {
