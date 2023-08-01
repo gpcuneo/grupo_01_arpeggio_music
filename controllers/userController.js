@@ -64,7 +64,8 @@ const validateUserFields = async (user, req, id=false) => {
 }
 
 const showUser = async (req, res) => {
-    const user = await db.User.findOne({ 
+    //const userInfo = userTools.isLogged(req);
+    const user = await db.User.findOne({
                                 where: { userName: req.params.userName },
                                 include: [
                                     {association: 'Town', as: 'town'},
@@ -80,9 +81,7 @@ const listUsers = async (req, res) => {
     const offset = page * limit;
     const userInfo = userTools.isLogged(req);
     const usersCount = await db.User.count()
-    console.log(usersCount)
     const pageLimit = Math.ceil(usersCount / 3) -1
-    console.log(pageLimit)
     db.User.findAll({
         limit,
         offset,
@@ -127,7 +126,6 @@ const editUser = async (req, res) => {
     delete(user.id)
     delete(user.password)
     delete(user.confirmPassword)
-    console.log(user)
     const provinces = await db.Province.findAll({attributes: ['id', 'name']});
     const towns = await db.Town.findAll({
         where: {id_province: user.id_province},
@@ -252,7 +250,6 @@ const exportUserlist = async (req, res) => {
         // Realiza el findAll() para obtener los datos de la tabla User
         const columns = ['userName', 'firstName', 'lastName', 'email', 'dni', 'phone', 'address', ];
         const users = await db.User.findAll();
-        console.log(users[1])
         // Crea un nuevo libro de Excel
         const workbook = new ExcelJS.Workbook();
 

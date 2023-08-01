@@ -41,6 +41,9 @@
                             <div class="menu-user">
                                 <ul>
                                     <li><a href="/user/<%= user.userName %>">Perfil</a></li>
+                                    <% if(user.id_rol === 2) { %>
+                                        <li><a href="/admin">Admin</a></li>
+                                    <% } %>
                                     <li><a href="/user/<%= user.userName %>/logout">Salir</a></li>
                                 </ul>
                             </div>
