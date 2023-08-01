@@ -52,6 +52,23 @@ hr {
     text-align: start;
 }
 
+.container-search {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    border: solid white 1px;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 25px;
+    text-align: start;
+}
+.container-search h2 {
+    margin-top: 5px;
+}
+.container-search button {
+    margin-top: 10px;
+}
+
 .center-items {
     display: flex;
     text-align: center;
@@ -134,6 +151,14 @@ hr {
 @media (min-width: 768px) {
     .container-info {
         width: 100%;
+    }
+    .container-search {
+        width: 100%;
+        
+    }
+    .container-search h2 {
+        margin-top: 5px;
+        margin-right: 10px;
     }
 
     .container-image {

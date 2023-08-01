@@ -10,6 +10,7 @@ const { Op, INTEGER } = require('sequelize');
 const {validationResult} = require('express-validator');
 const { log } = require('console');
 const { off } = require('process');
+const { query } = require('express');
 
 
 let orderHistory = jsonTools.read('horderHistory.json');
@@ -76,23 +77,36 @@ const showUser = async (req, res) => {
 }
 
 const listUsers = async (req, res) => {
-    const limit = 3;
-    const page = parseInt(req.query.page) || 0
-    const offset = page * limit;
     const userInfo = userTools.isLogged(req);
-    const usersCount = await db.User.count()
-    const pageLimit = Math.ceil(usersCount / 3) -1
-    db.User.findAll({
+    const limit = 3;
+    let pageLimit = 0
+    const page = parseInt(req.query.page) || 0;
+    const offset = page * limit;
+    const searchData = req.query.searchData;
+    const searchField = req.query.searchField;
+
+    let query = {
         limit,
         offset,
         include: [
             {association: 'Town', as: 'town'},
             {association: 'Province', as: 'province'},
             ]
-        }).then( 
-            (usersData) => res.render('User/list', {'users': usersData, user: userInfo, page, pageLimit})
-        );
-} 
+        };
+    if(searchField && searchData) {
+        searchField === 'userName' ? query['where'] = { userName: { [Op.like]: `%${searchData}%` } } : '';
+        searchField === 'lastName' ? query['where'] = { lastName: { [Op.like]: `%${searchData}%` } } : '';
+        searchField === 'dni' ? query['where'] = { dni: { [Op.like]: `%${parseInt(searchData)}%` } } : '';
+    }
+    users = await db.User.findAll(query);
+    if(searchField && searchData) {
+        pageLimit = Math.ceil(users.length / 3) -1; 
+    } else {
+        usersCount = await db.User.count();
+        pageLimit = Math.ceil(usersCount / 3) -1; 
+    }
+    return res.render('User/list', {users, user: userInfo, page, pageLimit});
+}
 
 const registerUser = async (req, res) => {
     if(userTools.isLogged(req)) {
