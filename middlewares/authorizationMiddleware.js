@@ -1,8 +1,9 @@
 const e = require("express");
 
 const isAdmin = (req, res, next) => {
-    if(req.session.user && req.session.user.rol === 'admin') {
-            next();
+    //if(req.session.user && req.session.user.rol === 'admin') {
+    if(req.session.user && req.session.user.id_rol === 2) {
+        next();
     } else {
         res.redirect('/user/login');
     }
@@ -25,10 +26,9 @@ const isOwnerOrAdmin = (req, res, next) => {
     if(req.session.user) {
         let reqUserName = req.params.userName;
         let userName = req.session.user.userName;
-        let rol = req.session.user.rol;
-        console.log(userName);
-        console.log(req.userName);
-        if(rol === 'admin' || userName == reqUserName) {
+        let rol = req.session.user.id_rol;
+        //if(rol === 'admin' || userName == reqUserName) {
+        if(rol === 2 || userName == reqUserName) {
             next();
         } else {
             res.redirect('/user/' + userName);

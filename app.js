@@ -33,6 +33,7 @@ const cartRoutes = require('./routes/cart');
 const historyRoutes = require('./routes/history');
 const mainRoutes = require('./routes/main');
 const apiRoutes = require('./routes/api');
+const adminRoutes = require('./routes/admin');
 const { log } = require('console');
 
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
@@ -43,4 +44,5 @@ app.use('/products', productRoutes);
 app.use('/category',categoryRoutes);
 app.use('/history',historyRoutes);
 app.use('/api', apiRoutes);
+app.use('/admin', adminRoutes);
 app.use('/', mainRoutes);
