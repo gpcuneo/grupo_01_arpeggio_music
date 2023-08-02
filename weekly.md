@@ -8,9 +8,10 @@
 
 ## Guillermo:
 ### Que hice: 
-- 
+- fin sprint 5
 ### Que voy a hacer:
-- 
+- Crear tarjetas en base a los requerimientos del sprint 6 y asignarlas
+- Pensar tablas necesarias y sus relaciones
 
 ## Maximiliano:
 ### Que hice: 
@@ -39,9 +40,12 @@
 
 ## Guillermo:
 ### Que hice: 
-- 
+- Cree las tarjetas en base a los requerimiento del actual script y asigne a los miembros del equipo en orden cronologico de resolucion.
+- Cree diagrama entidad relacion con las tablas que vamos a necesitar.
+- Cree los script SQL de las tablas: localidades, provincias, usuarios, roles, 
 ### Que voy a hacer:
-- 
+- Crear scripts de carga de datos.
+- Pensar normalizacion y automatizacion del entorno para el equipo.
 
 ## Maximiliano:
 ### Que hice: 
@@ -69,9 +73,16 @@
 
 ## Guillermo:
 ### Que hice: 
-- 
+- Cree scripts de carga de datos
+- Cree archivo de variables de entorno y configure el proyecto para que las consuma desde este.
+- Cree archivos dockerfile y docker-compose para correr entorno de desarrollo
+- Cree modelos de usuario, roles, provincias, localidades.
+- Cree migraciones de usuario, roles, provincias, localidades, categorias, productos.
+- Cree seeders de usuario, roles, provincias, localidades, categorias, productos.
+- Cree script general de creacion de la base, tablas y carga de datos en SQL.
 ### Que voy a hacer:
-- 
+- Crear busqueda de usuarios
+- Adaptar controlador para consumir datos desde los modelos.
 
 ## Maximiliano:
 ### Que hice: 
@@ -102,9 +113,14 @@
 
 ## Guillermo:
 ### Que hice: 
-- 
+- Adapte el controlador de usuarios para consumir datos mediante los modelos.
+- Cree funcionalidad de busqueda de usaurios
+- Cree funcionalidad de paginado de resultados de usuarios.
+- Cree vista de administracion
+- Cree menu desplegable en version mobile
+- Refactor varios sobre distitnos puntos de la aplicacion.
 ### Que voy a hacer:
-- 
+- Revision general y cierre del sprint.
 
 ## Maximiliano:
 ### Que hice: 
