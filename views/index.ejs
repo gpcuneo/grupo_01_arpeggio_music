@@ -41,30 +41,14 @@
             <div class="sub-title">
                 Categorias
             </div>
-            <div class="item-box">
-                <img class="img-responsive" src="/images/categories/guitarras.jpg" alt="Imagen de instrumentos de la tienda">
-                <div class="text-in-categories">
-                    <p>CUERDAS</p>
+            <% categories.forEach( category => { %>
+                <div class="item-box">
+                    <img class="img-responsive" src="/images/categories/<%= category.img %>" alt="Imagen de instrumentos de la tienda">
+                    <div class="text-in-categories">
+                        <p><%= category.name %></p>
+                    </div>
                 </div>
-            </div>
-            <div class="item-box">
-                <img class="img-responsive" src="/images/categories/percusion.webp" alt="Imagen de instrumentos de la tienda">
-                <div class="text-in-categories">
-                    <p>CUERDAS</p>
-                </div>
-            </div>
-            <div class="item-box">
-                <img class="img-responsive" src="/images/categories/sonido.jpg" alt="Imagen de instrumentos de la tienda">
-                <div class="text-in-categories">
-                    <p>CUERDAS</p>
-                </div>
-            </div>
-            <div class="item-box">
-                <img class="img-responsive" src="/images/categories/sonido_2.jpg" alt="Imagen de instrumentos de la tienda">
-                <div class="text-in-categories">
-                    <p>CUERDAS</p>
-                </div>
-            </div>
+            <% }); %>
         </section>
         <section class="container-items">
             <div class="sub-title">

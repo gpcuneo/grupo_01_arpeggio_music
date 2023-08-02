@@ -1,4 +1,5 @@
 const userTools = require('../utils/User')
+const db = require('../database/models');
 
 // Dummy data
 const products = [
@@ -8,9 +9,10 @@ const products = [
     {id: '4', name: 'Violin', details: 'Violin lorem lorem lorem lorem', price: '325738', image: '/images/productos/violin.png'}
 ]
 
-const home = (req, res) => {
+const home = async (req, res) => {
+    const categories = await db.Category.findAll({limit: 8 })
     let userInfo = userTools.isLogged(req);
-    res.render('index', {products: products, user: userInfo});
+    res.render('index', {products: products, user: userInfo, categories});
 }
 
 const about = (req, res) => {
