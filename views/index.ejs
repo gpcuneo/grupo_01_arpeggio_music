@@ -14,6 +14,18 @@
 <body>
     <%- include('./partials/header') %>
     <main>
+        <!-- Modal de Cookies -->
+        <section>
+            <div class="modal" id="modal">
+                <div class="modal-content">
+                <h2>Uso de Cookies</h2>
+                <p>Esta página web usa cookies
+                    Las cookies de este sitio web se usan para personalizar el contenido y los anuncios, ofrecer funciones de redes sociales y analizar el tráfico. Además, compartimos información sobre el uso que haga del sitio web con nuestros partners de redes sociales, publicidad y análisis web, quienes pueden combinarla con otra información que les haya proporcionado o que hayan recopilado a partir del uso que haya hecho de sus servicios.</p>
+                <button class="acept-btn" id="acceptBtn">Aceptar</button>
+                <button class="close-btn" onclick="closeModal()">Cancelar</button>
+                </div>
+            </div>
+        </section>
         <section class="slider">
             <img src="/images/slider_01.jpg" alt="Imagen de instrumentos de la tienda">
             <div class="float-text">
@@ -86,6 +98,8 @@
         </section>
     </main>
     <%- include('./partials/footer') %>
+    <script src="/js/index.js">
+    </script>
 </body>
 
 </html>
