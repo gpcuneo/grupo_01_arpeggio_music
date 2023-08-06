@@ -1,5 +1,6 @@
 const userTools = require('../utils/User')
 const db = require('../database/models');
+const { fn } = require('sequelize');
 
 // Dummy data
 const products = [
@@ -11,8 +12,28 @@ const products = [
 
 const home = async (req, res) => {
     const categories = await db.Category.findAll({limit: 8 })
+    const products = await db.Product.findAll({
+        order: [
+            fn( 'RAND' ),
+        ],
+        limit: 4,
+    });
+    products.forEach(product =>{
+        product.image = JSON.parse(product.image).map(imgName => imgName);
+    });
+
+    const productsOfertas = await db.Product.findAll({
+        order: [
+            fn( 'RAND' ),
+        ],
+        limit: 4,
+    });
+    productsOfertas.forEach(product =>{
+        product.image = JSON.parse(product.image).map(imgName => imgName);
+    });
+    console.log(productsOfertas)
     let userInfo = userTools.isLogged(req);
-    res.render('index', {products: products, user: userInfo, categories});
+    return res.render('index', {products, productsOfertas, user: userInfo, categories});
 }
 
 const about = (req, res) => {
