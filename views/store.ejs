@@ -18,38 +18,12 @@
         <section class="filter-products">
             <div class="filter-container-items">
                 <p>MARCAS</p>
-                <div class="input-filters">
-                    <input type="checkbox" value="casio" id="casio">
-                    <label for="casio">Casio</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="yamaha" id="yamaha">
-                    <label for="yamaha">yamaha</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="korg" id="korg">
-                    <label for="korg">korg</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="pearl" id="pearl">
-                    <label for="pearl">pearl</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="samson" id="samson">
-                    <label for="samson">samson</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="remo" id="remo">
-                    <label for="remo">remo</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="jackson" id="jackson">
-                    <label for="jackson">jackson</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="ibanez" id="ibanez">
-                    <label for="ibanez">ibanez</label>
-                </div>
+                <% brands.forEach( brand => { %>
+                    <div class="input-filters">
+                        <input type="checkbox" value="<%= brand.name %>" id="<%= brand.name %>">
+                        <label for="<%= brand.name %>"><%= brand.name %></label>
+                    </div>    
+                <% }) %>
             </div>
             <div class="filter-container-items">
                 <p>Rango de precio:</p>
@@ -72,38 +46,12 @@
             </div>
             <div class="filter-container-items">
                 <p>CATEGORIAS</p>
-                <div class="input-filters">
-                    <input type="checkbox" value="Guitarras" id="Guitarras">
-                    <label for="Guitarras">Guitarras</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="Teclados" id="Teclados">
-                    <label for="Teclados">Teclados</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="Audio DJ" id="Audio DJ">
-                    <label for="Audio DJ">Audio DJ</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="Audio hogar" id="Audio hogar">
-                    <label for="Audio hogar">Audio hogar</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="Baterias" id="Baterias">
-                    <label for="Baterias">Baterias</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="Violines" id="Violines">
-                    <label for="Violines">Violines</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="Consolas" id="Consolas">
-                    <label for="Consolas">Consolas</label>
-                </div>
-                <div class="input-filters">
-                    <input type="checkbox" value="Microfonos" id="Microfonos">
-                    <label for="Microfonos">Microfonos</label>
-                </div>
+                <% categories.forEach( category => { %>
+                    <div class="input-filters">
+                        <input type="checkbox" value="<%= category.name %>" id="<%= category.name %>">
+                        <label for="<%= category.name %>"><%= category.name %></label>
+                    </div>
+                <% }) %>
             </div>
         </section>
         <section class="container-items">

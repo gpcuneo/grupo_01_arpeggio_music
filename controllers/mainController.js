@@ -24,7 +24,6 @@ const home = async (req, res) => {
     productsOfertas.forEach(product =>{
         product.image = JSON.parse(product.image).map(imgName => imgName);
     });
-    console.log(productsOfertas)
     let userInfo = userTools.isLogged(req);
     return res.render('index', {products, productsOfertas, user: userInfo, categories});
 }
@@ -54,7 +53,19 @@ const store = async (req, res) => {
     products.forEach(product =>{
         product.image = JSON.parse(product.image).map(imgName => imgName);
     });
-    res.render('store', {products, user: userInfo});
+    
+    const brands = await db.Trademark.findAll({
+        order: [
+            ['name', 'ASC']
+        ]
+    });
+
+    const categories = await db.Category.findAll({
+        order: [
+            ['name', 'ASC']
+        ]
+    });
+    res.render('store', {products, brands, categories, user: userInfo});
 } 
 
 const mainController = {
