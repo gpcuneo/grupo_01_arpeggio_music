@@ -112,7 +112,7 @@
                     <% products.forEach( product => {%>
                         <div class="article-other">
                             <a href="/products/<%= product.id %>/detail">
-                                <img class="img-responsive" src="<%= product.image %>" alt="Imagen de instrumentos de la tienda">
+                                <img class="img-responsive" src="/images/productos/<%= product.image[0] %>" alt="Imagen de instrumentos de la tienda">
                                 <div class="box-article-charact">
                                     <h5><%= product.name %></h5>
                                     <p><%= product.details %></p>
