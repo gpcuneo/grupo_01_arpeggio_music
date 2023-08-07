@@ -1,11 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    var menuToggle = document.querySelector('.menu-toggle');
-    var menu = document.querySelector('.menu');
-
-    menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('active');
-    });
-
     function checkCookieConsent() {
         const consentKey = 'arpegiomusic_cookie_consent';
         const consentValue = localStorage.getItem(consentKey);
