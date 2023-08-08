@@ -100,9 +100,11 @@
                 <nav class="container-other-product">
                     <h5 class="name-other">Productos Similares</h5>
                     <div class="box-article">
+                        <% let indice = articles.findIndex(({id}) => id == product.id) %>
+                        <% let newArr = articles.splice(indice,1) %>
                         <% articles.forEach(article=>{ %>
                             <article class="article-other">
-                                <!-- <a href="/products/<%= article.id %>/detail"> -->
+                                <a href="/products/<%= article.id %>/detail">
                                     <img src="<%= article.image[0] %>" alt="">
                                     <div class="box-article-charact">
                                         <h5><%= article.name %></h5>
@@ -110,7 +112,7 @@
                                         <p class="price-art">$<%= article.price %>
                                         </p>
                                     </div>
-                                <!-- </a> -->
+                                </a>
                             </article>
                         <% }) %>
                     </div>

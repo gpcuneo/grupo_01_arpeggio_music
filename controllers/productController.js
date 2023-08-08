@@ -20,7 +20,6 @@ let getDetail= async (req, res)=>{
     const product = await db.Product.findByPk(req.params.id)
     product.image = JSON.parse(product.image).map(image => '/images/productos/'+image)
     product.colors = JSON.parse(product.colors)
-    console.log(product.stock);
     articles.forEach(article =>{
         article.image = JSON.parse(article.image).map(imgName => '/images/productos/' + imgName);
     })
