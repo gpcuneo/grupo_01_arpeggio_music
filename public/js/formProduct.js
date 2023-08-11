@@ -5,7 +5,7 @@ const priceInput = document.getElementById('price');
 /* const trademarkSelect = document.getElementById('trademark'); */
 const stockInput = document.getElementById('stock');
 const colorsCheck = Array.from(document.querySelectorAll('input[type="checkbox"]'));
-const imageInput = document.getElementById('image');
+const imageInput = document.querySelector('input[type="file"]');
 const characterInput = document.getElementById('characteristics');
 const descriptionInput = document.getElementById('description');
 const storeInput = document.getElementById('store');
@@ -90,10 +90,25 @@ colorsCheck.forEach(color =>{
         }
     }
 })
-imageInput.onchange=(e)=>{
+imageInput.oninput=(e)=>{
     const value = e.target.value;
-    const length= e.target.value.length
-    console.log(`el valor: ${value} y largo:${length}`);
+    const length= e.target.value.length;
+    const showP = document.getElementById('p-image');
+    if(value == ''){
+        showP.style.display = 'block';
+        e.target.nextElementSibling.innerHTML='No ha seleccionado una imagen'
+    }else{
+        let ArrExtension = ['jpg','jpeg', 'png'];
+        let extension = value.replace(/^.*\./, '');
+        extension= extension.toLowerCase();
+        if(ArrExtension.includes(extension)){
+            showP.style.display= 'none';
+            e.target.nextElementSibling.innerHTML = '';
+        }else{
+            showP.style.display= 'block';
+            e.target.nextElementSibling.innerHTML = 'Solo se permite jpg, jpeg, png.'
+        }
+    }
 }
 characterInput.oninput =(e)=>{
     const value = e.target.value;
