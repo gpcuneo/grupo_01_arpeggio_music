@@ -161,7 +161,8 @@
                         </div>
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>
-                            <input type="file" multiple accept=".jpg, .jpeg, .png" name="image" id="image" >
+                            <input type="file" multiple accept=".jpg, .jpeg, .png"  name="image" id="image" >
+                            <p id="p-image" style="display: none;"></p>
                             <% if (locals.errors && errors.image) { %>
                                 <div class="text-danger">
                                     <%= errors.image.msg %>
