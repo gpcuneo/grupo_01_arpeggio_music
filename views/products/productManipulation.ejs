@@ -23,7 +23,7 @@
             <div class="container">
                 <% if (action=='create' ) { %>
                     <h4 class="form-title">Crear nuevo producto</h4>
-                    <form action="/products" method="POST" class="form-container" enctype="multipart/form-data">
+                    <form action="/products" method="POST" id="form-crate" class="form-container" enctype="multipart/form-data">
                 <%} else { %>
                     <h4 class="form-title">Editar producto</h4>
                     <form action="/products/<%=product.id %>/update?_method=put" method="POST" class="form-container" enctype="multipart/form-data">
@@ -38,7 +38,7 @@
                             <% } %>
                                 id="name"
                             >
-                            <p id="pName" style="display: none;"></p>
+                            <p id="pName" class="errors"  style="display: none;"></p>
                                 <% if (locals.errors && errors.name) { %>
                                     <div class="text-danger">
                                         <%= errors.name.msg %>
@@ -59,7 +59,7 @@
                                     <% } %>
                                 <% }) %>
                             </select>
-                            <p id="p-category" style="display: none;"></p>
+                            <p id="p-category"  class="errors" style="display: none;"></p>
                                 <% if (locals.errors && errors.category) { %>
                                     <div class="text-danger">
                                         <%= errors.category.msg %>
@@ -76,7 +76,7 @@
                             <% } %>
                                 id="price"
                             >
-                            <p id="p-price" style="display: none;"></p>
+                            <p id="p-price" class="errors"  style="display: none;"></p>
                                 <% if (locals.errors && errors.price) { %>
                                     <div class="text-danger">
                                         <%= errors.price.msg %>
@@ -124,7 +124,7 @@
                             <% } %>
                                 id="stock"
                             >
-                            <p id="p-stock" style="display: none;"></p>
+                            <p id="p-stock" class="errors"  style="display: none;"></p>
                                 <% if (locals.errors && errors.stock) { %>
                                     <div class="text-danger">
                                         <%= errors.stock.msg %>
@@ -152,7 +152,7 @@
                                         </div>
                                     </div>   
                                 <% }) %>
-                            <p id="p-color" style="display: none;"></p>
+                            <p id="p-color"  class="errors" style="display: none;"></p>
                                 <% if (locals.errors && errors.colors) { %>
                                     <div class="text-danger">
                                         <%= errors.colors.msg %>
@@ -162,7 +162,7 @@
                         <div class="form-group">
                             <label for="img">Cargar imagen</label>
                             <input type="file" multiple accept=".jpg, .jpeg, .png"  name="image" id="image" >
-                            <p id="p-image" style="display: none;"></p>
+                            <p id="p-image" class="errors"  style="display: none;"></p>
                             <% if (locals.errors && errors.image) { %>
                                 <div class="text-danger">
                                     <%= errors.image.msg %>
@@ -172,7 +172,7 @@
                         <div class="form-group">
                             <label for="characteristics">Características del producto</label>
                             <textarea class="group-input <%= locals.errors && errors.characteristics?'invalid':null %>" id="characteristics" name="characteristics" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.characteristics: null ):( locals.oldData? oldData.characteristics: product.characteristics )  %></textarea>
-                            <p id="p-charater" style="display: none;"></p>
+                            <p id="p-charater" class="errors"  style="display: none;"></p>
                             <% if (locals.errors && errors.characteristics) { %>
                                 <div class="text-danger">
                                     <%= errors.characteristics.msg %>
@@ -182,7 +182,7 @@
                         <div class="form-group">
                             <label for="description">Descripción del producto</label>
                             <textarea class="group-input <%= locals.errors && errors.description?'invalid':null %>" name="description" id="description" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.description: null ): ( locals.oldData? oldData.description: product.description) %></textarea>
-                            <p id="p-description" style="display: none;"></p>
+                            <p id="p-description" class="errors"  style="display: none;"></p>
                             <% if (locals.errors && errors.description) { %>
                                 <div class="text-danger">
                                     <%= errors.description.msg %>
@@ -192,12 +192,12 @@
                         <div class="form-group">
                             <label for="store">Información de la tienda (Opcional)</label>
                             <textarea class="group-input" id="store" name="store" cols="30" rows="10" maxlength="500"><%= (action == 'create')? ( locals.oldData? oldData.store: null ): ( locals.oldData? oldData.store: product.store) %></textarea>
-                            <p id="p-store" style="display: none;"></p>
+                            <p id="p-store" class="errors"  style="display: none;"></p>
                         </div>
                         <% if (action=='create' ) { %>
-                            <button class="btn-black" type="submit">Guardar</button>
+                            <button class="btn-black" id="submit-btn" disabled style="background-color: rgb(50, 50, 49);" type="submit">Guardar</button>
                         <%} else { %>
-                            <button class="btn-black" type="submit">Editar</button>
+                            <button class="btn-black" id="submit-btn" type="submit">Editar</button>
                         <% } %>
                         <script src="/js/formProduct.js"></script>
                     </form>
