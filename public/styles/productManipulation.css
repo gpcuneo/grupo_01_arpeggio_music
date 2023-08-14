@@ -121,6 +121,11 @@ input[type='checkbox']:checked + .switch{
     position: absolute;
     left: -99999999px;
 }
+.errors{
+    color: red;
+    margin: 5px;
+    font-size: 14px;
+}
 
 @media (min-width: 769px) {
     .form-container {
