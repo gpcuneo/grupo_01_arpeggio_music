@@ -63,6 +63,7 @@ let postProducts = async(req, res) =>{
     const trademarks= await db.Trademark.findAll({raw:true});
     const resultValidation = validationResult(req);
     let userInfo = userTools.isLogged(req);
+    /* console.log(req.body.colors); */
     if(resultValidation.errors.length > 0){
         return res.render('products/productManipulation',{
             errors:resultValidation.mapped(),
@@ -75,6 +76,8 @@ let postProducts = async(req, res) =>{
             trademarks
         })
     }
+    const checkColors= req.body.colors;
+    const colorsArray= Array.isArray(checkColors)? checkColors: [checkColors];
     const newProduct = {
         name:req.body.name,
         characteristics:req.body.characteristics,
@@ -85,7 +88,7 @@ let postProducts = async(req, res) =>{
         description:req.body.description,
         store:req.body.store,
         image:JSON.stringify(req.files.map(file => file.filename)),
-        colors:JSON.stringify(req.body.colors),
+        colors:JSON.stringify(colorsArray),
         trademark:parseInt(req.body.trademark),
     }
     const create = await db.Product.create(newProduct)
