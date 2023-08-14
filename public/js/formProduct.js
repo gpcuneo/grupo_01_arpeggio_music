@@ -16,12 +16,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const length = e.target.value.length;
         const showP = document.getElementById('pName');
         if(length < 3 ){
+            nameInput.classList.add('invalid')
             showP.style.display = 'block';
             e.target.nextElementSibling.innerHTML = 'Debe tener al menos 3 caracteres';
         }else if(length > 35){
+            nameInput.classList.add('invalid')
             showP.style.display='block';
             e.target.nextElementSibling.innerHTML = 'El nombre no debe superar los 35 caracteres'
         }else{
+            nameInput.classList.remove('invalid')
             showP.style.display='none';
             e.target.nextElementSibling.innerHTML= '';
         }
@@ -32,9 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const length = e.target.value.length;
         const showP = document.getElementById('p-price');
         if(length == 0 ){
+            priceInput.classList.add('invalid')
             showP.style.display = 'block';
             e.target.nextElementSibling.innerHTML = 'Debe agregar un precio al producto'
         }else{
+            priceInput.classList.remove('invalid')
             showP.style.display='none';
             e.target.nextElementSibling.innerHTML= '';
         }
@@ -45,9 +50,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const length = e.target.value.length;
         const showP = document.getElementById('p-stock');
         if(length == 0 ){
+            stockInput.classList.add('invalid')
             showP.style.display = 'block';
             e.target.nextElementSibling.innerHTML = 'Debe agregar el stock del producto'
         }else{
+            stockInput.classList.remove('invalid')
             showP.style.display='none';
             e.target.nextElementSibling.innerHTML= '';
         }
@@ -58,9 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const length = e.target.value.length;
         const showP = document.getElementById('p-category')
         if(length == 0 ){
+            categorySelect.classList.add('invalid')
             showP.style.display = 'block';
             e.target.nextElementSibling.innerHTML = 'Elija una category'
         }else{
+            categorySelect.classList.remove('invalid')
             showP.style.display='none';
             e.target.nextElementSibling.innerHTML= '';
         }
@@ -117,12 +126,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const length = e.target.value.length;
         const showP = document.getElementById('p-charater');
         if(length == 0 ){
+            characterInput.classList.add('invalid')
             showP.style.display = 'block';
             e.target.nextElementSibling.innerHTML = 'Agregue una característica del producto'
         }else if(length > 150){
+            characterInput.classList.add('invalid')
             showP.style.display='block';
             e.target.nextElementSibling.innerHTML = 'El texto no debe superar los 150 caracteres'
+        }else if(length < 40){
+            characterInput.classList.add('invalid')
+            showP.style.display='block';
+            e.target.nextElementSibling.innerHTML = 'El texto debe tener como mínimo 40 caracteres'
         }else{
+            characterInput.classList.remove('invalid')
             showP.style.display='none';
             e.target.nextElementSibling.innerHTML= '';
         }
@@ -133,12 +149,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const length = e.target.value.length;
         const showP = document.getElementById('p-description');
         if(length == 0 ){
+            descriptionInput.classList.add('invalid')
             showP.style.display = 'block';
             e.target.nextElementSibling.innerHTML = 'Agregue una descripción del producto'
         }else if(length > 490){
+            descriptionInput.classList.add('invalid')
             showP.style.display='block';
             e.target.nextElementSibling.innerHTML = 'El texto no debe superar los 490 caracteres'
+        }else if(length < 100){
+            descriptionInput.classList.add('invalid')
+            showP.style.display='block';
+            e.target.nextElementSibling.innerHTML = 'El texto debe tener como mínimo 100 caracteres'
         }else{
+            descriptionInput.classList.remove('invalid')
             showP.style.display='none';
             e.target.nextElementSibling.innerHTML= '';
         }
@@ -149,9 +172,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const length = e.target.value.length;
         const showP = document.getElementById('p-store');
         if(length > 490){
+            storeInput.classList.add('invalid')
             showP.style.display='block';
             e.target.nextElementSibling.innerHTML = 'El texto no debe superar los 490 caracteres'
-        }else{
+        }else {
+            storeInput.classList.remove('invalid')
             showP.style.display='none';
             e.target.nextElementSibling.innerHTML= '';
         }
