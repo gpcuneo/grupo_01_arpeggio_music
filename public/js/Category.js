@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const text = document.querySelector('.text')
     const img = document.querySelector('#img')
+    const button = document.querySelector('.btn-black')
     text.oninput = (e) => {
         const value = e.target.value
         const lenght = e.target.value.length
@@ -34,16 +35,18 @@ checkErrors()
 const checkErrors = () =>{
 let errorsHTML =Array.from (document.querySelectorAll('.error'))
 let errors = []
+
 console.log(errorsHTML);
 errorsHTML.forEach (error =>{
     if (error.innerHTML !== ''){
         errors.push (error.innerHTML)
-        
     }
-
-    
-    
 })
+if (errors.length > 0) {
+    button.disabled = true
+} else{
+    button.removeAttribute('disabled')
+}
 
 
 

@@ -14,9 +14,10 @@ const categoryControllers = {
     postCategory: (req, res) => {
         let datos = req.body;
         const validations = expressValidator.validationResult(req);
+        let userInfo = userTools.isLogged(req);
 
         if(validations.errors.length > 0){
-            return res.render('categoryEdit', { errors: validations.errors, values: req.body , action:'create' });
+            return res.render('categoryEdit', { errors: validations.errors, values: req.body,user: userInfo , action:'create' });
         }
 
         if(req.file) {
