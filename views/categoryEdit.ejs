@@ -27,8 +27,10 @@
                                 Nombre:
                             </label>
                             <input class="text" type="text" name="name">
+                            <p class="error" id="p-name" style="display: none;"></p>
                         </div>
                         <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                        <p id="p-img" style="display: none;" class="error"></p>
                         <div class="button">
                             <button class="btn-black" type="submit">Guardar</button>
                         </div>
@@ -39,9 +41,11 @@
                                         Nombre:
                                     </label>
                                     <input class="text" type="text" name="name" value="<%= category.name %>">
+                                    <p class="error" id="p-name" style="display: none;"> </p>
                                 </div>
                                 <img class="category-img" src="/images/categories/<%= category.img %>">
                                 <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                                <p id="p-img" style="display: none;" class="error"></p>
                                 <div class="button">
                                     <button class="btn-black" type="submit">Guardar</button>
                                 </div>
