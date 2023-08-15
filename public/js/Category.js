@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const text = document.querySelector('.text')
     const img = document.querySelector('#img')
     const button = document.querySelector('.btn-black')
+    const form = document.querySelector ('#form')
     text.oninput = (e) => {
         const value = e.target.value
         const lenght = e.target.value.length
@@ -28,6 +29,9 @@ img.oninput = (e)=>{
 if (value == ''){
     showP.style.display='block'
     e.target.nextElementSibling.innerHTML = 'Debe cargar una imagen'
+} else {
+    showP.style.display='none'
+    e.target.nextElementSibling.innerHTML = ''
 }
 checkErrors()
 }
@@ -36,10 +40,11 @@ const checkErrors = () =>{
 let errorsHTML =Array.from (document.querySelectorAll('.error'))
 let errors = []
 
-console.log(errorsHTML);
+
 errorsHTML.forEach (error =>{
     if (error.innerHTML !== ''){
-        errors.push (error.innerHTML)
+        errors.push(error.innerHTML)
+        
     }
 })
 if (errors.length > 0) {
@@ -47,13 +52,11 @@ if (errors.length > 0) {
 } else{
     button.removeAttribute('disabled')
 }
-
-
-
-
-
 }
-
+form.addEventListener('submit',function(event){
+    if(checkErrors){
+   event.preventDefault();}
+})
 })
 
 
