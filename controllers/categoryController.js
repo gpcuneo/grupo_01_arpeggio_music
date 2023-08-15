@@ -15,6 +15,7 @@ const categoryControllers = {
     postCategory: (req, res) => {
         let datos = req.body;
         const validations = expressValidator.validationResult(req);
+       
         let userInfo = userTools.isLogged(req);
 
         if(validations.errors.length > 0){

@@ -37,7 +37,15 @@ const productFields = [
 ]
 
 const categoryFields = [
-    body('name').notEmpty().withMessage('campo obligatorio')
+ body('name').notEmpty().withMessage('campo obligatorio'),
+  body('img').custom ((value,{req})=>{
+    let file = req.file;
+    console.log(req);
+    if (!file){
+        throw new Error ('Tiene que subir una imagen')
+    }
+    return true
+  })
 ]
 
 const validations = {

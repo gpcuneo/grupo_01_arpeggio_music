@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const showP = document.getElementById('p-name')
       if(lenght===0){
         showP.style.display='block'
-        e.target.nextElementSibling.innerHTML = 'El texto debe contener 5 caracteres'
+        e.target.nextElementSibling.innerHTML = 'Debe contener un nombre'
       } else if (lenght<4){
         showP.style.display='block'
         e.target.nextElementSibling.innerHTML = 'El texto debe contener 5 caracteres'
       } else if (lenght >25){
         showP.style.display='block'
-        e.target.nextElementSibling.innerHTML = 'El texto debe contener 5 caracteres'
+        e.target.nextElementSibling.innerHTML = 'No debe superar los 25 caracteres'
     } else {
 showP.style.display = 'none'
 e.target.nextElementSibling.innerHTML = ''
