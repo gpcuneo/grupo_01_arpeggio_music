@@ -101,8 +101,12 @@ const categoryControllers = {
        
     },
      // /category
-    getCategoryDelete2: (req, res) => { //TODO falta
-        const id = Number(req.params.id);
+    getCategoryDelete2: async (req, res) =>  {
+        const categoryDelete = await db.Category.destroy({
+            where : {id:req.params.id}
+        }) //TODO falta
+        
+       console.log(categoryDelete);
         //categoryModel.deleteById(id); //TODO definir si se hace borrado logico o no
 
         res.redirect('/category');
