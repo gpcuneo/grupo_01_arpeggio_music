@@ -1,6 +1,7 @@
 const expressValidator = require ('express-validator')
 const userTools = require('../utils/User')
 const db = require('../database/models');
+const user = require('../utils/User');
 
 
 
@@ -14,9 +15,11 @@ const categoryControllers = {
     postCategory: (req, res) => {
         let datos = req.body;
         const validations = expressValidator.validationResult(req);
+       
+        let userInfo = userTools.isLogged(req);
 
         if(validations.errors.length > 0){
-            return res.render('categoryEdit', { errors: validations.errors, values: req.body , action:'create' });
+            return res.render('categoryEdit', { errors: validations.errors, values: req.body,user: userInfo , action:'create' });
         }
 
         if(req.file) {
@@ -59,6 +62,7 @@ const categoryControllers = {
     },
      // /category/:id/update
      putCategoryUpdate: async (req,res) => {
+        let userInfo = userTools.isLogged(req);
         const categoryUpDate = await db.Category.findOne({ 
             where: { id: req.params.id }
         });
@@ -66,7 +70,7 @@ const categoryControllers = {
         const validations = expressValidator.validationResult(req);
 
         if(validations.errors.length > 0){
-            return res.render('categoryEdit', { errors: validations.errors, values: req.body , action:'update',category:categoryUpDate });
+            return res.render('categoryEdit', { errors: validations.errors, values: req.body ,user:userInfo ,action:'update',category:categoryUpDate });
         }
 
         let datos = req.body;

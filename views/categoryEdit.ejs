@@ -21,16 +21,18 @@
                     <% }) %>
                   </ul>
                 <% if (action==='create' ) { %>
-                    <form action="/category" method="post" enctype="multipart/form-data">
+                    <form action="/category" id="form" method="post" enctype="multipart/form-data">
                         <div class="name">
                             <label>
                                 Nombre:
                             </label>
                             <input class="text" type="text" name="name">
+                            <p class="error" id="p-name" style="display: none;"></p>
                         </div>
                         <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                        <p id="p-img" style="display: none;" class="error"></p>
                         <div class="button">
-                            <button class="btn-black" type="submit">Guardar</button>
+                            <button class="btn-black" type="submit" disabled>Guardar</button>
                         </div>
                         <%} else if (action==="update" ) { %>
                             <form action="/category/<%= category.id %>/update?_method=put" method="post" enctype="multipart/form-data">
@@ -39,15 +41,17 @@
                                         Nombre:
                                     </label>
                                     <input class="text" type="text" name="name" value="<%= category.name %>">
+                                    <p class="error" id="p-name" style="display: none;"> </p>
                                 </div>
                                 <img class="category-img" src="/images/categories/<%= category.img %>">
                                 <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                                <p id="p-img" style="display: none;" class="error"></p>
                                 <div class="button">
-                                    <button class="btn-black" type="submit">Guardar</button>
+                                    <button class="btn-black" type="submit" disabled>Guardar</button>
                                 </div>
                                 <% } %>
             </div>
-            <script src="/js/Category.js"></script>
+           <script src="/js/Category.js"></script>
             </form>
             </div>
 

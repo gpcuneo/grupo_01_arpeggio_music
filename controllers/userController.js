@@ -122,7 +122,12 @@ const createUser = async (req, res) => {
     errors = await validateUserFields(user, req);
     if (Object.keys(errors) != 0) {
         console.log('hay errores', errors);
-        res.render('User/register', {'user': user, 'errors': errors, 'action': 'register'});
+        const provinces = await db.Province.findAll({attributes: ['id', 'name']});
+        const towns = await db.Town.findAll({
+            where: {id_province: user.id_province},
+            attributes: ['id', 'name']}
+        );
+        res.render('User/register', {'user': user, 'errors': errors, 'action': 'register', provinces, towns});
     } else {
         user.id = uuid.v4();
         user.image = 'default.avif';
