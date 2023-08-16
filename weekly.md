@@ -14,11 +14,11 @@
 
 ## Maximiliano:
 ### Que hice: 
-- 
+- Repasar conceptos de temas anteriores 
 - 
 ### Que voy a hacer:
--  
-- 
+-  validar formularios de javascript para front 
+-  resolver problemas de temas anteriores con Rebeca
 
 ## Rebeca:
 ### Que hice: 
@@ -47,10 +47,10 @@
 
 ## Maximiliano:
 ### Que hice: 
-- 
+- valide los formularios de js y resolvimos los desperfectos de temas anteriores
 - 
 ### Que voy a hacer:
--  
+- seguir repasando conceptos anteriores
 - 
 
 ## Rebeca:
