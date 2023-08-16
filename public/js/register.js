@@ -64,8 +64,6 @@ const validateInput = (input, inputElement) => {
     const type = input.type;
     const value = inputElement.value;
     const fieldValidated = validateCharacters(value, type);
-    console.log(value)
-    console.log(formFieldsValidated)
     if (fieldValidated) {
         formFieldsValidated[id] = true;
         inputElement.classList.remove('error-info');
