@@ -8,8 +8,16 @@ let getTowns = (req, res) => {
     }).then( (towns) => res.json(towns)
 )}
 
+const checkEmail = (req, res) => {
+    db.User.findOne({
+        where: { email: req.params.email },
+        attributes: ['email']
+    }).then( (email) => res.json(email)
+)}
+
 const apiController = {
-    getTowns: getTowns
+    getTowns: getTowns,
+    checkEmail: checkEmail
 }
 
 module.exports = apiController;
