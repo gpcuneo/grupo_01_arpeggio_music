@@ -101,6 +101,9 @@
                     <% if(errors){ %>
                         <div>
                             <p class="error-info">Por favor verifique los datos cargados</p>
+                            <div class="error-info"><%= errors.userName? errors.userName.msg : '' %></div>
+                            <div class="error-info"><%= errors.dni? errors.dni.msg : '' %></div>
+                            <div class="error-info"><%= errors.email? errors.email.msg : '' %></div>
                         </div>
                     <% } %>
                 </form>
