@@ -1,4 +1,4 @@
-# Semana 1 (6 de julio):
+# Semana 1 (2 de agosto):
 
 ## Agustina:
 ### Que hice: 
@@ -8,9 +8,11 @@
 
 ## Guillermo:
 ### Que hice: 
-- 
+- Refine detalles del sprint6, genere tag del sprint
 ### Que voy a hacer:
-- 
+- Generar tarjetas para el equipo y asignar las tareas.
+- Trabajar sobre validaciones del usuario
+- Agregar algunos features necesarios para el proyecto que fueron quedando en el backlog del proyecto.
 
 ## Maximiliano:
 ### Que hice: 
@@ -29,7 +31,7 @@
 - Y empezar hacer las validaciones de formulario de producto desde el lado del frontend
 
 
-# Semana 2 (13 julio):
+# Semana 2 (9 de agosto):
 
 ## Agustina:
 ### Que hice: 
@@ -39,11 +41,14 @@
 
 ## Guillermo:
 ### Que hice: 
-- 
-- 
+- Genere modal de uso de cookies 
+- Asigne limite de al tamaño de subida de imagenes del perfil de usaurio
+- Se agrego renderizado dinamico de los productos en la home de la web
+- Renderizado dinamico de categorias en el store
+- Se agregan imagenes de perfilk
+- Fix error menu desplegable en home
 ### Que voy a hacer:
-- 
-- 
+- Validaciones de los campos de registro de usuario.
 
 ## Maximiliano:
 ### Que hice: 
