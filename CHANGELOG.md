@@ -3,6 +3,25 @@ Todos los cambios notables en este proyecto se documentarán en este archivo.
 
 El formato se basa en [Keep a Changelog](http://keepachangelog.com/) y este proyecto se adhiere a [Semantic Versioning](http://semver.org/).
 
+## Sprint7 - 2023-08-16
+- Nuevas características:
+  - Se implemento modal de aceptacion de cookies
+  - Se agrega renderizado de productos dinamico en la home
+  - Se agrega renderizado de las categorias dinamico en la home
+  - Se agrega renderizado de productos dinamico en el store
+
+- Mejoras:
+  - Se agregaron validaciones a todos los campos de alta y edicion de usuarios
+  - Se agregaron validaciones a todos los campos de alta y edicion productos
+  - Se agregaron validaciones a todos los campos de alta y edicion de categorias
+  - Se agregaron limites a la subida de imagenes de perfil de usuario
+  - Se agregaron limites a la subida de imagenes de perfil de productos
+  - Se agregaron limites a la subida de imagenes de perfil de categorias
+
+
+- Correcciones de errores:
+  - Se corrigieron errores sobre el menu desplegable
+
 
 ## Sprint6 - 2023-06-02
 - Nuevas características:
