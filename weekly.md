@@ -2,9 +2,11 @@
 
 ## Agustina:
 ### Que hice: 
-- 
+- Repasar concepto de Apis
+- Completé playground
 ### Que voy a hacer:
-- 
+- Revisión en sprint anterior y realización de pequeñas correciones
+- Repasar coneptos
 
 ## Guillermo:
 ### Que hice: 
@@ -35,9 +37,10 @@
 
 ## Agustina:
 ### Que hice: 
-- 
+- Repasar conceptos del módulo 8
+- Reunion grupal
 ### Que voy a hacer:
-- 
+- Completar playground
 
 ## Guillermo:
 ### Que hice: 
