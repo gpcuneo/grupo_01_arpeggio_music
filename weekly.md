@@ -2,9 +2,9 @@
 
 ## Agustina:
 ### Que hice: 
-- 
+- Repaso del módulo 8 y completé el playground
 ### Que voy a hacer:
-- 
+- Fortalecer y ampliar información de React
 
 ## Guillermo:
 ### Que hice: 
@@ -35,9 +35,12 @@
 
 ## Agustina:
 ### Que hice: 
-- 
+- Revisión de pequeñas correcciones del sprint anterior
+- Repaso del módulo de Apis
+- Completé las actividades de playground
+- Reuniones de grupo
 ### Que voy a hacer:
-- 
+- Continuar repasando conceptos y prácticando
 
 ## Guillermo:
 ### Que hice: 
