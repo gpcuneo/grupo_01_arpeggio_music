@@ -1,3 +1,4 @@
+const { response } = require('express');
 const db = require('../database/models');
 const { Op } = require('sequelize');
 require('dotenv').config();
@@ -57,13 +58,44 @@ const userDetail = async (req, res) => {
     delete(user.dataValues.password);
     return res.json(user);
 }
+const productList = (req, res)=>{
+    db.Product.findAll({ include:[{association:'category'},{association:'trademark'}] ,nest:true})
+    .then(reponse => {
+        let array= reponse;
+        let categories={};
+        array.forEach( product => {
+            if(categories.hasOwnProperty(product.category.name)){
+                categories[product.category.name]++;
+            }else{
+                categories[product.category.name]=1;
+            }
 
+            if(!product.hasOwnProperty('detail')){
+                product['detail']='/api/detail/:id'
+            }
+        });
+        console.log(array);
+        let data = {
+            count:reponse.length,
+            countByCategory:categories,
+            products:reponse,
+        }
+        return res.json(data)
+    })
+}
 
 const apiController = {
     getTowns: getTowns,
     checkEmail: checkEmail,
     userList: userList,
     userDetail:userDetail,
+    productList:productList
 }
+
+/* const apiController = {
+    getTowns: getTowns,
+    checkEmail: checkEmail,
+    productList:productList
+} */
 
 module.exports = apiController;
