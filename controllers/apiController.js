@@ -28,12 +28,24 @@ const addDetailForUser = (userList) => {
 }
 
 const userList = async (req, res) => {
+    const limit = 3;
+    let page = parseInt(req.query.page) || 1;
+    page > 0 ? page-- : '';
+    const offset = page * limit;
     let usersList = await db.User.findAll({
+        limit,
+        offset,
         attributes: ['userName', 'email'],
     });
-    let usersData = {}
-    usersData.users = addDetailForUser(usersList);
-    usersData.count = usersData.users.length;
+
+    const usersCount = await db.User.count();
+    const pageLimit = Math.ceil(usersCount / 3);
+    const usersData = {
+        users: addDetailForUser(usersList),
+        count: usersCount,
+        currentPage: page + 1,
+        totalPages: pageLimit,
+    }
     return res.json(usersData);
 }
 
