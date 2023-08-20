@@ -58,8 +58,16 @@ const userDetail = async (req, res) => {
     delete(user.dataValues.password);
     return res.json(user);
 }
+
+const addDetailForProduct = (productList)=>{
+    const url = envs.APP_URL + ':' + envs.APP_PORT;
+    return (productList.map( product =>{
+        product.dataValues.detail = url + '/product/'+product.id;
+        return product;
+    }))
+}
 const productList = (req, res)=>{
-    db.Product.findAll({ include:[{association:'category'},{association:'trademark'}] ,nest:true})
+    db.Product.findAll({ include:[{association:'category'},{association:'trademark'}]})
     .then(reponse => {
         let array= reponse;
         let categories={};
@@ -69,16 +77,11 @@ const productList = (req, res)=>{
             }else{
                 categories[product.category.name]=1;
             }
-
-            if(!product.hasOwnProperty('detail')){
-                product['detail']='/api/detail/:id'
-            }
         });
-        console.log(array);
         let data = {
             count:reponse.length,
             countByCategory:categories,
-            products:reponse,
+            products:addDetailForProduct(reponse)
         }
         return res.json(data)
     })
@@ -91,11 +94,5 @@ const apiController = {
     userDetail:userDetail,
     productList:productList
 }
-
-/* const apiController = {
-    getTowns: getTowns,
-    checkEmail: checkEmail,
-    productList:productList
-} */
 
 module.exports = apiController;
