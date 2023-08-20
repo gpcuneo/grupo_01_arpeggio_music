@@ -86,13 +86,37 @@ const productList = (req, res)=>{
         return res.json(data)
     })
 }
+const addObjOfImage = (productDetail)=>{
+    let product = productDetail;
+    let arrayOfImages = JSON.parse(product.dataValues.image);
+    let objImage= {};
+    const url= envs.APP_URL+':'+ envs.APP_PORT;
+    arrayOfImages.forEach((image,i) =>{
+        objImage[i+1]= url +'/images/productos/'+image;
+    })
+    delete(product.dataValues.image)
+    delete(product.dataValues.category_id)
+    delete(product.dataValues.trademark_id)
+    product.dataValues.image= objImage;
+    return product;
+}
+const productDetail= (req,res)=>{
+    db.Product.findByPk(req.params.id,{include:[{association:'category'},{association:'trademark'}]})
+    .then(detail =>{
+        let data = {
+            product:addObjOfImage(detail),
+        }
+        return res.json(data)
+    })
+}
 
 const apiController = {
     getTowns: getTowns,
     checkEmail: checkEmail,
     userList: userList,
     userDetail:userDetail,
-    productList:productList
+    productList:productList,
+    productDetail:productDetail
 }
 
 module.exports = apiController;
