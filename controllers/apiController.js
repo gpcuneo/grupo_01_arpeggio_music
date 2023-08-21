@@ -51,12 +51,19 @@ const userList = async (req, res) => {
 }
 
 const userDetail = async (req, res) => {
-    let user = await db.User.findOne({});
-    const urlBase = envs.APP_URL + ':' + envs.APP_PORT;
-    user.dataValues.imageURL = urlBase + '/images/userProfile/' + user.image;
-    delete(user.dataValues.id);
-    delete(user.dataValues.password);
-    return res.json(user);
+    const findUser = req.params.userName;
+    let user = await db.User.findOne({
+        where: {userName: findUser}
+    });
+    if(user){
+        const urlBase = envs.APP_URL + ':' + envs.APP_PORT;
+        user.dataValues.imageURL = urlBase + '/images/userProfile/' + user.image;
+        delete(user.dataValues.id);
+        delete(user.dataValues.password);
+        return res.json(user);
+    } else {
+        return res.status(404).json({user: `El usuario ${findUser} no existe`});
+    }
 }
 
 const addDetailForProduct = (productList)=>{
