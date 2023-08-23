@@ -1,4 +1,3 @@
-const { response } = require('express');
 const db = require('../database/models');
 const { Op } = require('sequelize');
 require('dotenv').config();
@@ -73,10 +72,20 @@ const addDetailForProduct = (productList)=>{
         return product;
     }))
 }
-const productList = (req, res)=>{
-    db.Product.findAll({ include:[{association:'category'},{association:'trademark'}], attributes:['id','name','characteristics']})
-    .then(reponse => {
-        let array= reponse;
+const productList = async (req, res)=>{
+    const limit = 2;
+    let page= parseInt(req.query.page) || 1;
+    page > 0? page--:'';
+    let offset= page * limit;
+    const countProducts= await db.Product.count();
+    db.Product.findAll({ 
+        include:[{association:'category'},{association:'trademark'}], 
+        attributes:['id','name','characteristics'],
+        limit,
+        offset
+    })
+    .then(products => {
+        let array= products;
         let categories={};
         array.forEach( product => {
             if(categories.hasOwnProperty(product.category.name)){
@@ -85,10 +94,13 @@ const productList = (req, res)=>{
                 categories[product.category.name]=1;
             }
         });
+        const pageLimit= Math.ceil(countProducts/2);
         let data = {
-            count:reponse.length,
+            count:countProducts,
             countByCategory:categories,
-            products:addDetailForProduct(reponse)
+            currentPage:page +1,
+            totalPages: pageLimit,
+            products:addDetailForProduct(products)
         }
         return res.json(data)
     })
