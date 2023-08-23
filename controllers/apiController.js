@@ -74,7 +74,7 @@ const addDetailForProduct = (productList)=>{
     }))
 }
 const productList = (req, res)=>{
-    db.Product.findAll({ include:[{association:'category'},{association:'trademark'}]})
+    db.Product.findAll({ include:[{association:'category'},{association:'trademark'}], attributes:['id','name','characteristics']})
     .then(reponse => {
         let array= reponse;
         let categories={};
