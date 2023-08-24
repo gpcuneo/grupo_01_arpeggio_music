@@ -95,6 +95,7 @@ const productList = async (req, res)=>{
             totalPages: pageLimit,
             products: addDetailRouteToObjects(products, '/product/', 'id')
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         return res.json(data)
     })
 }
@@ -119,6 +120,7 @@ const productDetail= (req,res)=>{
         let data = {
             product:addObjOfImage(detail),
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         return res.json(data)
     })
 }
