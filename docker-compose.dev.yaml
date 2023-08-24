@@ -35,7 +35,7 @@ services:
     ports:
       - "${APP_PORT}:3000"
     volumes:
-      - ./:/app
+      - ./back/:/app
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
