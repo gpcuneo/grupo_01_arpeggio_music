@@ -18,11 +18,11 @@ const checkEmail = (req, res) => {
     }).then( (email) => res.json(email)
 )}
 
-const addDetailForUser = (userList) => {
+const addDetailRouteToObjects = (objList, route, field) => {
     const url = envs.APP_URL + ':' + envs.APP_PORT;
-    return (userList.map( (user) => {
-            user.dataValues.detail = url + '/user/' + user.userName;
-            return user
+    return (objList.map( (item) => {
+            item.dataValues.detail = url + route + item[field];
+            return item
         })
     );
 }
@@ -41,7 +41,7 @@ const userList = async (req, res) => {
     const usersCount = await db.User.count();
     const pageLimit = Math.ceil(usersCount / 3);
     const usersData = {
-        users: addDetailForUser(usersList),
+        users: addDetailRouteToObjects(usersList, '/user/', 'userName'),
         count: usersCount,
         currentPage: page + 1,
         totalPages: pageLimit,
@@ -65,13 +65,6 @@ const userDetail = async (req, res) => {
     }
 }
 
-const addDetailForProduct = (productList)=>{
-    const url = envs.APP_URL + ':' + envs.APP_PORT;
-    return (productList.map( product =>{
-        product.dataValues.detail = url + '/product/'+product.id;
-        return product;
-    }))
-}
 const productList = async (req, res)=>{
     const limit = 2;
     let page= parseInt(req.query.page) || 1;
@@ -100,11 +93,12 @@ const productList = async (req, res)=>{
             countByCategory:categories,
             currentPage:page +1,
             totalPages: pageLimit,
-            products:addDetailForProduct(products)
+            products: addDetailRouteToObjects(products, '/product/', 'id')
         }
         return res.json(data)
     })
 }
+
 const addObjOfImage = (productDetail)=>{
     let product = productDetail;
     let arrayOfImages = JSON.parse(product.dataValues.image);
