@@ -37,6 +37,19 @@ services:
     volumes:
       - ./back/:/app
 
+  front:
+    build:
+      context: .
+      dockerfile: dockerfilefront
+      #target: dev
+    #env_file: .env
+    image: arpegio-front:${APP_VERSION}
+    container_name: ${APP_NAME}-front
+    volumes:
+      - ./front/:/app
+    ports:
+      - ${APP_FRONT_PORT}:3001
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: ${APP_NAME}-phpmyadmin
