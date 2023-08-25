@@ -1,11 +1,16 @@
-import logo from './logo.svg';
+/* import logo from './logo.svg'; */
 import './App.css';
-import Products from './components/Products';
+import '../src/assets/css/app.css'
+import SideBar from './components/SideBar';
+import ContentWrapper from './components/ContentWrapper';
 
 function App() {
   return (
     <>
-      <Products/>
+      <div id="wrapper">
+        <SideBar/>
+        <ContentWrapper/>
+      </div>
     </>
   );
 }
