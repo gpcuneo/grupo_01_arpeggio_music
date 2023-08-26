@@ -4,6 +4,8 @@ import SideBar from './components/SideBar';
 import ContentWrapper from './components/ContentWrapper';
 import React, { useState, useEffect } from 'react';
 
+const urlBase = 'http://localhost:3001/api/'
+
 function App() {
   const [products, setProducts] = useState([]);
   const [countProducts, setCountProducts] = useState(0)
@@ -11,7 +13,7 @@ function App() {
   const [lastProduct, setLastProduct] = useState([])
   useEffect(() => {
     console.log('%cse montó el componente', 'color:green');
-    fetch('http://localhost:3000/api/products')
+    fetch(`${urlBase}products`)
       .then(response => response.json())
       .then(data => {
         setProducts(data.products)
@@ -22,7 +24,7 @@ function App() {
   }, [])
   useEffect(() => {
     console.log('se actualizo el componente');
-    fetch(`http://localhost:3000/api/products?page=${totalPageProd}`)
+    fetch(`${urlBase}products?page=${totalPageProd}`)
       .then(response => response.json())
       .then(data =>{
         setLastProduct(data.products)

@@ -48,7 +48,7 @@ services:
     volumes:
       - ./front/:/app
     ports:
-      - ${APP_FRONT_PORT}:3001
+      - ${APP_FRONT_PORT}:3000
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
