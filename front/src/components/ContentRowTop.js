@@ -1,5 +1,6 @@
 import React from 'react'
-import PanelTotal from './PanelTotal'
+import PanelTotal from './PanelTotal';
+import LastProductInDb from './LastProductInDb';
 
 function ContentRowTop(props) {
   return (
@@ -11,6 +12,11 @@ function ContentRowTop(props) {
 					<PanelTotal
 						countProduct={props.countProduct}
 					/>
+					<div className="row">
+						<LastProductInDb
+							detailProduct={props.detailProd}
+						/>
+					</div>
 				</div>
     </React.Fragment>
   )

@@ -7,7 +7,7 @@ function SideBar() {
             <ul className="navbar-nav  sidebar sidebar-light accordion" id="accordionSidebar" style={{backgroundColor:'black'}} >
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                     <div className="sidebar-brand-icon ">
-                        <img className="w-100 p-md-4" src={logo} alt="Digital House" />
+                        <img className="w-100 p-md-5" src={logo} alt="Digital House" />
                     </div>
                 </a>
                 <hr className="sidebar-divider my-0" />
