@@ -46,6 +46,7 @@ const userList = async (req, res) => {
         currentPage: page + 1,
         totalPages: pageLimit,
     }
+    res.setHeader('Access-Control-Allow-Origin', '*');
     return res.json(usersData);
 }
 
@@ -59,6 +60,7 @@ const userDetail = async (req, res) => {
         user.dataValues.imageURL = urlBase + '/images/userProfile/' + user.image;
         delete(user.dataValues.id);
         delete(user.dataValues.password);
+        res.setHeader('Access-Control-Allow-Origin', '*');
         return res.json(user);
     } else {
         return res.status(404).json({user: `El usuario ${findUser} no existe`});
