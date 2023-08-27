@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import apiCall from "../api";
 
-const urlBase = 'http://192.168.0.120:3001/api';
+const domain = process.envs.REACT_APP_BACK_NAME
+const port = process.envs.REACT_APP_BACK_PORT
+
+const urlBase = `http://${domain}:${port}/api`;
 
 const getUsers = async () => apiCall({ url: `${urlBase}/users` });
 

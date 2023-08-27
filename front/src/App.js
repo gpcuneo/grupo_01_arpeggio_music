@@ -5,6 +5,9 @@ import ContentWrapper from './components/ContentWrapper';
 import React, { useState, useEffect } from 'react';
 import { UserProvider } from './context/user';
 
+console.log(process.env.REACT_APP_BACK_NAME)
+console.log(process.env.REACT_APP_BACK_PORT)
+
 const urlBase = 'http://192.168.0.120:3001/api/'
 
 function App() {
