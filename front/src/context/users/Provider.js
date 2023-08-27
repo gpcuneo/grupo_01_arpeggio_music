@@ -16,9 +16,6 @@ export default function UserProvider({ children }) {
         setUsers(usersResult.results);
     } catch (error) {
         console.log(error);
-        // setUsers([]);
-        // setErrorMessage("Algo ha pasado, verifica tu conexion");
-        // setHasError(true);
     } finally {
         setIsLoading(false);
     }

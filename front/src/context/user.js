@@ -6,10 +6,10 @@ const urlBase = 'http://192.168.0.120:3001/api';
 const getUsers = async () => apiCall({ url: `${urlBase}/users` });
 
 const getLastuser = async (lastPage) => {
-    const lastPageData = await apiCall({ url: `${urlBase}/users` });
+    const lastPageData = await apiCall({ url: `${urlBase}/users?page=${lastPage}` });
     const userSearch = lastPageData.users.pop();
     const lastUserInfo = await apiCall({ url: `${urlBase}/users/${userSearch.userName}` });
-    //console.log(lastUserInfo);
+    console.log(lastUserInfo);
     return lastUserInfo;
 }
 
@@ -32,7 +32,6 @@ export function UserProvider({ children }) {
                 setUsers(usersData);
 
                 const lastUserData = await getLastuser(usersData.totalPages)
-                console.log(lastUserData);
                 setLastUser(lastUserData);
                 setIsLoading(false);
             } catch (error) {

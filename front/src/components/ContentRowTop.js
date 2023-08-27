@@ -5,13 +5,10 @@ import { useUserContext } from '../context/user';
 
 function ContentRowTop(props) {
 	const { users, isLoading } = useUserContext();
-	console.log(users)
-    console.log(isLoading)
-	console.log(props)
 	let cardsInfo = [
 		{
 			titulo:'Total de Productos',
-			cifra: 10,
+			cifra: props.countProduct,
 			color:'primary',
 			icono:'film'
 		},
@@ -28,7 +25,6 @@ function ContentRowTop(props) {
 			icono:'award'
 		},
 	]
-	console.log(cardsInfo)
 
 	return (
 		<React.Fragment>
@@ -37,7 +33,7 @@ function ContentRowTop(props) {
 							<h1 className="h3 mb-0 text-gray-800">Arpeggio Music Dashboard</h1>
 						</div>
 						<PanelTotal
-							countProduct={cardsInfo}
+							cardsInfo={cardsInfo}
 						/>
 						<div className="row">
 							<LastProductInDb
