@@ -3,8 +3,9 @@ import '../src/assets/css/app.css'
 import SideBar from './components/SideBar';
 import ContentWrapper from './components/ContentWrapper';
 import React, { useState, useEffect } from 'react';
+import { UserProvider } from './context/user';
 
-const urlBase = 'http://localhost:3001/api/'
+const urlBase = 'http://192.168.0.120:3001/api/'
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -43,11 +44,13 @@ function App() {
     <>
       <div id="wrapper">
         <SideBar />
-        <ContentWrapper
-          products={products}
-          countProduct={countProducts}
-          detailProd={lastProduct}
-        />
+        <UserProvider>
+          <ContentWrapper
+            products={products}
+            countProduct={countProducts}
+            detailProd={lastProduct}
+          />
+        </UserProvider>
       </div>
     </>
   );
