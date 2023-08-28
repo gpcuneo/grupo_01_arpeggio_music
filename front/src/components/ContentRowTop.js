@@ -7,7 +7,7 @@ import { useCategoryContext } from '../context/category';
 
 function ContentRowTop(props) {
 	const { users, loadingUser } = useUserContext();
-	const {products,isLoadingPro}= useProductContext();
+	const {products,isLoadingPro,lastProduct}= useProductContext();
 	const { category, countProductsByCategory, loadingCategories } = useCategoryContext();
 	let cardsInfo = [
 		{
@@ -50,7 +50,7 @@ function ContentRowTop(props) {
 						/>
 						<div className="row">
 							<LastProductInDb
-								detailProduct={props.detailProd}
+								detailData={lastProduct}
 							/>
 						</div>
 						<PanelTotal
