@@ -127,13 +127,53 @@ const productDetail= (req,res)=>{
     })
 }
 
+const categoryList = async (req, res) => {
+    const limit = 3;
+    let page = parseInt(req.query.page) || 1;
+    page > 0 ? page-- : '';
+    const offset = page * limit;
+    let categoryList = await db.Category.findAll({
+        limit,
+        offset,
+        attributes: ['id', 'name', 'img'],
+    });
+
+    const categoryCount = await db.Category.count();
+    const pageLimit = Math.ceil(categoryCount / 3);
+    const categoryData = {
+        users: addDetailRouteToObjects(categoryList, '/category/', 'id'),
+        count: categoryCount,
+        currentPage: page + 1,
+        totalPages: pageLimit,
+    }
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    return res.json(categoryData);
+}
+
+const categoryDetail = async (req, res) => {
+    const categoryID = req.params.id;
+    let category = await db.Category.findOne({
+        where: {id: categoryID}
+    });
+    if(category){
+        const urlBase = envs.APP_URL + ':' + envs.APP_PORT;
+        category.dataValues.imageURL = urlBase + '/images/categories/' + category.img;
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        return res.json(category);
+    } else {
+        return res.status(404).json({category: `El usuario ${categoryID} no existe`});
+    }
+}
+
 const apiController = {
     getTowns: getTowns,
     checkEmail: checkEmail,
     userList: userList,
     userDetail:userDetail,
     productList:productList,
-    productDetail:productDetail
+    productDetail:productDetail,
+    categoryList: categoryList,
+    categoryDetail:categoryDetail,
 }
 
 module.exports = apiController;
