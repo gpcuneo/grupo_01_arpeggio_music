@@ -8,7 +8,10 @@ import { UserProvider } from './context/user';
 console.log(process.env.REACT_APP_BACK_NAME)
 console.log(process.env.REACT_APP_BACK_PORT)
 
-const urlBase = 'http://192.168.0.120:3001/api/'
+const domain = process.env.REACT_APP_BACK_NAME
+const port = process.env.REACT_APP_BACK_PORT
+
+const urlBase = `http://${domain}:${port}/api`;
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -17,7 +20,7 @@ function App() {
   const [lastProduct, setLastProduct] = useState([])
   useEffect(() => {
     console.log('%cse montó el componente', 'color:green');
-    fetch(`${urlBase}products`)
+    fetch(`${urlBase}/products`)
       .then(response => response.json())
       .then(data => {
         setProducts(data.products)
@@ -28,7 +31,7 @@ function App() {
   }, [])
   useEffect(() => {
     console.log('se actualizo el componente');
-    fetch(`${urlBase}products?page=${totalPageProd}`)
+    fetch(`${urlBase}/products?page=${totalPageProd}`)
       .then(response => response.json())
       .then(data =>{
         setLastProduct(data.products)
