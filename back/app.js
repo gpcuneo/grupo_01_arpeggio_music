@@ -3,10 +3,10 @@ const session = require('express-session');
 const path = require('path');
 const methodOverride = require('method-override');
 const app = express();
-const port = 3000;
 const cookieParser = require('cookie-parser');
 const middlewares = require('./middlewares/index');
 require('dotenv').config();
+const port = process.env.APP_PORT;
 
 app.set('view engine', 'ejs')
 const publicPath = path.resolve(__dirname, './public');
