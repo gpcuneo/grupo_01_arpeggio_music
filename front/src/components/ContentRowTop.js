@@ -2,13 +2,15 @@ import React from 'react'
 import PanelTotal from './PanelTotal';
 import LastProductInDb from './LastProductInDb';
 import { useUserContext } from '../context/user';
+import { useProductContext } from '../context/product';
 
 function ContentRowTop(props) {
 	const { users, isLoading } = useUserContext();
+	const {products,isLoadingPro}= useProductContext();
 	let cardsInfo = [
 		{
 			titulo:'Total de Productos',
-			cifra: props.countProduct,
+			cifra:isLoadingPro?'cargando..':products.count,
 			color:'primary',
 			icono:'film'
 		},
