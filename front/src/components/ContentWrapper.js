@@ -3,15 +3,13 @@ import Footer from './Footer';
 import TopBar from './TopBar';
 import ContentRowTop from './ContentRowTop';
 
-function ContentWrapper(props) {
+function ContentWrapper() {
   return (
     <React.Fragment>
         <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
                 <TopBar/>
-                <ContentRowTop
-                  countProduct={props.countProduct}
-                />
+                <ContentRowTop/>
                 <Footer/>
             </div>
         </div>
@@ -19,4 +17,4 @@ function ContentWrapper(props) {
   )
 }
 
-export default ContentWrapper
+export default ContentWrapper;
