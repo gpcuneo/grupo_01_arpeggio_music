@@ -5,6 +5,7 @@ import ContentWrapper from './components/ContentWrapper';
 import React, { useState, useEffect } from 'react';
 import { UserProvider } from './context/user';
 import { ProductProvider } from './context/product';
+import { CategoryProvider } from './context/category';
 
 console.log(process.env.REACT_APP_BACK_NAME)
 console.log(process.env.REACT_APP_BACK_PORT)
@@ -53,9 +54,11 @@ function App() {
         <SideBar />
         <ProductProvider>
           <UserProvider>
-            <ContentWrapper
-              detailProd={lastProduct}
-            />
+            <CategoryProvider>
+              <ContentWrapper
+                detailProd={lastProduct}
+              />
+            </CategoryProvider>
           </UserProvider>
         </ProductProvider>
       </div>

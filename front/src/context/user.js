@@ -23,7 +23,7 @@ const UserContext = createContext("users");
 export function UserProvider({ children }) {
     const [users, setUsers] = useState([]);
     const [lastUser, setLastUser] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [loadingUser, setIsLoading] = useState(true);
 
     useEffect(() => {
         // Función para realizar la llamada a la API
@@ -52,7 +52,7 @@ export function UserProvider({ children }) {
     }, []);
 
     return (
-    <UserContext.Provider value={{ users, lastUser, isLoading }}>
+    <UserContext.Provider value={{ users, lastUser, loadingUser }}>
         {children}
     </UserContext.Provider>
     );
