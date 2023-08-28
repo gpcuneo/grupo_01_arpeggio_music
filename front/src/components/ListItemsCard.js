@@ -2,11 +2,9 @@ import React from 'react'
 import PanelTotal from './PanelTotal';
 import LastProductInDb from './LastProductInDb';
 import { useUserContext } from '../context/user';
-import { useCategoryContext } from '../context/category';
 
 function ContentRowTop(props) {
-	const { users, loadingUser } = useUserContext();
-	const { categories, countProductsByCategory, loadingCategories } = useCategoryContext();
+	const { users, isLoading } = useUserContext();
 	let cardsInfo = [
 		{
 			titulo:'Total de Productos',
@@ -16,7 +14,7 @@ function ContentRowTop(props) {
 		},
 		{
 			titulo:'Total de Usuarios',
-			cifra: loadingUser ? 'cargando' : users.count,
+			cifra: isLoading ? 'cargando' : users.count,
 			color:'success',
 			icono:'user'
 		},
@@ -27,15 +25,6 @@ function ContentRowTop(props) {
 			icono:'award'
 		},
 	]
-
-	const listProductByCategory = countProductsByCategory.map( element => {
-		return {
-			titulo: element['category.name'],
-			cifra: element['count'],
-			color: 'warning',
-			icono: 'award'
-		}
-	})
 
 	return (
 		<React.Fragment>
@@ -51,9 +40,6 @@ function ContentRowTop(props) {
 								detailProduct={props.detailProd}
 							/>
 						</div>
-						<PanelTotal
-							cardsInfo={listProductByCategory}
-						/>
 					</div>
 		</React.Fragment>
   	)
