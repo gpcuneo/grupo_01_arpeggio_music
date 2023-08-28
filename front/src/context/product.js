@@ -15,16 +15,17 @@ const getLastProduct= async(lastPage)=>{
     const lastProductInfo= lastProductDetail.product;
     return lastProductInfo;
 }
-
+// Crea el contexto
 const ProductContext=createContext('products');
 
-
+//Proveedor personalizado
 export function ProductProvider({children}) {
     const [products, setProducts]=useState([]);
     const [lastProduct, setLastProduct]=useState([]);
     const [isLoadingPro, setIsLoadingPro]=useState(true);
 
     useEffect(()=>{
+      //Función para realizar la llamada a la API
       const getProductData= async()=>{
         try {
           setIsLoadingPro(true)
@@ -41,9 +42,9 @@ export function ProductProvider({children}) {
         }
       }
       getProductData();
-      /* const intervalId= setInterval(getProductData,10000);
+      const intervalId= setInterval(getProductData,5000); //Llama a getProductData(llama a la api cada 5 segundos)
       
-      return ()=> clearInterval(intervalId); */
+      return ()=> clearInterval(intervalId);//Limpia el intervalo cuando se desmonta el componente
     },[])
     
   return (
@@ -52,6 +53,8 @@ export function ProductProvider({children}) {
     </ProductContext.Provider>
   );
 }
+
+//Hook personalizado para acceder al contexto
 export function useProductContext(){
   return useContext(ProductContext)
 }
