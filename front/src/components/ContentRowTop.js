@@ -6,7 +6,7 @@ import { useCategoryContext } from '../context/category';
 
 function ContentRowTop(props) {
 	const { users, loadingUser } = useUserContext();
-	const { categories, countProductsByCategory, loadingCategories } = useCategoryContext();
+	const { category, countProductsByCategory, loadingCategories } = useCategoryContext();
 	let cardsInfo = [
 		{
 			titulo:'Total de Productos',
@@ -22,7 +22,7 @@ function ContentRowTop(props) {
 		},
 		{
 			titulo:'Total de Categorias',
-			cifra:49,
+			cifra: loadingCategories ? 'cargando' : category.count,
 			color:'warning',
 			icono:'award'
 		},

@@ -36,12 +36,18 @@ export function CategoryProvider({ children }) {
                 
                 const categoryData = await getCategories();
                 setCategory(categoryData);
+                console.log('categoryData')
+                console.log(categoryData)
 
-                const lastUserData = await getLastCategory(categoryData.totalPages)
-                setLastCategory(lastUserData);
+                const lastCategoryData = await getLastCategory(categoryData.totalPages)
+                setLastCategory(lastCategoryData);
+                console.log('lastCategoryData')
+                console.log(lastCategoryData)
 
                 const productsByCategory = await getCountProductByCategories();
                 setCountProductsByCategory(productsByCategory)
+                console.log('productsByCategory')
+                console.log(productsByCategory)
                 
                 setIsLoading(false);
             } catch (error) {
