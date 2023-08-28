@@ -141,7 +141,7 @@ const categoryList = async (req, res) => {
     const categoryCount = await db.Category.count();
     const pageLimit = Math.ceil(categoryCount / 3);
     const categoryData = {
-        users: addDetailRouteToObjects(categoryList, '/category/', 'id'),
+        categories: addDetailRouteToObjects(categoryList, '/category/', 'id'),
         count: categoryCount,
         currentPage: page + 1,
         totalPages: pageLimit,
