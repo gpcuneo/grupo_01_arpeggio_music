@@ -1,5 +1,5 @@
 const db = require('../database/models');
-const { Op } = require('sequelize');
+const { Op, fn, col } = require('sequelize');
 require('dotenv').config();
 const envs = process.env;
 
@@ -165,6 +165,20 @@ const categoryDetail = async (req, res) => {
     }
 }
 
+const categoryProducts = async (req, res) => {
+    let countProductsByCategories = await db.Product.findAll({
+        attributes: ['category_id', [fn('COUNT', col('*')), 'count']],
+        include: [ {association: 'category',
+                    as: 'name',
+                    attributes: ['name'],
+                    }, ],
+        group: ['category_id'],
+        raw:true
+    });
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    return res.json(countProductsByCategories);
+}
+
 const apiController = {
     getTowns: getTowns,
     checkEmail: checkEmail,
@@ -174,6 +188,7 @@ const apiController = {
     productDetail:productDetail,
     categoryList: categoryList,
     categoryDetail:categoryDetail,
+    categoryProducts:categoryProducts,
 }
 
 module.exports = apiController;
