@@ -31,8 +31,12 @@ export function ProductProvider({children}) {
           setIsLoadingPro(true)
           const productsData= await getProducts()
           setProducts(productsData);
-          const lastProductData = await getLastProduct(productsData.totalPages);
+          let lastProductData = await getLastProduct(productsData.totalPages);
           setLastProduct(lastProductData);
+          lastProductData.img = lastProductData.image['1'];
+          
+          console.log(' ------------------ lastProductData')
+          console.log(lastProductData)
           setIsLoadingPro(false);
         } catch (error) {
           console.error(`Error al cargar datos:`, error);

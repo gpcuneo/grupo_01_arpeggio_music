@@ -21,7 +21,7 @@ const checkEmail = (req, res) => {
 const addDetailRouteToObjects = (objList, route, field) => {
     const url = envs.APP_URL + ':' + envs.APP_PORT;
     return (objList.map( (item) => {
-            item.dataValues.detail = url + route + item[field];
+            item.dataValues.detail = 'http://' + url + route + item[field];
             return item
         })
     );
@@ -57,7 +57,7 @@ const userDetail = async (req, res) => {
     });
     if(user){
         const urlBase = envs.APP_URL + ':' + envs.APP_PORT;
-        user.dataValues.imageURL = urlBase + '/images/userProfile/' + user.image;
+        user.dataValues.img = 'http://' +urlBase + '/images/userProfile/' + user.image;
         delete(user.dataValues.id);
         delete(user.dataValues.password);
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -95,7 +95,7 @@ const productList = async (req, res)=>{
             countByCategory:categories,
             currentPage:page +1,
             totalPages: pageLimit,
-            products: addDetailRouteToObjects(products, '/product/', 'id')
+            products: addDetailRouteToObjects(products, '/products/', 'id')
         }
         res.setHeader('Access-Control-Allow-Origin', '*');
         return res.json(data)
@@ -108,8 +108,8 @@ const addObjOfImage = (productDetail)=>{
     let objImage= {};
     const url= envs.APP_URL+':'+ envs.APP_PORT;
     arrayOfImages.forEach((image,i) =>{
-        objImage[i+1]= url +'/images/productos/'+image;
-    })
+        objImage[i+1]= 'http://'+ url + '/images/productos/'+image;
+    }) //localhost:
     delete(product.dataValues.image)
     delete(product.dataValues.category_id)
     delete(product.dataValues.trademark_id)

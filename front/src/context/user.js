@@ -34,7 +34,8 @@ export function UserProvider({ children }) {
                 const usersData = await getUsers()
                 setUsers(usersData);
 
-                const lastUserData = await getLastuser(usersData.totalPages)
+                let lastUserData = await getLastuser(usersData.totalPages)
+                
                 setLastUser(lastUserData);
                 setIsLoading(false);
             } catch (error) {

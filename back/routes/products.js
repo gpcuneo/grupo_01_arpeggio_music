@@ -19,7 +19,7 @@ router.get('/search',isAdmin ,productController.search);
 
 
 //GET /products/:id/detail
-router.get('/:id/detail', productController.showbyid);
+router.get('/:id', productController.showbyid);
 
 //GET /products/create
 router.get('/create', isAdmin ,productController.create);
