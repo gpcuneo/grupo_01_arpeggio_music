@@ -86,7 +86,7 @@
                         <div class="form-group">
                             <label for="discount">Eliga un descuento (Opcional)</label>
                             <select name="discount" id="discount" class="group-input <%= locals.errors && errors.discount?'invalid':null %>">
-                                <option value="">Ninguno</option>
+                                <option value="0">Ninguno</option>
                                 <% let discounts = ['20','30','50','60'] %>
                                 <% for (const oneDiscount of discounts) { %>
                                     <% if (action == 'create') { %>
