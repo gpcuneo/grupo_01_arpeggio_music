@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 //import imagenFondo from '../assets/images/profile-user.jpeg'
 
 function LastProductInDb({detailData}) {

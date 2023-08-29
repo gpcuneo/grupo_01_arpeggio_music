@@ -33,8 +33,9 @@ export function ProductProvider({children}) {
           setProducts(productsData);
           let lastProductData = await getLastProduct(productsData.totalPages);
           setLastProduct(lastProductData);
+          const id = lastProductData.id;
           lastProductData.img = lastProductData.image['1'];
-          
+          lastProductData.detail = `http://${domain}:${port}/products/${id}` 
           console.log(' ------------------ lastProductData')
           console.log(lastProductData)
           setIsLoadingPro(false);
