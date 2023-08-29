@@ -17,12 +17,12 @@ router.get('/',isAdmin ,productController.product);
 router.post('/',upload.any('image'), validateCreate,productController.postProduct);
 router.get('/search',isAdmin ,productController.search);
 
+//GET /products/create
+router.get('/create', isAdmin ,productController.create);
 
 //GET /products/:id/detail
 router.get('/:id', productController.showbyid);
 
-//GET /products/create
-router.get('/create', isAdmin ,productController.create);
 
 //PUT /products/:id/update
 router.put('/:id/update',upload.any('image'),validateCreate,productController.update);
