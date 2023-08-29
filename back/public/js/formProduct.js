@@ -118,29 +118,51 @@ document.addEventListener('DOMContentLoaded', function () {
             checkErrors();
         }
     })
-    imageInput.oninput=(e)=>{
-        const value = e.target.value;
+    const loadedImages = [];
+    imageInput.oninput = (e) => {
+        const files = e.target.files; // Obtener los archivos seleccionados
         const showP = document.getElementById('p-image');
-        if(value == ''){
-            formFilesValidated.image = false
+        loadedImages.length= 0; //vacia el array antes de cargar una imagen nueva
+        if (files.length === 0) {
+            formFilesValidated.image = false;
             showP.style.display = 'block';
-            e.target.nextElementSibling.innerHTML='No ha seleccionado una imagen'
-        }else{
-            let ArrExtension = ['jpg','jpeg', 'png'];
-            let extension = value.replace(/^.*\./, '');
-            extension= extension.toLowerCase();
-            if(ArrExtension.includes(extension)){
-                formFilesValidated.image = true
-                showP.style.display= 'none';
-                e.target.nextElementSibling.innerHTML = '';
-            }else{
-                formFilesValidated.image = false
-                showP.style.display= 'block';
-                e.target.nextElementSibling.innerHTML = 'Solo se permite jpg, jpeg, png.'
+            e.target.nextElementSibling.innerHTML = 'No ha seleccionado una imagen';
+        } else {
+            let ArrExtension = ['jpg', 'jpeg', 'png'];
+            
+            // Recorrer cada archivo seleccionado
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const extension = file.name.split('.').pop().toLowerCase();
+                
+                if (ArrExtension.includes(extension)) {
+                    formFilesValidated.image = true;
+                    showP.style.display = 'none';
+                    e.target.nextElementSibling.innerHTML = '';
+                    loadedImages.push(file.name); // Agregar el nombre del archivo al array
+                } else {
+                    formFilesValidated.image = false;
+                    showP.style.display = 'block';
+                    e.target.nextElementSibling.innerHTML = 'Solo se permite jpg, jpeg, png.';
+                }
+            }
+            loadedImages.map(nameImg=>{
+                //verifica si el nombre de la imagen es mayor a 26 caracteres
+                if(nameImg.length > 26){
+                    formFilesValidated.image = false;
+                    showP.style.display = 'block';
+                    e.target.nextElementSibling.innerHTML = 'El nombre de la imagen debe contener como máximo 26 caracteres';
+                }
+            })
+            //Verifica si contiene más de 6 imagenes
+            if(loadedImages.length > 6){
+                formFilesValidated.image = false;
+                showP.style.display = 'block';
+                e.target.nextElementSibling.innerHTML = 'El máximo permitido es de 6 imagenes por producto';
             }
         }
         checkErrors();
-    }
+    };
     characterInput.oninput =(e)=>{
         const length = e.target.value.length;
         const showP = document.getElementById('p-charater');
