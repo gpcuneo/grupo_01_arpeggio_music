@@ -84,7 +84,7 @@ let postProducts = async(req, res) =>{
         store:req.body.store,
         image:JSON.stringify(req.files.map(file => file.filename)),
         colors:JSON.stringify(colorsArray),
-        trademark:parseInt(req.body.trademark),
+        trademark_id:parseInt(req.body.trademark),
     }
     const create = await db.Product.create(newProduct)
     res.redirect('/products');
