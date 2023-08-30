@@ -3,4 +3,5 @@ const router = express.Router();
 const cartController = require('../controllers/cartController');
 
 router.get('/', cartController.cart);
+router.get('/order', cartController.order)
 module.exports=router;
