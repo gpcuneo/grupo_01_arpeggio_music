@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const apiController = require('../controllers/apiController');
+const apiCart = require('../controllers/apiCart');
+
+const middlewares = require('../middlewares/index');
+//const apiAuth = middlewares.authenticationMiddleware.apiAuth;
+const loged = middlewares.authenticationMiddleware.apiAuth;
 
 router.get('/town/:id', apiController.getTowns)
 router.get('/email/:email', apiController.checkEmail)
@@ -11,5 +16,7 @@ router.get('/products/:id',apiController.productDetail)
 router.get('/category', apiController.categoryList)
 router.get('/category/products/',apiController.categoryProducts)
 router.get('/category/:id',apiController.categoryDetail)
+router.get('/cart', loged, apiCart.getCart)
+router.post('/cart', loged, apiCart.addItem)
 
 module.exports=router;
