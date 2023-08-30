@@ -1,11 +1,12 @@
 import React from 'react'
 import PanelTotal from './PanelTotal';
 import LastProductInDb from './LastProductInDb';
+import DataListInDB from './DataListInDB';
 import { useUserContext } from '../context/user';
 import { useProductContext } from '../context/product';
 import { useCategoryContext } from '../context/category';
 
-function ContentRowTop(props) {
+function ContentRowTop() {
 	const { users, loadingUser } = useUserContext();
 	const {products,isLoadingPro,lastProduct}= useProductContext();
 	const { category, countProductsByCategory, loadingCategories } = useCategoryContext();
@@ -52,6 +53,7 @@ function ContentRowTop(props) {
 							<LastProductInDb
 								detailData={lastProduct}
 							/>
+							<DataListInDB/>
 						</div>
 						<PanelTotal
 							cardsInfo={listProductByCategory}
@@ -61,4 +63,4 @@ function ContentRowTop(props) {
   	)
 }
 
-export default ContentRowTop
+export default ContentRowTop;
