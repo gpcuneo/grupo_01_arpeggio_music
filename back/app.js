@@ -22,7 +22,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(middlewares.loggerMiddleware);
-app.use(middlewares.authenticationMiddleware);
+app.use(middlewares.authenticationMiddleware.auth);
 
 const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/products');
