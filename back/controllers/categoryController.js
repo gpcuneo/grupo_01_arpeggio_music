@@ -10,7 +10,7 @@ const categoryControllers = {
     getCategory: async (req, res) => {
         const categorias = await db.Category.findAll({attributes: ['id', 'name', 'img']});
         let userInfo = userTools.isLogged(req);
-        res.render('category', {'categoryList': categorias, user: userInfo})
+        res.render('categorys/category', {'categoryList': categorias, user: userInfo})
     },
     postCategory: (req, res) => {
         let datos = req.body;
@@ -19,7 +19,7 @@ const categoryControllers = {
         let userInfo = userTools.isLogged(req);
 
         if(validations.errors.length > 0){
-            return res.render('categoryEdit', { errors: validations.errors, values: req.body,user: userInfo , action:'create' });
+            return res.render('categorys/categoryEdit', { errors: validations.errors, values: req.body,user: userInfo , action:'create' });
         }
 
         if(req.file) {
@@ -39,13 +39,13 @@ const categoryControllers = {
         if (!categoriaAMostrar){
             return res.send ('Error de id')
         }
-        res.render ('categoryDetail',{category:categoriaAMostrar,title: 'Detalle de la categoria',user: userInfo }) 
+        res.render ('categorys/categoryDetail',{category:categoriaAMostrar,title: 'Detalle de la categoria',user: userInfo }) 
        
     },
     // /category/create
     getCategoryCreate: (req, res) => {
         let userInfo = userTools.isLogged(req);
-        res.render('categoryEdit', {errors:[],action:'create',user: userInfo})
+        res.render('categorys/categoryEdit', {errors:[],action:'create',user: userInfo})
     },
     // /category/:id/update
     getCategoryUpdate: async (req,res) => {
@@ -58,7 +58,7 @@ const categoryControllers = {
             return res.send('error de ID)')
         }
 
-        res.render ('categoryEdit', {category:categoryUpDate,errors:[], action:'update',user: userInfo})
+        res.render ('categorys/categoryEdit', {category:categoryUpDate,errors:[], action:'update',user: userInfo})
     },
      // /category/:id/update
      putCategoryUpdate: async (req,res) => {
@@ -70,7 +70,7 @@ const categoryControllers = {
         const validations = expressValidator.validationResult(req);
 
         if(validations.errors.length > 0){
-            return res.render('categoryEdit', { errors: validations.errors, values: req.body ,user:userInfo ,action:'update',category:categoryUpDate });
+            return res.render('categorys/categoryEdit', { errors: validations.errors, values: req.body ,user:userInfo ,action:'update',category:categoryUpDate });
         }
 
         let datos = req.body;
@@ -97,7 +97,7 @@ const categoryControllers = {
             return res.send ('Error de id')
 
         }
-        res.render ('categoryDelete',{title:'eliminar categoria',category:categoriaAMostrar,user: userInfo }) 
+        res.render ('categorys/categoryDelete',{title:'eliminar categoria',category:categoriaAMostrar,user: userInfo }) 
        
     },
      // /category

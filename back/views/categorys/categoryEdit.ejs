@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <%- include('./partials/header') %>
+    <%- include('../partials/header') %>
         <main>
             <div class="container">
                 <ul>
@@ -32,8 +32,9 @@
                         <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
                         <p id="p-img" style="display: none;" class="error"></p>
                         <div class="button">
-                            <button class="btn-black" type="submit" disabled>Guardar</button>
+                            <button class="btn-black" type="submit" >Crear</button>
                         </div>
+                 </form>
                         <%} else if (action==="update" ) { %>
                             <form action="/category/<%= category.id %>/update?_method=put" method="post" enctype="multipart/form-data">
                                 <div class="name">
@@ -50,13 +51,14 @@
                                     <button class="btn-black" type="submit" disabled>Guardar</button>
                                 </div>
                                 <% } %>
+                           </form>
             </div>
            <script src="/js/Category.js"></script>
-            </form>
+          
             </div>
 
         </main>
-        <%- include('./partials/footer') %>
+        <%- include('../partials/footer') %>
 
 </body>
 
