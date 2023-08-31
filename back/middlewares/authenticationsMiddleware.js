@@ -24,10 +24,10 @@ const apiAuthMiddleware = async (req, res, next) => {
             delete user.password;
             req.session.user = user;
         } else {
-            return res.send('404');
+            return res.redirect('/user/login');
         } 
     } else {
-        return res.send('404');
+        return res.redirect('/user/login');
     }
     next();
 }

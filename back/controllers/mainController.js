@@ -51,7 +51,7 @@ const store = async (req, res) => {
         ]
     });
     products.forEach(product =>{
-        product.image = JSON.parse(product.image).map(imgName => imgName);
+        product.image = JSON.parse(product.image);
     });
     
     const brands = await db.Trademark.findAll({
