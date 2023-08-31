@@ -26,7 +26,7 @@ const addItem = (req, res) => {
     db.Cart.create({
         userid: userID,
         productid: parseInt(req.body.product),
-        quantity: 1
+        quantity: parseInt(req.body.quantity),
     });
 }
 
