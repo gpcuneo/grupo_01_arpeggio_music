@@ -4,8 +4,8 @@ const userTools = require('../utils/User')
 require('dotenv').config();
 const envs = process.env;
 
-let urlBase = `http://${envs.APP_URL}:${envs.APP_PORT}/api/products`;
-let secondUrl= 'http://localhost:3001/api/products'
+let urlBase = `http://${envs.APP_URL}:${envs.APP_PORT}/api/cart`;
+
 let getCart = (req, res)=>{
     let userInfo = userTools.isLogged(req);
     const costShop={
@@ -15,15 +15,31 @@ let getCart = (req, res)=>{
     res.render('productCart', {title:'Mi carrito', cart, 'user':userInfo,costShop})
 }
 const getOrder=async (req,res)=>{
-    const getOrderOfApi= await getApiCart(urlBase);
-    console.log(getOrderOfApi);
-    let userInfo = userTools.isLogged(req);
-    res.render('orderShop',{title:'Order', 'user':userInfo })
+    try {
+        let cartData= await getApiCart();
+        console.log(cartData);
+        let userInfo = userTools.isLogged(req);
+        res.render('orderShop',{title:'Order', 'user':userInfo })
+    } catch (error) {
+        console.error('La api no se logror llamar');
+        res.send('No se pudo llamar a la api')
+    }
 }
-const getApiCart = async(api)=>{
-    const getApi = await fetch(api);
-    const dataApi= await getApi.json();
-    return dataApi;
+const getApiCart = async()=>{
+    try {
+        const response = await fetch(urlBase,{
+            method:'GET',
+            credentials:'include'
+        });
+        if(!response.ok){
+            throw new Error('La respuesta de la api no llego')
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error al llamar a la api');
+        throw error;
+    }
 }
 const cartController ={
     cart:getCart,
