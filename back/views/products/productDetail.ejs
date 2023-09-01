@@ -70,16 +70,16 @@
                             <h5>Stock disponible</h5>
                             <div class="container-inc-dec">
                                 <label for="cantidad">Cantidad:</label>
-                                <button id="decrement"> - </button>
-                                <p>
+                                <button id="decrement" value="<%= product.id %>"> - </button>
+                                <p id="stock-product" >
                                     <%= product.stock %>
                                 </p>
-                                <button id="increment"> + </button>
+                                <button id="increment" value="<%= product.id %>"> + </button>
                             </div>
                         </div>
                         <div class="container-button">
-                            <button id="input-shop">Comprar</button>
-                            <button id="input-cart-shop">Agregar al carrito</button>
+                            <!-- <button id="input-shop">Comprar</button> -->
+                            <button id="input-cart-shop" value="<%= product.id %>" >Agregar al carrito</button>
                         </div>
                     </section>
                 </nav>
@@ -119,6 +119,7 @@
                 </nav>
             </article>
         </main>
+        <script src="/js/detailProduct.js"></script>
         <%- include('../partials/footer') %>
 </body>
 
