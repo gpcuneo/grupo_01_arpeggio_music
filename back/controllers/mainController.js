@@ -44,16 +44,14 @@ const error = (req, res) => {
 } 
 
 const storePOST = async (req, res) => {
-    console.log(' ------ STORE -------- ');
-    console.log(req.body);
-    console.log(req.query);
-
     return res.json('ok')
 }
 
-const buildQueryByParams = (brandsChecked, categoriesCheckd) => {
+const buildQueryByParams = (limit, offset, brandsChecked, categoriesCheckd) => {
     let query = {
-        order: [fn( 'RAND' ),],
+        limit,
+        offset,
+        //order: [fn( 'RAND' ),],
         where: {}
     }
     brandsChecked ? query.where.trademark_id = brandsChecked : '';
@@ -64,7 +62,6 @@ const buildQueryByParams = (brandsChecked, categoriesCheckd) => {
 const reqQueryToArrayOfNumbers = (dataInReqQuery) => {
     let data = dataInReqQuery;
     if(data) {
-        console.log(data) 
         typeof(data) === 'string'? data = [data] : '';
         return data.map( item => parseInt(item) );
     } else {
@@ -74,9 +71,18 @@ const reqQueryToArrayOfNumbers = (dataInReqQuery) => {
 
 const store = async (req, res) => {  
     const userInfo = userTools.isLogged(req);
+    const limit = 2;
+    let pageLimit = 0
+    const reqPage = parseInt(req.query.page)
+    let page = 0
+    if(reqPage){
+        page = reqPage -1
+    }
+    const offset = page * limit;
     const brandsChecked = reqQueryToArrayOfNumbers(req.query.brands);
     const categoriesCheckd = reqQueryToArrayOfNumbers(req.query.category);
-    const query = buildQueryByParams(brandsChecked, categoriesCheckd);
+    const query = buildQueryByParams(limit, offset, brandsChecked, categoriesCheckd);
+    
     const products = await db.Product.findAll(query);
     // Field images string to array.
     products.forEach(product =>{
@@ -92,9 +98,19 @@ const store = async (req, res) => {
             ['name', 'ASC']
         ]
     });
-    console.log('brandsChecked')
-    console.log(brandsChecked)
-    res.render('store', {products, brands, categories, user: userInfo, brandsChecked, categoriesCheckd});
+    let productsCount;
+    if(brandsChecked || categoriesCheckd) {
+        let query = {
+            where: {}
+        }
+        brandsChecked ? query.where.trademark_id = brandsChecked : '';
+        categoriesCheckd ? query.where.category_id = categoriesCheckd : '';
+        productsCount = await db.Product.count(query);
+    } else {
+        productsCount = await db.Product.count();
+    }
+    pageLimit = Math.ceil(productsCount / limit) -1; 
+    res.render('store', {products, brands, categories, user: userInfo, brandsChecked, categoriesCheckd, page, pageLimit});
 } 
 
 const mainController = {
