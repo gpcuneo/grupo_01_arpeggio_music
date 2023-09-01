@@ -14,19 +14,6 @@
 <body>
     <%- include('./partials/header') %>
     <main>
-        <% function checkeds(checkbox, checkboxCompare) {
-            console.log(checkbox)
-            console.log(typeof(checkbox))
-            console.log(checkboxCompare)
-            console.log(typeof(checkboxCompare))
-            if(checkboxCompare){
-                if(checkbox in [checkboxCompare]){
-                    console.log('checked="checked"')
-                    return 'checked="checked"'
-                }
-            }
-            return ''
-        } %>
         <form action="/store" method="GET" id="miFormulario">
             <div class="container-flex">
             <section class="filter-products">
@@ -72,7 +59,7 @@
         </section>
         <section class="container-items">
             <div class="container-flex">
-                <% [0,1,2,4,5].forEach( i => { %>
+                <% [0,1].forEach( i => { %>
                     <% products.forEach( product => {%>
                         <div class="article-other">
                             <a href="/products/<%= product.id %>">
@@ -88,36 +75,31 @@
                 <% }); %>
             </div>
         </section>
+        <section class="container-items">
+            <section class="container-pagination">
+                <div class="paginacion">
+                    <% if(page > 0) { %>
+                        <a href="/store?page=<%= page -1 %>" class="btn-page">&laquo;</a>
+                        <a href="/store?page=<%= page -1 %>" class="btn-page"><%= page %></a>
+                    <% } %>
+                    <a href="#" class="btn-page"><%= page +1 %></a>
+                    <% if(page < pageLimit) { %>
+                        <a href="/store?page=<%= page +1 %>" class="btn-page"><%= page +2 %></a>
+                        <a href="/store?page=<%= page +1 %>" class="btn-page">&raquo;</a>
+                    <% } %>
+                </div>
+            </section>
+        </section>
+        <section class="container-pagination">
+            <div class="center-items order-item">
+                <form action="/user/export">
+                    <button type="submit">Exportar listado</button>
+                </form>
+            </div>
+        </section>
         </div>
     </main>
     <%- include('./partials/footer') %>
-    <script>
-        const categories = document.querySelectorAll('input');
-
-        // Agrega un manejador de eventos 'change' a cada checkbox
-        categories.forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            const categories = document.querySelectorAll('input[name="categories"]:checked');
-            const brands = document.querySelectorAll('input[name="brands"]:checked');
-            const categoriesSelecteds = Array.from(categories).map(checkbox => checkbox.value);
-            const brandsSelecteds = Array.from(brands).map(checkbox => checkbox.value);
-            console.log('Valores seleccionados:', categoriesSelecteds);
-            console.log('Valores seleccionados:', brandsSelecteds);
-            const params = new URLSearchParams();
-            categoriesSelecteds.forEach(valor => {
-                params.append('category', valor);
-            });
-            brandsSelecteds.forEach(valor => {
-                params.append('brands', valor);
-            });
-            const url = `/store?${params.toString()}`;
-            console.log(url);
-            window.location.href = url;
-        })
-    })
-
-
-
-    </script>
+    <script src="/js/store.js"> </script>
 </body>
 </html>
