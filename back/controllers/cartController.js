@@ -16,29 +16,10 @@ let getCart = (req, res)=>{
 }
 const getOrder=async (req,res)=>{
     try {
-        let cartData= await getApiCart();
-        console.log(cartData);
         let userInfo = userTools.isLogged(req);
-        res.render('orderShop',{title:'Order', 'user':userInfo })
+        res.render('orderShop',{title:'Order', 'user':userInfo,envs })
     } catch (error) {
-        console.error('La api no se logror llamar');
         res.send('No se pudo llamar a la api')
-    }
-}
-const getApiCart = async()=>{
-    try {
-        const response = await fetch(urlBase,{
-            method:'GET',
-            credentials:'include'
-        });
-        if(!response.ok){
-            throw new Error('La respuesta de la api no llego')
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error al llamar a la api');
-        throw error;
     }
 }
 const cartController ={
