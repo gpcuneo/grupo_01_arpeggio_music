@@ -5,20 +5,43 @@ const getUserID = async (userName) => {
         where: { userName: userName },
         attributes: ['id']
     });
-
     return userID;
+}
+
+const formatObjectProduct = (products) => {
+    return products.map( row => {
+        return {
+            ...row.Product.dataValues,
+            quantity: row.quantity,
+            totalPriceProduct: row.quantity * row.Product.price
+        }
+    })
+}
+
+const sumTotalPriceProducts = (itemsArray) => {
+    console.log(itemsArray)
+    return itemsArray.reduce( (accumulated, currentValue) => {
+        console.log(currentValue.totalPriceProduct)
+        return accumulated + currentValue.totalPriceProduct
+    }, 0);
 }
 
 const getCart = async (req, res) => {
     const user = await getUserID(req.cookies.userName);
-    console.log(user.id);
-    
     const products = await db.Cart.findAll({
         where: { userid: user.id },
-        attributes: ['id', 'productid', 'quantity']
-    });
-    delete(products.userid);
-    return res.json(products);
+        attributes: ['id', 'productid', 'quantity'],
+        include: [
+            {
+                association: 'Product', 
+                as: 'product',
+                attributes: ['id', 'name', 'price', 'discount', 'stock', 'image'],
+            }]
+        });
+    let cart ={}
+    cart.products = formatObjectProduct(products);
+    cart.totalPrice = sumTotalPriceProducts(cart.products);
+    return res.json(cart);
 }
 
 const addItem = (req, res) => {
