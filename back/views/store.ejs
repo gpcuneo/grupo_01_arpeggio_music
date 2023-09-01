@@ -14,45 +14,61 @@
 <body>
     <%- include('./partials/header') %>
     <main>
-        <div class="container-flex">
-        <section class="filter-products">
-            <div class="filter-container-items">
-                <p>MARCAS</p>
-                <% brands.forEach( brand => { %>
-                    <div class="input-filters">
-                        <input type="checkbox" value="<%= brand.name %>" id="<%= brand.name %>">
-                        <label for="<%= brand.name %>"><%= brand.name %></label>
-                    </div>    
-                <% }) %>
-            </div>
-            <div class="filter-container-items">
-                <p>Rango de precio:</p>
-                <div class="price-rangue input-filters">
-                    <div class="input-price-container">
-                        <input class="input-price" type="number" name="min-price" id="min-price">
-                        <label for=""></label>
-                    </div>
-                    <div class="input-price-container">
-                        <input class="input-price" type="number" name="max-price" id="max-price">
-                        <label for=""></label>
-                    </div>
-                    <div class="center-elements">
-                        <button type="button">Filtrar</button>
-                    </div>
+        <% function checkeds(checkbox, checkboxCompare) {
+            console.log(checkbox)
+            console.log(typeof(checkbox))
+            console.log(checkboxCompare)
+            console.log(typeof(checkboxCompare))
+            if(checkboxCompare){
+                if(checkbox in [checkboxCompare]){
+                    console.log('checked="checked"')
+                    return 'checked="checked"'
+                }
+            }
+            return ''
+        } %>
+        <form action="/store" method="GET" id="miFormulario">
+            <div class="container-flex">
+            <section class="filter-products">
+                <div class="filter-container-items">
+                    <p>MARCAS</p>
+                    <% brands.forEach( brand => { %>
+                        <div class="input-filters">
+                            <input type="checkbox" value="<%= brand.id %>" id="<%= brand.name %>" name="brands" <% if(brandsChecked){
+                                                                                                                    if(brandsChecked.includes(parseInt(brand.id))){
+                                                                                                                        %> checked="checked" <% } } %> >
+                            <label for="<%= brand.name %>"><%= brand.name %></label>
+                        </div>    
+                    <% }) %>
                 </div>
-                
-            </div>
-            <div>
-            </div>
-            <div class="filter-container-items">
-                <p>CATEGORIAS</p>
-                <% categories.forEach( category => { %>
-                    <div class="input-filters">
-                        <input type="checkbox" value="<%= category.name %>" id="<%= category.name %>">
-                        <label for="<%= category.name %>"><%= category.name %></label>
-                    </div>
-                <% }) %>
-            </div>
+                <div class="filter-container-items">
+                    <p>CATEGORIAS</p>
+                    <% categories.forEach( category => { %>
+                        <div class="input-filters">
+                            <input type="checkbox" value="<%= category.id %>" id="<%= category.name %>" name="categories" <% if(categoriesCheckd){
+                                                                                                                        if(categoriesCheckd.includes(parseInt(category.id))){
+                                                                                                                            %> checked="checked" <% } } %> >
+                            <label for="<%= category.name %>"><%= category.name %></label>
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="filter-container-items">
+                    <!-- <p>Rango de precio:</p> -->
+                    <div class="price-rangue input-filters">
+                        <!-- <div class="input-price-container">
+                            <input class="input-price" type="number" name="min-price" id="min-price">
+                            <label for=""></label>
+                        </div>
+                        <div class="input-price-container">
+                            <input class="input-price" type="number" name="max-price" id="max-price">
+                            <label for=""></label>
+                        </div> -->
+                        <div class="center-elements">
+                            <button type="submit">Filtrar</button>
+                        </div>
+                    </div>    
+                </div>
+            </form>
         </section>
         <section class="container-items">
             <div class="container-flex">
@@ -75,5 +91,33 @@
         </div>
     </main>
     <%- include('./partials/footer') %>
+    <script>
+        const categories = document.querySelectorAll('input');
+
+        // Agrega un manejador de eventos 'change' a cada checkbox
+        categories.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const categories = document.querySelectorAll('input[name="categories"]:checked');
+            const brands = document.querySelectorAll('input[name="brands"]:checked');
+            const categoriesSelecteds = Array.from(categories).map(checkbox => checkbox.value);
+            const brandsSelecteds = Array.from(brands).map(checkbox => checkbox.value);
+            console.log('Valores seleccionados:', categoriesSelecteds);
+            console.log('Valores seleccionados:', brandsSelecteds);
+            const params = new URLSearchParams();
+            categoriesSelecteds.forEach(valor => {
+                params.append('category', valor);
+            });
+            brandsSelecteds.forEach(valor => {
+                params.append('brands', valor);
+            });
+            const url = `/store?${params.toString()}`;
+            console.log(url);
+            window.location.href = url;
+        })
+    })
+
+
+
+    </script>
 </body>
 </html>

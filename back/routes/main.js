@@ -4,7 +4,8 @@ const mainController = require('../controllers/mainController');
 
 router.use('/about', mainController.about);
 router.use('/shipping', mainController.shipping);
-router.use('/store', mainController.store);
+router.get('/store', mainController.store);
+router.post('/store', mainController.storePOST);
 router.use('/', mainController.home);
 router.use('/*', mainController.error);
 
