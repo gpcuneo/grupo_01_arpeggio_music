@@ -46,12 +46,13 @@ document.addEventListener('DOMContentLoaded',function(){
             let id = e.target.value;
             let product = {
                 productid: id.toString(),
-                quantity: newCount,
+                quantity: newCount, 
             }
             
             try {
-                const response = await fetch('http://localhost:3001/api/cart',{
+                const response = await fetch('/api/cart',{
                     method:'POST',
+                    credentials: 'include',
                     headers:{
                         'Content-Type': 'application/json'
                     },

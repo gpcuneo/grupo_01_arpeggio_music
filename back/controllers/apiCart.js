@@ -44,13 +44,22 @@ const getCart = async (req, res) => {
     return res.json(cart);
 }
 
-const addItem = (req, res) => {
-    const userID = getUserID(req.cookies.userName);
-    db.Cart.create({
-        userid: userID,
-        productid: parseInt(req.body.product),
-        quantity: parseInt(req.body.quantity),
-    });
+const addItem = async (req, res) => {
+    const userID = await getUserID(req.cookies.userName);
+    console.log(userID.id)
+    console.log(req.body)
+    try{
+        result = await db.Cart.create({
+            userid: userID.id,
+            productid: parseInt(req.body.productid),
+            quantity: parseInt(req.body.quantity),
+        });
+        console.log(`Se insertaron ${result[0]} producto(s).`);
+        return res.json({result: 'ok'})
+    } catch {
+        console.error('Error al actualizar el carrito:', error);
+        return res.json({error: error})
+    }
 }
 
 const updateItemQuantity = (req, res) => {
