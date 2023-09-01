@@ -8,78 +8,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/productCart.css">
 </head>
 
 <body>
     <%- include('./partials/header') %>
-    <main>
-        <div class="container">
-            <section class="section-article">
-                <h5 class="title-cart">Mi Carrito</h5>
-                <div class="container-article">
-                    <div class="title-first">
-                        <p class="product">Producto</p>
-                        <p class="price-title">Precio</p>
-                        <p class="title-many">Cantidad</p>
-                        <p class="title-total">Total</p>
+        <main>
+            <div class="container">
+                <section class="section-article">
+                    <h5 class="title-cart">Mi Carrito</h5>
+                    <div class="container-article">
+                        <div class="title-first">
+                            <p class="product">Producto</p>
+                            <p class="price-title">Precio</p>
+                            <p class="title-many">Cantidad</p>
+                            <p class="title-total">Total</p>
+                        </div>
+                        <div class="container-article-all">
+                            
+                        </div>
                     </div>
-                    <% cart.forEach( cart => { %>
-                        <article>
-                            <div class="box-img-text">
-                                <img src="<%= cart.img %>" alt="">
-                                <div class="box-text-descrip">
-                                    <h5 class="title-product"><%= cart.name %></h5>
-                                    <p><%= cart.characteristics %></p>
-                                    <p class="price-first">$<%= cart.price %></p>
-                                </div>
-                            </div>
-                            <div class="price-second">
-                                <p>$<%= cart.price %></p>
-                            </div>
-                            <div class="container-input-price">
-                                <div class="box-input-inc-dec">
-                                    <button class="decrement" id="btn-decrement" value="<%=cart.id %>"> - </button>
-                                    <p class="number count-product"><%= cart.stock %></p>
-                                    <button class="increment" id="btn-increment" > + </button>
-                                </div>
-                                <div class="box-price-delete">
-                                    <p>$<%= cart.total %></p>
-                                    <button class="delete"> x </button>
-                                </div>
-                            </div>
-                        </article>
-                    <% }) %>
-                </div>
-            </section>
-            <section class="section-shop-total">
-                <div class="container-price">
-                    <div class="box-shop-price">
-                        <p class="text-shop">Sub. Total</p>
-                        <p class="price-shop">$0.00</p>
+                </section>
+                <section class="section-shop-total">
+                    <div class="container-price">
+                        <div class="box-shop-price">
+                            <p class="text-shop">Sub. Total</p>
+                            <p class="price-shop" id="Sub-price-product"></p>
+                        </div>
+                        <div class="box-shop-price">
+                            <p class="text-shop"><i class="fa-solid fa-tags"></i>Ingresar Código de Cupón</p>
+                            <p class="price-shop">%<%= costShop.discount %> Descuento</p>
+                        </div>
+                        <div class="box-shop-price">
+                            <p class="text-shop">Envío</p>
+                            <p class="price-shop" id="price-send-product">$<%= costShop.costSend %>
+                            </p>
+                        </div>
+                        <div class="box-shop-price">
+                            <p class="text-shop">Total</p>
+                            <p class="price-shop" id="total-price-shop" ></p>
+                        </div>
                     </div>
-                    <div class="box-shop-price">
-                        <p class="text-shop"><i class="fa-solid fa-tags"></i>Ingresar Código de Cupón</p>
-                        <p class="price-shop">%<%= costShop.discount %> Descuento</p>
+                    <div class="box-input">
+                        <button class="finaly-button">Finalizar Comprar</button>
+                        <button class="more-shop-button">Buscar más</button>
                     </div>
-                    <div class="box-shop-price">
-                        <p class="text-shop">Envío</p>
-                        <p class="price-shop">$<%= costShop.costSend %></p>
-                    </div>
-                    <div class="box-shop-price">
-                        <p class="text-shop">Total</p>
-                        <p class="price-shop">$0.00</p>
-                    </div>
-                </div>
-                <div class="box-input">
-                    <button class="finaly-button">Finalizar Comprar</button>
-                    <button class="more-shop-button">Buscar más</button>
-                </div>
-            </section>
-        </div>
-        <script src="/js/cart.js"></script>
-    </main>
-    <%- include('./partials/footer') %>
+                </section>
+            </div>
+            <script src="/js/cart.js"></script>
+        </main>
+        <%- include('./partials/footer') %>
 </body>
