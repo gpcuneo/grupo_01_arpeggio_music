@@ -53,9 +53,29 @@ const addItem = (req, res) => {
     });
 }
 
+const updateItemQuantity = (req, res) => {
+    const userID = getUserID(req.cookies.userName);
+    const productID = req.body.productid;
+    const newQuantity = req.body.newQuantity;
+    Cart.update(
+        { quantity: newQuantity }, {
+        where: {
+            userid: userID,
+            productid: productID
+        }
+    })
+    .then((result) => {
+        console.log(`Se actualizó ${result[0]} fila(s).`);
+        return res.JSON({update: 'OK'})
+    }).catch((error) => {
+        console.error('Error al actualizar el carrito:', error);
+    });
+}
+
 const apiCart = {
     getCart: getCart,
     addItem: addItem,
+    updateItemQuantity: updateItemQuantity,
 }
 
 module.exports = apiCart;

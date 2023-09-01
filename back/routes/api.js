@@ -18,5 +18,6 @@ router.get('/category/products/',apiController.categoryProducts)
 router.get('/category/:id',apiController.categoryDetail)
 router.get('/cart', loged, apiCart.getCart)
 router.post('/cart', loged, apiCart.addItem)
+router.put('/cart', loged, apiCart.updateItemQuantity)
 
 module.exports=router;
