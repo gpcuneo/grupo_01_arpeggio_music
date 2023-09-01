@@ -65,17 +65,35 @@ const updateItemQuantity = (req, res) => {
         }
     })
     .then((result) => {
-        console.log(`Se actualizó ${result[0]} fila(s).`);
+        console.log(`Se actualizó ${result[0]} producto(s).`);
         return res.JSON({update: 'OK'})
     }).catch((error) => {
         console.error('Error al actualizar el carrito:', error);
     });
 }
 
+const deleteItem = (req, res) => {
+    const userID = getUserID(req.cookies.userName);
+    const productID = req.body.productid;
+    Cart.destroy({
+            where: {
+                userid: userID,
+                productid: productID
+            }
+        })
+        .then((result) => {
+            console.log(`Se eliminaron ${result[0]} producto(s).`);
+            return res.JSON({delete: 'OK'})
+        }).catch((error) => {
+            console.error('Error al actualizar el carrito:', error);
+        });
+}
+
 const apiCart = {
     getCart: getCart,
     addItem: addItem,
     updateItemQuantity: updateItemQuantity,
+    deleteItem: deleteItem,
 }
 
 module.exports = apiCart;

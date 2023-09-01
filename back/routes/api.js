@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const apiController = require('../controllers/apiController');
 const apiCart = require('../controllers/apiCart');
-
 const middlewares = require('../middlewares/index');
-//const apiAuth = middlewares.authenticationMiddleware.apiAuth;
 const loged = middlewares.authenticationMiddleware.apiAuth;
 
 router.get('/town/:id', apiController.getTowns)
@@ -19,5 +17,6 @@ router.get('/category/:id',apiController.categoryDetail)
 router.get('/cart', loged, apiCart.getCart)
 router.post('/cart', loged, apiCart.addItem)
 router.put('/cart', loged, apiCart.updateItemQuantity)
+router.delete('/cart', loged, apiCart.deleteItem)
 
 module.exports=router;
