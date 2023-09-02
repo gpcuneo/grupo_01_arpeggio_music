@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const subTotal = document.querySelector('#Sub-price-product')
     const containerArticle = document.querySelector('.container-article-all')
     const url = `http://localhost:3001/api/cart`;
+    console.log(btnPlus);
     const getApiCart = async () => {
         const getCart = await fetch(url, {
             method: 'GET',
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div class="box-price-delete">
                 <p class="total-price-product">$${product.totalPriceProduct}</p>
-                <button class="delete"> x </button>
+                <button class="delete" id="delete-btn" value="${product.id}"> x </button>
             </div>
         </div>
             `
@@ -64,13 +65,40 @@ document.addEventListener('DOMContentLoaded', function () {
     const sendUpdateOfProducts = (productId, action) => {
         
     }
-    const deleteProductCart = () => {
-
+    const deleteProductCart = async() => {
+        containerArticle.addEventListener('click', async(e)=>{
+            if(e.target.classList.contains('delete')){
+                const id= e.target.value;
+                let body = {
+                    productid:id.toString(),
+                }
+                console.log(`estas haciendo click a : ${id}`);
+                try {
+                    const response = await fetch(url,{
+                        method:'DELETE',
+                        credentials:'include',
+                        headers:{
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(body)
+                    })
+                    if(response.ok){
+                        const dataSend = await response.json();
+                        console.log(`El producto ${dataSend} se elimino correctamente`);
+                    }else{
+                        console.error(`No se pudo eliminar el producto`);
+                    }
+                } catch (error) {
+                    console.log(`Error al eliminar el producto :${error}`);
+                }
+            }
+        })
     }
     const drawCartUpdateStatus = async () => {
         containerArticle.innerHTML= ''
         const dataProductCart = await getApiCart();
         const datos = await drawCartStatus(dataProductCart)
+        deleteProductCart();
         return datos
     }
     drawCartUpdateStatus();
