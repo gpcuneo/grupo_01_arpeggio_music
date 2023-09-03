@@ -46,17 +46,42 @@ const getCart = async (req, res) => {
 
 const addItem = async (req, res) => {
     const userID = await getUserID(req.cookies.userName);
-    try{
-        result = await db.Cart.create({
+    result = await db.Cart.findOne({
+        where: {
             userid: userID,
-            productid: parseInt(req.body.productid),
-            quantity: parseInt(req.body.quantity),
-        });
-        console.log(`Se insertaron ${result[0]} producto(s).`);
-        return res.json({result: 'ok'})
-    } catch {
-        console.error('Error al actualizar el carrito:', error);
-        return res.json({error: error})
+            productid: req.body.productid
+        }
+    });
+    console.log(result)
+    if(result) {
+        const newQuantity = result.quantity + 1;
+        try{
+            result = await db.Cart.update(
+                { quantity: newQuantity }, {
+                where: {
+                    userid: userID,
+                    productid: req.body.productid
+                }
+            });
+            console.log(`Se actualizo el registro a la cantidad: ${result.quantity} producto(s).`);
+            return res.json({result: 'ok'})
+        } catch (e) {
+            console.error('Error al actualizar el carrito:', e);
+            return res.json({error: error})
+        }
+    } else {
+        try{
+            result = await db.Cart.create({
+                userid: userID,
+                productid: parseInt(req.body.productid),
+                quantity: parseInt(req.body.quantity),
+            });
+            console.log(`Se insertaron el registro ${result.id}`);
+            return res.json({result: 'ok'})
+        } catch (e) {
+            console.error('Error al actualizar el carrito:', e);
+            return res.json({error: error})
+        }
     }
 }
 

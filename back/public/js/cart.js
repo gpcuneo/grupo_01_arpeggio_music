@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                     if (response.ok) {
                         const dataSend = await response.json();
+                        drawCartUpdateStatus()
                         console.log(`El producto ${dataSend} se elimino correctamente`);
                         drawCartUpdateStatus();
                     } else {

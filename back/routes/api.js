@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const apiController = require('../controllers/apiController');
 const apiCart = require('../controllers/apiCart');
+const mp = require('../controllers/mercadoPagoController');
 const middlewares = require('../middlewares/index');
 const loged = middlewares.authenticationMiddleware.apiAuth;
 
@@ -18,5 +19,7 @@ router.get('/cart', loged, apiCart.getCart)
 router.post('/cart', loged, apiCart.addItem)
 router.put('/cart', loged, apiCart.updateItemQuantity)
 router.delete('/cart', loged, apiCart.deleteItem)
+router.post('/mp/createPreference', loged, mp.createPreference)
+router.post('/mp/payByCard', loged, mp.payByCard)
 
 module.exports=router;

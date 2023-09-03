@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Arpeggio Music</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="/styles/productCart.css" />
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+  </head>
+  <body>
+    <%- include('./partials/header') %>
+    <main>
+        <div class="container">
+            <section class="section-article">
+                <h5 class="title-cart">Mi Carrito</h5>
+                <div class="container-article">
+                    <div class="title-first">
+                        <p class="product">Producto</p>
+                        <p class="price-title">Precio</p>
+                        <p class="title-many">Cantidad</p>
+                        <p class="title-total">Total</p>
+                    </div>
+                    <div class="container-article-all">
+                        <% cart.products.map( product => { %>
+                            <article>
+                                <div class="box-img-text">
+                                    <img src="/images/productos/<%= product.image %>" id="img" alt="">
+                                    <div class="box-text-descrip">
+                                        <h5 class="title-product name-product"><%= product.name %></h5>
+                                        <p class="price-first price-value">$<%= product.price %></p>
+                                    </div>
+                                </div>
+                                <div class="price-second">
+                                    <p class="price-value">$<%= product.price %></p>
+                                </div>
+                                <div class="box-input-inc-dec">
+                                    <p class="number count-product"><%= product.quantity %></p>
+                                </div>
+                                <div class="container-input-price">
+                                    <div class="box-price-delete">
+                                        <p class="total-price-product">$<%= product.totalPriceProduct %></p>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }); %>
+                    </div>
+                </div>
+            </section>
+            <section class="payment-form dark">
+                <div class="container_payment">
+                    <div id="button-checkout"></div>
+                </div>
+                </section>
+                <div id="cardPaymentBrick_container">
+            </section>
+        </div>
+    </main>
+
+    <%- include('./partials/footer') %>
+    <script src="/js/checkout.js"></script>
+  </body>
+</html>
