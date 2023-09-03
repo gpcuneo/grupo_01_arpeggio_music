@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let urlBase = `http://localhost:3001/api/cart`;
+    let urlBase = `/api/cart`;
     const getApiCart = async () => {
         try {
             const response = await fetch(urlBase, {

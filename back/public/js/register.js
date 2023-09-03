@@ -1,5 +1,5 @@
 function getTowns(id) {
-    const url = 'http://localhost:3000/api/town/' + id;
+    const url = '/api/town/' + id;
     fetch(url)
     .then(response => response.json())
     .then(data => {

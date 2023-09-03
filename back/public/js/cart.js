@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalPriceShop = document.querySelector('#total-price-shop')
     const subTotal = document.querySelector('#Sub-price-product')
     const containerArticle = document.querySelector('.container-article-all')
-    const url = `http://localhost:3001/api/cart`;
+    const url = `/api/cart`;
     console.log(btnPlus);
     const getApiCart = async () => {
         const getCart = await fetch(url, {
