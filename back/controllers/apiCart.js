@@ -5,7 +5,7 @@ const getUserID = async (userName) => {
         where: { userName: userName },
         attributes: ['id']
     });
-    return userID;
+    return userID.id;
 }
 
 const formatObjectProduct = (products) => {
@@ -29,7 +29,7 @@ const sumTotalPriceProducts = (itemsArray) => {
 const getCart = async (req, res) => {
     const user = await getUserID(req.cookies.userName);
     const products = await db.Cart.findAll({
-        where: { userid: user.id },
+        where: { userid: user },
         attributes: ['id', 'productid', 'quantity'],
         include: [
             {
@@ -46,11 +46,9 @@ const getCart = async (req, res) => {
 
 const addItem = async (req, res) => {
     const userID = await getUserID(req.cookies.userName);
-    console.log(userID.id)
-    console.log(req.body)
     try{
         result = await db.Cart.create({
-            userid: userID.id,
+            userid: userID,
             productid: parseInt(req.body.productid),
             quantity: parseInt(req.body.quantity),
         });
@@ -66,7 +64,7 @@ const updateItemQuantity = (req, res) => {
     const userID = getUserID(req.cookies.userName);
     const productID = req.body.productid;
     const newQuantity = req.body.newQuantity;
-    Cart.update(
+    db.Cart.update(
         { quantity: newQuantity }, {
         where: {
             userid: userID,
@@ -81,21 +79,23 @@ const updateItemQuantity = (req, res) => {
     });
 }
 
-const deleteItem = (req, res) => {
-    const userID = getUserID(req.cookies.userName);
+const deleteItem = async (req, res) => {
+    const userID = await getUserID(req.cookies.userName);
     const productID = req.body.productid;
-    Cart.destroy({
+    try{
+        result = await db.Cart.destroy({
             where: {
                 userid: userID,
                 productid: productID
             }
-        })
-        .then((result) => {
-            console.log(`Se eliminaron ${result[0]} producto(s).`);
-            return res.JSON({delete: 'OK'})
-        }).catch((error) => {
-            console.error('Error al actualizar el carrito:', error);
         });
+        console.log(`Se eliminaron ${result[0]} producto(s).`);
+        return res.JSON({delete: 'OK'})
+    } catch (e) {
+        const error = await e;
+        console.error('Error al actualizar el carrito:', error);
+        return res.json({error: error})
+    }
 }
 
 const apiCart = {
