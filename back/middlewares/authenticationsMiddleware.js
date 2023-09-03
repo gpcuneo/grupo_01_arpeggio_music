@@ -4,6 +4,10 @@ const authMiddleware = async (req, res, next) => {
     if(req.cookies.userName) {
         const user = await db.User.findOne({ 
             where: { userName: req.cookies.userName },
+            include: [
+                {association: 'Town', as: 'town'},
+                {association: 'Province', as: 'province'},
+                ]
         });
         if(user) {
             delete user.id;
