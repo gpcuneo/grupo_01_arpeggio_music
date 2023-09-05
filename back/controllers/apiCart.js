@@ -98,7 +98,7 @@ const updateItemQuantity = (req, res) => {
     })
     .then((result) => {
         console.log(`Se actualizó ${result[0]} producto(s).`);
-        return res.JSON({update: 'OK'})
+        return res.json({update: 'OK'})
     }).catch((error) => {
         console.error('Error al actualizar el carrito:', error);
     });
