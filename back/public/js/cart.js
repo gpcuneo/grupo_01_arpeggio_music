@@ -139,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         const dataSend = await response.json();
                         drawCartUpdateStatus()
                         console.log(`El producto ${dataSend} se elimino correctamente`);
-                        drawCartUpdateStatus();
                     } else {
                         console.error(`No se pudo eliminar el producto`);
                     }
