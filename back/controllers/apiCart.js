@@ -87,8 +87,8 @@ const addItem = async (req, res) => {
 
 const updateItemQuantity = (req, res) => {
     const userID = getUserID(req.cookies.userName);
-    const productID = req.body.productid;
-    const newQuantity = req.body.newQuantity;
+    const productID = parseInt(req.body.productid);
+    const newQuantity =  parseInt(req.body.newQuantity);
     db.Cart.update(
         { quantity: newQuantity }, {
         where: {
