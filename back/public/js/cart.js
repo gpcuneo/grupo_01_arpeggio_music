@@ -75,9 +75,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify(body)
             })
             if (response.ok) {
-                const dataSend = await response.json();
-                console.log(`El producto ${dataSend} se actualizo correctamente`);
                 drawCartUpdateStatus();
+                const dataSend = await response.json();
+                console.log(dataSend);
+                console.log(`El producto ${dataSend} se actualizo correctamente`);
             } else {
                 console.error(`No se pudo actualizar el producto`);
             }
@@ -86,36 +87,44 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     const sendUpdateOfProducts = async () => {
-        containerArticle.addEventListener('click', async (e) => {
-            if (e.target.classList.contains('increment')) {
+        const btnPlus = Array.from(containerArticle.querySelectorAll('.increment'))
+        const btnMinus = Array.from(containerArticle.querySelectorAll('.decrement'))
+        
+        btnPlus.forEach(button =>{
+            button.addEventListener('click', async(e)=>{
                 const id = e.target.value;
-                const newQuantity = containerArticle.querySelector(`.count-product-${id}`)
+                const newQuantity= containerArticle.querySelector(`.count-product-${id}`)
                 const product = await getApiProduct(id);
                 const stock = await product.stock;
-                let quantity = newQuantity.innerText;
-                if (quantity < stock) {
-                    newQuantity.innerHTML++
-                    let newUpdateQuantity = newQuantity.innerText
+                const quantity = newQuantity.innerText;
+                if(quantity < stock){
+                    newQuantity.innerText++
+                    let newUpdateQuantity = await newQuantity.innerText
+                    console.log(newUpdateQuantity);
                     let body = {
-                        quantity:newUpdateQuantity,
-                        productid:id.toString()
+                        newQuantity: newUpdateQuantity,
+                        productid: id.toString()
                     };
-                    apiUpdate(body)
+                    await apiUpdate(body)
                 }
-            } else if (e.target.classList.contains('decrement')) {
+            })
+        })
+        btnMinus.forEach(button =>{
+            button.addEventListener('click', async(e)=>{
                 const id = e.target.value;
                 const newQuantity = containerArticle.querySelector(`.count-product-${id}`)
                 let quantity = newQuantity.innerText;
                 if (quantity > 1) {
                     newQuantity.innerHTML--
-                    let newUpdateQuantity = newQuantity.innerText
+                    let newUpdateQuantity = await newQuantity.innerText
+                    console.log(newUpdateQuantity);
                     let body = {
-                        quantity:newUpdateQuantity,
-                        productid:id.toString()
+                        newQuantity: newUpdateQuantity,
+                        productid: id.toString()
                     };
-                    apiUpdate(body)
+                    await apiUpdate(body)
                 }
-            }
+            })
         })
     }
     const deleteProductCart = async () => {
@@ -152,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
         containerArticle.innerHTML = ''
         const dataProductCart = await getApiCart();
         const datos = await drawCartStatus(dataProductCart)
-        sendUpdateOfProducts(dataProductCart)
+        sendUpdateOfProducts();
         deleteProductCart();
         return datos
     }
