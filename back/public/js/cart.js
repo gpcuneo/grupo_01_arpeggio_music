@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 drawCartUpdateStatus();
                 const dataSend = await response.json();
-                console.log(dataSend);
                 console.log(`El producto ${dataSend} se actualizo correctamente`);
             } else {
                 console.error(`No se pudo actualizar el producto`);
@@ -128,13 +127,13 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
     const deleteProductCart = async () => {
-        containerArticle.addEventListener('click', async (e) => {
-            if (e.target.classList.contains('delete')) {
+        const btnDelete = Array.from(containerArticle.querySelectorAll('.delete'))
+        btnDelete.forEach(button =>{
+            button.addEventListener('click', async(e) =>{
                 const id = e.target.value;
                 let body = {
                     productid: id.toString(),
                 }
-                console.log(`estas haciendo click a : ${id}`);
                 try {
                     const response = await fetch(url, {
                         method: 'DELETE',
@@ -154,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } catch (error) {
                     console.log(`Error al eliminar el producto :${error}`);
                 }
-            }
+            })
         })
     }
     const drawCartUpdateStatus = async () => {
