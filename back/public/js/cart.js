@@ -51,11 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const product of dataProducts) {
             createArticle(product)
         };
-        subTotal.innerText = `$${cart.totalPrice}`
-        const costSend = priceSend.innerText;
-        const valueNumber = parseFloat(costSend.replace(/\$/g, ''))
-        const total = valueNumber + cart.totalPrice;
-        totalPriceShop.innerText = `$${total}`;
+        totalPriceShop.innerText = `$${cart.totalPrice}`;
         return containerArticle;
     }
     const getApiProduct = async (id) => {
