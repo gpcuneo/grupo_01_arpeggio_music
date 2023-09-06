@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let product = await detail.product;
         return product;
     }
-    const apiUpdate = async (body) => {
+    const apiUpdateAndDelete = async (body, method) => {
         try {
             const response = await fetch(url, {
-                method: 'PUT',
+                method: method,
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         newQuantity: newUpdateQuantity,
                         productid: id.toString()
                     };
-                    await apiUpdate(body)
+                    await apiUpdateAndDelete(body,'PUT')
                 }
             })
         })
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         newQuantity: newUpdateQuantity,
                         productid: id.toString()
                     };
-                    await apiUpdate(body)
+                    await apiUpdateAndDelete(body,'PUT')
                 }
             })
         })
@@ -134,25 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let body = {
                     productid: id.toString(),
                 }
-                try {
-                    const response = await fetch(url, {
-                        method: 'DELETE',
-                        credentials: 'include',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(body)
-                    })
-                    if (response.ok) {
-                        const dataSend = await response.json();
-                        drawCartUpdateStatus()
-                        console.log(`El producto ${dataSend} se elimino correctamente`);
-                    } else {
-                        console.error(`No se pudo eliminar el producto`);
-                    }
-                } catch (error) {
-                    console.log(`Error al eliminar el producto :${error}`);
-                }
+                await apiUpdateAndDelete(body,'DELETE')
             })
         })
     }
