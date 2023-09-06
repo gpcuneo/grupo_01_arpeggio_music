@@ -32,6 +32,9 @@ main{
 .container-img-product-colum{
     display: none;
 }
+.box-text-product{
+    padding: 10px;
+}
 .name-product h4{
     font-size: 20px;
     text-align: center;
@@ -196,9 +199,15 @@ main{
     border: 2px solid black ;
     background-color: white;
     box-sizing: border-box;
+    transition: all 0.5s;
+}
+#input-cart-shop:hover{
+    color: white;
+    background-color: black;
 }
 .container-descripcion{
     margin-top: 20px;
+    box-sizing: border-box;
 }
 .caja-descripcion{
     width: 100%;
@@ -221,6 +230,7 @@ main{
     margin: 0;
     padding: 10px;
     font-size: 13px;
+    box-sizing: border-box;
 }
 .container-store{
     background-color: whitesmoke;
@@ -338,11 +348,9 @@ main{
         box-sizing: border-box;
     }
     .container-img-product-colum{
-        width: 12%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-/*         border: 1px orange dashed; */
         box-sizing: border-box;
     }
     .container-img-product-colum img{
@@ -361,6 +369,7 @@ main{
         width: 40%;
         display: flex;
         padding: 5px;
+        padding-left: 15px;
         flex-direction: column;
         background-color: white;
         box-shadow: 0px 0px 10px rgb(100, 100, 100);
@@ -368,6 +377,7 @@ main{
     }
     .box-text-product h4{
         display: block;
+        margin: 10px 0px;
     }
     .box-characteristics h5{
         font-size: 14px;
