@@ -184,11 +184,13 @@ main {
 .box-article-charact h5{
     font-size: 16px;
     margin: 5px;
+    color: black;
     margin-top: 10px;
 }
 .box-article-charact p{
     font-size: 12px;
     margin: 5px;
+    color: black;
     visibility: hidden;
 }
 .box-article-charact .price-art{
