@@ -11,6 +11,25 @@ const port = process.env.APP_PORT;
 app.set('view engine', 'ejs')
 const publicPath = path.resolve(__dirname, './public');
 
+
+
+
+const  {aboutRoute,
+adminRoute,
+apiRoute,
+cartRoute, 
+categoryRoute, 
+historyRoute ,
+indexRoute,
+mainRoute ,
+productRoute, 
+userRoute ,
+} = require ('./routes')
+
+
+const { log } = require('console');
+
+
 app.use( express.static(publicPath) );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -24,25 +43,16 @@ app.use(session({
 app.use(middlewares.loggerMiddleware);
 app.use(middlewares.authenticationMiddleware.auth);
 
-const userRoutes = require('./routes/user');
-const productRoutes = require('./routes/products');
-const indexRoutes = require('./routes/index');
-const categoryRoutes = require('./routes/category')
-const aboutRoutes = require('./routes/about');
-const cartRoutes = require('./routes/cart');
-const historyRoutes = require('./routes/history');
-const mainRoutes = require('./routes/main');
-const apiRoutes = require('./routes/api');
-const adminRoutes = require('./routes/admin');
-const { log } = require('console');
+
+
+
+app.use('/user', userRoute);
+app.use('/productCart',cartRoute);
+app.use('/products', productRoute);
+app.use('/category',categoryRoute);
+app.use('/history',historyRoute);
+app.use('/api', apiRoute);
+app.use('/admin', adminRoute);
+app.use('/', mainRoute);
 
 app.listen(port, () => console.log(`Servidor corriendo en el puerto ${port}`) );
-
-app.use('/user', userRoutes);
-app.use('/productCart',cartRoutes);
-app.use('/products', productRoutes);
-app.use('/category',categoryRoutes);
-app.use('/history',historyRoutes);
-app.use('/api', apiRoutes);
-app.use('/admin', adminRoutes);
-app.use('/', mainRoutes);

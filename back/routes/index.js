@@ -1,8 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const indexController = require('../controllers/indexController')
+module.exports = {
+    aboutRoute : require ('./about'),
+    adminRoute : require ('./admin'),
+    apiRoute : require ('./api'),
+    cartRoute : require ('./cart'),
+    categoryRoute : require ('./category'),
+    historyRoute : require ('./history'),
+    indexRoute : require ('./index'),
+    mainRoute : require ('./main'),
+    productRoute : require ('./products'),
+    userRoute : require ('./user')
 
-router.use('/', indexController.Index)
-
-module.exports = router
-
+}

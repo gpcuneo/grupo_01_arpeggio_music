@@ -27,7 +27,7 @@
                     </div>
           
                 <div class="category-Form">
-                    <form class="form-detail" action="/category/<%= category.id %>/update" method="post">
+                    <form class="form-detail" action="/category/<%= category.id %>/update" method="get">
                         <input class="btn-success-detail" type="submit" value="Modificar categoría">
                     </form>
                     <form class="form-delete" action="/category/<%= category.id %>?_method=delete" method="post">
@@ -44,3 +44,4 @@
 </body>
 
 </html>
+
