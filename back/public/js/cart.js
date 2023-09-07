@@ -13,38 +13,56 @@ document.addEventListener('DOMContentLoaded', function () {
         const productsCart = await cartData;
         return productsCart;
     }
+    const showMainSecond = async ()=>{
+        const apiCart = await getApiCart();
+        const productsData = await apiCart.products;
+        const secondMain = document.getElementById('second-main')
+        const firstMain = document.getElementById('first-main')
+        if(productsData.length < 1){
+            secondMain.style.display = 'block';
+            firstMain.style.display='none';
+        }else{
+            secondMain.style.display = 'none';
+            firstMain.style.display='block';
+        }
+    }
+    const minusCountCart = async ()=>{
+        const productsData = await getApiCart();
+        const products = await productsData.products;
+        console.log(products.length);
+    }
     const drawCartStatus = async (dataCart) => {
         const cart = await dataCart;
         const dataProducts = await cart.products;
-
+        
         const createArticle = async (product) => {
             const img = await JSON.parse(product.image)
             const image = img[0]
-
+            
             const article = document.createElement('article')
             article.innerHTML = `
             <div class="box-img-text">
             <img src="/images/productos/${image}" id="img" alt="">
             <div class="box-text-descrip">
-                <h5 class="title-product name-product">${product.name}</h5>
-                <p class="character">${product.name}</p>
-                <p class="price-first price-value">$${product.price}</p>
+            <h5 class="title-product name-product">${product.name}</h5>
+            <p class="character">${product.name}</p>
+            <p class="price-first price-value">$${product.price}</p>
             </div>
-        </div>
-        <div class="price-second">
+            </div>
+            <div class="price-second">
             <p class="price-value">$${product.price}</p>
-        </div>
-        <div class="container-input-price">
+            </div>
+            <div class="container-input-price">
             <div class="box-input-inc-dec">
-                <button class="decrement" id="btn-decrement" value="${product.id}"> - </button>
-                <p class="number count-product-${product.id}">${product.quantity}</p>
-                <button class="increment" id="btn-increment" value="${product.id}"> + </button>
+            <button class="decrement" id="btn-decrement" value="${product.id}"> - </button>
+            <p class="number count-product-${product.id}">${product.quantity}</p>
+            <button class="increment" id="btn-increment" value="${product.id}"> + </button>
             </div>
             <div class="box-price-delete">
-                <p class="total-price-product">$${product.totalPriceProduct}</p>
-                <button class="delete" id="delete-btn" value="${product.id}"> x </button>
+            <p class="total-price-product">$${product.totalPriceProduct}</p>
+            <button class="delete" id="delete-btn" value="${product.id}"> x </button>
             </div>
-        </div>
+            </div>
             `
             containerArticle.appendChild(article)
         }
@@ -131,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     productid: id.toString(),
                 }
                 await apiUpdateAndDelete(body,'DELETE')
+                await minusCountCart()
             })
         })
     }
@@ -140,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const datos = await drawCartStatus(dataProductCart)
         sendUpdateOfProducts();
         deleteProductCart();
+        showMainSecond()
         return datos
     }
     drawCartUpdateStatus();
