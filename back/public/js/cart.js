@@ -51,11 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const product of dataProducts) {
             createArticle(product)
         };
-        subTotal.innerText = `$${cart.totalPrice}`
-        const costSend = priceSend.innerText;
-        const valueNumber = parseFloat(costSend.replace(/\$/g, ''))
-        const total = valueNumber + cart.totalPrice;
-        totalPriceShop.innerText = `$${total}`;
+        totalPriceShop.innerText = `$${cart.totalPrice}`;
         return containerArticle;
     }
     const getApiProduct = async (id) => {
@@ -64,10 +60,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let product = await detail.product;
         return product;
     }
-    const apiUpdate = async (body) => {
+    const apiUpdateAndDelete = async (body, method) => {
         try {
             const response = await fetch(url, {
-                method: 'PUT',
+                method: method,
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
@@ -75,9 +71,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify(body)
             })
             if (response.ok) {
+                drawCartUpdateStatus();
                 const dataSend = await response.json();
                 console.log(`El producto ${dataSend} se actualizo correctamente`);
-                drawCartUpdateStatus();
             } else {
                 console.error(`No se pudo actualizar el producto`);
             }
@@ -86,73 +82,63 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     const sendUpdateOfProducts = async () => {
-        containerArticle.addEventListener('click', async (e) => {
-            if (e.target.classList.contains('increment')) {
+        const btnPlus = Array.from(containerArticle.querySelectorAll('.increment'))
+        const btnMinus = Array.from(containerArticle.querySelectorAll('.decrement'))
+        
+        btnPlus.forEach(button =>{
+            button.addEventListener('click', async(e)=>{
                 const id = e.target.value;
-                const newQuantity = containerArticle.querySelector(`.count-product-${id}`)
+                const newQuantity= containerArticle.querySelector(`.count-product-${id}`)
                 const product = await getApiProduct(id);
                 const stock = await product.stock;
-                let quantity = newQuantity.innerText;
-                if (quantity < stock) {
-                    newQuantity.innerHTML++
-                    let newUpdateQuantity = newQuantity.innerText
+                const quantity = newQuantity.innerText;
+                if(quantity < stock){
+                    newQuantity.innerText++
+                    let newUpdateQuantity = await newQuantity.innerText
+                    console.log(newUpdateQuantity);
                     let body = {
-                        quantity:newUpdateQuantity,
-                        productid:id.toString()
+                        newQuantity: newUpdateQuantity,
+                        productid: id.toString()
                     };
-                    apiUpdate(body)
+                    await apiUpdateAndDelete(body,'PUT')
                 }
-            } else if (e.target.classList.contains('decrement')) {
+            })
+        })
+        btnMinus.forEach(button =>{
+            button.addEventListener('click', async(e)=>{
                 const id = e.target.value;
                 const newQuantity = containerArticle.querySelector(`.count-product-${id}`)
                 let quantity = newQuantity.innerText;
                 if (quantity > 1) {
                     newQuantity.innerHTML--
-                    let newUpdateQuantity = newQuantity.innerText
+                    let newUpdateQuantity = await newQuantity.innerText
+                    console.log(newUpdateQuantity);
                     let body = {
-                        quantity:newUpdateQuantity,
-                        productid:id.toString()
+                        newQuantity: newUpdateQuantity,
+                        productid: id.toString()
                     };
-                    apiUpdate(body)
+                    await apiUpdateAndDelete(body,'PUT')
                 }
-            }
+            })
         })
     }
     const deleteProductCart = async () => {
-        containerArticle.addEventListener('click', async (e) => {
-            if (e.target.classList.contains('delete')) {
+        const btnDelete = Array.from(containerArticle.querySelectorAll('.delete'))
+        btnDelete.forEach(button =>{
+            button.addEventListener('click', async(e) =>{
                 const id = e.target.value;
                 let body = {
                     productid: id.toString(),
                 }
-                console.log(`estas haciendo click a : ${id}`);
-                try {
-                    const response = await fetch(url, {
-                        method: 'DELETE',
-                        credentials: 'include',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(body)
-                    })
-                    if (response.ok) {
-                        const dataSend = await response.json();
-                        drawCartUpdateStatus()
-                        console.log(`El producto ${dataSend} se elimino correctamente`);
-                    } else {
-                        console.error(`No se pudo eliminar el producto`);
-                    }
-                } catch (error) {
-                    console.log(`Error al eliminar el producto :${error}`);
-                }
-            }
+                await apiUpdateAndDelete(body,'DELETE')
+            })
         })
     }
     const drawCartUpdateStatus = async () => {
         containerArticle.innerHTML = ''
         const dataProductCart = await getApiCart();
         const datos = await drawCartStatus(dataProductCart)
-        sendUpdateOfProducts(dataProductCart)
+        sendUpdateOfProducts();
         deleteProductCart();
         return datos
     }

@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
+
+main {
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    padding: 15px 0;
+    box-sizing: border-box;
+}
+
+.container-data-profile{
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+    background-color: whitesmoke;
+}
+.container-article{
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}
+.box-data{
+    background-color: black;
+    padding: 5px 10px;
+}
+.title-data{
+    margin: 0;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+}
+.title-data-profile{
+    margin: 10px; 
+    font-weight: 400;
+    font-family: 'Roboto';
+}
+.title-cart {
+    margin: 10px 0px;
+    font-size: 20px;
+}
+
+.title-first {
+    display: flex;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+}
+.product {
+    width: 35%;
+    text-align: center;
+    margin: 5px 0px;
+    font-weight: 500;
+    font-family: 'Roboto';
+}
+
+.price-title {
+    width: 25%;
+    text-align: center;
+    margin: 5px 0px;
+    font-weight: 500;
+    font-family: 'Roboto';
+}
+
+.title-many {
+    width: 15%;
+    text-align: center;
+    margin: 5px 0px;
+    font-weight: 500;
+    font-family: 'Roboto';
+}
+
+.title-total {
+    width: 30%;
+    text-align: center;
+    margin: 5px 0px;
+    font-weight: 500;
+    font-family: 'Roboto';
+}
+.section-article {
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+article {
+    background-color: whitesmoke;
+    margin: 0px 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-top: 0.5px solid rgb(127, 127, 127);
+    box-sizing: border-box;
+}
+
+
+.box-text-descrip {
+    text-align: center;
+    width: 35%;
+    padding: 0 5px;
+}
+
+.title-product {
+    margin: 0;
+}
+
+.price-second {
+    text-align: center;
+    width: 25%;
+}
+
+.price-value{
+    margin: 0;
+}
+.container-input-price {
+    padding: 5px;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.total-price-product{
+    margin: 0;
+}
+.box-input-inc-dec {
+    display: flex;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.container-price{
+    /* border: 1px solid black; */
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+    width: 50%;
+    margin: 20px 0px;
+}
+.box-shop-price{
+    border-bottom: 1px solid rgb(117, 117, 117);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.text-shop{
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    margin: 0;
+    width: 60%;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.price-shop{
+    margin: 0;
+    width: 40%;
+    background-color: whitesmoke;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+@media (min-width: 1200px) {
+
+    .section-article,
+    .section-shop-total {
+        max-width: 1200px;
+        margin: auto;
+    }
+    .section-article {
+        margin-bottom: 40px;
+        padding: 0;
+    }
+}

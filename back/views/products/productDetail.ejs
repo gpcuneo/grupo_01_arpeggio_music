@@ -25,13 +25,19 @@
                             <%= product.name %>
                         </h4>
                     </div>
-                    <div class="container-img-product-colum">
-                            <% let selectedImg=product.image[0]; %>
+                    <div class="container-img-product-colum" 
+                    <% if (product.image.length >1) { %>
+                        style="width: 12%;"
+                    <% }else { %>
+                        style="width: 0%;"
+                    <% } %>
+                    >
+                        <% let selectedImg=product.image[0]; %>
                             <% product.image.forEach (img=>{ %>
                                 <% if (img !==selectedImg){ %>
                                     <img src="<%= img %>" alt="">
-                                <% } %>
-                            <% }) %>
+                                    <% } %>
+                                        <% }) %>
                     </div>
                     <div class="container-img">
                         <img src="<%= selectedImg %>" alt="">
@@ -42,11 +48,11 @@
                         </h4>
                         <p class="price">$<%= product.price %>
                         </p>
-                        <p class="discount"  
-                        <% if (product.discount == 0) { %>
+                        <p class="discount" <% if (product.discount==0) { %>
                             style= "display:none"
-                        <% } %>
-                        ><%= product.discount %> % de descuento</p>
+                            <% } %>
+                                ><%= product.discount %> % de descuento
+                        </p>
                         <div class="box-characteristics">
                             <h5>Características</h5>
                             <p>
@@ -61,9 +67,11 @@
                             <h5>Seleccione un color</h5>
                             <label for="">Color:</label>
                             <select name="color" id="">
-                                <% product.colors.forEach(color =>{ %>
-                                    <option value="<%= color %>"><%= color %></option>
-                                <% }) %>
+                                <% product.colors.forEach(color=>{ %>
+                                    <option value="<%= color %>">
+                                        <%= color %>
+                                    </option>
+                                    <% }) %>
                             </select>
                         </div>
                         <div class="box-stock">
@@ -71,15 +79,14 @@
                             <div class="container-inc-dec">
                                 <label for="cantidad">Cantidad:</label>
                                 <button id="decrement" value="<%= product.id %>"> - </button>
-                                <p id="stock-product" >
+                                <p id="stock-product">
                                     <%= product.stock %>
                                 </p>
                                 <button id="increment" value="<%= product.id %>"> + </button>
                             </div>
                         </div>
                         <div class="container-button">
-                            <!-- <button id="input-shop">Comprar</button> -->
-                            <button id="input-cart-shop" value="<%= product.id %>" >Agregar al carrito</button>
+                            <button id="input-cart-shop" value="<%= product.id %>">Agregar al carrito</button>
                         </div>
                     </section>
                 </nav>
@@ -90,7 +97,13 @@
                             <%= product.description %>
                         </p>
                     </div>
-                    <div class="container-store">
+                    <div class="container-store" 
+                    <% if (product.store === '') { %>
+                        style="display: none;"
+                    <% }else{ %>
+                        style="display: block;"
+                    <% } %>
+                    >
                         <h5>Información de Tienda</h5>
                         <p class="texto">
                             <%= product.store %>
@@ -100,21 +113,25 @@
                 <nav class="container-other-product">
                     <h5 class="name-other">Productos Similares</h5>
                     <div class="box-article">
-                        <% let indice = articles.findIndex(({id}) => id == product.id) %>
-                        <% let newArr = articles.splice(indice,1) %>
-                        <% articles.forEach(article=>{ %>
-                            <article class="article-other">
-                                <a href="/products/<%= article.id %>">
-                                    <img src="<%= article.image[0] %>" alt="">
-                                    <div class="box-article-charact">
-                                        <h5><%= article.name %></h5>
-                                        <p><%= article.characteristics %></p>
-                                        <p class="price-art">$<%= article.price %>
-                                        </p>
-                                    </div>
-                                </a>
-                            </article>
-                        <% }) %>
+                        <% let indice=articles.findIndex(({id})=> id == product.id) %>
+                            <% let newArr=articles.splice(indice,1) %>
+                                <% articles.forEach(article=>{ %>
+                                    <article class="article-other">
+                                        <a href="/products/<%= article.id %>">
+                                            <img src="<%= article.image[0] %>" alt="">
+                                            <div class="box-article-charact">
+                                                <h5>
+                                                    <%= article.name %>
+                                                </h5>
+                                                <p>
+                                                    <%= article.characteristics %>
+                                                </p>
+                                                <p class="price-art">$<%= article.price %>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </article>
+                                    <% }) %>
                     </div>
                 </nav>
             </article>

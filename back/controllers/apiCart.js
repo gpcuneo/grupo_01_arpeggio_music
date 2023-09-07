@@ -85,8 +85,8 @@ const addItem = async (req, res) => {
     }
 }
 
-const updateItemQuantity = (req, res) => {
-    const userID = getUserID(req.cookies.userName);
+const updateItemQuantity = async (req, res) => {
+    const userID = await getUserID(req.cookies.userName);
     const productID = parseInt(req.body.productid);
     const newQuantity =  parseInt(req.body.newQuantity);
     db.Cart.update(
