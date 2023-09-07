@@ -1,6 +1,7 @@
 const userTools = require('../utils/User')
 const db = require('../database/models');
-const { fn } = require('sequelize');
+const { fn, or } = require('sequelize');
+const user = require('../utils/User');
 
 const getUserID = async (userName) => {
     const userID = await db.User.findOne({
@@ -155,6 +156,123 @@ const checkout = async (req,res) => {
     res.render('checkout', {user, cart});
 }
 
+const getCart = async (userid) => {
+    const products = await db.Cart.findAll({
+        where: { userid: userid },
+        attributes: ['id', 'productid', 'quantity'],
+        include: [
+            {
+                association: 'Product', 
+                as: 'product',
+                attributes: ['id', 'name', 'price', 'discount', 'stock', 'image'],
+            }]
+        });
+    let cart ={}
+    cart.products = formatObjectProduct(products);
+    cart.totalPrice = sumTotalPriceProducts(cart.products);
+    return cart;
+}
+
+const getOrder = async (userID) => {
+    try {
+        const result = await db.Order.findOne({
+            where: {
+                user_id: userID
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        });
+        return result;
+    } catch (error) {
+        console.error('Error al obtener el último preference_id:', error);
+        throw error;
+    }
+}
+
+const impactSales = async (products, order_id) => {
+    const rows = products.map( product => {
+        return {
+            order_id: order_id,
+            product_id: product.id,
+            price: product.price,
+            quantity: product.quantity,
+        }
+    });
+    try {
+        await db.Sale.bulkCreate(rows);
+    } catch (error) {
+        console.error('Error al guardar las ventas:', error);
+        throw error;
+    }
+    
+}
+
+const updateProductsStock = async (products) => {
+    products.map( async product => {
+        const stock = await db.Product.findOne({
+                                    where: {id: product.id},
+                                    attributes: ['stock']
+                            });
+        await db.Product.update(
+            {stock: stock - product.quantity},
+            {where: { id: product.id}}
+        );
+    });
+}
+
+const createInvoice = async (orderID, totalPrice, paymentType) => {
+    const invoiceID = await db.Invoice.create({
+        order_id: orderID,
+        total: totalPrice,
+        payment_type: paymentType
+    });
+    return invoiceID.id;
+}
+
+const clearCar = async (userID) => {
+    await db.Cart.destroy({
+        where: {userid: userID}
+    });
+}
+
+const createDelivery = (orderID) => {
+    db.Shipping.create({
+        status: 'En preparacion',
+        order_id: orderID,
+    });
+}
+
+const paymentResult = async (req, res) => {
+    const user = userTools.isLogged(req);
+    const payment = {
+		id: req.query.payment_id,
+		status: req.query.status,
+        collectionID: req.query.collection_id,
+		merchantOrder: req.query.merchant_order_id,
+        type: req.query.payment_type,
+        preference_id: req.query.preference_id
+	};
+    if(payment.status === 'approved') {
+        const userID = await getUserID(req.cookies.userName);
+        const productsCar = await getCart(userID);
+        const order = await getOrder(userID);
+        if(payment.preference_id === order.preference_id ) {
+            await impactSales(productsCar.products, order.id);
+            const invoice = await createInvoice(order.id, productsCar.totalPrice, payment.type);
+            await updateProductsStock(productsCar.products);
+            await createDelivery(order.id);
+            await clearCar(userID);
+            return res.render('payment', {order, invoice, user});
+        } else {
+            return res.render('payment', {order, invoice:null, user});
+        }
+    } else {
+        console.error(' --- PAGO FALLIDO -- ')
+    }
+}
+
+
 const mainController = {
     home: home,
     store: store,
@@ -162,7 +280,23 @@ const mainController = {
     shipping: shipping,
     error: error,
     storePOST: storePOST,
-    checkout: checkout
+    checkout: checkout,
+    paymentResult: paymentResult
 }
 
 module.exports = mainController;
+
+
+
+// http://localhost||192.168.0.120/
+// ?collection_id=1314621752
+// &collection_status=approved
+// &payment_id=1314621752
+// &status=approved
+// &external_reference=null
+// &payment_type=credit_card
+// &merchant_order_id=11530151897
+// &preference_id=56415458-527fd2e1-bfb4-4e4a-8899-6b5fcea58bce
+// &site_id=MLA
+// &processing_mode=aggregator
+// &merchant_account_id=null

@@ -12,7 +12,7 @@ module.exports=(sequelize, DataType) =>{
             type: DataType.INTEGER,
             allowNull:false
         },
-        productcolor_id:{
+        product_id:{
             type:DataType.INTEGER,
             allowNull:false
         },
@@ -42,9 +42,9 @@ module.exports=(sequelize, DataType) =>{
     const Sale = sequelize.define(alias, cols, config)
 
     Sale.associate= models=>{
-        Sale.belongsTo(models.ProductColor,{
-            as:'product-color',
-            foreignKey:'productcolor_id'     //preguntar o avisar el nombre de la foreignkey
+        Sale.belongsTo(models.Product,{
+            as:'product',
+            foreignKey:'product_id'     //preguntar o avisar el nombre de la foreignkey
         });
         Sale.belongsTo(models.Order,{
             as:'orders',

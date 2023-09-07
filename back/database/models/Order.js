@@ -16,6 +16,10 @@ module.exports = (sequelize, DataType) => {
             type: DataType.INTEGER,
             allowNull: false
         },
+        preference_id: {
+            type: DataType.CHAR(46),
+            allowNull: false
+        },
         createdAt: {
             type: DataType.DATE,
             allowNull: false,
@@ -24,7 +28,6 @@ module.exports = (sequelize, DataType) => {
             type: DataType.DATE,
             allowNull: false,
         }
-
     };
 
     const config = {

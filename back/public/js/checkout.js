@@ -6,10 +6,9 @@ const mercadopago = new MercadoPago('TEST-118a6459-19fa-4836-929e-c1d8d4b76bec',
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Replace by inputs...
         const orderData = {
         quantity: 1,
-        description: 'algo es un test',
+        description: 'Solo es dummy, manejamos en el back',
         price: 1000
     };
 
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(function (preference) {
-            console.log(preference)
             createCheckoutButton(preference.id);
         });
 });
@@ -35,7 +33,7 @@ function createCheckoutButton(preferenceId) {
         if (window.checkoutButton) window.checkoutButton.unmount();
         await bricksBuilder.create(
         'wallet',
-        'button-checkout', // class/id where the payment button will be displayed
+        'button-checkout',
         {
             initialization: {
             preferenceId: preferenceId,

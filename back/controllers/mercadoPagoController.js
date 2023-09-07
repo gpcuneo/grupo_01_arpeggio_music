@@ -1,34 +1,100 @@
+const db = require('../database/models');
+require('dotenv').config();
+const envs = process.env;
+
+const urlBase = `http://${envs.APP_URL}:${envs.APP_PORT}/payment`;
+
+const getUserID = async (userName) => {
+    const userID = await db.User.findOne({
+        where: { userName: userName },
+        attributes: ['id']
+    });
+    return userID.id;
+}
+
+const formatObjectProduct = (products) => {
+    return products.map( row => {
+        return {
+            ...row.Product.dataValues,
+            quantity: row.quantity,
+            totalPriceProduct: row.quantity * row.Product.price
+        }
+    })
+}
+
+const sumTotalPriceProducts = (itemsArray) => {
+    return itemsArray.reduce( (accumulated, currentValue) => {
+        return accumulated + currentValue.totalPriceProduct
+    }, 0);
+}
+
+const getCart = async (req) => {
+    const user = await getUserID(req.cookies.userName);
+    const products = await db.Cart.findAll({
+        where: { userid: user },
+        attributes: ['id', 'productid', 'quantity'],
+        include: [
+            {
+                association: 'Product', 
+                as: 'product',
+                attributes: ['id', 'name', 'price', 'discount', 'stock', 'image'],
+            }]
+        });
+    let cart ={}
+    cart.products = formatObjectProduct(products);
+    cart.totalPrice = sumTotalPriceProducts(cart.products);
+    return cart;
+}
+
 const mercadopago = require("mercadopago");
 mercadopago.configure({
     access_token: "TEST-4828293259593186-122423-21648a5eebeb58c9376a626ed34beb1f-56415458",
 });
 
-const createPreference = (req, res) => {
-	let preference = {
+const createPurchaseOrder = async (preference, userId, delivery_id) => {
+	const orderData = {
+		preference_id: preference,
+		user_id: userId,
+		delivery_id: delivery_id, 
+	}
+	const result = await db.Order.create(orderData);
+	return result
+}
+
+const createPreference = async (req, res) => {
+	const cart = await getCart(req)
+	const preference = {
 		items: [
 			{
-				// title: req.body.description,
-				// unit_price: Number(req.body.price),
-				// quantity: Number(req.body.quantity),
-                title: 'bateria',
-				unit_price: 2000,
-				quantity: 5,
-                picture_url: 'http://192.168.0.120:3001/images/productos/image-32.jpg'
+                title: 'Productos',
+				description: "Payment for product",
+				unit_price: cart.totalPrice,
+				quantity: 1,
 			}
 		],
 		back_urls: {
-			"success": "/home",
-			"failure": "/home",
-			"pending": "/home"
+			"success": urlBase,
+			"failure": urlBase,
+			"pending": urlBase
 		},
 		auto_return: "approved",
 	};
 
 	mercadopago.preferences.create(preference)
-		.then(function (response) {
-			res.json({
-				id: response.body.id
-			});
+		.then( (response) => {
+			preferenceId = response.body.id
+			getUserID(req.cookies.userName)
+				.then( (data) => {
+					userID = data
+					return createPurchaseOrder(preferenceId, userID, 3)
+						.then( (data) => {
+							if(data) {
+								return res.json({
+									id: preferenceId
+								});
+							}
+						})
+				})
 		}).catch(function (error) {
 			console.log(error);
 		});
@@ -40,10 +106,6 @@ const payByCard = (req, res) => {
     mercadopago.payment.save(req.body)
         .then(function(response) {
             const { status, status_detail, id } = response.body;
-            console.log(response.body)
-            console.log(status)
-            console.log(status_detail)
-            console.log(id)
             res.status(response.status).json({ status, status_detail, id });
         })
         .catch(function(error) {
