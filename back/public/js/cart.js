@@ -29,7 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const minusCountCart = async ()=>{
         const productsData = await getApiCart();
         const products = await productsData.products;
-        console.log(products.length);
+        const countCart = Array.from(document.querySelectorAll('.count-cart'))
+        countCart.forEach(count => {
+            count.innerText = products.length;
+            const newCountCart = count.innerText;
+            return newCountCart;
+        })
     }
     const drawCartStatus = async (dataCart) => {
         const cart = await dataCart;

@@ -174,7 +174,6 @@ main{
     box-sizing: border-box;
 }
 .container-button{
-/*     border: 1px solid orange; */
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -293,20 +292,23 @@ main{
 .box-article-charact h5{
     font-size: 16px;
     margin: 5px;
+    color: black;
     margin-top: 10px;
 }
 .box-article-charact p{
     font-size: 12px;
     margin: 5px;
+    color: black;
     visibility: hidden;
 }
 .box-article-charact .price-art{
     font-size: 12px;
     margin: 5px;
+    color: black;
     visibility: hidden;
 }
 .box-article-charact:hover{
-    height: 45%;
+    height: 50%;
     background-color: #ebebeb;
 }
 .box-article-charact:hover p{
@@ -330,7 +332,6 @@ main{
     .article-other{
         width: 40%;
         margin: 10px;
-        box-shadow: 0px 0px 10px rgb(100, 100, 100);
     }
 }
 

@@ -1,13 +1,8 @@
-//llamo a la api de detalle de producto 
-//primero capturar los eventos botones de mas y menos
-//segundo capturar el boton de agregar al carrito
-//tercero enviar por fech por el metodo post el value de los botones del stock elegido;
 document.addEventListener('DOMContentLoaded',function(){
     const btnPlus= document.getElementById('increment')
     const btnMinus= document.getElementById('decrement')
     const submitByPost = document.getElementById('input-cart-shop')
     const numberStock = document.getElementById('stock-product')
-    /* numberStock.innerText > 1? (numberStock.innerText=1):numberStock.innerText; */
     
     const getApiCart = async ()=>{
         const dataCart = await fetch(`/api/cart`);
@@ -46,10 +41,16 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
     lessProduct()
-    const addCountCart = async (id)=>{
+    /* const addCountCart = async ()=>{
         const dataProducts = await getApiCart();
-        console.log(dataProducts.length);
-    }
+        const countCart = Array.from(document.querySelectorAll('.count-cart'))
+        countCart.forEach(count => {
+            count.innerText = dataProducts.length;
+            count.style.display='block';
+            const newCountCart = count.innerText;
+            return newCountCart;
+        })
+    } */
     const addProductCart = ()=>{
         submitByPost.onclick= async(e)=>{
             let id = e.target.value;
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 if(response.ok){
                     const dataResponse = await response.json();
                     console.log(`Producto agregado al carrito:${dataResponse}`);
-                    addCountCart()
+                    /* addCountCart() */
                 }else{
                     console.error('No se puedo agregar el producto al carrito');
                 }
