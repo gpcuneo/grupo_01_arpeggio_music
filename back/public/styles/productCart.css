@@ -161,10 +161,6 @@ article {
     font-weight: 500;
 }
 
-.container_payment {
-    max-width: 400px;
-}
-
 @media (min-width:769px){
     .container{
         padding-bottom: 60px;
