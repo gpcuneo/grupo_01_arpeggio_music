@@ -9,8 +9,14 @@ document.addEventListener('DOMContentLoaded',function(){
     const numberStock = document.getElementById('stock-product')
     /* numberStock.innerText > 1? (numberStock.innerText=1):numberStock.innerText; */
     
+    const getApiCart = async ()=>{
+        const dataCart = await fetch(`/api/cart`);
+        const response = await dataCart.json();
+        const productsCart = await response.products;
+        return productsCart;
+    }
     const getApiProduct= async(id)=>{
-        const data= await fetch(`http://localhost:3001/api/products/${id}`)
+        const data= await fetch(`/api/products/${id}`)
         const detail= await data.json();
         let product = await detail.product;
         return product;
@@ -40,7 +46,10 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
     lessProduct()
-    
+    const addCountCart = async (id)=>{
+        const dataProducts = await getApiCart();
+        console.log(dataProducts.length);
+    }
     const addProductCart = ()=>{
         submitByPost.onclick= async(e)=>{
             let id = e.target.value;
@@ -61,6 +70,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 if(response.ok){
                     const dataResponse = await response.json();
                     console.log(`Producto agregado al carrito:${dataResponse}`);
+                    addCountCart()
                 }else{
                     console.error('No se puedo agregar el producto al carrito');
                 }
