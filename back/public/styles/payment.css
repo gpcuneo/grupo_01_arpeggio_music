@@ -1,0 +1,25 @@
+main {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    min-height: 50vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.section-article {
+    width: 50%;
+    text-align: center;
+}

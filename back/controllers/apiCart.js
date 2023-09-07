@@ -19,9 +19,7 @@ const formatObjectProduct = (products) => {
 }
 
 const sumTotalPriceProducts = (itemsArray) => {
-    console.log(itemsArray)
     return itemsArray.reduce( (accumulated, currentValue) => {
-        console.log(currentValue.totalPriceProduct)
         return accumulated + currentValue.totalPriceProduct
     }, 0);
 }
@@ -52,7 +50,6 @@ const addItem = async (req, res) => {
             productid: req.body.productid
         }
     });
-    console.log(result)
     if(result) {
         const newQuantity = result.quantity + 1;
         try{
@@ -63,7 +60,6 @@ const addItem = async (req, res) => {
                     productid: req.body.productid
                 }
             });
-            console.log(`Se actualizo el registro a la cantidad: ${result.quantity} producto(s).`);
             return res.json({result: 'ok'})
         } catch (e) {
             console.error('Error al actualizar el carrito:', e);
@@ -76,7 +72,6 @@ const addItem = async (req, res) => {
                 productid: parseInt(req.body.productid),
                 quantity: parseInt(req.body.quantity),
             });
-            console.log(`Se insertaron el registro ${result.id}`);
             return res.json({result: 'ok'})
         } catch (e) {
             console.error('Error al actualizar el carrito:', e);
@@ -97,7 +92,6 @@ const updateItemQuantity = async (req, res) => {
         }
     })
     .then((result) => {
-        console.log(`Se actualizó ${result[0]} producto(s).`);
         return res.json({update: 'OK'})
     }).catch((error) => {
         console.error('Error al actualizar el carrito:', error);
@@ -114,7 +108,6 @@ const deleteItem = async (req, res) => {
                 productid: productID
             }
         });
-        console.log(`Se eliminaron ${result[0]} producto(s).`);
         return res.JSON({delete: 'OK'})
     } catch (e) {
         const error = await e;

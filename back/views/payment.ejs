@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Arpeggio Music</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="/styles/payment.css"/>
+  </head>
+  <body>
+    <%- include('./partials/header') %>
+    <main>
+        <div class="container">
+            <section class="section-article">
+                <h1>Compra finalizada</h1>
+                <% if(invoice) { %>
+                  <div class="details">
+                    <p>Hemos procesado exitosamente la orden: </p> <%= order.id %>
+                    <p>El numero de factura es: </p> <%= invoice %>
+                    <p>Puede seguir el estado de envio desde su perfil de usuario</p>
+                    <b><p>Gracias por confiar en nosotros</p></b>
+                  </div>
+                <% } else { %>
+                  <div class="details">
+                    <p>Lamentablemente no hemo podido facturar la orden: </p> <%= order.id %>
+                    <b><p>Intente nuevamente procesar el pago</p></b>
+                  </div>
+                <% } %>
+            </section>
+        </div>
+    </main>
+
+    <%- include('./partials/footer') %>
+  </body>
+</html>

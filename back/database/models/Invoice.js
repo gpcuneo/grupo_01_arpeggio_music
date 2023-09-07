@@ -12,16 +12,12 @@ module.exports=(sequelize, DataType) =>{
             type:DataType.INTEGER,
             allowNull:false
         },
-        sub_total:{
-            type:DataType.FLOAT,
-            allowNull:false
-        },
-        taxes:{
-            type:DataType.FLOAT,
-            allowNull:false
-        },
         total:{
             type:DataType.FLOAT,
+            allowNull:false
+        },
+        payment_type:{
+            type:DataType.STRING,
             allowNull:false
         },
         createdAt: {

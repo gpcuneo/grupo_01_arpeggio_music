@@ -7,6 +7,7 @@ router.use('/shipping', mainController.shipping);
 router.get('/store', mainController.store);
 router.post('/store', mainController.storePOST);
 router.get('/checkout', mainController.checkout);
+router.get('/payment', mainController.paymentResult);
 router.use('/', mainController.home);
 router.use('/*', mainController.error);
 
