@@ -17,7 +17,12 @@
 
 <body>
     <%- include('./partials/header') %>
-        <main>
+        <main style="display: none;" id="second-main" >
+            <div class="container-empty-cart">
+                <img src="/images/empty-cart.png" alt="">
+            </div>
+        </main>
+        <main style="display: block;" id="first-main">
             <div class="container">
                 <section class="section-article">
                     <h5 class="title-cart">Mi Carrito</h5>
