@@ -112,14 +112,14 @@ const formatDate = (orderHistory) => {
 }
 
 const showUser = async (req, res) => {
-    //const userInfo = userTools.isLogged(req);
-    const user = await db.User.findOne({
-                                where: { userName: req.params.userName },
-                                include: [
-                                    {association: 'Town', as: 'town'},
-                                    {association: 'Province', as: 'province'},
-                                ]
-                            });
+    const user = userTools.isLogged(req);
+    // const user = await db.User.findOne({
+    //                             where: { userName: req.params.userName },
+    //                             include: [
+    //                                 {association: 'Town', as: 'town'},
+    //                                 {association: 'Province', as: 'province'},
+    //                             ]
+    //                         });
     const orderHistory = await buildOrderInvoiceShipping(user.id); 
     const orderHistoryFormated = formatDate(orderHistory);
     res.render('User/profile', {'user': user, 'orderHistory': orderHistoryFormated} );
@@ -190,8 +190,9 @@ const createUser = async (req, res) => {
 }
 
 const editUser = async (req, res) => {
-    let user = await db.User.findOne({where: {userName: req.params.userName}})
-    delete(user.id)
+    const user = userTools.isLogged(req);
+    //let user = await db.User.findOne({where: {userName: req.params.userName}})
+    //delete(user.id)
     delete(user.password)
     delete(user.confirmPassword)
     const provinces = await db.Province.findAll({attributes: ['id', 'name']});
@@ -241,8 +242,9 @@ const updatePassword = async (req, res) => {
 }
 
 const userDelete = async (req, res) => {
-    let userName = req.params.userName;
-    let user = await db.User.findOne({where:{ userName: userName}})
+    const user = userTools.isLogged(req);
+    // let userName = req.params.userName;
+    // let user = await db.User.findOne({where:{ userName: userName}})
     res.render('User/delete', {'user': user});
 }
 
