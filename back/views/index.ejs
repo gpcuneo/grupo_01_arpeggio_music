@@ -55,10 +55,12 @@
             </div>
             <% categories.forEach( category => { %>
                 <div class="item-box">
-                    <img class="img-responsive" src="/images/categories/<%= category.img %>" alt="Imagen de instrumentos de la tienda">
-                    <div class="text-in-categories">
-                        <p><%= category.name %></p>
-                    </div>
+                    <a href="/store?category=<%= category.id %>">
+                        <img class="img-responsive" src="/images/categories/<%= category.img %>" alt="Imagen de instrumentos de la tienda">
+                        <div class="text-in-categories">
+                            <p><%= category.name %></p>
+                        </div>
+                    </a>
                 </div>
             <% }); %>
         </section>
