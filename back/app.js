@@ -24,6 +24,7 @@ indexRoute,
 mainRoute ,
 productRoute, 
 userRoute ,
+privacyPoliticsRoute,
 } = require ('./routes')
 
 
@@ -52,6 +53,7 @@ app.use('/products', productRoute);
 app.use('/category',categoryRoute);
 app.use('/orderHistory',historyRoute);
 app.use('/api', apiRoute);
+app.use('/privacyPolitics', privacyPoliticsRoute );
 app.use('/admin', adminRoute);
 app.use('/', mainRoute);
 
