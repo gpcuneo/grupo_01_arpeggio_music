@@ -60,7 +60,7 @@ const getOrderHistory_v2 = async (userId) => {
             ],
             where: {
                 status: 'payed',
-                user_id: 'd72f98b1-dbb2-41d8-88e1-9c0e8eb4fc7c',
+                user_id: userId,
             },
         });
         if (orders) {
