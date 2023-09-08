@@ -12,10 +12,8 @@ const authMiddleware = async (req, res, next) => {
         });
         if(user) {
             user.cart = await getCart(user.id);
-            delete user.dataValues.id;
+            //delete user.dataValues.id;
             delete user.dataValues.password;
-            console.log(' --- user')
-            console.log(user)
             req.session.user = user;
         }
     }
@@ -28,7 +26,7 @@ const apiAuthMiddleware = async (req, res, next) => {
             where: { userName: req.cookies.userName },
         });
         if(user) {
-            delete user.id;
+            //delete user.id; 
             delete user.password;
             req.session.user = user;
         } else {

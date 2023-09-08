@@ -6,6 +6,7 @@ const fs = require('fs');
 const netTools = require('../utils/networkTools');
 const userTools = require('../utils/User');
 const db = require('../database/models');
+const Order = require('../models/order');
 const { Op, INTEGER } = require('sequelize');
 const {validationResult} = require('express-validator');
 const { query } = require('express');
@@ -50,19 +51,9 @@ const validateUserFields = async (user, req, id=false) => {
     return errors 
 }
 
-const getOrderHistory_v2 = async (userId) => {
+const buildOrderInvoiceShipping = async (userId) => {
     try {
-        const orders = await db.Order.findAll({
-            attributes: [
-                [db.sequelize.fn('DISTINCT', db.sequelize.col('id')), 'id'],
-                'status',
-                'createdAt',
-            ],
-            where: {
-                status: 'payed',
-                user_id: userId,
-            },
-        });
+        const orders = await Order.getOrdersPayed(userId);
         if (orders) {
             let results = orders.map(order => {
                 return {
@@ -73,6 +64,7 @@ const getOrderHistory_v2 = async (userId) => {
                     createdAt: order.createdAt ? order.createdAt : null,
                 };
             });
+            // Add Invoice data
             for(let i=0; i < results.length; i++) {
                 const invoice = await db.Invoice.findOne({
                     where: {order_id: results[i].id},
@@ -80,6 +72,7 @@ const getOrderHistory_v2 = async (userId) => {
                 });
                 results[i].total = invoice.total;
             }
+            // Add Shipping data
             for(let i=0; i < results.length; i++) {
                 const shipping = await db.Shipping.findOne({
                     where: {order_id: results[i].id},
@@ -127,7 +120,7 @@ const showUser = async (req, res) => {
                                     {association: 'Province', as: 'province'},
                                 ]
                             });
-    const orderHistory = await getOrderHistory_v2(user.id); 
+    const orderHistory = await buildOrderInvoiceShipping(user.id); 
     const orderHistoryFormated = formatDate(orderHistory);
     res.render('User/profile', {'user': user, 'orderHistory': orderHistoryFormated} );
 }

@@ -102,7 +102,7 @@
                         <p><b>Estado: </b><span class="status-<%= item.shippingStatus %>"><%= item.shippingStatus %></span></p>
                     </div>
                     <div class="order-item center-items">
-                    <form action="/history">
+                    <form action="/orderHistory/<%= item.id %>">
                         <button class="btn-order-details" type="submmit">
                             Ver detalles
                         </button>

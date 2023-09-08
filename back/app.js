@@ -50,7 +50,7 @@ app.use('/user', userRoute);
 app.use('/productCart',cartRoute);
 app.use('/products', productRoute);
 app.use('/category',categoryRoute);
-app.use('/history',historyRoute);
+app.use('/orderHistory',historyRoute);
 app.use('/api', apiRoute);
 app.use('/admin', adminRoute);
 app.use('/', mainRoute);
