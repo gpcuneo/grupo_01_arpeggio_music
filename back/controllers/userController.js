@@ -11,9 +11,10 @@ const {validationResult} = require('express-validator');
 const { log } = require('console');
 const { off } = require('process');
 const { query } = require('express');
+//const Order = require('../database/models/Order');
 
 
-let orderHistory = jsonTools.read('horderHistory.json');
+//let orderHistory = jsonTools.read('horderHistory.json');
 
 const createUserObject = (req) => {
     return {
@@ -64,6 +65,172 @@ const validateUserFields = async (user, req, id=false) => {
     return errors 
 }
 
+// async function getOrderHistory(userId) {
+//     console.log(userId)
+//     try {
+//         const orderHistory = await db.Order.findAll({
+//             where: { user_id: userId },
+//             include: [
+//                 {
+//                     model: db.Invoice,
+//                     as: 'Invoice',
+//                     where: {order_id: 13},
+//                     attributes: ['total'], // Incluye solo el campo 'mount' de la factura
+//                 },
+//                 {
+//                     model: db.Shipping,
+//                     as: 'Shipping',
+//                     where: {order_id: 13},
+//                     attributes: ['status'], // Incluye solo el campo 'status' del envío
+//                 }
+//             ],
+//         });
+//         if (orderHistory) {
+//             console.log(orderHistory)
+//             return orderHistory;
+//         } else {
+//             return null; // El usuario no existe o no tiene pedidos asociados
+//         }
+//     } catch (error) {
+//         console.error('Error al obtener la información del pedido:', error);
+//         throw error;
+//     }
+// }
+
+// const getInvoice = async (order_id) => {
+//     const invoice = await db.Invoice.findOne({
+//         where: { order_id: order_id },
+//     });
+//     return invoice.toJSON();
+// }
+
+// const getShipping = async (order_id) => {
+//     console.log(order_id)
+//     const shipping = await db.Shipping.findOne({
+//         where: { order_id: order_id },
+//     });
+//     return shipping.toJSON();
+// }
+
+// async function getOrderHistory(userId) {
+//     try {
+//         const qq = `select distinct (ord.id), ord.id, ord.status, inv.total, ship.status, ord.createdAt from orders ord
+//         join invoices inv ON inv.order_id = ord.id
+//         join shippings ship ON ship.order_id = ord.id
+//         where ord.status = 'payed'
+//         and ord.user_id = '${userId}'
+//         and inv.total != 0
+//         ;`
+//         console.log(qq);
+
+//         const ordersHistory = await db.sequelise.query(qq, { type: Sequelize.QueryTypes.SELECT });
+//         //console.log(metadata)
+//         console.log(ordersHistory)
+//         if (ordersHistory) {
+//             return ordersInvoices;
+//         } else {
+//             return null; // El usuario no existe o no tiene pedidos asociados
+//         }
+//     } catch (error) {
+//         console.error('Error al obtener la información del pedido:', error);
+//         throw error;
+//     }
+// }
+
+const getOrderHistory_v2 = async (userId) => {
+    try {
+        const orders = await db.Order.findAll({
+            attributes: [
+                [db.sequelize.fn('DISTINCT', db.sequelize.col('id')), 'id'],
+                'status',
+                'createdAt',
+            ],
+            where: {
+                status: 'payed',
+                user_id: 'd72f98b1-dbb2-41d8-88e1-9c0e8eb4fc7c',
+            },
+            // include: [
+            //     {
+            //         model: db.Invoice,
+            //         attributes: ['total'],
+            //         as: 'Invoice',
+            //         where: {
+            //         total: {
+            //             [Op.ne]: 0,
+            //         },
+            //         },
+            //     },
+            //     {
+            //         model: db.Shipping,
+            //         as: 'Shipping',
+            //         attributes: ['status'],
+            //     },
+            // ],
+        });
+        console.log(orders)
+        if (orders) {
+            let results = orders.map(order => {
+                return {
+                    id: order.id,
+                    status: order.status,
+                    total: order.Invoice ? order.Invoice.total : null,
+                    shippingStatus: order.Shipping ? order.Shipping.status : null,
+                    createdAt: order.createdAt ? order.createdAt : null,
+                };
+            });
+
+            for(let i=0; i < results.length; i++) {
+                const invoice = await db.Invoice.findOne({
+                    where: {order_id: results[i].id},
+                    attributes: ['total']
+                });
+                results[i].total = invoice.total;
+            }
+
+            for(let i=0; i < results.length; i++) {
+                const shipping = await db.Shipping.findOne({
+                    where: {order_id: results[i].id},
+                    attributes: ['status']
+                });
+                results[i].shippingStatus = shipping.status;
+            }
+
+            console.log('results')
+            console.log(results)
+
+            return results;
+        } else {
+            return null;
+        }
+        } catch (error) {
+            console.error('Error al obtener la información del pedido:', error);
+            throw error;
+        }
+}
+
+
+const formatDate = (orderHistory) => {
+    const timeZone = "America/Argentina/Buenos_Aires";
+    const formatOptions = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: timeZone,
+        timeZoneName: "short"
+    };
+
+    for(let i=0; i<orderHistory.length; i++) {
+        console.log(orderHistory[i].createdAt);
+        const originalDate = new Date(orderHistory[i].createdAt);
+        const strDate = originalDate.toLocaleString("es-AR", formatOptions);
+        console.log(strDate)
+        orderHistory[i].date = strDate
+    }
+    return orderHistory;
+}
+
 const showUser = async (req, res) => {
     //const userInfo = userTools.isLogged(req);
     const user = await db.User.findOne({
@@ -73,7 +240,10 @@ const showUser = async (req, res) => {
                                     {association: 'Province', as: 'province'},
                                 ]
                             });
-    res.render('User/profile', {'user': user, 'orderHistory': orderHistory} );
+    const orderHistory = await getOrderHistory_v2(user.id); 
+    const orderHistoryFormated = formatDate(orderHistory);
+    console.log(orderHistoryFormated)
+    res.render('User/profile', {'user': user, 'orderHistory': orderHistoryFormated} );
 }
 
 const listUsers = async (req, res) => {

@@ -87,19 +87,19 @@
             <div class="tittle">
                 <p>Historial de pedidos</p>
             </div>
-            <% orderHistory.forEach( order => { %>
+            <% orderHistory.forEach( item => { %>
                 <article class="container-info">
                     <div class="order-item">
-                        <p><b>Numero de pedido: </b># <%= order.id  %></p>
+                        <p><b>Numero de pedido: </b># <%= item.id  %></p>
                     </div>
                     <div class="order-item">
-                        <p><b>Fecha: </b><%= order.date  %></p>
+                        <p><b>Fecha: </b><%= item.date  %></p>
                     </div>
                     <div class="order-item">
-                        <p><b>Monto: </b>$ <%= order.mount %></p>
+                        <p><b>Monto: </b>$ <%= item.total %></p>
                     </div>
                     <div class="order-item">
-                        <p><b>Estado: </b><span class="status-<%= order.status %>"><%= order.status %></span></p>
+                        <p><b>Estado: </b><span class="status-<%= item.shippingStatus %>"><%= item.shippingStatus %></span></p>
                     </div>
                     <div class="order-item center-items">
                     <form action="/history">
