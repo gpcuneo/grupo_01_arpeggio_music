@@ -1,5 +1,5 @@
 const db = require('../database/models');
-const cart = require('../models/cart');
+const Cart = require('../models/cart');
 
 const getUserID = async (userName) => {
     const userID = await db.User.findOne({
@@ -11,82 +11,53 @@ const getUserID = async (userName) => {
  
 const getUserCart = async (req, res) => {
     const user = await getUserID(req.cookies.userName);
-    const userCart = await cart.getCart(user)
+    const userCart = await Cart.getCart(user)
     return res.json(userCart);
 }
 
 const addItem = async (req, res) => {
     const userID = await getUserID(req.cookies.userName);
-    result = await db.Cart.findOne({
-        where: {
-            userid: userID,
-            productid: req.body.productid
-        }
+    const productId = parseInt(req.body.productid);
+    const quantity = parseInt(req.body.quantity);
+    
+    const productStock = await db.Product.findOne({
+        where: {id: productId},
+        attributes: ['stock']
     });
-    if(result) {
-        const newQuantity = result.quantity + 1;
-        try{
-            result = await db.Cart.update(
-                { quantity: newQuantity }, {
-                where: {
-                    userid: userID,
-                    productid: req.body.productid
-                }
-            });
-            return res.json({result: 'ok'})
-        } catch (e) {
-            console.error('Error al actualizar el carrito:', e);
-            return res.json({error: error})
+    if(quantity > productStock.stock) {
+        return res.json({error: 'stock insuficiente'})
+    }
+    
+    const productCart = await Cart.findProductByUser(productId, userID);
+    if(productCart) {
+        const newQuantity = productCart.quantity + quantity;
+        console.log('newQuantity')
+        console.log(newQuantity)
+        if(newQuantity > productStock.stock) {
+            return res.json({error: 'stock insuficiente'})
         }
+        await Cart.updateProductQuantity(productId, userID, newQuantity);
+        return res.json({result: 'ok'})
     } else {
-        try{
-            result = await db.Cart.create({
-                userid: userID,
-                productid: parseInt(req.body.productid),
-                quantity: parseInt(req.body.quantity),
-            });
-            return res.json({result: 'ok'})
-        } catch (e) {
-            console.error('Error al actualizar el carrito:', e);
-            return res.json({error: error})
-        }
+        console.log(' --- Agregando nuevo producto')
+        await Cart.createProduct(productId, userID, quantity)
+        return res.json({result: 'ok'})
     }
 }
 
 const updateItemQuantity = async (req, res) => {
     const userID = await getUserID(req.cookies.userName);
-    const productID = parseInt(req.body.productid);
+    const productId = parseInt(req.body.productid);
     const newQuantity =  parseInt(req.body.newQuantity);
-    db.Cart.update(
-        { quantity: newQuantity }, {
-        where: {
-            userid: userID,
-            productid: productID
-        }
-    })
-    .then((result) => {
-        return res.json({update: 'OK'})
-    }).catch((error) => {
-        console.error('Error al actualizar el carrito:', error);
-    });
+    await Cart.updateProductQuantity(productId, userID, newQuantity);
+    return res.json({update: 'OK'});
 }
 
 const deleteItem = async (req, res) => {
     const userID = await getUserID(req.cookies.userName);
     const productID = req.body.productid;
-    try{
-        result = await db.Cart.destroy({
-            where: {
-                userid: userID,
-                productid: productID
-            }
-        });
-        return res.JSON({delete: 'OK'})
-    } catch (e) {
-        const error = await e;
-        console.error('Error al actualizar el carrito:', error);
-        return res.json({error: error})
-    }
+    Cart.removeProduct(productID, userID);
+    return res.json({delete: 'OK'});
 }
 
 const apiCart = {
