@@ -1,5 +1,5 @@
 const jsonTools = require('../utils/JSONTools');
-let article = jsonTools.read('shoppingHistory.json');
+//let article = jsonTools.read('shoppingHistory.json');
 const userTools = require('../utils/User')
 
 const getHistory = (req, res) => {

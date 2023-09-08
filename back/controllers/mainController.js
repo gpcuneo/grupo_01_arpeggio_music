@@ -1,5 +1,6 @@
 const userTools = require('../utils/User')
 const db = require('../database/models');
+const Order = require('../models/order');
 const cart = require('../models/cart');
 const { fn, or } = require('sequelize');
 
@@ -132,24 +133,7 @@ const checkout = async (req,res) => {
     res.render('checkout', {user, cart: userCart});
 }
 
-const getOrder = async (userID) => {
-    try {
-        const result = await db.Order.findOne({
-            where: {
-                user_id: userID
-            },
-            order: [
-                ['createdAt', 'DESC']
-            ]
-        });
-        return result;
-    } catch (error) {
-        console.error('Error al obtener el último preference_id:', error);
-        throw error;
-    }
-}
-
-const updateOrderStatus = async (orderId) => {
+const updateOrderStatus = async (orderId, status) => {
     try {
         const result = await db.Order.update(
             {status: 'payed'},
@@ -228,11 +212,11 @@ const paymentResult = async (req, res) => {
     if(payment.status === 'approved') {
         const userID = await getUserID(req.cookies.userName);
         const productsCar = await cart.getCart(userID);
-        const order = await getOrder(userID);
+        const order = await Order.getLastOrder(userID);
         if(payment.preference_id === order.preference_id ) {
             await impactSales(productsCar.products, order.id);
             const invoice = await createInvoice(order.id, productsCar.totalPrice, payment.type);
-            await updateOrderStatus(order.id);
+            await Order.updateStatus(order.id, 'payed');
             await updateProductsStock(productsCar.products);
             await createDelivery(order.id);
             await clearCar(userID);
