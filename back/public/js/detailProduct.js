@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
     lessProduct()
-    /* const addCountCart = async ()=>{
+    const addCountCart = async ()=>{
         const dataProducts = await getApiCart();
         const countCart = Array.from(document.querySelectorAll('.count-cart'))
         countCart.forEach(count => {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded',function(){
             const newCountCart = count.innerText;
             return newCountCart;
         })
-    } */
+    }
     const addProductCart = ()=>{
         submitByPost.onclick= async(e)=>{
             let id = e.target.value;
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 if(response.ok){
                     const dataResponse = await response.json();
                     console.log(`Producto agregado al carrito:${dataResponse}`);
-                    /* addCountCart() */
+                    await addCountCart()
                 }else{
                     console.error('No se puedo agregar el producto al carrito');
                 }

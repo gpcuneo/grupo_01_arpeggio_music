@@ -36,8 +36,16 @@
                     <img src="/images/logos/logo-arpeggio.JPG" class="img-logo" alt="Logo de Arpeggio Music">
                 </a>                    
             </div>
-            <div>
-                <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a>
+            <div class="box-cart-count">
+                <a href="/productCart"><i class="fa-solid fa-cart-plus"></i>
+                <span  class="count-cart"
+                <% if(user.cart.products.length > 0) { %>
+                    style="display: block;"
+                <% }else{ %>
+                    style="display: none;"
+                <% } %>
+                ><%= user.cart.products.length %></span>
+                </a>
             </div>
         </div>
         <div class="nav-bar">
@@ -83,7 +91,15 @@
                     <% } %>
                 </div>
                 <div class="cart">
-                    <a href="/productCart"><i class="fa-solid fa-cart-plus"></i></a> 
+                    <a href="/productCart" ><i class="fa-solid fa-cart-plus"></i> 
+                    <span class="count-cart" 
+                    <% if(user.cart.products.length > 0) { %>
+                        style="display: block;"
+                    <% }else{ %>
+                        style="display: none;"
+                    <% } %>
+                    ><%= user.cart.products.length %></span>
+                    </a>
                 </div>
             </div>
         </div>

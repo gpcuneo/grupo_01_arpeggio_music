@@ -51,8 +51,6 @@ main {
     font-size: 24px;
     cursor: pointer;
 }
-
-
 .container-general {
     width: 100vw;
     font-family: 'Roboto', sans-serif;
@@ -71,13 +69,27 @@ main {
     margin: 15px;
     font-size: 25px;
 }
-
+.box-cart-count{
+    position: relative;
+    margin: 15px;
+    padding: 5px;
+    box-sizing: border-box;
+}
 .fa-cart-plus {
     color: white;
-    margin: 15px;
-    font-size: 25px;
+    font-size: 28px;
 }
-
+.count-cart{
+    position: absolute;
+    font-size: 12px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: black;
+    right: 11px;
+    bottom: 17.2px;
+    padding: 0px 3px ;
+    background-color: white;
+}
 .caja-one {
     background-color: black;
     width: 100%;
@@ -335,25 +347,27 @@ body {
         padding-left: 15px;
         box-sizing: border-box;
     }
-
     .second-img-logo .img-logo-ar {
         width: 13vw;
     }
-
     .cart {
         display: flex;
-        border: dashed 1px black;
+        position: relative;
         align-self: center;
         justify-content: center;
     }
-
     .cart i {
-        font-size: 15px;
+        font-size: 28px;
         color: white;
         margin: 0;
         padding-left: 5px;
     }
-
+    .count-cart{
+        position: absolute;
+        color: black;
+        bottom: 12.3px;
+        right: 7px;
+    }
     .caja-login {
         display: flex;
         flex-direction: row;
