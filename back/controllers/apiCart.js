@@ -1,4 +1,5 @@
 const db = require('../database/models');
+const cart = require('../models/cart');
 
 const getUserID = async (userName) => {
     const userID = await db.User.findOne({
@@ -7,39 +8,11 @@ const getUserID = async (userName) => {
     });
     return userID.id;
 }
-
-const formatObjectProduct = (products) => {
-    return products.map( row => {
-        return {
-            ...row.Product.dataValues,
-            quantity: row.quantity,
-            totalPriceProduct: row.quantity * row.Product.price
-        }
-    })
-}
-
-const sumTotalPriceProducts = (itemsArray) => {
-    return itemsArray.reduce( (accumulated, currentValue) => {
-        return accumulated + currentValue.totalPriceProduct
-    }, 0);
-}
-
-const getCart = async (req, res) => {
+ 
+const getUserCart = async (req, res) => {
     const user = await getUserID(req.cookies.userName);
-    const products = await db.Cart.findAll({
-        where: { userid: user },
-        attributes: ['id', 'productid', 'quantity'],
-        include: [
-            {
-                association: 'Product', 
-                as: 'product',
-                attributes: ['id', 'name', 'price', 'discount', 'stock', 'image'],
-            }]
-        });
-    let cart ={}
-    cart.products = formatObjectProduct(products);
-    cart.totalPrice = sumTotalPriceProducts(cart.products);
-    return res.json(cart);
+    const userCart = await cart.getCart(user)
+    return res.json(userCart);
 }
 
 const addItem = async (req, res) => {
@@ -117,7 +90,7 @@ const deleteItem = async (req, res) => {
 }
 
 const apiCart = {
-    getCart: getCart,
+    getCart: getUserCart,
     addItem: addItem,
     updateItemQuantity: updateItemQuantity,
     deleteItem: deleteItem,
