@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     btnPagesArray.forEach(btn => {
         btn.addEventListener('click', function (e) {
-            const page = e.target.text;
+            const page = e.target.getAttribute("href");
+            console.log(page)
             getValuesAndLoad(page)
             e.preventDefault();
         });

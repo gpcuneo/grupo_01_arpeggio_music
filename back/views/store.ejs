@@ -39,22 +39,6 @@
                         </div>
                     <% }) %>
                 </div>
-                <div class="filter-container-items">
-                    <!-- <p>Rango de precio:</p> -->
-                    <div class="price-rangue input-filters">
-                        <!-- <div class="input-price-container">
-                            <input class="input-price" type="number" name="min-price" id="min-price">
-                            <label for=""></label>
-                        </div>
-                        <div class="input-price-container">
-                            <input class="input-price" type="number" name="max-price" id="max-price">
-                            <label for=""></label>
-                        </div> -->
-                        <div class="center-elements">
-                            <button type="submit">Filtrar</button>
-                        </div>
-                    </div>    
-                </div>
             </form>
         </section>
         <section class="container-items">
@@ -79,23 +63,16 @@
             <section class="container-pagination">
                 <div class="paginacion">
                     <% if(page > 0) { %>
-                        <a href="/store?page=<%= page -1 %>" class="btn-page">&laquo;</a>
-                        <a href="/store?page=<%= page -1 %>" class="btn-page"><%= page %></a>
+                        <a href="<%= page %>" class="btn-page"><-</a>
+                        <a href="<%= page %>" class="btn-page"><%= page %></a>
                     <% } %>
-                    <a href="#" class="btn-page"><%= page +1 %></a>
+                    <a href="#" class="btn-page-selected"><%= page +1 %></a>
                     <% if(page < pageLimit) { %>
-                        <a href="/store?page=<%= page +1 %>" class="btn-page"><%= page +2 %></a>
-                        <a href="/store?page=<%= page +1 %>" class="btn-page">&raquo;</a>
+                        <a href="<%= page +2 %>" class="btn-page"><%= page +2 %></a>
+                        <a href="<%= page +2 %>" class="btn-page">-></a>
                     <% } %>
                 </div>
             </section>
-        </section>
-        <section class="container-pagination">
-            <div class="center-items order-item">
-                <form action="/user/export">
-                    <button type="submit">Exportar listado</button>
-                </form>
-            </div>
         </section>
         </div>
     </main>
