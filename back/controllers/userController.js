@@ -2,19 +2,14 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const ExcelJS = require('exceljs');
 const fs = require('fs');
-const jsonTools = require('../utils/JSONTools');
+//const jsonTools = require('../utils/JSONTools');
 const netTools = require('../utils/networkTools');
 const userTools = require('../utils/User');
 const db = require('../database/models');
 const { Op, INTEGER } = require('sequelize');
 const {validationResult} = require('express-validator');
-const { log } = require('console');
-const { off } = require('process');
 const { query } = require('express');
-//const Order = require('../database/models/Order');
 
-
-//let orderHistory = jsonTools.read('horderHistory.json');
 
 const createUserObject = (req) => {
     return {
@@ -52,90 +47,8 @@ const validateUserFields = async (user, req, id=false) => {
     await db.User.findOne({where: {email : user.email, id: {[Op.ne]: id}}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
     user.city === 0 ? errors.city = {msg : 'Seleccione una provincia valida'} : '' ;
     user.town === 0 ? errors.town = {msg : 'Selecciona una localidad valida'} : '' ;
-    // Query mas eficiente pero no puedo controlar el mensaje de error por campo.
-    // const users = await db.User.findAll({
-    //     where: {
-    //         [Op.or]: [
-    //             { dni: user.dni},
-    //             { userName: user.userName}, 
-    //             { email: user.email},
-    //         ],
-    //     }, 
-    //     });
     return errors 
 }
-
-// async function getOrderHistory(userId) {
-//     console.log(userId)
-//     try {
-//         const orderHistory = await db.Order.findAll({
-//             where: { user_id: userId },
-//             include: [
-//                 {
-//                     model: db.Invoice,
-//                     as: 'Invoice',
-//                     where: {order_id: 13},
-//                     attributes: ['total'], // Incluye solo el campo 'mount' de la factura
-//                 },
-//                 {
-//                     model: db.Shipping,
-//                     as: 'Shipping',
-//                     where: {order_id: 13},
-//                     attributes: ['status'], // Incluye solo el campo 'status' del envío
-//                 }
-//             ],
-//         });
-//         if (orderHistory) {
-//             console.log(orderHistory)
-//             return orderHistory;
-//         } else {
-//             return null; // El usuario no existe o no tiene pedidos asociados
-//         }
-//     } catch (error) {
-//         console.error('Error al obtener la información del pedido:', error);
-//         throw error;
-//     }
-// }
-
-// const getInvoice = async (order_id) => {
-//     const invoice = await db.Invoice.findOne({
-//         where: { order_id: order_id },
-//     });
-//     return invoice.toJSON();
-// }
-
-// const getShipping = async (order_id) => {
-//     console.log(order_id)
-//     const shipping = await db.Shipping.findOne({
-//         where: { order_id: order_id },
-//     });
-//     return shipping.toJSON();
-// }
-
-// async function getOrderHistory(userId) {
-//     try {
-//         const qq = `select distinct (ord.id), ord.id, ord.status, inv.total, ship.status, ord.createdAt from orders ord
-//         join invoices inv ON inv.order_id = ord.id
-//         join shippings ship ON ship.order_id = ord.id
-//         where ord.status = 'payed'
-//         and ord.user_id = '${userId}'
-//         and inv.total != 0
-//         ;`
-//         console.log(qq);
-
-//         const ordersHistory = await db.sequelise.query(qq, { type: Sequelize.QueryTypes.SELECT });
-//         //console.log(metadata)
-//         console.log(ordersHistory)
-//         if (ordersHistory) {
-//             return ordersInvoices;
-//         } else {
-//             return null; // El usuario no existe o no tiene pedidos asociados
-//         }
-//     } catch (error) {
-//         console.error('Error al obtener la información del pedido:', error);
-//         throw error;
-//     }
-// }
 
 const getOrderHistory_v2 = async (userId) => {
     try {
@@ -149,25 +62,7 @@ const getOrderHistory_v2 = async (userId) => {
                 status: 'payed',
                 user_id: 'd72f98b1-dbb2-41d8-88e1-9c0e8eb4fc7c',
             },
-            // include: [
-            //     {
-            //         model: db.Invoice,
-            //         attributes: ['total'],
-            //         as: 'Invoice',
-            //         where: {
-            //         total: {
-            //             [Op.ne]: 0,
-            //         },
-            //         },
-            //     },
-            //     {
-            //         model: db.Shipping,
-            //         as: 'Shipping',
-            //         attributes: ['status'],
-            //     },
-            // ],
         });
-        console.log(orders)
         if (orders) {
             let results = orders.map(order => {
                 return {
@@ -178,7 +73,6 @@ const getOrderHistory_v2 = async (userId) => {
                     createdAt: order.createdAt ? order.createdAt : null,
                 };
             });
-
             for(let i=0; i < results.length; i++) {
                 const invoice = await db.Invoice.findOne({
                     where: {order_id: results[i].id},
@@ -186,7 +80,6 @@ const getOrderHistory_v2 = async (userId) => {
                 });
                 results[i].total = invoice.total;
             }
-
             for(let i=0; i < results.length; i++) {
                 const shipping = await db.Shipping.findOne({
                     where: {order_id: results[i].id},
@@ -194,10 +87,6 @@ const getOrderHistory_v2 = async (userId) => {
                 });
                 results[i].shippingStatus = shipping.status;
             }
-
-            console.log('results')
-            console.log(results)
-
             return results;
         } else {
             return null;
@@ -222,10 +111,8 @@ const formatDate = (orderHistory) => {
     };
 
     for(let i=0; i<orderHistory.length; i++) {
-        console.log(orderHistory[i].createdAt);
         const originalDate = new Date(orderHistory[i].createdAt);
         const strDate = originalDate.toLocaleString("es-AR", formatOptions);
-        console.log(strDate)
         orderHistory[i].date = strDate
     }
     return orderHistory;
@@ -242,7 +129,6 @@ const showUser = async (req, res) => {
                             });
     const orderHistory = await getOrderHistory_v2(user.id); 
     const orderHistoryFormated = formatDate(orderHistory);
-    console.log(orderHistoryFormated)
     res.render('User/profile', {'user': user, 'orderHistory': orderHistoryFormated} );
 }
 
@@ -339,7 +225,6 @@ const updateUser = async (req, res) => {
             where: { id: userID.id },
             returning: false
         });
-        console.log('Usuario actualizado: ' + user.userName);
         res.redirect ('/user/' + user.userName);
     }
 }
@@ -358,7 +243,6 @@ const updatePassword = async (req, res) => {
             where: { id: userID.id },
             returning: false
         });
-        console.log('Se actualizo el password del usuario: ' + userName );
     }
     res.redirect ('/user/' + userName);
 }
@@ -379,7 +263,6 @@ const changeStatus = async (req, res) => {
         where: { userName: userName },
         returning: false
     });
-    console.log('Se Modifico el estado del usuario: ' + userName);
     res.redirect('/');
 }
 
@@ -396,7 +279,6 @@ const userLogin = async (req, res) => {
     let user = await db.User.findOne({where: {userName: req.body.userName}})
     if(user) {
         if(bcrypt.compareSync(req.body.password, user.password) && user.active){
-            console.log('Se logueo el usuario: ' + userName);
             if(!!req.body.remember) {
                 res.cookie('userName', user.userName, {
                     maxAge: 1000 * 60 * 60 * 24 * 30
@@ -418,7 +300,6 @@ const userLogin = async (req, res) => {
 
 const signOut = (req, res) => {
     res.clearCookie('userName');
-    console.log('userName error: ' + req.session.user.userName);
     delete req.session.user;
     res.redirect('/');
 }
@@ -430,7 +311,6 @@ const uploadImage = async (req, res) => {
         where: { userName: userName },
         returning: false
     });
-    console.log('Se actualizo la imagen del usuario: ' + userName);
     res.redirect ('/user/'+userName);
 }
 
