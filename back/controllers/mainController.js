@@ -133,19 +133,6 @@ const checkout = async (req,res) => {
     res.render('checkout', {user, cart: userCart});
 }
 
-const updateOrderStatus = async (orderId, status) => {
-    try {
-        const result = await db.Order.update(
-            {status: 'payed'},
-            { where: { id: orderId }}
-        );
-        return result;
-    } catch (error) {
-        console.error('Error al actualizar la orden de compra:', error);
-        throw error;
-    }
-}
-
 const impactSales = async (products, order_id) => {
     const rows = products.map( product => {
         return {

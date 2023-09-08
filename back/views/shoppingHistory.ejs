@@ -21,7 +21,7 @@
                 <p>Mis Compras</p>
                 <i class="fa-solid fa-list-ul"></i>
             </div>
-            <% article.forEach(article => { %>
+            <% articles.forEach(article => { %>
             <section class="container-section">
                 <div class="container-article">
                     <div class="box-title-general">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="box-img-text">
-                            <img src="<%= article.img %>" alt="">
+                            <img src="<%= article.image[0] %>" alt="">
                             <div class="box-text-article">
                                 <button>Volver a comprar</button>
                                 <p class="name-caract"><%= article.characteristics %></p>
@@ -71,14 +71,10 @@
                         </div>
                         <div class="container-resumen">
                             <div class="box-text-cost">
-                                <p>Pago Completo</p>
-                                <p>Costo del Envío</p>
-                                <p>Total</p>
+                                <p>Precio</p>
                             </div>
                             <div class="box-cost">
-                                <p>$0.00</p>
-                                <p>$0.00</p>
-                                <p>$0.00</p>
+                                <p>$<%= article.price %></p>
                             </div>
                         </div>
                     </article>

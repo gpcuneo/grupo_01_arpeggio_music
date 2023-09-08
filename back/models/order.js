@@ -14,6 +14,25 @@ const getOrder = async (orderId) => {
     }
 }
 
+const checkIfOwner = async (orderId, userId) => {
+    try {
+        const result = await db.Order.findOne({
+            where: {
+                id: orderId,
+                user_id: userId
+            },
+        });
+        if(result){
+            return result;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener la irden:', error);
+        throw error;
+    }
+}
+
 const getLastOrder = async (userID) => {
     try {
         const result = await db.Order.findOne({
@@ -68,7 +87,28 @@ const updateStatus = async (orderId, status) => {
     }
 }
 
-
+const getAssociatedSales = async (orderId, userId) => {
+    try {
+        const result = await db.Sale.findAll({
+                where: { order_id: orderId },
+                include: [
+                    {
+                        model: db.Product,
+                        as: 'product'
+                    }
+                ],
+                raw: true
+            });
+        if(result) {
+            return result;
+        } else {
+            return null
+        }
+    } catch (error) {
+        console.error('Error al actualizar la orden de compra:', error);
+        throw error;
+    }
+}
 
 const order = {
     //getOrders: getOrders,
@@ -76,6 +116,8 @@ const order = {
     getLastOrder: getLastOrder,
     updateStatus: updateStatus,
     getOrdersPayed: getOrdersPayed,
+    getAssociatedSales: getAssociatedSales,
+    checkIfOwner: checkIfOwner,
 }
 
 module.exports = order;
