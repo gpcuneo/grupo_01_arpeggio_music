@@ -1,5 +1,6 @@
 const userTools = require('../utils/User')
 const db = require('../database/models');
+const cart = require('../models/cart');
 const { fn, or } = require('sequelize');
 const user = require('../utils/User');
 
@@ -33,6 +34,11 @@ const home = async (req, res) => {
         product.image = JSON.parse(product.image).map(imgName => imgName);
     });
     let userInfo = userTools.isLogged(req);
+    // let userCart;
+    // if(userInfo){
+    //     userCart = getCart(userId)
+    // }
+    // console.log(userCart)
     return res.render('index', {products, productsOfertas, user: userInfo, categories});
 }
 
@@ -121,56 +127,10 @@ const store = async (req, res) => {
     res.render('store', {products, brands, categories, user: userInfo, brandsChecked, categoriesCheckd, page, pageLimit});
 } 
 
-const formatObjectProduct = (products) => {
-    return products.map( row => {
-        return {
-            ...row.Product.dataValues,
-            quantity: row.quantity,
-            totalPriceProduct: row.quantity * row.Product.price
-        }
-    })
-}
-
-const sumTotalPriceProducts = (itemsArray) => {
-    return itemsArray.reduce( (accumulated, currentValue) => {
-        return accumulated + currentValue.totalPriceProduct
-    }, 0);
-}
-
 const checkout = async (req,res) => {
     let user = userTools.isLogged(req);
-    const products = await db.Cart.findAll({
-        where: { userid: user.id },
-        attributes: ['id', 'productid', 'quantity'],
-        include: [
-            {
-                association: 'Product', 
-                as: 'product',
-                attributes: ['id', 'name', 'price', 'discount', 'stock', 'image'],
-            }]
-        });
-    let cart ={}
-    cart.products = formatObjectProduct(products);
-    cart.totalPrice = sumTotalPriceProducts(cart.products);
-
-    res.render('checkout', {user, cart});
-}
-
-const getCart = async (userid) => {
-    const products = await db.Cart.findAll({
-        where: { userid: userid },
-        attributes: ['id', 'productid', 'quantity'],
-        include: [
-            {
-                association: 'Product', 
-                as: 'product',
-                attributes: ['id', 'name', 'price', 'discount', 'stock', 'image'],
-            }]
-        });
-    let cart ={}
-    cart.products = formatObjectProduct(products);
-    cart.totalPrice = sumTotalPriceProducts(cart.products);
-    return cart;
+    const userCart = await cart.getCart(user.id);
+    res.render('checkout', {user, cart: userCart});
 }
 
 const getOrder = async (userID) => {
@@ -255,7 +215,7 @@ const paymentResult = async (req, res) => {
 	};
     if(payment.status === 'approved') {
         const userID = await getUserID(req.cookies.userName);
-        const productsCar = await getCart(userID);
+        const productsCar = await cart.getCart(userID);
         const order = await getOrder(userID);
         if(payment.preference_id === order.preference_id ) {
             await impactSales(productsCar.products, order.id);
@@ -285,18 +245,3 @@ const mainController = {
 }
 
 module.exports = mainController;
-
-
-
-// http://localhost||192.168.0.120/
-// ?collection_id=1314621752
-// &collection_status=approved
-// &payment_id=1314621752
-// &status=approved
-// &external_reference=null
-// &payment_type=credit_card
-// &merchant_order_id=11530151897
-// &preference_id=56415458-527fd2e1-bfb4-4e4a-8899-6b5fcea58bce
-// &site_id=MLA
-// &processing_mode=aggregator
-// &merchant_account_id=null

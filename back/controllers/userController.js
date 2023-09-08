@@ -2,18 +2,14 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const ExcelJS = require('exceljs');
 const fs = require('fs');
-const jsonTools = require('../utils/JSONTools');
+//const jsonTools = require('../utils/JSONTools');
 const netTools = require('../utils/networkTools');
 const userTools = require('../utils/User');
 const db = require('../database/models');
 const { Op, INTEGER } = require('sequelize');
 const {validationResult} = require('express-validator');
-const { log } = require('console');
-const { off } = require('process');
 const { query } = require('express');
 
-
-let orderHistory = jsonTools.read('horderHistory.json');
 
 const createUserObject = (req) => {
     return {
@@ -51,17 +47,75 @@ const validateUserFields = async (user, req, id=false) => {
     await db.User.findOne({where: {email : user.email, id: {[Op.ne]: id}}}) ? errors.email = {msg : 'El email ya se encuentra registrado'} : '' ;
     user.city === 0 ? errors.city = {msg : 'Seleccione una provincia valida'} : '' ;
     user.town === 0 ? errors.town = {msg : 'Selecciona una localidad valida'} : '' ;
-    // Query mas eficiente pero no puedo controlar el mensaje de error por campo.
-    // const users = await db.User.findAll({
-    //     where: {
-    //         [Op.or]: [
-    //             { dni: user.dni},
-    //             { userName: user.userName}, 
-    //             { email: user.email},
-    //         ],
-    //     }, 
-    //     });
     return errors 
+}
+
+const getOrderHistory_v2 = async (userId) => {
+    try {
+        const orders = await db.Order.findAll({
+            attributes: [
+                [db.sequelize.fn('DISTINCT', db.sequelize.col('id')), 'id'],
+                'status',
+                'createdAt',
+            ],
+            where: {
+                status: 'payed',
+                user_id: userId,
+            },
+        });
+        if (orders) {
+            let results = orders.map(order => {
+                return {
+                    id: order.id,
+                    status: order.status,
+                    total: order.Invoice ? order.Invoice.total : null,
+                    shippingStatus: order.Shipping ? order.Shipping.status : null,
+                    createdAt: order.createdAt ? order.createdAt : null,
+                };
+            });
+            for(let i=0; i < results.length; i++) {
+                const invoice = await db.Invoice.findOne({
+                    where: {order_id: results[i].id},
+                    attributes: ['total']
+                });
+                results[i].total = invoice.total;
+            }
+            for(let i=0; i < results.length; i++) {
+                const shipping = await db.Shipping.findOne({
+                    where: {order_id: results[i].id},
+                    attributes: ['status']
+                });
+                results[i].shippingStatus = shipping.status;
+            }
+            return results;
+        } else {
+            return null;
+        }
+        } catch (error) {
+            console.error('Error al obtener la información del pedido:', error);
+            throw error;
+        }
+}
+
+
+const formatDate = (orderHistory) => {
+    const timeZone = "America/Argentina/Buenos_Aires";
+    const formatOptions = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: timeZone,
+        timeZoneName: "short"
+    };
+
+    for(let i=0; i<orderHistory.length; i++) {
+        const originalDate = new Date(orderHistory[i].createdAt);
+        const strDate = originalDate.toLocaleString("es-AR", formatOptions);
+        orderHistory[i].date = strDate
+    }
+    return orderHistory;
 }
 
 const showUser = async (req, res) => {
@@ -73,7 +127,9 @@ const showUser = async (req, res) => {
                                     {association: 'Province', as: 'province'},
                                 ]
                             });
-    res.render('User/profile', {'user': user, 'orderHistory': orderHistory} );
+    const orderHistory = await getOrderHistory_v2(user.id); 
+    const orderHistoryFormated = formatDate(orderHistory);
+    res.render('User/profile', {'user': user, 'orderHistory': orderHistoryFormated} );
 }
 
 const listUsers = async (req, res) => {
@@ -169,7 +225,6 @@ const updateUser = async (req, res) => {
             where: { id: userID.id },
             returning: false
         });
-        console.log('Usuario actualizado: ' + user.userName);
         res.redirect ('/user/' + user.userName);
     }
 }
@@ -188,7 +243,6 @@ const updatePassword = async (req, res) => {
             where: { id: userID.id },
             returning: false
         });
-        console.log('Se actualizo el password del usuario: ' + userName );
     }
     res.redirect ('/user/' + userName);
 }
@@ -209,7 +263,6 @@ const changeStatus = async (req, res) => {
         where: { userName: userName },
         returning: false
     });
-    console.log('Se Modifico el estado del usuario: ' + userName);
     res.redirect('/');
 }
 
@@ -226,7 +279,6 @@ const userLogin = async (req, res) => {
     let user = await db.User.findOne({where: {userName: req.body.userName}})
     if(user) {
         if(bcrypt.compareSync(req.body.password, user.password) && user.active){
-            console.log('Se logueo el usuario: ' + userName);
             if(!!req.body.remember) {
                 res.cookie('userName', user.userName, {
                     maxAge: 1000 * 60 * 60 * 24 * 30
@@ -248,7 +300,6 @@ const userLogin = async (req, res) => {
 
 const signOut = (req, res) => {
     res.clearCookie('userName');
-    console.log('userName error: ' + req.session.user.userName);
     delete req.session.user;
     res.redirect('/');
 }
@@ -260,7 +311,6 @@ const uploadImage = async (req, res) => {
         where: { userName: userName },
         returning: false
     });
-    console.log('Se actualizo la imagen del usuario: ' + userName);
     res.redirect ('/user/'+userName);
 }
 

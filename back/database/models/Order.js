@@ -20,6 +20,10 @@ module.exports = (sequelize, DataType) => {
             type: DataType.CHAR(46),
             allowNull: false
         },
+        status: {
+            type: DataType.STRING(),
+            allowNull: false
+        },
         createdAt: {
             type: DataType.DATE,
             allowNull: false,
@@ -48,6 +52,11 @@ module.exports = (sequelize, DataType) => {
         })
     };
 
+    Order.associate = (models) => {
+        //Town.hasMany(models.User, {as: 'Users', foreignKey: 'id_town'});
+        Order.hasMany(models.Invoice, {as: 'Invoice', foreignKey: 'order_id'});
+        Order.hasMany(models.Shipping, {as: 'Shipping', foreignKey: 'order_id'});
+    }
 
     return Order;
 }
