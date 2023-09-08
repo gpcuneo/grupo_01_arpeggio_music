@@ -2,7 +2,6 @@ const userTools = require('../utils/User')
 const db = require('../database/models');
 const cart = require('../models/cart');
 const { fn, or } = require('sequelize');
-const user = require('../utils/User');
 
 const getUserID = async (userName) => {
     const userID = await db.User.findOne({
@@ -125,7 +124,7 @@ const store = async (req, res) => {
     }
     pageLimit = Math.ceil(productsCount / limit) -1; 
     res.render('store', {products, brands, categories, user: userInfo, brandsChecked, categoriesCheckd, page, pageLimit});
-} 
+}
 
 const checkout = async (req,res) => {
     let user = userTools.isLogged(req);
@@ -146,6 +145,19 @@ const getOrder = async (userID) => {
         return result;
     } catch (error) {
         console.error('Error al obtener el último preference_id:', error);
+        throw error;
+    }
+}
+
+const updateOrderStatus = async (orderId) => {
+    try {
+        const result = await db.Order.update(
+            {status: 'payed'},
+            { where: { id: orderId }}
+        );
+        return result;
+    } catch (error) {
+        console.error('Error al actualizar la orden de compra:', error);
         throw error;
     }
 }
@@ -220,6 +232,7 @@ const paymentResult = async (req, res) => {
         if(payment.preference_id === order.preference_id ) {
             await impactSales(productsCar.products, order.id);
             const invoice = await createInvoice(order.id, productsCar.totalPrice, payment.type);
+            await updateOrderStatus(order.id);
             await updateProductsStock(productsCar.products);
             await createDelivery(order.id);
             await clearCar(userID);
