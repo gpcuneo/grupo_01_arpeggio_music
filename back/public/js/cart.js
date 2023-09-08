@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const priceSend = document.querySelector('#price-send-product')
     const totalPriceShop = document.querySelector('#total-price-shop')
-    const subTotal = document.querySelector('#Sub-price-product')
     const containerArticle = document.querySelector('.container-article-all')
     const url = `/api/cart`;
     const getApiCart = async () => {
