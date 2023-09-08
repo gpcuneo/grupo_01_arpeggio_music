@@ -14,8 +14,6 @@ const authMiddleware = async (req, res, next) => {
             user.cart = await getCart(user.id);
             delete user.dataValues.id;
             delete user.dataValues.password;
-            console.log(' --- user')
-            console.log(user)
             req.session.user = user;
         }
     }
