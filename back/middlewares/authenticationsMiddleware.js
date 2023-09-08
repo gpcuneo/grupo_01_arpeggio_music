@@ -1,5 +1,6 @@
 const e = require('express');
 const db = require('../database/models');
+const { getCart } = require('../models/cart');
 const authMiddleware = async (req, res, next) => {
     if(req.cookies.userName) {
         const user = await db.User.findOne({ 
@@ -10,8 +11,11 @@ const authMiddleware = async (req, res, next) => {
                 ]
         });
         if(user) {
-            delete user.id;
-            delete user.password;
+            user.cart = await getCart(user.id);
+            delete user.dataValues.id;
+            delete user.dataValues.password;
+            console.log(' --- user')
+            console.log(user)
             req.session.user = user;
         }
     }
