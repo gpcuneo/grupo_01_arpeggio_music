@@ -14,9 +14,10 @@
 <body>
     <%- include('./partials/header') %>
     <main>
-        <form action="/store" method="GET" id="miFormulario">
+        <div id="miFormulario">
             <div class="container-flex">
             <section class="filter-products">
+                <button id="filter-toggle" class="filter-toggle-button">Filtros</button>
                 <div class="filter-container-items">
                     <p>MARCAS</p>
                     <% brands.forEach( brand => { %>
@@ -39,7 +40,6 @@
                         </div>
                     <% }) %>
                 </div>
-            </form>
         </section>
         <section class="container-items">
             <div class="container-flex">

@@ -198,14 +198,37 @@ main {
     cursor: pointer;
 }
 
+/* Estilo del botón de toggle en todas las pantallas */
+.filter-toggle-button {
+    border-radius: 3px;
+    margin: 5px;
+    background: white;
+    border: white 1px ;
+    cursor: pointer;
+    font-weight: bold;
+    display: block; /* Mostrar en todas las pantallas */
+}
 
+/* Estilo del contenido de filtros en pantallas grandes */
+.filter-container-items {
+    display: none; /* Ocultar en pantallas pequeñas */
+}
 
-
-
+/* Estilo para mostrar contenido de filtros cuando la clase "show-filters" está presente */
+.show-filters {
+    display: block !important; /* !important asegura que se muestre en pantallas grandes */
+}
 
 
 
 @media (min-width: 768px) {
+
+    .filter-container-items {
+        display: block;
+    }
+    .filter-toggle-button {
+        display: none; /* Ocultar en pantallas grandes */
+    }
 
     .article-other {
         width: 30%;
