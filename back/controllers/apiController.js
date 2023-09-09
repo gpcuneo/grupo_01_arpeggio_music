@@ -58,6 +58,7 @@ const userDetail = async (req, res) => {
     if(user){
         const urlBase = envs.APP_URL + ':' + envs.APP_PORT;
         user.dataValues.img = 'http://' +urlBase + '/images/userProfile/' + user.image;
+        user.dataValues.detail = 'http://' +urlBase + '/user/' + user.userName;
         delete(user.dataValues.id);
         delete(user.dataValues.password);
         res.setHeader('Access-Control-Allow-Origin', '*');
