@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,24 +8,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Road+Rage&display=swap" rel="stylesheet">
     <title>Arpeggio Music</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/home.css">
 </head>
+
 <body>
     <%- include('./partials/header') %>
-    <main>
-        <!-- Modal de Cookies -->
-        <section>
-            <div class="modal" id="modal">
-                <div class="modal-content">
-                <h2>Uso de Cookies</h2>
-                <p>Esta página web usa cookies
-                    Las cookies de este sitio web se usan para personalizar el contenido y los anuncios, ofrecer funciones de redes sociales y analizar el tráfico. Además, compartimos información sobre el uso que haga del sitio web con nuestros partners de redes sociales, publicidad y análisis web, quienes pueden combinarla con otra información que les haya proporcionado o que hayan recopilado a partir del uso que haya hecho de sus servicios.</p>
-                <button class="acept-btn" id="acceptBtn">Aceptar</button>
-                <button class="close-btn" onclick="closeModal()">Cancelar</button>
-                </div>
-            </div>
+        <main>
+            <!-- Modal de Cookies -->
+            <section>
+                <div class="modal" id="modal">
+                    <div class="modal-content">
+                        <h2>Uso de Cookies</h2>
+                        <p>Esta página web usa cookies
+                            Las cookies de este sitio web se usan para personalizar el contenido y los anuncios, ofrecer
+                            funciones de redes sociales y analizar el tráfico. Además, compartimos información sobre el
+                            uso que haga del sitio web con nuestros partners de redes sociales, publicidad y análisis
+                            web, quienes pueden combinarla con otra información que les haya proporcionado o que hayan
+                            recopilado a partir del uso que haya hecho de sus servicios.</p>
+                        <button class="acept-btn" id="acceptBtn">Aceptar</button>
+                        <button class="close-btn" onclick="closeModal()">Cancelar</button>
+                    </div>
         </section>
         <section class="slider">
             <img src="/images/slider_01.jpg" alt="Imagen de instrumentos de la tienda">
@@ -37,6 +45,7 @@
                     </p>
                 </div>
                 <div class="row-direction">> </div>
+            </div>
             </div>
         </section>
         <section class="brands-container">
@@ -55,51 +64,65 @@
             </div>
             <% categories.forEach( category => { %>
                 <div class="item-box">
-                    <img class="img-responsive" src="/images/categories/<%= category.img %>" alt="Imagen de instrumentos de la tienda">
-                    <div class="text-in-categories">
-                        <p><%= category.name %></p>
-                    </div>
+                        <a href="/store?category=<%= category.id %>">
+                            <img class="img-responsive" src="/images/categories/<%= category.img %>" alt="Imagen de instrumentos de la tienda">
+                        </a>
+                        <div class="text-in-categories">
+                            <p><%= category.name %></p>
+                        </div>
                 </div>
             <% }); %>
-        </section>
-        <section class="container-items">
-            <div class="sub-title">
-                Lo mas vendido
-            </div>
-            <% products.forEach( product => {%>
-                <div class="article-other">
-                    <a href="/products/<%= product.id %>">
-                        <img class="img-responsive" src="/images/productos/<%= product.image[0] %>" alt="Imagen de instrumentos de la tienda">
-                        <div class="box-article-charact">
-                            <h5><%= product.name %></h5>
-                            <p><%= product.characteristics %></p>
-                            <p class="price-art">$<%= product.price %></p>
-                        </div>
-                    </a>
+            </section>
+            <section class="container-items">
+                <div class="sub-title">
+                    Lo mas vendido
                 </div>
-            <% }) %>
-        </section>
-        <section class="container-items">
-            <div class="sub-title">
-                Ofertas
-            </div>
-            <% productsOfertas.forEach( product => {%>
-                <div class="article-other">
-                    <a href="/products/<%= product.id %>">
-                        <img class="img-responsive" src="/images/productos/<%= product.image[0] %>" alt="Imagen de instrumentos de la tienda">
-                        <div class="box-article-charact">
-                            <h5><%= product.name %></h5>
-                            <p><%= product.characteristics %></p>
-                            <p class="price-art">$<%= product.price %></p>
-                        </div>
-                    </a>
+                <% products.forEach( product=> {%>
+                    <div class="article-other">
+                        <a href="/products/<%= product.id %>">
+                            <img class="img-responsive" src="/images/productos/<%= product.image[0] %>"
+                                alt="Imagen de instrumentos de la tienda">
+                            <div class="box-article-charact">
+                                <h5>
+                                    <%= product.name %>
+                                </h5>
+                                <p>
+                                    <%= product.characteristics %>
+                                </p>
+                                <p class="price-art">$<%= product.price %>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <% }) %>
+            </section>
+            <section class="container-items">
+                <div class="sub-title">
+                    Ofertas
                 </div>
-            <% }) %>
-        </section>
-    </main>
-    <%- include('./partials/footer') %>
-    <script src="/js/index.js">
-    </script>
+                <% productsOfertas.forEach( product=> {%>
+                    <div class="article-other">
+                        <a href="/products/<%= product.id %>">
+                            <img class="img-responsive" src="/images/productos/<%= product.image[0] %>"
+                                alt="Imagen de instrumentos de la tienda">
+                            <div class="box-article-charact">
+                                <h5>
+                                    <%= product.name %>
+                                </h5>
+                                <p>
+                                    <%= product.characteristics %>
+                                </p>
+                                <p class="price-art">$<%= product.price %>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <% }) %>
+            </section>
+        </main>
+        <%- include('./partials/footer') %>
+            <script src="/js/index.js">
+            </script>
 </body>
 
 </html>

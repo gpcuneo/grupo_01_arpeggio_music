@@ -8,6 +8,7 @@ module.exports = {
     indexRoute : require ('./index'),
     mainRoute : require ('./main'),
     productRoute : require ('./products'),
-    userRoute : require ('./user')
+    userRoute : require ('./user'),
+    privacyPoliticsRoute : require ('./privacyPolitics')
 
 }

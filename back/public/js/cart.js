@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const totalPriceShop = document.querySelector('#total-price-shop')
     const containerArticle = document.querySelector('.container-article-all')
+    const btnFinish = document.getElementById('finish');
+    const btnSearchMore = document.getElementById('searchMore');
+
     const url = `/api/cart`;
     const getApiCart = async () => {
         const getCart = await fetch(url, {
@@ -166,4 +169,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return datos
     }
     drawCartUpdateStatus();
+
+    btnFinish.addEventListener('click', () => {
+        window.location.href = "/checkout";
+    });
+
+    btnSearchMore.addEventListener('click', () => {
+        window.location.href = "/store";
+    });
 })
