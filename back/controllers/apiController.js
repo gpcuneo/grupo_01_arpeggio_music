@@ -221,7 +221,7 @@ const getSalesDetails = async (req, res) => {
             {
                 model: db.Product,
                 as: 'product',
-                attributes: ['name', 'price']
+                attributes: ['name', 'price', 'image']
             },
         ],
         limit: 3,
@@ -252,7 +252,7 @@ const getSalesDetails = async (req, res) => {
     }
     
     salesInfo.topUsers = salesUsers;
-    
+    res.setHeader('Access-Control-Allow-Origin', '*');
     return res.json(salesInfo);
 }
 
