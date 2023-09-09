@@ -262,20 +262,13 @@ const getSalesDetails = async (req, res) => {
         limit: 3,
     });
     const totalPaymentsUser = await totalPaymentsByUser(salesUsers)
-    console.log(' --- TOTAL PAYMENTS DEL REDUCE:')
-    console.log(totalPaymentsUser)
     for(let i=0; i<salesUsers.length; i++){
-        console.log(salesUsers[i])
-        console.log(totalPaymentsUser[i])
         salesUsers[i].dataValues.totalPayment = totalPaymentsUser[i];
     }
-    //console.log(salesUsers)
-
+    
     salesInfo.topUsers = salesUsers;
     
-
     return res.json(salesInfo);
-
 }
 
 const apiController = {
