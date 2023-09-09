@@ -182,21 +182,6 @@ const categoryProducts = async (req, res) => {
     return res.json(countProductsByCategories);
 }
 
-// const totalPaymentsByUser = async (salesUsers) => {
-//     const paymentsTotal = await salesUsers.map( async user => {
-//         const orders = await Order.getOrdersPayed(user.user_id);
-//         const payments = await orders.map( async order => {
-//             const mount = await Invoice.getInvoiceByOrderID(order.id);
-//             console.log(' --- Estoy en el map de mount')
-//             console.log(mount)
-//             return mount;
-//         });
-//         return payments
-//     });
-
-//     return paymentsTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-// }
-
 const totalPaymentsByUser = async (salesUsers) => {
     const paymentsTotal = await Promise.all(salesUsers.map(async (user) => {
         const orders = await Order.getOrdersPayed(user.user_id);
