@@ -6,7 +6,7 @@ import { useSalesContext } from '../context/sales';
 const domain = process.env.REACT_APP_BACK_NAME
 const port = process.env.REACT_APP_BACK_PORT
 
-const urlImg = `http://${domain}:${port}/`;
+const baseUrl = `http://${domain}:${port}/`;
 
 function ContentRowTop() {
 	const { sales, loadingSales, lastSales } = useSalesContext();
@@ -45,7 +45,22 @@ function ContentRowTop() {
 				name: element.product.name,
 				count: element.count,
 				price: element.product.price,
-				img: urlImg + images[0],
+				img: baseUrl + images[0],
+				type: 'product'
+			}
+		})
+	}
+
+	let topUsers = null
+	if(sales.topUsers) {
+		topUsers = sales.topUsers.map( item => {
+			const urlImg = `${baseUrl}/images/userProfile/${item.user.image}`
+			return {
+				name: item.user.userName,
+				count: item.count,
+				price: item.totalPayment,
+				img: urlImg,
+				type: 'user'
 			}
 		})
 	}
@@ -60,6 +75,11 @@ function ContentRowTop() {
 						<div className="row">
 							<ContainerBigCards
 								items={productsStatistics}
+							/>
+						</div>
+						<div className="row">
+							<ContainerBigCards
+								items={topUsers}
 							/>
 						</div>
 					</div>
