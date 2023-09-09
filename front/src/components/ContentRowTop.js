@@ -2,21 +2,16 @@ import React from 'react'
 import PanelTotal from './PanelTotal';
 import LastProductInDb from './LastProductInDb';
 import DataListInDB from './DataListInDB';
+import ContainerLastItems from './ContainerLastItems';
 import { useUserContext } from '../context/user';
 import { useProductContext } from '../context/product';
 import { useCategoryContext } from '../context/category';
 
 function ContentRowTop() {
-	const { users, loadingUser } = useUserContext();
+	const { users, loadingUser, lastUser } = useUserContext();
 	const {products,isLoadingPro,lastProduct}= useProductContext();
 	const { category, countProductsByCategory, loadingCategories } = useCategoryContext();
 	let cardsInfo = [
-		{
-			titulo:'Total de Productos',
-			cifra:isLoadingPro?'cargando..':products.count,
-			color:'primary',
-			icono:'film'
-		},
 		{
 			titulo:'Total de Usuarios',
 			cifra: loadingUser ? 'cargando' : users.count,
@@ -24,10 +19,31 @@ function ContentRowTop() {
 			icono:'user'
 		},
 		{
+			titulo:'Total de Productos',
+			cifra:isLoadingPro?'cargando..':products.count,
+			color:'primary',
+			icono:'film'
+		},
+		{
 			titulo:'Total de Categorias',
 			cifra: loadingCategories ? 'cargando' : category.count,
 			color:'warning',
 			icono:'award'
+		},
+	]
+
+	let lastItemsInDB = [
+		{
+			title: 'Last user',
+			name: loadingUser ? 'cargando' : lastUser.name,
+			img: loadingUser ? 'cargando' : lastUser.img,
+			detail: loadingUser ? 'cargando' : lastUser.detail,
+		},
+		{
+			title: 'Last product',
+			name: isLoadingPro ? 'cargando' : lastProduct.name,
+			img: isLoadingPro ? 'cargando' : lastProduct.img,
+			detail: isLoadingPro ? 'cargando' : lastProduct.detail,
 		},
 	]
 
@@ -40,6 +56,7 @@ function ContentRowTop() {
 		}
 	})
 
+
 	return (
 		<React.Fragment>
 					<div className="container-fluid">
@@ -50,8 +67,8 @@ function ContentRowTop() {
 							cardsInfo={cardsInfo}
 						/>
 						<div className="row">
-							<LastProductInDb
-								detailData={lastProduct}
+							<ContainerLastItems
+								lastItemsInDB={lastItemsInDB}
 							/>
 							<DataListInDB/>
 						</div>
