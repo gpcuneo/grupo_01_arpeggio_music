@@ -67,12 +67,12 @@ main {
 
 .fa-bars {
     color: white;
-    margin: 15px;
+    margin: 5px;
     font-size: 25px;
 }
 .box-cart-count{
     position: relative;
-    margin: 15px;
+    margin-right: 5px;
     padding: 5px;
     box-sizing: border-box;
 }
@@ -187,10 +187,13 @@ input.src {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
 }
 .logo-user img {
     width: 40px;
     height: 40px;
+    border-radius: 5px;
 }
 .menu-user {
     position: absolute;
@@ -277,6 +280,10 @@ body {
 
 /* Estilos para versión móvil */
 @media (max-width: 768px) {
+    .box-cart-count{
+        margin: 5px;
+    }
+
     .menu.active {
         display: flex; /* Mostrar el menú al hacer clic en el ícono */
         flex-direction: column;

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded',function(){
     const btnMinus= document.getElementById('decrement')
     const submitByPost = document.getElementById('input-cart-shop')
     const numberStock = document.getElementById('stock-product')
+    const notificacion = document.getElementById("notificacion");
     
     const getApiCart = async ()=>{
         const dataCart = await fetch(`/api/cart`);
@@ -71,6 +72,11 @@ document.addEventListener('DOMContentLoaded',function(){
                 if(response.ok){
                     const dataResponse = await response.json();
                     console.log(`Producto agregado al carrito:${dataResponse}`);
+                    notificacion.style.display = "block";
+                    // Oculta la notificación después de un tiempo (por ejemplo, 3 segundos)
+                    setTimeout(function() {
+                        notificacion.style.display = "none";
+                    }, 3000); // 3000 milisegundos = 3 segundos
                     await addCountCart()
                 }else{
                     console.error('No se puedo agregar el producto al carrito');
@@ -82,3 +88,4 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     addProductCart();
 })
+

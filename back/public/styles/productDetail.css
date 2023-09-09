@@ -318,6 +318,19 @@ main{
     visibility: visible;
 }
 
+#notificacion {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
 @media (min-width: 481px){
     .container-img img{
         width: 70%;
@@ -336,6 +349,12 @@ main{
 }
 
 @media (min-width: 769px){
+    #notificacion {
+        max-width: 210px;
+        margin-left: 6px;
+        margin-bottom: 5px;
+    }
+
     .container{
         padding-left: 20px;
         padding-right: 20px;

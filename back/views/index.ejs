@@ -33,47 +33,45 @@
                         <button class="acept-btn" id="acceptBtn">Aceptar</button>
                         <button class="close-btn" onclick="closeModal()">Cancelar</button>
                     </div>
+        </section>
+        <section class="slider">
+            <img src="/images/slider_01.jpg" alt="Imagen de instrumentos de la tienda">
+            <div class="float-text">
+                <div class="row-direction"> <</div>
+                <div>
+                    <p>
+                        La musica comienza aqui <br>
+                        descubre tu talento con nuestros instrumentos
+                    </p>
                 </div>
-            </section>
-            <section class="slider">
-                <img src="/images/slider_01.jpg" alt="Imagen de instrumentos de la tienda">
-                <div class="float-text">
-                    <div class="row-direction">
-                        << /div>
-                            <div>
-                                <p class="typograpgy-central-text">
-                                    La musica comienza aqui <br>
-                                    descubre tu talento con nuestros instrumentos
-                                </p>
-                            </div>
-                            <div class="row-direction">> </div>
-                    </div>
-            </section>
-            <section class="brands-container">
-                <img class="logos" src="/images/logos/casio.jpg" alt="Logo de Casio">
-                <img class="logos" src="/images/logos/yamaha.jpg" alt="Logo de Yamaha">
-                <img class="logos" src="/images/logos/korg.jpg" alt="Logo de korg">
-                <img class="logos" src="/images/logos/pearl.jpg" alt="Logo de pearl">
-                <img class="logos" src="/images/logos/samson.jpg" alt="Logo de samson">
-                <img class="logos" src="/images/logos/remo.jpg" alt="Logo de remo">
-                <img class="logos" src="/images/logos/jackson.jpg" alt="Logo de jackson">
-                <img class="logos" src="/images/logos/ibanez.jpg" alt="Logo de ibanez">
-            </section>
-            <section class="container-items">
-                <div class="sub-title">
-                    Categorias
-                </div>
-                <% categories.forEach( category=> { %>
-                    <div class="item-box">
-                        <img class="img-responsive" src="/images/categories/<%= category.img %>"
-                            alt="Imagen de instrumentos de la tienda">
+                <div class="row-direction">> </div>
+            </div>
+            </div>
+        </section>
+        <section class="brands-container">
+            <img class="logos" src="/images/logos/casio.jpg" alt="Logo de Casio">
+            <img class="logos" src="/images/logos/yamaha.jpg" alt="Logo de Yamaha">
+            <img class="logos" src="/images/logos/korg.jpg" alt="Logo de korg">
+            <img class="logos" src="/images/logos/pearl.jpg" alt="Logo de pearl">
+            <img class="logos" src="/images/logos/samson.jpg" alt="Logo de samson">
+            <img class="logos" src="/images/logos/remo.jpg" alt="Logo de remo">
+            <img class="logos" src="/images/logos/jackson.jpg" alt="Logo de jackson">
+            <img class="logos" src="/images/logos/ibanez.jpg" alt="Logo de ibanez">
+        </section>
+        <section class="container-items">
+            <div class="sub-title">
+                Categorias
+            </div>
+            <% categories.forEach( category => { %>
+                <div class="item-box">
+                        <a href="/store?category=<%= category.id %>">
+                            <img class="img-responsive" src="/images/categories/<%= category.img %>" alt="Imagen de instrumentos de la tienda">
+                        </a>
                         <div class="text-in-categories">
-                            <p>
-                                <%= category.name %>
-                            </p>
+                            <p><%= category.name %></p>
                         </div>
-                    </div>
-                    <% }); %>
+                </div>
+            <% }); %>
             </section>
             <section class="container-items">
                 <div class="sub-title">
