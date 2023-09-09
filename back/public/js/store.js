@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Obtén referencias a elementos DOM
     const filterToggle = document.getElementById("filter-toggle");
     const filterContainer = document.querySelectorAll(".filter-container-items");
-    console.log(filterContainer)
     // Agrega un controlador de eventos click al botón de toggle
     filterToggle.addEventListener("click", function() {
         // Alterna la visibilidad del contenido de filtros
