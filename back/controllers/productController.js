@@ -4,14 +4,32 @@ const userTools = require('../utils/User')
 const db = require('../database/models')
 const Op = db.Sequelize.Op;
 
+const formatDate = (productList) => {
+    const formatOptions = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+    };
+
+    for(let i=0; i<productList.length; i++) {
+        const originalDate = new Date(productList[i].updatedAt);
+        const strDate = originalDate.toLocaleString("es-AR", formatOptions);
+        productList[i].date = strDate
+    }
+    return productList;
+}
+
 let getProduct =  async (req, res)=>{
     let userInfo = userTools.isLogged(req);
     const products = await db.Product.findAll({nest:true, include:['category'],})
     const categorys= await db.Category.findAll({raw:true})
     const name = req.query.name || ''
+    const date = formatDate(products)
     products.forEach(product =>{
         product.image = JSON.parse(product.image).map(imgName => `/images/productos/${imgName}`);
-    })        
+    })
     return res.render('products/productList', {products,'user':userInfo, categorys,name});
 }
 let getDetail= async (req, res)=>{
@@ -135,10 +153,11 @@ let search= async (req,res)=>{
     const name= req.query.name||'';
     const search = await db.Product.findAll({
         where:{
-            name:{[Op.like]: `%${name}%`}
+            name:{[Op.like]: `%${name}%`},
         },
         include:['category']
     })
+    const date = formatDate(search)
     search.forEach(product =>{
         product.image = JSON.parse(product.image).map(imgName => `/images/productos/${imgName}`);
     })  
