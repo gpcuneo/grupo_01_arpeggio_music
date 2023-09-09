@@ -1,7 +1,5 @@
 import React from 'react'
 import PanelTotal from './PanelTotal';
-import LastProductInDb from './LastProductInDb';
-import DataListInDB from './DataListInDB';
 import ContainerBigCards from './ContainerBigCards';
 import { useSalesContext } from '../context/sales';
 
@@ -39,21 +37,6 @@ function ContentRowTop() {
 		},
 	]
 
-	// let lastItemsInDB = [
-	// 	{
-	// 		title: 'Last user',
-	// 		name: loadingUser ? 'cargando' : lastUser.name,
-	// 		img: loadingUser ? 'cargando' : lastUser.img,
-	// 		detail: loadingUser ? 'cargando' : lastUser.detail,
-	// 	},
-	// 	{
-	// 		title: 'Last product',
-	// 		name: isLoadingPro ? 'cargando' : lastProduct.name,
-	// 		img: isLoadingPro ? 'cargando' : lastProduct.img,
-	// 		detail: isLoadingPro ? 'cargando' : lastProduct.detail,
-	// 	},
-	// ]
-
 	let productsStatistics = null
 	if(sales.topProducts) {
 		productsStatistics = sales.topProducts.map( element => {
@@ -78,11 +61,7 @@ function ContentRowTop() {
 							<ContainerBigCards
 								items={productsStatistics}
 							/>
-							{/* <DataListInDB/> */}
 						</div>
-						{/* <PanelTotal
-							cardsInfo={listProductByCategory}
-						/> */}
 					</div>
 		</React.Fragment>
   	)

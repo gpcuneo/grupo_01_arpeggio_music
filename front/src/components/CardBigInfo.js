@@ -1,5 +1,4 @@
 import React from 'react';
-//import imagenFondo from '../assets/images/profile-user.jpeg'
 
 function LastProductInDb(props) {
     const {name, count, price, img}=props;
@@ -17,7 +16,6 @@ function LastProductInDb(props) {
                         <p>Precio: {price}</p>
                         <p>Cantidad vendida: {count}</p>
                         <p>Total facturado: {price * count}</p>
-                        {/* <a className="btn bg-danger text-white"  rel="nofollow" href={detail} >View detail</a> */}
                     </div>
                 </div>
             </div>

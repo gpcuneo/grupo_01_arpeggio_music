@@ -1,5 +1,4 @@
 import React from 'react';
-//import imagenFondo from '../assets/images/profile-user.jpeg'
 
 function LastProductInDb(props) {
     const {title, name, detail, img}=props;
