@@ -43,19 +43,17 @@
         </section>
         <section class="container-items">
             <div class="container-flex">
-                <% [0,1].forEach( i => { %>
-                    <% products.forEach( product => {%>
-                        <div class="article-other">
-                            <a href="/products/<%= product.id %>">
-                                <img class="img-responsive" src="/images/productos/<%= product.image[0] %>" alt="Imagen de instrumentos de la tienda">
-                                <div class="box-article-charact">
-                                    <h5><%= product.name %></h5>
-                                    <p><%= product.details %></p>
-                                    <p class="price-art">$ <%= product.price %></p>
-                                </div>
-                            </a>
-                        </div>
-                    <% }); %>
+                <% products.forEach( product => {%>
+                    <div class="article-other">
+                        <a href="/products/<%= product.id %>">
+                            <img class="img-responsive" src="/images/productos/<%= product.image[0] %>" alt="Imagen de instrumentos de la tienda">
+                            <div class="box-article-charact">
+                                <h5><%= product.name %></h5>
+                                <p><%= product.details %></p>
+                                <p class="price-art">$ <%= product.price %></p>
+                            </div>
+                        </a>
+                    </div>
                 <% }); %>
             </div>
         </section>

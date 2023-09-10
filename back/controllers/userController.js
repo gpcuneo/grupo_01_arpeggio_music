@@ -100,7 +100,7 @@ const formatDate = (orderHistory) => {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: timeZone,
-        timeZoneName: "short"
+        // timeZoneName: "short"
     };
 
     for(let i=0; i<orderHistory.length; i++) {
