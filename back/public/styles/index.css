@@ -108,8 +108,18 @@ main {
 }
 
 .typograpgy-central-text {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', sans-serif;
+    color: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
+
+/* .box-index-text {
+    display: flex;
+    justify-content: center;
+} */
 
 .caja-searchbar {
     display: flex;
