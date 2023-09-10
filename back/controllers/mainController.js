@@ -85,7 +85,7 @@ const reqQueryToArrayOfNumbers = (dataInReqQuery) => {
 
 const store = async (req, res) => {  
     const userInfo = userTools.isLogged(req);
-    const limit = 2;
+    const limit = 9;
     let pageLimit = 0
     const reqPage = parseInt(req.query.page)
     let page = 0

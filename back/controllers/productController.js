@@ -31,10 +31,10 @@ let getProduct =  async (req, res)=>{
         product.image = JSON.parse(product.image).map(imgName => `/images/productos/${imgName}`);
     })
     return res.render('products/productList', {products,'user':userInfo, categorys,name});
-}
+} 
 let getDetail= async (req, res)=>{
     let userInfo = userTools.isLogged(req);
-    const articles = await db.Product.findAll({nest:true, include:['category']})
+    const articles = await db.Product.findAll({nest:true, include:['category'], limit: 5})
     const product = await db.Product.findByPk(req.params.id)
     product.image = JSON.parse(product.image).map(image => `/images/productos/${image}`)
     product.colors = JSON.parse(product.colors)
