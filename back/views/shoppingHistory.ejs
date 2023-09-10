@@ -8,82 +8,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/shoppingHistory.css">
 </head>
 
 <body>
     <%- include('./partials/header') %>
-    <main>
-        <div class="container">
-            <div class="Text-icon">
-                <p>Mis Compras</p>
-                <i class="fa-solid fa-list-ul"></i>
-            </div>
-            <% articles.forEach(article => { %>
-            <section class="container-section">
-                <div class="container-article">
-                    <div class="box-title-general">
-                        <div class="container-date-number-send">
-                            <h5 class="number-shop">Número de pedido:#<%= article.id %></h5>
-                            <h5 class="text-date">Fecha:<%= article.date %></h5>
-                            <div class="estado-producto">
-                                <h5 class="text-send">Estado:</h5>
-                                <% if(article.state === 'Entregado'){ %>
-                                    <h5 class="send-entregado"><%= article.state %></h5>
-                                <% } else if (article.state ==='Facturado') { %>
-                                    <h5 class="send-entregado facturado"><%= article.state %></h5>
-                                <% } else if (article.state === 'Cargado') { %>
-                                    <h5 class="send-entregado cargado"><%= article.state %></h5>
-                                <% } else if(article.state === 'Cancelado'){ %>
-                                    <h5 class="send-entregado cancelado"><%= article.state %></h5>
-                                <% } %>
-                            </div>
-                        </div>
-                        <h5 class="text-resumen-shop">Resumen de Compra</h5>
+        <main>
+            <section class="container-order-shop">
+                <div class="container">
+                    <h1 class="first-title">Mis compras</h1>
+                    <i class="fa-solid fa-list-ul"></i>
+                </div>
+                <div class="container-titles">
+                    <div class="text-titles">
+                        <i class="fa-regular fa-image"></i>
+                        <h5 class="title-name">Nombre</h5>
+                        <h5 class="title-price">Precio</h5>
+                        <h4 class="text-category">Cantidad</h4>
+                        <h5 class="text-date">Fecha</h5>
                     </div>
-                    <article>
-                        <div class="box-title-second">
-                            <h5>N°:#<%= article.id %></h5>
-                            <h5>Fecha:<%= article.date %></h5>
-                            <div class="title-text-entregado">
-                                <p class="title-art">Estado:</p>
-                                <% if(article.state === 'Entregado'){ %>
-                                    <p class="text-entregado"><%= article.state %></p>
-                                <% } else if (article.state ==='Facturado') { %>
-                                    <p class="text-entregado facturado"><%= article.state %></p>
-                                <% } else if (article.state === 'Cargado') { %>
-                                    <p class="text-entregado cargado"><%= article.state %></p>
-                                <% } else if(article.state === 'Cancelado'){ %>
-                                    <p class="text-entregado cancelado"><%= article.state %></p>
-                                <% } %>
-                            </div>
-                        </div>
-                        <div class="box-img-text">
+                </div>
+                <div class="box-articles">
+                    <% articles.forEach(article=> { %>
+                        <article>
                             <img src="<%= article.image[0] %>" alt="">
-                            <div class="box-text-article">
-                                <button>Volver a comprar</button>
-                                <p class="name-caract"><%= article.characteristics %></p>
-                                <p class="price">$<%= article.price %></p>
+                            <div class="text-name-price-charac">
+                                <p class="text-charact">
+                                    <%= article['product.characteristics'] %>
+                                </p>
+                                <p class="text-price">$<%= article.price %>
+                                </p>
+                                <a href="/products/<%= article.product_id %>">Ver detalle</a>
                             </div>
-                            <a href="#">Comprar de nuevo</a>
-                        </div>
-                        <div class="container-resumen">
-                            <div class="box-text-cost">
-                                <p>Precio</p>
+                            <div class="text-price-second">
+                                <p>$<%= article.price %>
+                                </p>
                             </div>
-                            <div class="box-cost">
-                                <p>$<%= article.price %></p>
+                            <div class="box-category">
+                                <p>
+                                    <%= article.quantity %>
+                                </p>
                             </div>
-                        </div>
-                    </article>
+                            <div class="box-date">
+                                <p>
+                                    <%= article.date %>
+                                </p>
+                            </div>
+                        </article>
+                        <% }) %>
                 </div>
             </section>
-            <% }) %>
-        </div>
-    </main>
-    <%- include('./partials/footer') %>
+        </main>
+        <%- include('./partials/footer') %>
 </body>
 
 </html>

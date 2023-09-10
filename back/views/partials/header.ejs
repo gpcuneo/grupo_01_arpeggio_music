@@ -38,13 +38,17 @@
             </div>
             <div class="box-cart-count">
                 <a href="/productCart"><i class="fa-solid fa-cart-plus"></i>
-                <span  class="count-cart"
-                <% if(user.cart.products.length > 0) { %>
-                    style="display: block;"
-                <% }else{ %>
-                    style="display: none;"
+                <% if(user.cart) { %>
+                    <span  class="count-cart"
+                    <% if(user.cart.products.length > 0) { %>
+                        style="display: block;"
+                    <% }else{ %>
+                        style="display: none;"
+                    <% } %>
+                    ><%= user.cart.products.length %></span>
+                <% } else { %>
+                    <span  class="count-cart"></span>
                 <% } %>
-                ><%= user.cart.products.length %></span>
                 </a>
             </div>
         </div>
@@ -92,13 +96,17 @@
                 </div>
                 <div class="cart">
                     <a href="/productCart" ><i class="fa-solid fa-cart-plus"></i> 
-                    <span class="count-cart" 
-                    <% if(user.cart.products.length > 0) { %>
-                        style="display: block;"
-                    <% }else{ %>
-                        style="display: none;"
+                    <% if(user.cart) { %>
+                        <span class="count-cart" 
+                        <% if(user.cart.products.length > 0) { %>
+                            style="display: block;"
+                        <% }else{ %>
+                            style="display: none;"
+                        <% } %>
+                        ><%= user.cart.products.length %></span>
+                    <% } else { %>
+                        <span class="count-cart" ></span>
                     <% } %>
-                    ><%= user.cart.products.length %></span>
                     </a>
                 </div>
             </div>

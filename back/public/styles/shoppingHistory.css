@@ -4,249 +4,250 @@ main{
     background-color: white;
     font-family: 'Roboto', sans-serif;
 }
+.container-order-shop{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
 .container{
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    box-sizing: border-box;
-}
-.Text-icon{
+    margin: 15px;
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-}
-.Text-icon p{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: 500;
-}
-.Text-icon i{
-    font-size: 20px;
-}
-
-.box-title-general{
-    display: none;
-}
-.container-section article{
-    border: 1px black solid;
-    margin-top: 10px;
-    margin-bottom: 10px;
     box-sizing: border-box;
 }
-.box-title-second{
+.first-title{
+    margin: 0;
+}
+.text-titles{
     display: flex;
-    box-sizing: border-box;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-around;
     background-color: black;
+    justify-content: space-around;
 }
-.box-title-second h5{
-    margin: 5px;
+.fa-image{
     color: white;
-    font-weight: 500;
 }
-.box-img-text{
-    display: flex;
-    padding: 5px;
-    box-sizing: border-box;
+.text-category{
+    display:none;
 }
-.box-img-text a{
+.title-name{
+    margin: 5px 0;
+    color: white;
+}
+.title-price{
+    margin: 5px 0;
+    color: white;
     display: none;
 }
-.box-img-text img{
-    width: 50%;
+.text-date{
+    display: none;
 }
-.box-text-article{
+.update{
+    display: none;
+}
+.box-articles{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+article{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: #ebebeb;
+    margin: 3px 15px;
+}
+article a{
+    text-decoration: none;
+}
+article img{
+    width: 35%;
+    padding: 5px 5px 0px 5px;
+}
+.text-name-price-charac{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    text-align: center;
-    width: 50%;
-    padding-left: 5px;
-    padding-right: 5px;
-    box-sizing: border-box;
+    width: 55%;
 }
-.title-text-entregado{
-    display: flex;
-}
-.title-art{
-    margin: 0;
-    font-weight: 500;
-    display: flex;
-    color: white;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-.text-entregado{
-    margin: 0;
-    margin-left: 3px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #39b54a;
-}
-.cargado{
-    color:yellow;
-}
-.facturado{
-    color: blue;
-}
-.cancelado{
-    color: red;
-}
-.box-text-article button{
-    border: none;
-    background-color: white;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 5px 10px;
-    box-sizing: border-box;
-    border-radius: 15px;
-    transition: all 0.5s;
-}
-.box-text-article button:hover{
-    background-color: black;
-    color:white;
-}
-.name-caract{
+.text-charact{
     font-size: 13px;
-    display: flex;
-    margin: 10px 0px;
+    margin: 5px 0;
+    color: black;
+}
+
+.text-price{
+    font-size: 13px;
+    font-weight: 500;
+    margin: 5px 0;
+    margin-bottom: 5px;
+    color: black;
+}
+.text-name-price-charac a{
+    color: white;
+    background-color: black;
+    text-align: center;
+    font-weight:400;
+    font-size: 14px;
+    width: 55%;
+    padding: 5px;
+    transition: all 0.5s;
     box-sizing: border-box;
 }
-.price{
-    display: flex;
-    font-size: 18px;
-    margin: 10px 0;
-    box-sizing: border-box;
+.text-name-price-charac a:hover{
+    background-color: white;
+    color: black;
+    box-shadow: 0px 0px 5px rgb(100, 100, 100);
 }
-.container-resumen{
+.box-category{
     display: none;
 }
-@media(min-width:769px){
+.box-date{
+    display: none;
+}
+.text-price-second{
+    display: none;
+}
+
+@media (min-width: 800px){
+    .container-general{
+        padding-bottom: 20px;
+    }
     .container{
-        padding: 0px 20px;
-        padding-bottom: 10px;
+        margin: 10px 20px;
     }
-    .Text-icon p{
-        margin-bottom: 0;
-    }
-    .box-title-general{
-        display: flex;
-        background-color: black;
-    }
-    .container-date-number-send{
-        display: flex;
-        justify-content: space-between;
-        width: 70%;
-    }
-    .number-shop{
-        margin: 5px;
-        color: white;
-        font-weight: 500;
-    }
-    .text-date{
-        margin: 5px;
-        color: white;
-        font-weight: 500;
-        /* width: 70%; */
-        box-sizing: border-box;
-    }
-    .estado-producto{
-        display: flex;
-    }
-    .text-send{
-        margin: 5px;
-        color: white;
-        font-weight: 500;
-    }
-    .send-entregado{
-        margin: 5px;
-        color: #39b54a;
-        font-weight: 500;
-    }
-    .cargado{
-        color:yellow;
-    }
-    .facturado{
-        color: blue;
-    }
-    .cancelado{
-        color: red;
-    }
-    .text-resumen-shop{
-        margin: 5px 0px;
-        color: white;
-        font-weight: 500;
-        text-align: center;
-        width: 30%;
-        box-sizing: border-box;
-    }
-    .container-article{
-        margin: 10px 0;
-        box-shadow: 0px 0px 10px rgb(100, 100, 100);
-    }
-    .container-section article{
-        display: flex;
-        border: none;
+    .first-title{
         margin: 0;
     }
-    .box-title-second{
-        display: none;
+    .text-titles{
+        padding: 0px 20px;
+        justify-content: space-between;
     }
-    .box-text-article button{
-        display: none;
-    }
-    .box-img-text img{
-        width: 30%;
-        box-sizing: border-box;
-    }
-    .box-img-text .box-text-article{
-        width: 45%;
-        display: flex;
-        padding-left: 10px;
-        align-items: flex-start;
-        box-sizing: border-box;
-    }
-    .name-caract{
-        text-align: left;
-    }
-    .box-img-text a{
-        display: flex;
-        flex-direction: column;
+    .fa-image{
+        width: 10%;
         text-align: center;
-        justify-content: center;
-        width: 25%;
-        box-sizing: border-box;
     }
-    .container-resumen{
-        display: flex;
-        width: 30%;
-        border-left: 1px solid rgba(0, 0, 0, 0.5);
-        box-sizing: border-box;
-    }
-    .box-img-text{
-        width: 70%;
-    }
-    .box-text-cost{
-        /* border: 1px red solid; */
-        width: 60%;
+    .title-name{
+        width: 35%;
         padding-left: 5px;
+        font-weight: 500;
         box-sizing: border-box;
     }
-    .box-cost{
-        /* border: 1px dashed blue; */
-        width: 40%;
+    .title-price{
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        width: 15%;
         text-align: center;
         box-sizing: border-box;
+    }
+    .text-category{
+        display: block;
+        width: 15%;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        margin: 5px 0;
+    }
+    .text-date{
+        display: block;
+        width: 15%;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        margin: 5px 0;
+    }
+    .text-price{
+        display: none;
+    }
+    article{
+        margin: 3px 20px;
+    }
+    article img{
+        width: 10%;
+        padding: 2px;
+        box-sizing: border-box;
+    }
+    .text-name-price-charac{
+        width: 35%;
+        box-sizing: border-box;
+    }
+    .box-category{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+        box-sizing: border-box;
+    }
+    .box-date{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+        box-sizing: border-box;
+    }
+    .text-price-second{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 15%;
+        box-sizing: border-box;
+    }
+    .text-charact{
+        font-size: 12px;
+    }
+    .text-name-price-charac a{
+        font-size: 13px;
+        box-shadow: none;
+        color: white;
+        width: 30%;
+        background-color: black;
+        transition: all 0.5s;
+        box-sizing: border-box;
+    }
+    .text-name-price-charac:hover a{
+        color: black;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgb(100, 100, 100);
+    }
+    .text-price-second p {
+        font-size: 13px;
+    }
+    .box-category p{
+        font-size: 13px;
+    }
+    .box-date p{
+        font-size: 13px;
     }
 }
-@media(min-width:1200px){
-    .container{
+@media (min-width:1200px){
+    .first-title, .box-articles{
         max-width: 1200px;
         margin: auto;
-        padding-left: 0;
-        padding-right: 0;
+    }
+    .container-titles{
+        background-color: black;
+    }
+    .text-titles{
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 ;
+    }
+    .first-title{
+        width: 100%;
+        padding: 10px 0;
+        box-sizing: border-box;
+    }
+    article{
+        margin: 2px 0px;
     }
 }

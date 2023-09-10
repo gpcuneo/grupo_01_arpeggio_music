@@ -1,4 +1,6 @@
 const db = require('../database/models');
+const Order = require('../models/order');
+const Invoice = require('../models/invoice');
 const { Op, fn, col } = require('sequelize');
 require('dotenv').config();
 const envs = process.env;
@@ -58,6 +60,7 @@ const userDetail = async (req, res) => {
     if(user){
         const urlBase = envs.APP_URL + ':' + envs.APP_PORT;
         user.dataValues.img = 'http://' +urlBase + '/images/userProfile/' + user.image;
+        user.dataValues.detail = 'http://' +urlBase + '/user/' + user.userName;
         delete(user.dataValues.id);
         delete(user.dataValues.password);
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -179,6 +182,80 @@ const categoryProducts = async (req, res) => {
     return res.json(countProductsByCategories);
 }
 
+const totalPaymentsByUser = async (salesUsers) => {
+    const paymentsTotal = await Promise.all(salesUsers.map(async (user) => {
+        const orders = await Order.getOrdersPayed(user.user_id);
+        const payments = await Promise.all(orders.map(async (order) => {
+            const mount = await Invoice.getInvoiceByOrderID(order.id);
+            return mount.total;
+        }));
+        return payments.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    }));
+    return paymentsTotal;
+}
+
+
+const getSalesDetails = async (req, res) => {
+    let salesInfo = {}
+    // obtener total de ventas
+    const invoices = await db.Invoice.findAll();
+    salesInfo.countInvoices = invoices.length;
+    const mount = invoices.map( invoice => {
+        return invoice.total;
+    });
+    salesInfo.maxInvoice = Math.max(...mount);
+    salesInfo.totalInvoice = mount.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+    const productsSales = await db.Sale.findAll();
+    salesInfo.productsCount = productsSales.length;
+
+    // cantidad de elementos vendidos
+    const salesCount = await db.Sale.findAll({
+        attributes: [
+            [db.sequelize.fn('COUNT', db.sequelize.col('Sale.id')), 'count'],
+            [db.sequelize.col('Sale.product_id'), 'product_id'],
+        ],
+        group: ['product_id'],
+        order: [[db.sequelize.fn('COUNT', db.sequelize.col('id')), 'DESC']],
+        include: [
+            {
+                model: db.Product,
+                as: 'product',
+                attributes: ['name', 'price', 'image']
+            },
+        ],
+        limit: 3,
+    });
+    salesInfo.topProducts = salesCount;
+
+    // TOP de usuarios mas compradores:
+    let salesUsers = await db.Order.findAll({
+        attributes: [
+            [db.sequelize.fn('COUNT', db.sequelize.col('Order.id')), 'count'],
+            [db.sequelize.col('Order.user_id'), 'user_id'],
+        ],
+        where: {status: 'payed'},
+        group: ['user_id'],
+        order: [[db.sequelize.fn('COUNT', db.sequelize.col('id')), 'DESC']],
+        include: [
+            {
+                model: db.User,
+                as: 'user',
+                attributes: ['userName', 'image']
+            },
+        ],
+        limit: 3,
+    });
+    const totalPaymentsUser = await totalPaymentsByUser(salesUsers)
+    for(let i=0; i<salesUsers.length; i++){
+        salesUsers[i].dataValues.totalPayment = totalPaymentsUser[i];
+    }
+    
+    salesInfo.topUsers = salesUsers;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    return res.json(salesInfo);
+}
+
 const apiController = {
     getTowns: getTowns,
     checkEmail: checkEmail,
@@ -189,6 +266,7 @@ const apiController = {
     categoryList: categoryList,
     categoryDetail:categoryDetail,
     categoryProducts:categoryProducts,
+    getSalesDetails: getSalesDetails,
 }
 
 module.exports = apiController;

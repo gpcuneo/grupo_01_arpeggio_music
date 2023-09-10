@@ -1,6 +1,10 @@
 import React from 'react'
 import Profile from '../assets/images/profile-user.jpeg'
 
+const domain = process.env.REACT_APP_BACK_NAME
+const port = process.env.REACT_APP_BACK_PORT
+const baseUrl = `http://${domain}:${port}/admin`;
+
 function TopBar() {
     return (
         <React.Fragment>
@@ -9,17 +13,11 @@ function TopBar() {
                     <i className="fa fa-bars text-dark"></i>
                 </button>
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item dropdown no-arrow mx-1">
-                        <a className="nav-link dropdown-toggle" href="/" id="messagesDropdown">
-                            <i className="fas fa-envelope fa-fw"></i>
-                            <span className="badge badge-danger badge-counter">7</span>
-                        </a>
-                    </li>
                     <div className="topbar-divider d-none d-sm-block"></div>
                     <li className="nav-item dropdown no-arrow">
-                        <a className="nav-link dropdown-toggle" href="/" id="userDropdown">
-                            <span className="mr-2 d-none d-lg-inline text-gray-600 small">Jordan Walke</span>
-                            <img className="img-profile rounded-circle" src={Profile} alt="Jordan Walke - Creador de React" width="60" />
+                        <a className="nav-link dropdown-toggle" href={baseUrl} id="userDropdown">
+                            <span className="mr-2 d-none d-lg-inline text-gray-600 small">ADMIN</span>
+                            <img className="img-profile rounded-circle" src={Profile} alt="ADMIN - Creador de React" width="60" />
                         </a>
                     </li>
                 </ul>

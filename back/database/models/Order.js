@@ -41,7 +41,14 @@ module.exports = (sequelize, DataType) => {
 
     const Order = sequelize.define(alias, cols, config);
 
-    Order.associate = models => {
+    // Order.associate = models => {
+        
+    // };
+
+    Order.associate = (models) => {
+        //Town.hasMany(models.User, {as: 'Users', foreignKey: 'id_town'});
+        Order.hasMany(models.Invoice, {as: 'Invoice', foreignKey: 'order_id'});
+        Order.hasMany(models.Shipping, {as: 'Shipping', foreignKey: 'order_id'});
         Order.belongsTo(models.User, {
             as: 'user',
             foreignKey: 'user_id'
@@ -50,12 +57,6 @@ module.exports = (sequelize, DataType) => {
             as: 'delivery',
             foreignKey: 'delivery_id'
         })
-    };
-
-    Order.associate = (models) => {
-        //Town.hasMany(models.User, {as: 'Users', foreignKey: 'id_town'});
-        Order.hasMany(models.Invoice, {as: 'Invoice', foreignKey: 'order_id'});
-        Order.hasMany(models.Shipping, {as: 'Shipping', foreignKey: 'order_id'});
     }
 
     return Order;

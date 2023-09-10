@@ -33,6 +33,7 @@
                         <button class="acept-btn" id="acceptBtn">Aceptar</button>
                         <button class="close-btn" onclick="closeModal()">Cancelar</button>
                     </div>
+<<<<<<< HEAD
                 </div>
             </section>
             <section class="slider">
@@ -46,33 +47,90 @@
                                 </p>
                             </div>
                             <div class="row-direction"> </div>
+=======
+        </section>
+        <section class="slider">
+            <!-- <img src="/images/slider_01.jpg" alt="Imagen de instrumentos de la tienda"> -->
+            <div class="slider-container">
+                <div class="slide fade imgMaxBox">
+                    <img class="slide-image" src="/images/slider_01.jpg">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Algo 1</h3>
+                        <p class="slide-desc">
+                            Alguna frase 1
+                        </p>
+                        <a href="/store" class="slide-btn">
+                        Tienda <ion-icon name="arrow-forward-circle"></ion-icon>
+                        </a>
                     </div>
-            </section>
-            <section class="brands-container">
-                <img class="logos" src="/images/logos/casio.jpg" alt="Logo de Casio">
-                <img class="logos" src="/images/logos/yamaha.jpg" alt="Logo de Yamaha">
-                <img class="logos" src="/images/logos/korg.jpg" alt="Logo de korg">
-                <img class="logos" src="/images/logos/pearl.jpg" alt="Logo de pearl">
-                <img class="logos" src="/images/logos/samson.jpg" alt="Logo de samson">
-                <img class="logos" src="/images/logos/remo.jpg" alt="Logo de remo">
-                <img class="logos" src="/images/logos/jackson.jpg" alt="Logo de jackson">
-                <img class="logos" src="/images/logos/ibanez.jpg" alt="Logo de ibanez">
-            </section>
-            <section class="container-items">
-                <div class="sub-title">
-                    Categorias
+                    <div class="slide-number-container">
+>>>>>>> d214eded2d1c461efbe3c87f4758ac7b347e166f
+                    </div>
                 </div>
-                <% categories.forEach( category=> { %>
-                    <div class="item-box">
-                        <img class="img-responsive" src="/images/categories/<%= category.img %>"
-                            alt="Imagen de instrumentos de la tienda">
-                        <div class="text-in-categories">
-                            <p>
-                                <%= category.name %>
-                            </p>
-                        </div>
+                <div class="slide fade imgMaxBox">
+                    <img class="slide-image" src="/images/slider_03.png">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Algo 2</h3>
+                        <p class="slide-desc">
+                            Alguna frase 2
+                        </p>
+                        <a href="/store" class="slide-btn">
+                        Tienda <ion-icon name="arrow-forward-circle"></ion-icon>
+                        </a>
                     </div>
-                    <% }); %>
+                    <div class="slide-number-container">
+                    </div>
+                </div>
+                <div class="slide fade imgMaxBox">
+                    <img class="slide-image" src="/images/slider_02.png">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Algo 3</h3>
+                        <p class="slide-desc">
+                            Alguna frase 3
+                        </p>
+                        <a href="/store" class="slide-btn">
+                        Tienda <ion-icon name="arrow-forward-circle"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="slide-number-container">
+                    </div>
+                </div>
+                <div class="slider-nav">
+                    <a class="slider-nav-btn" onclick="plusSlides(-1)">
+                        <ion-icon name="caret-back-outline"></ion-icon>
+                    </a>
+                    <a class="slider-nav-btn" onclick="plusSlides(1)">
+                        <ion-icon name="caret-forward-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        </section>
+        <section class="brands-container">
+            <img class="logos" src="/images/logos/casio.jpg" alt="Logo de Casio">
+            <img class="logos" src="/images/logos/yamaha.jpg" alt="Logo de Yamaha">
+            <img class="logos" src="/images/logos/korg.jpg" alt="Logo de korg">
+            <img class="logos" src="/images/logos/pearl.jpg" alt="Logo de pearl">
+            <img class="logos" src="/images/logos/samson.jpg" alt="Logo de samson">
+            <img class="logos" src="/images/logos/remo.jpg" alt="Logo de remo">
+            <img class="logos" src="/images/logos/jackson.jpg" alt="Logo de jackson">
+            <img class="logos" src="/images/logos/ibanez.jpg" alt="Logo de ibanez">
+        </section>
+        <section class="container-items">
+            <div class="sub-title">
+                Categorias
+            </div>
+            <% categories.forEach( category => { %>
+                <div class="item-box">
+                        <a href="/store?category=<%= category.id %>">
+                            <img class="img-responsive" src="/images/categories/<%= category.img %>" alt="Imagen de instrumentos de la tienda">
+                        </a>
+                        <div class="text-in-categories">
+                            <p><%= category.name %></p>
+                        </div>
+                </div>
+            <% }); %>
             </section>
             <section class="container-items">
                 <div class="sub-title">

@@ -21,5 +21,6 @@ router.put('/cart', loged, apiCart.updateItemQuantity)
 router.delete('/cart', loged, apiCart.deleteItem)
 router.post('/mp/createPreference', loged, mp.createPreference)
 router.post('/mp/payByCard', loged, mp.payByCard)
+router.get('/sales', apiController.getSalesDetails)
 
 module.exports=router;

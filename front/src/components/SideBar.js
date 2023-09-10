@@ -16,7 +16,7 @@ function SideBar() {
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard - Arpeggio Music </span></a>
                 </li>
-                <hr className="sidebar-divider" />
+                {/* <hr className="sidebar-divider" />
                 <div className="sidebar-heading">Actions</div>
                 <li className="nav-item">
                     <a className="nav-link collapsed" href="/">
@@ -29,7 +29,7 @@ function SideBar() {
                         <i className="fas fa-fw fa-table"></i>
                         <span>Tables</span></a>
                 </li>
-                <hr className="sidebar-divider d-none d-md-block" />
+                <hr className="sidebar-divider d-none d-md-block" /> */}
             </ul>
         </React.Fragment>
     )

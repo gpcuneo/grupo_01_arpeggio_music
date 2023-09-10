@@ -6,6 +6,7 @@ import React from 'react';
 import { UserProvider } from './context/user';
 import { ProductProvider } from './context/product';
 import { CategoryProvider } from './context/category';
+import { SalesProvider } from './context/sales';
 
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
         <ProductProvider>
           <UserProvider>
             <CategoryProvider>
-              <ContentWrapper/>
+              <SalesProvider>
+                <ContentWrapper/>
+              </SalesProvider>
             </CategoryProvider>
           </UserProvider>
         </ProductProvider>

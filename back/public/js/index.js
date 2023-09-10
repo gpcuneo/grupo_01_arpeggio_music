@@ -1,3 +1,36 @@
+let slideIndex = 1;
+const slides = document.getElementsByClassName("slide");
+
+function showSlides(n) {
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+    
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+}
+
+function plusSlides(n) {
+    showSlides((slideIndex += n));
+}
+
+function currentSlide(n) {
+    showSlides((slideIndex = n));
+}
+
+setInterval(function () {
+plusSlides(1);
+}, 5000);
+
+showSlides(slideIndex);
+
 document.addEventListener('DOMContentLoaded', () => {
     function checkCookieConsent() {
         const consentKey = 'arpegiomusic_cookie_consent';
@@ -26,16 +59,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Función para ocultar el modal
-    
-        
     if (!checkCookieConsent()) {
         openModal();
     }
 
+    homeCarrousel()
 });
 
 function closeModal() {
     const modal = document.getElementById('modal');
     location.href = 'https://digitalhouse.com/';
     modal.style.display = 'none';
+}
+
+function homeCarrousel() {
+    
+
+    
+
 }

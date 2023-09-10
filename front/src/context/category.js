@@ -3,8 +3,8 @@ import apiCall from "../api";
 
 const domain = process.env.REACT_APP_BACK_NAME
 const port = process.env.REACT_APP_BACK_PORT
-
 const urlBase = `http://${domain}:${port}/api`;
+const timeCallAPI = 10000;
 
 const getCategories = async () => apiCall({ url: `${urlBase}/category` });
 
@@ -14,7 +14,6 @@ const getLastCategory = async (lastPage) => {
     const lastPageData = await apiCall({ url: `${urlBase}/category?page=${lastPage}` });
     const categorySearch = lastPageData.categories.pop();
     const lastCategoryInfo = await apiCall({ url: `${urlBase}/category/${categorySearch.id}` });
-    console.log(lastCategoryInfo);
     return lastCategoryInfo;
 }
 
@@ -53,7 +52,7 @@ export function CategoryProvider({ children }) {
         };
 
         getCategoriesData();
-        const intervalId = setInterval(getCategoriesData, 5000); // Llama a getCategoriesData cada 5 segundos
+        const intervalId = setInterval(getCategoriesData, timeCallAPI); // Llama a getCategoriesData cada 5 segundos
 
         return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta
     }, []);

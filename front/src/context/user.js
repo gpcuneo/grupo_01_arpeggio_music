@@ -12,7 +12,6 @@ const getLastuser = async (lastPage) => {
     const lastPageData = await apiCall({ url: `${urlBase}/users?page=${lastPage}` });
     const userSearch = lastPageData.users.pop();
     const lastUserInfo = await apiCall({ url: `${urlBase}/users/${userSearch.userName}` });
-    console.log(lastUserInfo);
     return lastUserInfo;
 }
 
