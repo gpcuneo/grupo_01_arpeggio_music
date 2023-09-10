@@ -35,18 +35,61 @@
                     </div>
         </section>
         <section class="slider">
-            <img src="/images/slider_01.jpg" alt="Imagen de instrumentos de la tienda">
-            <div class="float-text">
-                <div class="row-direction"> <</div>
-                <div>
-                    <p>
-                        La musica comienza aqui <br>
-                        descubre tu talento con nuestros instrumentos
-                    </p>
+            <!-- <img src="/images/slider_01.jpg" alt="Imagen de instrumentos de la tienda"> -->
+            <div class="slider-container">
+                <div class="slide fade imgMaxBox">
+                    <img class="slide-image" src="/images/slider_01.jpg">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Algo 1</h3>
+                        <p class="slide-desc">
+                            Alguna frase 1
+                        </p>
+                        <a href="/store" class="slide-btn">
+                        Tienda <ion-icon name="arrow-forward-circle"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="slide-number-container">
+                    </div>
                 </div>
-                <div class="row-direction">> </div>
+                <div class="slide fade imgMaxBox">
+                    <img class="slide-image" src="/images/slider_03.png">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Algo 2</h3>
+                        <p class="slide-desc">
+                            Alguna frase 2
+                        </p>
+                        <a href="/store" class="slide-btn">
+                        Tienda <ion-icon name="arrow-forward-circle"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="slide-number-container">
+                    </div>
+                </div>
+                <div class="slide fade imgMaxBox">
+                    <img class="slide-image" src="/images/slider_02.png">
+                    <div class="slide-content">
+                        <h3 class="slide-title">Algo 3</h3>
+                        <p class="slide-desc">
+                            Alguna frase 3
+                        </p>
+                        <a href="/store" class="slide-btn">
+                        Tienda <ion-icon name="arrow-forward-circle"></ion-icon>
+                        </a>
+                    </div>
+                    <div class="slide-number-container">
+                    </div>
+                </div>
+                <div class="slider-nav">
+                    <a class="slider-nav-btn" onclick="plusSlides(-1)">
+                        <ion-icon name="caret-back-outline"></ion-icon>
+                    </a>
+                    <a class="slider-nav-btn" onclick="plusSlides(1)">
+                        <ion-icon name="caret-forward-outline"></ion-icon>
+                    </a>
+                </div>
             </div>
-            </div>
+            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         </section>
         <section class="brands-container">
             <img class="logos" src="/images/logos/casio.jpg" alt="Logo de Casio">
