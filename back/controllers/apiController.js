@@ -256,6 +256,15 @@ const getSalesDetails = async (req, res) => {
     return res.json(salesInfo);
 }
 
+const searchProducts = async (req, res) => {
+    const textSearch = req.body.search;
+    const products = await db.Product.findAll({
+        where: {name: { [Op.like]: `%${textSearch}%` }},
+        attributes: ['id', 'name', 'image']
+    });
+    return res.json(products);
+}
+
 const apiController = {
     getTowns: getTowns,
     checkEmail: checkEmail,
@@ -267,6 +276,7 @@ const apiController = {
     categoryDetail:categoryDetail,
     categoryProducts:categoryProducts,
     getSalesDetails: getSalesDetails,
+    searchProducts: searchProducts,
 }
 
 module.exports = apiController;

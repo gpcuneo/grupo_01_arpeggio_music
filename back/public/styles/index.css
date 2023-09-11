@@ -278,6 +278,47 @@ body {
     background-color:   rgb(0, 61, 0);
   }
 
+/* Estilos CSS para el buscador y los resultados */
+#resultados {
+    display: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 200px;
+    width: 600px;
+    overflow-y: auto;
+    z-index: 1; /* Ajusta este valor según sea necesario para colocarlo por encima de otros elementos */
+    position: absolute; /* Cambia la posición para que funcione correctamente con z-index */
+    top: 77px; /* Desplaza el elemento 25 píxeles hacia abajo */
+    background-color: #fff; /* Agrega un fondo blanco para que sea más visible */
+}
+
+#resultados ul {
+    list-style: none;
+    padding: 0;
+}
+
+#resultados li {
+    margin-bottom: 5px;
+}
+
+.elementSearched{
+    color: black;
+    display: flex; /* Utilizar flexbox para centrar verticalmente */
+    align-items: center; /* Centrar verticalmente el contenido */
+    text-decoration: none; /* Evitar el subrayado del enlace */
+}
+
+.texto-center {
+    flex-grow: 1;
+    margin-left: 25px;
+}
+
+.img-search {
+    max-width: 50px;
+    max-height: 50px;
+}
+
 /* Estilos para versión móvil */
 @media (max-width: 768px) {
     .box-cart-count{

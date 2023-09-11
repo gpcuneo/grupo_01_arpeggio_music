@@ -31,6 +31,28 @@ plusSlides(1);
 
 showSlides(slideIndex);
 
+const searchProducts = async (searchText) => {
+    try {
+        const find = {search: searchText};
+        const response = await fetch('/api/searchProduct',{
+            method:'POST',
+            credentials: 'include',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(find)
+        });
+        if(response.ok){
+            const dataResponse = await response.json();
+            return dataResponse;
+        }else{
+            console.error('No se puede obtener informacion de la api');
+        }
+    } catch (error) {
+        console.log(`Error al realizar la solicitud: ${error}`);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     function checkCookieConsent() {
         const consentKey = 'arpegiomusic_cookie_consent';
@@ -63,7 +85,42 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal();
     }
 
-    homeCarrousel()
+    const busquedaInput = document.getElementById("busquedaInput");
+    const resultadosDiv = document.getElementById("resultados");
+
+    async function mostrarResultados() {
+        const busqueda = busquedaInput.value.toLowerCase();
+        console.log(busqueda)
+        // if(busqueda != '') {
+            
+        // }
+        const resultadosFiltrados = await searchProducts(busqueda);
+        if(resultadosFiltrados.length > 0) {
+            const listaHTML = resultadosFiltrados.map(resultado => {
+                const images = JSON.parse(resultado.image).map(imgName => `/images/productos/${imgName}`);
+                return `<li>
+                <a class="elementSearched" href="/products/${resultado.id}">
+                    <img class="img-search" src="${images[0]}" alt="">
+                    <span class="text-center" style="margin-left: 15px;">${resultado.name}</span>
+                </a>
+                </li>`
+            });            
+            resultadosDiv.innerHTML = `<ul> ${listaHTML} </ul>`;
+            resultadosDiv.style.display = resultadosFiltrados.length ? "block" : "none";
+        }
+    }
+
+    // Agrega un controlador de eventos para el input de búsqueda
+    busquedaInput.addEventListener("input", mostrarResultados);
+
+    // Cierra los resultados al hacer clic fuera del input
+    document.addEventListener("click", function(event) {
+        if (event.target !== busquedaInput) {
+            resultadosDiv.style.display = "none";
+        }
+    });
+
+
 });
 
 function closeModal() {
@@ -72,9 +129,3 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-function homeCarrousel() {
-    
-
-    
-
-}
