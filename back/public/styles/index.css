@@ -33,25 +33,31 @@ main {
     justify-content: space-between;
     padding: 10px;
 }
+
 .menu {
     display: none;
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
 .menu li {
     margin-right: 15px;
 }
+
 .menu a {
     color: #fff;
     text-decoration: none;
     padding: 5px 10px;
 }
+
 .menu-toggle {
-    display: block; /* Mostrar el ícono del menú en versión móvil */
+    display: block;
+    /* Mostrar el ícono del menú en versión móvil */
     font-size: 24px;
     cursor: pointer;
 }
+
 .container-general {
     width: 100vw;
     font-family: 'Roboto', sans-serif;
@@ -70,17 +76,20 @@ main {
     margin: 5px;
     font-size: 25px;
 }
-.box-cart-count{
+
+.box-cart-count {
     position: relative;
     margin-right: 5px;
     padding: 5px;
     box-sizing: border-box;
 }
+
 .fa-cart-plus {
     color: white;
     font-size: 28px;
 }
-.count-cart{
+
+.count-cart {
     position: absolute;
     font-size: 12px;
     font-family: 'Roboto';
@@ -88,9 +97,10 @@ main {
     color: black;
     right: 11px;
     bottom: 17.2px;
-    padding: 0px 3px ;
+    padding: 0px 3px;
     background-color: white;
 }
+
 .caja-one {
     background-color: black;
     width: 100%;
@@ -170,19 +180,38 @@ input.src {
 
 .footer-container {
     display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 5px;
     color: white;
 }
 
 .footer-section {
+    text-align: center;
     width: 100%;
+    padding: 20px 0;
     border-bottom: 1px solid #ccc;
 }
 
+.text-footer {
+    font-size: 14px;
+    margin: 5px 0;
+}
 
+.footer-section i {
+    padding-right: 8px;
+}
+
+#footer-copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+.text-copyright{
+    color: white;
+    margin: 5px 0;
+}
 .logo-user {
     position: relative;
     display: inline-block;
@@ -227,10 +256,10 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-  }
-  
-  /* Estilos para el modal */
-  .modal {
+}
+
+/* Estilos para el modal */
+.modal {
     display: none;
     position: fixed;
     top: 0;
@@ -239,9 +268,9 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -249,34 +278,35 @@ body {
     background-color: #fff;
     padding: 20px;
     border-radius: 4px;
-  }
-  
-  .close-btn {
+}
+
+.close-btn {
     background-color: #007bff;
     color: #fff;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  /* Estilos para el botón "Aceptar" */
-  .close-btn:hover {
-    background-color: #0056b3;
-  }
+}
 
-  .acept-btn {
+/* Estilos para el botón "Aceptar" */
+.close-btn:hover {
+    background-color: #0056b3;
+}
+
+.acept-btn {
     background-color: green;
     color: #fff;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-  }
-  /* Estilos para el botón "Aceptar" */
-  .acept-btn:hover {
-    background-color:   rgb(0, 61, 0);
-  }
+}
+
+/* Estilos para el botón "Aceptar" */
+.acept-btn:hover {
+    background-color: rgb(0, 61, 0);
+}
 
 /* Estilos CSS para el buscador y los resultados */
 #resultados {
@@ -287,10 +317,14 @@ body {
     max-height: 200px;
     width: 600px;
     overflow-y: auto;
-    z-index: 1; /* Ajusta este valor según sea necesario para colocarlo por encima de otros elementos */
-    position: absolute; /* Cambia la posición para que funcione correctamente con z-index */
-    top: 77px; /* Desplaza el elemento 25 píxeles hacia abajo */
-    background-color: #fff; /* Agrega un fondo blanco para que sea más visible */
+    z-index: 1;
+    /* Ajusta este valor según sea necesario para colocarlo por encima de otros elementos */
+    position: absolute;
+    /* Cambia la posición para que funcione correctamente con z-index */
+    top: 77px;
+    /* Desplaza el elemento 25 píxeles hacia abajo */
+    background-color: #fff;
+    /* Agrega un fondo blanco para que sea más visible */
 }
 
 #resultados ul {
@@ -302,11 +336,14 @@ body {
     margin-bottom: 5px;
 }
 
-.elementSearched{
+.elementSearched {
     color: black;
-    display: flex; /* Utilizar flexbox para centrar verticalmente */
-    align-items: center; /* Centrar verticalmente el contenido */
-    text-decoration: none; /* Evitar el subrayado del enlace */
+    display: flex;
+    /* Utilizar flexbox para centrar verticalmente */
+    align-items: center;
+    /* Centrar verticalmente el contenido */
+    text-decoration: none;
+    /* Evitar el subrayado del enlace */
 }
 
 .texto-center {
@@ -321,12 +358,13 @@ body {
 
 /* Estilos para versión móvil */
 @media (max-width: 768px) {
-    .box-cart-count{
+    .box-cart-count {
         margin: 5px;
     }
 
     .menu.active {
-        display: flex; /* Mostrar el menú al hacer clic en el ícono */
+        display: flex;
+        /* Mostrar el menú al hacer clic en el ícono */
         flex-direction: column;
         position: absolute;
         top: 50px;
@@ -362,6 +400,7 @@ body {
         width: 100%;
         box-sizing: border-box;
     }
+
     .nav-bar {
         width: 100%;
         display: flex;
@@ -400,27 +439,32 @@ body {
         padding-left: 15px;
         box-sizing: border-box;
     }
+
     .second-img-logo .img-logo-ar {
         width: 13vw;
     }
+
     .cart {
         display: flex;
         position: relative;
         align-self: center;
         justify-content: center;
     }
+
     .cart i {
         font-size: 28px;
         color: white;
         margin: 0;
         padding-left: 5px;
     }
-    .count-cart{
+
+    .count-cart {
         position: absolute;
         color: black;
         bottom: 12.3px;
         right: 7px;
     }
+
     .caja-login {
         display: flex;
         flex-direction: row;
@@ -466,10 +510,12 @@ body {
         padding: 0;
         box-sizing: border-box;
     }
-    .lista-menu li{
+
+    .lista-menu li {
         background: black;
         transition: all 0.5s;
     }
+
     .lista-menu li a {
         text-decoration: none;
         color: white;
@@ -511,7 +557,8 @@ body {
         transition: all 0.5s;
         border-right: white solid 1px;
     }
-    .lista-login li{
+
+    .lista-login li {
         background: black;
         transition: all 0.5s;
     }
@@ -523,7 +570,8 @@ body {
     .lista-login li a:hover {
         color: black;
     }
-    .caja-login a{
+
+    .caja-login a {
         text-decoration: none;
     }
 
@@ -533,11 +581,29 @@ body {
         font-size: 15px;
         margin-right: 5px;
     }
+
+    .footer-container {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: baseline;
+    }
+
+    .footer-section {
+        width: 49%;
+        height: auto;
+    }
+    #footer-copyright {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
 }
 
 @media (min-width: 1200px) {
 
-    .nav-bar,.barra-menu {
+    .nav-bar,
+    .barra-menu {
         max-width: 1200px;
         margin: auto;
         padding-left: 0;
@@ -559,53 +625,5 @@ body {
     .register-bar {
         width: 25%;
         padding-right: 0;
-    }
-}
-
-
-/* -- START FOOTER -- */
-#footer-sections {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: white;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-#footer-sections i {
-    padding: 5px;
-}
-
-.footer-section {
-    width: 33%;
-    padding: 0 90px;
-    text-align: center;
-}
-
-.footer-section p {
-    font-size: 13px;
-}
-
-#footer-fiscal-data,
-#footer-copyright {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size:small;
-}
-
-/* -- END FOOTER -- */
-
-
-/* XS */
-@media (max-width: 480px) {
-    /* -- START FOOTER -- */
-    #footer-sections { 
-        flex-direction: column;
-        text-align: center;
-    }
-    .footer-section {
-        width: 30%;
-        border-bottom: none;
     }
 }
