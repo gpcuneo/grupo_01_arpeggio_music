@@ -3,8 +3,8 @@ import apiCall from "../api";
 
 const domain = process.env.REACT_APP_BACK_NAME
 const port = process.env.REACT_APP_BACK_PORT
-
 const urlBase = `http://${domain}:${port}/api`;
+const timeCallAPI = 10000;
 
 const getUsers = async () => apiCall({ url: `${urlBase}/users` });
 
@@ -46,7 +46,7 @@ export function UserProvider({ children }) {
         };
 
         getUserData();
-        const intervalId = setInterval(getUserData, 5000); // Llama a getUserData cada 5 segundos
+        const intervalId = setInterval(getUserData, timeCallAPI); // Llama a getUserData cada 5 segundos
 
         return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta
     }, []);

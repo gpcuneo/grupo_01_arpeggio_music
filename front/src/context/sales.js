@@ -3,11 +3,11 @@ import apiCall from "../api";
 
 const domain = process.env.REACT_APP_BACK_NAME
 const port = process.env.REACT_APP_BACK_PORT
-
-const urlBase = `http://${domain}:${port}/api`;
+const urlBase = `http://${domain}:${port}/api/sales`;
+const timeCallAPI = 10000;
 
 //const getSales = async () => apiCall({ url: `${urlBase}/sales` });
-const getSales = async () => apiCall({ url: 'http://192.168.0.120:3001/api/sales' });
+const getSales = async () => apiCall({ url: urlBase });
 
 
 // Crea el contexto
@@ -37,7 +37,7 @@ export function SalesProvider({ children }) {
         };
 
         getSalesData();
-        const intervalId = setInterval(getSalesData, 10000); // Llama a getUserData cada 5 segundos
+        const intervalId = setInterval(getSalesData, timeCallAPI); // Llama a getUserData cada 5 segundos
 
         return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta
     }, []);
