@@ -211,7 +211,8 @@ main {
     font-weight: bold;
     color: white;
     -webkit-text-stroke: 1px black; /* WebKit browsers (Safari) */
-    text-stroke: 1px black; /* Future compatibility */
+    /* text-stroke: 1px black;  */
+    /* Future compatibility */
 }
 
 .brands-container {
