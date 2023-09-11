@@ -14,6 +14,8 @@ const getLastCategory = async (lastPage) => {
     const lastPageData = await apiCall({ url: `${urlBase}/category?page=${lastPage}` });
     const categorySearch = lastPageData.categories.pop();
     const lastCategoryInfo = await apiCall({ url: `${urlBase}/category/${categorySearch.id}` });
+    console.log(' --- lastCategoryInfo')
+    console.log(lastCategoryInfo)
     return lastCategoryInfo;
 }
 

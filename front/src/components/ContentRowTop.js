@@ -10,7 +10,8 @@ import { useCategoryContext } from '../context/category';
 function ContentRowTop() {
 	const { users, loadingUser, lastUser } = useUserContext();
 	const {products,isLoadingPro,lastProduct}= useProductContext();
-	const { category, countProductsByCategory, loadingCategories } = useCategoryContext();
+	const { category, countProductsByCategory, lastCategory, loadingCategories } = useCategoryContext();
+	//category, lastCategory, countProductsByCategory, loadingCategories
 	let cardsInfo = [
 		{
 			titulo:'Total de Usuarios',
@@ -34,16 +35,22 @@ function ContentRowTop() {
 
 	let lastItemsInDB = [
 		{
-			title: 'Last user',
+			title: 'Ultimo usuario',
 			name: loadingUser ? 'cargando' : lastUser.name,
 			img: loadingUser ? 'cargando' : lastUser.img,
 			detail: loadingUser ? 'cargando' : lastUser.detail,
 		},
 		{
-			title: 'Last product',
+			title: 'Ultimo producto',
 			name: isLoadingPro ? 'cargando' : lastProduct.name,
 			img: isLoadingPro ? 'cargando' : lastProduct.img,
 			detail: isLoadingPro ? 'cargando' : lastProduct.detail,
+		},
+		{
+			title: 'Ultima categoria',
+			name: loadingCategories ? 'cargando' : lastCategory.name,
+			img: loadingCategories ? 'cargando' : lastCategory.imageURL,
+			detail: loadingCategories ? 'cargando' : lastCategory.detail,
 		},
 	]
 
