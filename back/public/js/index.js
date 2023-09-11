@@ -90,23 +90,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function mostrarResultados() {
         const busqueda = busquedaInput.value.toLowerCase();
-        console.log(busqueda)
-        // if(busqueda != '') {
-            
-        // }
-        const resultadosFiltrados = await searchProducts(busqueda);
-        if(resultadosFiltrados.length > 0) {
-            const listaHTML = resultadosFiltrados.map(resultado => {
-                const images = JSON.parse(resultado.image).map(imgName => `/images/productos/${imgName}`);
-                return `<li>
-                <a class="elementSearched" href="/products/${resultado.id}">
-                    <img class="img-search" src="${images[0]}" alt="">
-                    <span class="text-center" style="margin-left: 15px;">${resultado.name}</span>
-                </a>
-                </li>`
-            });            
-            resultadosDiv.innerHTML = `<ul> ${listaHTML} </ul>`;
-            resultadosDiv.style.display = resultadosFiltrados.length ? "block" : "none";
+        if(busqueda.length > 0) {
+            const resultadosFiltrados = await searchProducts(busqueda);
+            if(resultadosFiltrados.length > 0) {
+                const listaHTML = resultadosFiltrados.map(resultado => {
+                    const images = JSON.parse(resultado.image).map(imgName => `/images/productos/${imgName}`);
+                    return `<li>
+                    <a class="elementSearched" href="/products/${resultado.id}">
+                        <img class="img-search" src="${images[0]}" alt="">
+                        <span class="text-center" style="margin-left: 15px;">${resultado.name}</span>
+                    </a>
+                    </li>`
+                });            
+                resultadosDiv.innerHTML = `<ul> ${listaHTML} </ul>`;
+                resultadosDiv.style.display = resultadosFiltrados.length ? "block" : "none";
+            }
+        } else {
+            resultadosDiv.innerHTML = '';
+            resultadosDiv.style.display = "none";
         }
     }
 
