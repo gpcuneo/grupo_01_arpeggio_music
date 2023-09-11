@@ -15,11 +15,6 @@
     <%- include('../partials/header') %>
         <main>
             <div class="container">
-                <ul>
-                    <% errors.forEach(errorActual => { %>
-                    <li><%= errorActual.msg %></li>
-                    <% }) %>
-                  </ul>
                 <% if (action==='create' ) { %>
                     <form action="/category" id="form" method="post" enctype="multipart/form-data">
                         <div class="name">
@@ -30,6 +25,11 @@
                             <p class="error" id="p-name" style="display: none;"></p>
                         </div>
                         <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                        <ul class="error-ul">
+                            <% errors.forEach(errorActual => { %>
+                            <li><%= errorActual.msg %></li>
+                            <% }) %>
+                          </ul>
                         <p id="p-img" style="display: none;" class="error"></p>
                         <div class="button">
                             <button class="btn-black" type="submit" >Crear</button>
@@ -44,9 +44,16 @@
                                     <input class="text" type="text" name="name" value="<%= category.name %>">
                                     <p class="error" id="p-name" style="display: none;"> </p>
                                 </div>
-                                <img class="category-img" src="/images/categories/<%= category.img %>">
-                                <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
-                                <p id="p-img" style="display: none;" class="error"></p>
+                                <div class="img1">
+                                    <img class="category-img" src="/images/categories/<%= category.img %>">
+                                    <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                                    <ul class="error-ul">
+                                        <% errors.forEach(errorActual => { %>
+                                        <li><%= errorActual.msg %></li>
+                                        <% }) %>
+                                      </ul>
+                                    <p id="p-img" style="display: none;" class="error"></p>
+                                </div>
                                 <div class="button">
                                     <button class="btn-black" type="submit" disabled>Guardar</button>
                                 </div>
@@ -54,7 +61,6 @@
                            </form>
             </div>
            <script src="/js/Category.js"></script>
-          
             </div>
 
         </main>
