@@ -9,6 +9,11 @@ main {
     padding-bottom: 500px;
 
 }
+.form-keep{
+display: flex;
+justify-content: center;
+
+}
 .error {
     color:red
 }

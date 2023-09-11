@@ -36,32 +36,38 @@
                         </div>
                  </form>
                         <%} else if (action==="update" ) { %>
-                            <form action="/category/<%= category.id %>/update?_method=put" method="post" enctype="multipart/form-data">
-                                <div class="name">
-                                    <label>
-                                        Nombre:
-                                    </label>
-                                    <input class="text" type="text" name="name" value="<%= category.name %>">
-                                    <p class="error" id="p-name" style="display: none;"> </p>
-                                </div>
-                                <div class="img1">
-                                    <img class="category-img" src="/images/categories/<%= category.img %>">
-                                    <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
-                                    <ul class="error-ul">
-                                        <% errors.forEach(errorActual => { %>
-                                        <li><%= errorActual.msg %></li>
-                                        <% }) %>
-                                      </ul>
-                                    <p id="p-img" style="display: none;" class="error"></p>
-                                </div>
-                                <div class="button">
-                                    <button class="btn-black" type="submit" disabled>Guardar</button>
-                                </div>
-                                <% } %>
-                           </form>
+
+                           
+                                <form action="/category/<%= category.id %>/update?_method=put" method="post" enctype="multipart/form-data">
+                                    <div class="name">
+                                        <label>
+                                            Nombre:
+                                        </label>
+                                        <input class="text" type="text" name="name" value="<%= category.name %>">
+                                        <p class="error" id="p-name" style="display: none;"> </p>
+                                    </div>
+                                    <div class="img1">
+                                        <img class="category-img" src="/images/categories/<%= category.img %>">
+                                        <input type="file" accept=".png, .jpg, .jpge" name="img" id="img">
+                                        <ul class="error-ul">
+                                            <% errors.forEach(errorActual => { %>
+                                            <li><%= errorActual.msg %></li>
+                                            <% }) %>
+                                          </ul>
+                                        <p id="p-img" style="display: none;" class="error"></p>
+                                    </div>
+                                    <div class="button">
+                                        <button class="btn-black" type="submit" disabled>Guardar</button>
+                                    </div>
+                                    <% } %>
+                               </form>
+                                
             </div>
+            <form class="form-keep" action="/category" method="get">
+                <button class="btn-black">Cancelar</button>
+               </form>
            <script src="/js/Category.js"></script>
-            </div>
+           
 
         </main>
         <%- include('../partials/footer') %>
