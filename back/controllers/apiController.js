@@ -225,7 +225,7 @@ const getSalesDetails = async (req, res) => {
                 attributes: ['name', 'price', 'image']
             },
         ],
-        limit: 3,
+        limit: 5,
     });
     salesInfo.topProducts = salesCount;
 
@@ -245,7 +245,7 @@ const getSalesDetails = async (req, res) => {
                 attributes: ['userName', 'image']
             },
         ],
-        limit: 3,
+        limit: 5,
     });
     const totalPaymentsUser = await totalPaymentsByUser(salesUsers)
     for(let i=0; i<salesUsers.length; i++){
