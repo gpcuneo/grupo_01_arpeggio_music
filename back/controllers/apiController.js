@@ -161,6 +161,7 @@ const categoryDetail = async (req, res) => {
     if(category){
         const urlBase = envs.APP_URL + ':' + envs.APP_PORT;
         category.dataValues.imageURL = urlBase + '/images/categories/' + category.img;
+        category.dataValues.imageURL = `http://${urlBase}/images/categories/${category.img}`;
         res.setHeader('Access-Control-Allow-Origin', '*');
         return res.json(category);
     } else {

@@ -3,7 +3,6 @@ import CardBigInfo from './CardBigInfo';
 
 function ContainerBigCards({items}) {
     if(items){
-        console.log(items)
         return (
         <>
             <div className="row">

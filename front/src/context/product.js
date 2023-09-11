@@ -3,8 +3,8 @@ import apiCall from "../api";
 
 const domain = process.env.REACT_APP_BACK_NAME;
 const port = process.env.REACT_APP_BACK_PORT;
-
 const urlBase= `http://${domain}:${port}/api`;
+const timeCallAPI = 10000;
 
 const getProducts= async ()=> apiCall({url:`${urlBase}/products`});
 
@@ -66,7 +66,7 @@ export function ProductProvider({children}) {
         }
       }
       getProductData();
-      const intervalId= setInterval(getProductData,5000); //Llama a getProductData(llama a la api cada 5 segundos)
+      const intervalId= setInterval(getProductData, timeCallAPI); //Llama a getProductData(llama a la api cada 5 segundos)
       getProductList();      
       
       return ()=> clearInterval(intervalId);//Limpia el intervalo cuando se desmonta el componente
