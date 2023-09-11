@@ -20,12 +20,6 @@
                 <h1 class="first-title">Lista de productos</h1>
                 <div class="container-create-filter-search">
                     <a href="/products/create"><button class="butto-create">Crear nuevo producto</button></a>
-                    <select name="category" id="category" class="select-filter">
-                        <option value="">Filtrar por Categoría</option>
-                        <% categorys.forEach(category =>{ %>
-                            <option value="<%= category.name %>"><%= category.name %></option>
-                        <% }) %>
-                    </select>
                     <div class="nav-search">
                         <form action="/products/search?name=<%= name %>" method="get">
                             <input type="text" placeholder="Buscar producto" name="name">

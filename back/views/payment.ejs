@@ -20,13 +20,23 @@
     <main>
         <div class="container">
             <section class="section-article">
-                <h1>Compra finalizada</h1>
+              <div class="title-order-shop">
+                <h1><i class="fa-regular fa-circle-check"></i>Compra finalizada</h1>
+              </div>
                 <% if(invoice) { %>
                   <div class="details">
-                    <p>Hemos procesado exitosamente la orden: </p> <%= order.id %>
-                    <p>El numero de factura es: </p> <%= invoice %>
-                    <p>Puede seguir el estado de envio desde su perfil de usuario</p>
-                    <b><p>Gracias por confiar en nosotros</p></b>
+                    <div class="box-order-text">
+                      <p class="text-order-pay">Hemos procesado exitosamente la orden: </p>
+                      <p class="text-id-order"># <%= order.id %></p> 
+                    </div>
+                    <div class="box-order-text">
+                      <p class="text-order-pay">El numero de factura es: </p> 
+                      <p class="text-id-order"><%= invoice %></p>
+                    </div>
+                    <div class="box-order-text">
+                      <p class="text-order-pay">Puede seguir el estado de envio desde su perfil de usuario</p>
+                      <b><p>Gracias por confiar en nosotros</p></b>
+                    </div>
                   </div>
                 <% } else { %>
                   <div class="details">
